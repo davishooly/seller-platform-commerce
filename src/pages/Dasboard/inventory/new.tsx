@@ -106,7 +106,7 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
             <h1>Create a new product</h1>
             <p>To start creating a detail page, first select a primary category for your product.</p>
 
-           
+
                 <h2>Browse for your product’s category</h2>
 
                 <p>Note: If you do not see your products category listed below, it may either require approval or be restricted. <a>Click here </a> to learn more.</p>
@@ -117,8 +117,8 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
                     <Breadcrumb.Item >Category</Breadcrumb.Item>
                     <Breadcrumb.Item>Sub category</Breadcrumb.Item>
                 </Breadcrumb>
-                
-      
+
+
         </>
     )
 };
@@ -151,7 +151,7 @@ const ProductDetails = () => {
         sub: {}
     });
 
-    const inputChange = (e) => {
+    const inputChange = (e: any) => {
         const { name , value } = e.target;
         setProduct({
             ...product,
@@ -229,7 +229,7 @@ const ProductDetails = () => {
                                     categoryId={categories.main.id}/>
                             </TabPane>
 
-                            */}  
+                            */}
 
                         </Tabs>
 

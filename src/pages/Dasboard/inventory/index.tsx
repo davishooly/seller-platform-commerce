@@ -1,7 +1,7 @@
-import React from 'pages/Dasboard/inventory/node_modules/react';
-import { NavLink, Route, Switch } from "pages/Dasboard/inventory/node_modules/react-router-dom"
+import React from 'react';
+import { NavLink, Route, Switch } from "react-router-dom"
 import Menu from '../menu';
-import Container from '../../../components/common/container';
+import Container from '../../../components/Common/Container';
 import NewProduct from './new';
 import ManageInventory from "./manageInventory";
 import OeExpress from "./oeExpress";

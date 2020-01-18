@@ -61,7 +61,7 @@ const TableSection = styled.section`
  }
 `;
 
-const DivContainer = styled.div`
+const DivContainer = styled.div<any>`
     display: flex;
     justify-content: space-between;
     padding-bottom: 20px;
@@ -113,7 +113,7 @@ const ProductContainer = styled.div`
      }
     `;
 
-const Button =  styled.button`
+const Button =  styled.button<any>`
    border: none;
    height: 16px;
    color: #C0C4CC;
@@ -131,7 +131,7 @@ const Button =  styled.button`
    padding-right: 16px;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled.div<any>`
  display: flex;
  justify-content: space-between;
  width: 260px;
