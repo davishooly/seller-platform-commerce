@@ -9,10 +9,9 @@ import Info from "./Info";
 import Owner from "./Info/owner";
 import BillAndPay from "./BillAndPay";
 import FinalDetails from "./Final";
-// import { mutateAsync } from "redux-query";
-// import { sellersCreate } from "api/src";
-// import { State } from "@types";
 import { compose } from "redux";
+import {sellersCreate} from "../../api/src/apis";
+import {mutateAsync} from "redux-query";
 
 const { Step } = Steps;
 
@@ -77,7 +76,7 @@ const NewSeller: React.FC<IProp> = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false)
   const [error, setInputError] = useState({});
-  
+
 
   const agreeTerms = () => {
     setIsChecked(!isChecked);
@@ -162,38 +161,38 @@ const NewSeller: React.FC<IProp> = (props) => {
   };
 
   const submitDetails = () => {
-    // const { dispatch } = props;
-    // setLoading(true)
-    // dispatch(
-    //   mutateAsync(
-    //     sellersCreate({
-    //       data: {
-    //         businessName: customerDetails.businessName,
-    //         phoneNumber: customerDetails.phone,
-    //         bank: {
-    //           name:customerDetails.bankName
-    //         },
-    //         address: {
-    //           street:customerDetails.businessNameLocation,
-    //           city:customerDetails.town,
-    //           name: customerDetails.businessNameLocation
-    //         },
-    //         owner: {
-    //           password: customerDetails.password,
-    //           email: customerDetails.email
-    //         }
-    //       }
-    //     }),
-    //   )
-    // ).then(redirectAfterEpisodeCreation).catch(() => {
-    //   setLoading(false)
-    // })
+    const { dispatch } = props;
+    setLoading(true);
+    dispatch(
+      mutateAsync(
+        sellersCreate({
+          data: {
+            businessName: customerDetails.businessName,
+            phoneNumber: customerDetails.phone,
+            bank: {
+              name:customerDetails.bankName
+            },
+            address: {
+              street:customerDetails.businessNameLocation,
+              city:customerDetails.town,
+              name: customerDetails.businessNameLocation
+            },
+            owner: {
+              password: customerDetails.password,
+              email: customerDetails.email
+            }
+          }
+        }),
+      )
+    ).then(redirect).catch(() => {
+      setLoading(false)
+    })
   };
 
 
-  const redirectAfterEpisodeCreation = (response: any) => {
+  const redirect = (response: any) => {
     setLoading(false)
-  }
+  };
 
   return (
     <div>
@@ -267,7 +266,7 @@ const NewSeller: React.FC<IProp> = (props) => {
 
 
 const mapStateToProps = (state: any) => ({
-  
+
 });
 
 export default compose<any>(connect(mapStateToProps))(NewSeller);

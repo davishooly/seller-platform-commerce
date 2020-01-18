@@ -21,6 +21,7 @@
     "draft-js": "^0.11.4",
     "highcharts": "^8.0.0",
     "highcharts-react-official": "^2.2.2",
+    "http-proxy-middleware": "^0.20.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-draft-wysiwyg": "^1.14.4",
@@ -38,7 +39,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "npm run generate",
+    "generate": "rm -rf ./src/api && java -jar ./src/vendor/openapi-generator/openapi-generator-cli.jar generate -i http://10.10.164.90:6969/swagger/swagger.yaml -g typescript-redux-query -o ./src/api"
   },
   "eslintConfig": {
     "extends": "react-app"
