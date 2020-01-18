@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { 
+import {
   StoreEnhancer,
   applyMiddleware,
   createStore,
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
 // Initial state - keep it simple, just to prevent basic null selection errs
 export const initialState: any = {
   auth: {
-    
+
   },
   queries: {},
   entities: {}
@@ -40,11 +40,8 @@ const getEntities = (state: any) => state.entities;
 // See this issue comment by Dan Abramov:
 // https://github.com/facebook/create-react-app/issues/1114#issuecomment-263650957
 const middleware = [
-  // stubRequest,
   authHeader,
-  // patientAccessMiddleware,
   queryMiddleware(superagentInterface, getQueries, getEntities),
-  // resolveActionableItems
 ];
 const enhancers: StoreEnhancer<{ dispatch: {} }, {}>[] = [
   applyMiddleware(...middleware)

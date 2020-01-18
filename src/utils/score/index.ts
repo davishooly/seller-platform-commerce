@@ -5,4 +5,3 @@ export const calculateScore = ( value: string, type: string ) => {
     }
     return score >= 20
   };
-  

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from "styled-components"
 
-const Button = styled.button`
+const Button = styled.button<any>`
 	height: 40px;
 	border: 1px solid #006DBF;
 	border-radius: 4px;

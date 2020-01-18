@@ -1,8 +1,8 @@
 import React from "react";
-import {renderCardContent} from "components/card";
-import TableSection from 'components/table'
+import {renderCardContent} from "components/Card";
+import TableSection from 'components/Table'
 import styled from "styled-components";
-import details from "components/card/cardContent";
+import details from "components/Card/cardContent";
 
 export const CardSection = styled.section`
  display: flex;

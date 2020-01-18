@@ -8,6 +8,6 @@ const Root = () => (
         <Routing />
       </div>
     </StateManagement>
-)
+);
 
 export default Root;

@@ -1,18 +1,17 @@
 import React from 'react';
-// import { Link } from "react-router-dom";
 import Menu from './menu';
 import {Avatar, Table} from "antd";
-
+import { Link } from "@reach/router"
 import {columns} from "./dashboardFixtures/tableColumns";
 import dataSources from "./dashboardFixtures/dataSources";
-import Container from "../../components/common/container";
+import Container from "../../components/Common/Container";
 
-import {ProductContainer, TableSection} from "../../components/table/styles";
+import {ProductContainer, TableSection} from "../../components/Table/styles";
 import {CardSection} from "./inventory/manageInventory";
 import {details, orderSummary, fullFilledSummary } from "./dashboardFixtures/details";
-import {renderCardContent, RenderCard } from "../../components/Card";
+import { RenderCard } from "../../components/Card";
 import { AnalyticsSection, Span, Div, DivCard } from './styles'
-import {BarChart} from "components/charts";
+import { BarChart } from "components/Charts";
 
 
 // const user: any  = JSON.parse(localStorage.getItem('user'));
@@ -20,7 +19,7 @@ import {BarChart} from "components/charts";
 const Dashboard: React.FC<any> = () => {
 
   const renderProductContent = (data: any) => (
-      <ProductContainer dashboard >
+      <ProductContainer  >
         <Avatar shape="square" size={44} icon="shopping"/>
         <div>
         <span>LG SK8Y Sound bar system for home theater</span>
@@ -42,7 +41,7 @@ const Dashboard: React.FC<any> = () => {
     return (
         <>
             <Menu>
-                <li>Hey {user ? user.user.name: ''}!.Its great to see you again.</li>
+                {/*<li>Hey {user ? user.user.name: ''}!.Its great to see you again.</li>*/}
             </Menu>
           <Container>
             <AnalyticsSection>

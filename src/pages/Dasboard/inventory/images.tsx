@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'pages/Dasboard/inventory/node_modules/react';
-import { Upload, Icon, Modal, Button } from 'pages/Dasboard/inventory/node_modules/antd';
-import styled from "pages/Dasboard/inventory/node_modules/styled-components"
+import React, {useEffect, useState} from 'react';
+import { Upload, Icon, Modal, Button } from 'antd';
+import styled from "styled-components"
 import notification from '../../../utils/toast';
 
 
-function getBase64(file) {
+function getBase64(file: File) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -14,7 +14,7 @@ function getBase64(file) {
 }
 
 
-function beforeUpload(file) {
+function beforeUpload(file: Blob) {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
         notification.error({
@@ -51,8 +51,8 @@ export const Action = styled.div`
     }
 `;
 
-const Image = ({ callback, score, setScore, files, setFiles }) => {
-    const [state, setState] = useState({
+const Image = ({ callback, score, setScore, files, setFiles }: any) => {
+    const [state, setState] = useState<any>({
         previewVisible: false,
         previewImage: '',
         fileList: [],
@@ -74,7 +74,7 @@ const Image = ({ callback, score, setScore, files, setFiles }) => {
 
     const handleCancel = () => setState({ previewVisible: false });
 
-    const handlePreview = async file => {
+    const handlePreview = async (file: any) => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
         }
@@ -85,8 +85,8 @@ const Image = ({ callback, score, setScore, files, setFiles }) => {
         });
     };
 
-    const uploadHandleChange = ({ fileList }) => {
-        const newFiles = fileList.map( ({ originFileObj }) => originFileObj);
+    const uploadHandleChange = ({ fileList }: any) => {
+        const newFiles = fileList.map( ({ originFileObj }: any) => originFileObj);
         setState({ fileList: newFiles });
         setFiles(newFiles)
     };

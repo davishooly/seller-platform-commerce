@@ -58,12 +58,12 @@ export const REFRESH_TOKEN_KEY = "refreshToken";
 export const setToken = function(accessToken: any, refreshToken: any) {
   window.localStorage.setItem(ACCESS_TOKEN_KEY, accessToken)
   window.localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken)
-}
+};
 
-export const getTokens = (name: any) => {
+export const getTokens = (body: any) => {
   const queryConfig = {
     url: `/o/token/`,
-    body: name,
+    body: body,
     transform: (responseBody  : any) => {
       return {
         auth: responseBody

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'pages/Dasboard/inventory/node_modules/react';
-import { convertToRaw } from 'pages/Dasboard/inventory/node_modules/draft-js';
-import RichEditor from '../../../components/input/editor';
+import React, { useEffect, useState } from 'react';
+import { convertToRaw } from 'draft-js';
+import RichEditor from '../../../components/Input/editor';
 import { Action } from './images';
-import { Button, Collapse} from 'pages/Dasboard/inventory/node_modules/antd';
-import { calculateScore } from '../../../utils/scores'
+import { Button, Collapse} from 'antd';
+import { calculateScore } from '../../../Utils/score'
 
 
 const descriptionSet = new Set();
 
 
-const Description = ({ onNext, callback, setScore, score  }) => {
+const Description = ({ onNext, callback, setScore, score  }: any) => {
     const { Panel } = Collapse;
-    const [ productDescription, setDescription ] = useState( {
+    const [ productDescription, setDescription ] = useState<any>( {
         description: '',
         package:'',
         moreInfo: ''
@@ -21,7 +21,7 @@ const Description = ({ onNext, callback, setScore, score  }) => {
 
     useEffect(()=>{
         if(changeDescription === "description" && productDescription.description !== ''){
-            const blocks = convertToRaw(productDescription.description.getCurrentContent()).blocks;
+            const blocks = convertToRaw(productDescription.description?.getCurrentContent()).blocks;
             let blockedText = '';
             let totalLength = 0;
             blocks.forEach(({ text, inlineStyleRanges }) => {
@@ -73,7 +73,7 @@ const Description = ({ onNext, callback, setScore, score  }) => {
 
     }, [productDescription.description, productDescription.package]);
 
-    const onChange = (state, editor) => {
+    const onChange = (state: any, editor: any) => {
         setDescription({ ...productDescription, [`${editor}`]: state});
         setChangeDescription(editor);
         const { key, text} = convertToRaw(state.getCurrentContent()).blocks[0];

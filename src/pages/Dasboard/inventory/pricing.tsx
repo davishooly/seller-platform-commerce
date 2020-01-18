@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Input, Form, Button, Icon } from 'antd';
 import { Action } from './images';
 import { TabsContainer } from './styles'
-import {hasErrors} from "utils/validators";;
+import {hasErrors} from "utils/validators";
 
 
 const Pricing: React.FC<any> = ({ product, onNext, form, callback, }: any) => {
