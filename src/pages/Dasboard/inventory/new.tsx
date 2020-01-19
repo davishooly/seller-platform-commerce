@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Box from 'components/Box';
+import useBeforeUnload from 'use-before-unload'
+
 
 import { Tabs, Breadcrumb, Progress, Col, Row,} from 'antd';
 // import ProductInfo from './productInfo';
@@ -175,6 +177,11 @@ const ProductDetails = () => {
     function callback(key: any) {
         setCurrent(key)
     }
+
+    useBeforeUnload(evt => {
+        /* Do some checks here if you like */
+        return true; // Suppress reload
+    });
 
     return (
         <>

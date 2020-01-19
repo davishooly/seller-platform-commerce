@@ -9,6 +9,7 @@ import Owner from "./Info/owner";
 import BillAndPay from "./BillAndPay";
 import FinalDetails from "./Final";
 import { compose } from "redux";
+import useBeforeUnload from 'use-before-unload'
 // import { sellersCreate} from "../../api/src/apis";
 import {mutateAsync} from "redux-query";
 
@@ -192,6 +193,11 @@ const NewSeller: React.FC<IProp> = (props) => {
   const redirect = (response: any) => {
     setLoading(false)
   };
+
+  useBeforeUnload(evt => {
+    /* Do some checks here if you like */
+    return true; // Suppress reload
+  });
 
   return (
     <div>
