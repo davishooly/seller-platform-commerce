@@ -1,12 +1,12 @@
-import {Checkbox, Icon, Input, Select, Table} from "pages/Dasboard/orders/node_modules/antd";
-import React, {useState} from "pages/Dasboard/orders/node_modules/react";
+import {Checkbox, Icon, Input, Select, Table} from "antd";
+import React, {useState} from "react";
 import { CardSection }  from '../inventory/manageInventory'
-import {renderCardContent} from '../../../components/card/index'
-import Styled from 'pages/Dasboard/orders/node_modules/styled-components';
+import {renderCardContent} from 'components/Card/index'
+import Styled from 'styled-components';
 import details from "./fixtures/details";
 import {columns} from "./fixtures/tableColumns";
 import dataSources from "./fixtures/dataSources";
-import {Button, ButtonContainer, DivContainer, TableSection} from "../../../components/table/styles";
+import { Button, ButtonContainer, DivContainer, TableSection } from "components/Table/styles";
 
 
 const OrderContainer  = Styled.div`
@@ -20,18 +20,17 @@ const options = ['category', 'price'];
 
 const ManageOrders = () => {
 
-  const [selectedOrders, SelectOrders] = useState([]);
-
-  const onSelect = (e) => {
+  const [selectedOrders, SelectOrders] = useState<any>([]);
+  const onSelect = (e: any) => {
     const {value, checked} = e.target;
     const products = Object.assign([], selectedOrders);
     checked ?
         SelectOrders([...products, value])
         :
-        SelectOrders(products.filter(product => product.key !== value.key));
+        SelectOrders(products.filter((product: any) => product.key !== value.key));
   };
 
-  const renderOderContent = (data) => (
+  const renderOderContent = (data: any ) => (
       <OrderContainer>
         <Checkbox value={data} onChange={onSelect}/>
         <span>

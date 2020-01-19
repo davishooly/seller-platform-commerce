@@ -7,6 +7,8 @@ import {
   compose
 } from "redux";
 import { Provider } from 'react-redux';
+import { BrowserRouter } from "react-router-dom";
+// import { Beforeunload } from 'react-beforeunload';
 import superagentInterface from "redux-query-interface-superagent";
 import { Provider as ReduxQueryProvider } from 'redux-query-react';
 import { queryMiddleware, entitiesReducer, queriesReducer } from 'redux-query';
@@ -59,11 +61,15 @@ export const store: any = createStore(
 
 const StateManagement = (props: any) => {
   return (
+      <BrowserRouter>
+      {/*<Beforeunload onBeforeunload={(e) => {e.preventDefault()}}>*/}
     <Provider store={store}>
       <ReduxQueryProvider queriesSelector={getQueries}>
         {props.children}
       </ReduxQueryProvider>
     </Provider>
+      {/*</Beforeunload>*/}
+      </BrowserRouter>
   );
 };
 

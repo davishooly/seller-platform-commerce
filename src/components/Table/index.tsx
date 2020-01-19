@@ -106,7 +106,7 @@ const  RenderTable = () => {
                         <Search/>
                     </div>
                 </DivContainer>
-                {/*<Table pagination={{total: productList.length}} dataSource={productList} columns={columns}/>*/}
+                <Table pagination={{total: 1}} dataSource={[]} columns={columns}/>
             </TableSection>
         </div>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
 import Menu from './menu';
 import {Avatar, Table} from "antd";
-import { Link } from "@reach/router"
+import { Link } from "react-router-dom"
 import {columns} from "./dashboardFixtures/tableColumns";
 import dataSources from "./dashboardFixtures/dataSources";
 import Container from "../../components/Common/Container";
@@ -9,7 +9,7 @@ import Container from "../../components/Common/Container";
 import {ProductContainer, TableSection} from "../../components/Table/styles";
 import {CardSection} from "./inventory/manageInventory";
 import {details, orderSummary, fullFilledSummary } from "./dashboardFixtures/details";
-import { RenderCard } from "../../components/Card";
+import { RenderCard } from "components/Card";
 import { AnalyticsSection, Span, Div, DivCard } from './styles'
 import { BarChart } from "components/Charts";
 

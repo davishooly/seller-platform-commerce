@@ -1,8 +1,8 @@
-import React from 'pages/Dasboard/settings/node_modules/react';
-import { NavLink, Route, Switch } from 'pages/Dasboard/settings/node_modules/react-router-dom'
-import styled from "pages/Dasboard/settings/node_modules/styled-components"
+import React from 'react';
+import { NavLink, Route, Switch } from 'react-router-dom'
+import styled from "styled-components"
 import Menu from '../menu';
-import Container from '../../../components/common/container';
+import Container from 'components/Common/Container';
 import ShopInfo from './shopinfo';
 import Users from './users';
 

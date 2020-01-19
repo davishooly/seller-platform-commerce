@@ -1,8 +1,8 @@
-import React from 'pages/Dasboard/payoutTaxes/node_modules/react';
-import { NavLink, Route, Switch } from "pages/Dasboard/payoutTaxes/node_modules/react-router-dom";
+import React from 'react';
+import { NavLink, Route, Switch } from "react-router-dom";
 import Menu from "../menu";
 import Users from "../settings/users";
-import Container from "../../../components/common/container";
+import Container from "components/Common/Center";
 import Payout from "./payout";
 
 

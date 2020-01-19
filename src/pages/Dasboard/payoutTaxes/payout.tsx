@@ -1,8 +1,8 @@
-import React from "pages/Dasboard/payoutTaxes/node_modules/react";
-import {Table} from "pages/Dasboard/payoutTaxes/node_modules/antd";
-import Styled from 'pages/Dasboard/payoutTaxes/node_modules/styled-components';
+import React from "react";
+import {Table} from "antd";
+import Styled from 'styled-components';
 
-import {TableSection} from "../../../components/table/styles";
+import {TableSection} from "components/Table/styles";
 import { columns } from './fixtures/tableColumns'
 import dataSources from "./fixtures/dataSources";
 

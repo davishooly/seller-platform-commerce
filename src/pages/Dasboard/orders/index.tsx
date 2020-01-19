@@ -1,7 +1,7 @@
-import React from "pages/Dasboard/orders/node_modules/react";
+import React from "react";
 import Menu from "../menu";
-import {NavLink, Route, Switch} from "pages/Dasboard/orders/node_modules/react-router-dom";
-import Container from "../../../components/common/container";
+import {NavLink, Route, Switch} from "react-router-dom";
+import Container from "components/Common/Container";
 import Users from "../settings/users";
 import ManageOrders from "./manageOrders";
 

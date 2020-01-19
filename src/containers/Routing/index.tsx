@@ -1,12 +1,11 @@
-import * as React from "react";
-import { Router, RouteComponentProps, Match } from "@reach/router";
-
+import React from "react";
+import { Route , Switch } from 'react-router-dom'
 import requireAuthentication from "../RequireAuthentication";
-import { NewSeller } from "pages";
-import Home from "../../pages/Home";
-import Dashboard from "../../pages/Dasboard";
+import MainLayout, { DashboardLayout } from "../../components/Layout";
+import HomeRoutes, { DashboardRoutes } from "./troutes";
 
-const AuthedRoutes: React.FunctionComponent<RouteComponentProps> = () => {
+
+const AuthedRoutes: React.FunctionComponent<any> = () => {
   return <React.Fragment></React.Fragment>;
 };
 
@@ -16,13 +15,23 @@ class Routing extends React.Component<any, {}> {
   render() {
     const Routes = this.PreAuthedRoutes;
     return (
-        <Router>
-            <Home path="/" />
-            <Dashboard path={"dashboard"}/>
-            <NewSeller path="/new" />
-        </Router>
+        <Switch>
+            {/*<Route path='/auth/:id'>*/}
+            {/*    <AuthRoutes/>*/}
+            {/*</Route>*/}
+            <Route path="/dashboard">
+                <DashboardLayout>
+                    <DashboardRoutes />
+                </DashboardLayout>
+            </Route>
+
+            <Route path="/">
+                <MainLayout>
+                    <HomeRoutes/>
+                </MainLayout>
+            </Route>
+          </Switch>
     );
   }
 }
-
 export default Routing;

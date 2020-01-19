@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { RouteComponentProps } from "@reach/router";
 import { Steps, Button } from "antd";
 import Agreement from "./Terms";
 import styled from "styled-components";
@@ -10,7 +9,7 @@ import Owner from "./Info/owner";
 import BillAndPay from "./BillAndPay";
 import FinalDetails from "./Final";
 import { compose } from "redux";
-import {sellersCreate} from "../../api/src/apis";
+// import { sellersCreate} from "../../api/src/apis";
 import {mutateAsync} from "redux-query";
 
 const { Step } = Steps;
@@ -29,7 +28,7 @@ const customer = {
   bankAccountHoldersName: "",
   confirmBankAccount: "",
   bankName: "",
-
+  confirmPassword:'',
   username: "",
   password: "",
   email: "",
@@ -66,7 +65,7 @@ const stepStyle = {
   boxShadow: "0px -1px 0 0 #e8e8e8 inset"
 };
 
-interface IProp extends RouteComponentProps {
+interface IProp  {
   dispatch: any
 }
 
@@ -162,31 +161,31 @@ const NewSeller: React.FC<IProp> = (props) => {
 
   const submitDetails = () => {
     const { dispatch } = props;
-    setLoading(true);
-    dispatch(
-      mutateAsync(
-        sellersCreate({
-          data: {
-            businessName: customerDetails.businessName,
-            phoneNumber: customerDetails.phone,
-            bank: {
-              name:customerDetails.bankName
-            },
-            address: {
-              street:customerDetails.businessNameLocation,
-              city:customerDetails.town,
-              name: customerDetails.businessNameLocation
-            },
-            owner: {
-              password: customerDetails.password,
-              email: customerDetails.email
-            }
-          }
-        }),
-      )
-    ).then(redirect).catch(() => {
-      setLoading(false)
-    })
+    // setLoading(true);
+    // dispatch(
+    //   mutateAsync(
+    //     sellersCreate({
+    //       data: {
+    //         businessName: customerDetails.businessName,
+    //         phoneNumber: customerDetails.phone,
+    //         bank: {
+    //           name:customerDetails.bankName
+    //         },
+    //         address: {
+    //           street:customerDetails.businessNameLocation,
+    //           city:customerDetails.town,
+    //           name: customerDetails.businessNameLocation
+    //         },
+    //         owner: {
+    //           password: customerDetails.password,
+    //           email: customerDetails.email
+    //         }
+    //       }
+    //     }),
+    //   )
+    // ).then(redirect).catch(() => {
+    //   setLoading(false)
+    // })
   };
 
 

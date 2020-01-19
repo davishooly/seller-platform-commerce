@@ -1,6 +1,6 @@
-import React from 'pages/Dasboard/settings/node_modules/react';
-import { Row, Col, Button, Divider } from 'pages/Dasboard/settings/node_modules/antd';
-import Input from '../../../components/input';
+import React from 'react';
+import { Row, Col, Button, Divider } from 'antd';
+import Input from 'components/Input';
 
 const ShopInfo = () => {
     return (

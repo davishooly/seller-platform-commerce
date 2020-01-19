@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Input } from "components";
 import { Col, Row } from "antd";
-import { validateNameFields } from "utils/validators";
+import {validateEmail, validateNameFields} from "utils/validators";
 
 const StyledInfo = styled.div`
   display: grid;
@@ -23,7 +23,7 @@ const StyledInfo = styled.div`
 `;
 
 const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
-  const { username, email, firstname, lastname, password } = owner;
+  const { username, email, firstname, lastname, password, confirmPassword } = owner;
 
   useEffect(() => {
     if (username !== "") {
@@ -39,7 +39,12 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
 
   useEffect(() => {
     if (email !== "") {
-      setInputError({ ...error, email: "" });
+      if(!validateEmail(email)){
+        setInputError({...error, email: 'please enter a valid email address'})
+      }
+      else {
+        setInputError({...error, email: ''})
+      }
     }
   }, [email]);
 
@@ -78,6 +83,16 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
       );
     }
   }, [password]);
+
+  useEffect(()=>{
+    if ( confirmPassword !== password) {
+      setInputError({...error, confirmPassword:'confirm password does not match password' })
+    }
+    else {
+      setInputError({...error, confirmPassword:'' })
+    }
+
+}, [confirmPassword]);
 
   return (
     <StyledInfo>
@@ -127,15 +142,26 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
             <span style={{ color: "red" }}>{error.lastname}</span>
           </Col>
         </Row>
-
         <Input
           style={{ borderColor: error.password ? "red" : "" }}
           name="password"
           onChange={changeCustomerDetails}
           value={password}
+          type="password"
           placeholder="password"
         />
         <span style={{ color: "red" }}>{error.password}</span>
+
+        <Input
+            style={{ borderColor: error.password ? "red" : "" }}
+            name="confirmPassword"
+            type="password"
+            onChange={changeCustomerDetails}
+            value={confirmPassword}
+            placeholder="confirm password"
+        />
+        <span style={{ color: "red" }}>{error.confirmPassword}</span>
+
       </div>
     </StyledInfo>
   );

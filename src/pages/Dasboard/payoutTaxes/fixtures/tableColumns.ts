@@ -1,4 +1,4 @@
-import React from "pages/Dasboard/payoutTaxes/fixtures/node_modules/react";
+import React from "react";
 
 export const columns =  [
   {
