@@ -22,6 +22,9 @@ const ModalContent = (props: any) => {
 
     const {userCredentials, handleInputChange} = useInputChange();
     const [error, setInputError] = useState<any>({});
+    const [isVisible, setPasswordVisible] = useState(false);
+
+
 
     const {username, password, email} = userCredentials;
     const history = useHistory();
@@ -85,20 +88,32 @@ const ModalContent = (props: any) => {
             {modalIcon ?
                 <Icon onClick={onClick} type="close" style={{fontSize: 20, color: "#000000", cursor: "pointer"}}/> : ''}
             <LoginContainer>
-                <div className="image">
-                    <img src={Logo} alt='logo' style={{filter: "invert(1)"}}/>
+                <div className="modal__container title">
+                    <h1> OE Seller center </h1>
                 </div>
                 <form action="">
                     <div className="action__container">
-                        <input style={{borderColor: error.username ? "red" : ''}} required name='username'
-                               value={username} autoComplete="email" className="input__field"
-                               onChange={handleInputChange} placeholder={"Username"}/>
-                        <span style={{color: "red"}}>{error.username}</span>
-                        <span style={{color: "red"}}>{error.email}</span>
-                        <input name='password' style={{borderColor: error.password ? "red" : ''}}
-                               autoComplete="new-password" type='password' value={password} className="input__field"
-                               onChange={handleInputChange} placeholder="Password"/>
-                        <span style={{color: "red"}}>{error.password}</span>
+                        { signUpModal ? (
+                            <>
+                                <input style={{ borderColor: error.username ? "red" : ''}}  required name='username' value={username}  autoComplete="email" className="input__field" onChange={handleInputChange} placeholder="Username"/>
+                                <span  className="error" style={{color: "red" }}>{error.username}</span>
+                            </>
+                        ): ''}
+                        <input name='email' style={{ borderColor: error.email ? "red" : ''}}  autoComplete="phone" value={email} className="input__field" onChange={handleInputChange} placeholder="E-mail"/>
+                        <span className="error" style={{color: "red" }}>{error.email}</span>
+                        <div className="password__container">
+                            <input
+                                name='password'
+                                style={{ borderColor: error.password ? "red" : ''}}
+                                autoComplete="new-password"
+                                type={ isVisible ? 'text': 'password'}
+                                value={password}
+                                className="input__field"
+                                onChange={handleInputChange}
+                                placeholder="Password"/>
+                            { signUpModal ? '' : <Icon onClick={()=> setPasswordVisible(!isVisible)} type="eye" /> }
+                        </div>
+                        <span className="error" style={{color: "red" }}>{error.password}</span>
                         <Button className='btn' onClick={logInUser} loading={ isPending }
                                 style={{width: 223}}> Sign in </Button>
                         <div className="bottom__section">
@@ -133,3 +148,4 @@ const useInputChange = () => {
         handleInputChange
     }
 };
+
