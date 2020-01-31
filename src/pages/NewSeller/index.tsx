@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import { useHistory } from "react-router-dom";
+
 import {Steps, Button, notification} from "antd";
 import Agreement from "./Terms";
 import styled from "styled-components";
@@ -8,11 +10,12 @@ import Info from "./Info";
 import Owner from "./Info/owner";
 import BillAndPay from "./BillAndPay";
 import FinalDetails from "./Final";
-import {compose} from "redux";
+import { compose } from "redux";
 import useBeforeUnload from 'use-before-unload'
-import {sellersCreate} from "../../api/src/apis";
-import {mutateAsync} from "redux-query";
-import {createSeller} from "../../state/seller";
+import  { createSeller } from "../../state/seller";
+
+import { useMutation } from 'redux-query-react';
+
 
 const {Step} = Steps;
 
@@ -72,11 +75,16 @@ interface IProp {
 }
 
 const NewSeller: React.FC<IProp> = (props) => {
+
+    const history = useHistory();
     const [current, setCurrent] = useState(0);
     const [customerDetails, setCustomerDetails] = useState(customer);
     const [isChecked, setIsChecked] = useState(false);
-    const [loading, setLoading] = useState(false)
     const [error, setInputError] = useState({});
+
+    const [ { isFinished, isPending}, sellerCreate ] = useMutation(() =>
+        createSeller(customerDetails)
+    )
 
 
     const agreeTerms = () => {
@@ -162,41 +170,7 @@ const NewSeller: React.FC<IProp> = (props) => {
     };
 
     const submitDetails = () => {
-        const {dispatch} = props;
-        setLoading(true);
-        // dispatch(
-        //     mutateAsync(createSeller(customerDetails)
-        //     )).then(redirect).catch(( error : any ) => {
-        //     setLoading(false)
-        //   console.log({ error })
-        //     notification.error({
-        //         message: "Error",
-        //         description: error
-        //     });
-        // })
-        dispatch(
-            mutateAsync(
-                sellersCreate({
-                    data: {
-                        businessName: customerDetails.businessName,
-                        phoneNumber: customerDetails.phone,
-                        bank: {
-                            name: customerDetails.bankName
-                        },
-                        address: {
-                            street: customerDetails.businessNameLocation,
-                            city: customerDetails.town,
-                            name: customerDetails.businessNameLocation
-                        },
-                        owner: {
-                            password: customerDetails.password,
-                            email: customerDetails.email
-                        }
-                    }
-                }),
-            )
-        ).then(redirect).catch(( error: any ) => {
-            setLoading(false)
+        sellerCreate().then(redirect).catch(( error: any ) => {
             notification.error({
                 message: "Error",
                 description: error
@@ -204,14 +178,22 @@ const NewSeller: React.FC<IProp> = (props) => {
         })
     };
 
-
     const redirect = (response: any) => {
-        setLoading(false)
-        console.log(">>>>>>>>>>>.", {response})
-        notification.success({
-            message: "Success",
-            description: "Seller created successfully"
-        });
+        const { status, text }  = response;
+        if( status === 201){
+            notification.success({
+                message: "Success",
+                description: "Seller created successfully"
+            });
+            history.push("/dashboard")
+        }
+        else {
+            const { owner: { email } } = JSON.parse(text)
+            notification.error({
+                message: "Error",
+                description: email[0]
+            });
+        }
     };
 
     useBeforeUnload(evt => {
@@ -267,7 +249,7 @@ const NewSeller: React.FC<IProp> = (props) => {
                 <FinalDetails
                     customer={customerDetails}
                     submit={submitDetails}
-                    loading={loading}
+                    loading={isPending}
                     onClick={() => {
                         prev();
                     }}
@@ -275,7 +257,7 @@ const NewSeller: React.FC<IProp> = (props) => {
             )}
             <Center>
                 {current < steps.length - 1 && (
-                    <Button type="primary" onClick={() => next()} loading={loading}>
+                    <Button type="primary" onClick={() => next()}>
                         Next Step
                     </Button>
                 )}

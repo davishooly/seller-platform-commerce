@@ -2,7 +2,6 @@ import { sellersCreate } from "api/src/apis";
 
 
 export const createSeller = (customerDetails: any) => {
-    console.log({ customerDetails })
     return  sellersCreate({
         data: {
             owner: {

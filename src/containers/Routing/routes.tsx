@@ -7,6 +7,7 @@ import Dashboard from 'pages/Dasboard';
 import Inventory from 'pages/Dasboard/inventory';
 import PayoutTaxes from "pages/Dasboard/payoutTaxes/index";
 import Orders from "pages/Dasboard/orders";
+import Register from "../../pages/Auth";
 
 
 
@@ -21,12 +22,12 @@ const HomeRoutes = () => {
   );
 };
 
-// export const AuthRoutes = () => (
-//     <Switch>e
-//         <Route path="/auth/:id" exact component={Register} />
-// </Switch>
-//
-// );
+export const AuthRoutes = () => (
+    <Switch>
+        <Route path="/auth" exact component={Register} />
+</Switch>
+
+);
 
 
 export const DashboardRoutes = () => {

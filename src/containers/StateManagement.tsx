@@ -24,9 +24,7 @@ const rootReducer = combineReducers({
 
 // Initial state - keep it simple, just to prevent basic null selection errs
 export const initialState: any = {
-  auth: {
-
-  },
+  auth: {},
   queries: {},
   entities: {}
 };

@@ -61,10 +61,10 @@ const Landing = () => {
                     <span>Start selling where thousands of customers are shopping every day.</span>
                     <span>You’re just a few steps away from becoming a seller on OE.</span>
                     <ButtonContainer>
-                        <Link to="/auth/register">
+                        <Link to="/new">
                             <Button register> Register to sell</Button>
                         </Link>
-                        <Link to="/auth/login">
+                        <Link to="/auth">
                             <Button signin> Sign in</Button>
                         </Link>
                     </ButtonContainer>
