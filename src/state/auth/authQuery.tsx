@@ -6,6 +6,7 @@ export interface Login {
 }
 
 export const loginSeller = ( userCredentials: Login ) => {
+
     const config = sellersloginCreate({
         data: {
             email: userCredentials.email,

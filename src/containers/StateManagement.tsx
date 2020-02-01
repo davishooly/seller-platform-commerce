@@ -30,6 +30,7 @@ export const initialState: any = {
 };
 
 
+
 // Middleware / redux query setup
 const getQueries = (state: any) => state.queries;
 const getEntities = (state: any) => state.entities;

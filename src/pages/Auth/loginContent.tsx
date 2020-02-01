@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {withRouter, Link, useHistory } from "react-router-dom";
-import { Icon, Button } from 'antd';
-import jwt_decode from 'jwt-decode';
-import Logo from 'icons/omaar-logo.svg'
-import { LoginContainer, ModelContent } from './styles'
+import {withRouter, Link, useHistory} from "react-router-dom";
+import {Icon, Button} from 'antd';
+import {LoginContainer, ModelContent} from './styles'
 import notification from '../../utils/toast'
-import { loginSeller } from "../../state/auth/authQuery";
-import { validate } from '../../utils/validators'
-import { useMutation } from 'redux-query-react';
-
+import {loginSeller} from "../../state/auth/authQuery";
+import {validate} from '../../utils/validators'
+import {useMutation} from 'redux-query-react';
 
 
 const user = {
@@ -25,15 +22,14 @@ const ModalContent = (props: any) => {
     const [isVisible, setPasswordVisible] = useState(false);
 
 
-
     const {username, password, email} = userCredentials;
     const history = useHistory();
 
-      const [ { isFinished, isPending}, loginMutation ] = useMutation( (user: any) =>
-          loginSeller({
-              email: user.username, password: user.password
-          })
-      )
+    const [{isFinished, isPending}, loginMutation] = useMutation((user: any) =>
+        loginSeller({
+            ...user
+        })
+    )
 
 
     useEffect(() => {
@@ -44,6 +40,13 @@ const ModalContent = (props: any) => {
     }, [password]);
 
     useEffect(() => {
+        if (email !== '') {
+            setInputError({...error, email: ''})
+        }
+
+    }, [email]);
+
+    useEffect(() => {
         if (username !== '') {
             setInputError({...error, username: ''})
         }
@@ -52,30 +55,28 @@ const ModalContent = (props: any) => {
     const logInUser = (e: any) => {
         e.preventDefault();
         const infoFields = [
-            {username},
             {password},
+            {email}
         ];
         const fieldErrors = validate(infoFields);
         setInputError({...error, ...fieldErrors});
         if (Object.keys(fieldErrors).length === 0) {
-            loginMutation( {username, password }).then(redirect).catch((error: any) => {
-                console.log(error)
+            loginMutation({email, password}).then(redirect).catch((error: any) => {
             })
         }
     };
 
     const redirect = (response: any) => {
-        const { status, text }  = response;
-        if( status === 201){
+        const {status, text} = response;
+        if (status === 201) {
             notification.success({
                 message: "Success",
                 description: "Welcome back "
             });
             history.push("/dashboard")
-        }
-        else {
+        } else {
+            console.log(">>>>>>>>>>", JSON.parse(text) )
             // const { owner: { email } } = JSON.parse(text)
-            console.log(">>>>>>", JSON.parse(text))
             notification.error({
                 message: "Error",
                 description: ""
@@ -93,28 +94,32 @@ const ModalContent = (props: any) => {
                 </div>
                 <form action="">
                     <div className="action__container">
-                        { signUpModal ? (
+                        {signUpModal ? (
                             <>
-                                <input style={{ borderColor: error.username ? "red" : ''}}  required name='username' value={username}  autoComplete="email" className="input__field" onChange={handleInputChange} placeholder="Username"/>
-                                <span  className="error" style={{color: "red" }}>{error.username}</span>
+                                <input style={{borderColor: error.username ? "red" : ''}} required name='username'
+                                       value={username} autoComplete="email" className="input__field"
+                                       onChange={handleInputChange} placeholder="Username"/>
+                                <span className="error" style={{color: "red"}}>{error.username}</span>
                             </>
-                        ): ''}
-                        <input name='email' style={{ borderColor: error.email ? "red" : ''}}  autoComplete="phone" value={email} className="input__field" onChange={handleInputChange} placeholder="E-mail"/>
-                        <span className="error" style={{color: "red" }}>{error.email}</span>
+                        ) : ''}
+                        <input name='email' style={{borderColor: error.email ? "red" : ''}} autoComplete="phone"
+                               value={email} className="input__field" onChange={handleInputChange}
+                               placeholder="E-mail"/>
+                        <span className="error" style={{color: "red"}}>{error.email}</span>
                         <div className="password__container">
                             <input
                                 name='password'
-                                style={{ borderColor: error.password ? "red" : ''}}
+                                style={{borderColor: error.password ? "red" : ''}}
                                 autoComplete="new-password"
-                                type={ isVisible ? 'text': 'password'}
+                                type={isVisible ? 'text' : 'password'}
                                 value={password}
                                 className="input__field"
                                 onChange={handleInputChange}
                                 placeholder="Password"/>
-                            { signUpModal ? '' : <Icon onClick={()=> setPasswordVisible(!isVisible)} type="eye" /> }
+                            {signUpModal ? '' : <Icon onClick={() => setPasswordVisible(!isVisible)} type="eye"/>}
                         </div>
-                        <span className="error" style={{color: "red" }}>{error.password}</span>
-                        <Button className='btn' onClick={logInUser} loading={ isPending }
+                        <span className="error" style={{color: "red"}}>{error.password}</span>
+                        <Button className='btn' onClick={logInUser} loading={isPending}
                                 style={{width: 223}}> Sign in </Button>
                         <div className="bottom__section">
                             <span>Can’t remember your password?</span>
