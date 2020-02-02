@@ -68,10 +68,10 @@ const ModalContent = (props: any) => {
 
     const redirect = (response: any) => {
         const {status, text} = response;
-        if (status === 201) {
+        if (status === 200) {
             notification.success({
                 message: "Success",
-                description: "Welcome back "
+                description: "Welcome back OE Seller Center"
             });
             history.push("/dashboard")
         } else {

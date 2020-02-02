@@ -64,7 +64,7 @@ const Landing = () => {
                         <Link to="/new">
                             <Button register> Register to sell</Button>
                         </Link>
-                        <Link to="/auth">
+                        <Link to="/login">
                             <Button signin> Sign in</Button>
                         </Link>
                     </ButtonContainer>

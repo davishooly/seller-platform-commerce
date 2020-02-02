@@ -8,6 +8,7 @@ import Inventory from 'pages/Dasboard/inventory';
 import PayoutTaxes from "pages/Dasboard/payoutTaxes/index";
 import Orders from "pages/Dasboard/orders";
 import Register from "../../pages/Auth";
+import ActivationPage from "../../pages/ActivateAccount";
 
 
 
@@ -24,9 +25,15 @@ const HomeRoutes = () => {
 
 export const AuthRoutes = () => (
     <Switch>
-        <Route path="/auth" exact component={Register} />
+        <Route path="/login" exact component={Register} />
 </Switch>
 
+);
+
+export const AccountActivationRoutes = () => (
+    <Switch>
+        <Route path={"/activate/:userId/:token"} render={(props: any) => <ActivationPage {...props } />} />
+    </Switch>
 );
 
 

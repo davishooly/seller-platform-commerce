@@ -173,7 +173,7 @@ const NewSeller: React.FC<IProp> = (props) => {
         sellerCreate().then(redirect).catch(( error: any ) => {
             notification.error({
                 message: "Error",
-                description: error
+                description: "An Error occurred"
             });
         })
     };
@@ -183,9 +183,9 @@ const NewSeller: React.FC<IProp> = (props) => {
         if( status === 201){
             notification.success({
                 message: "Success",
-                description: "Seller created successfully"
+                description: "Seller created successfully Check your email to activate your account"
             });
-            history.push("/dashboard")
+
         }
         else {
             const { owner: { email } } = JSON.parse(text)
