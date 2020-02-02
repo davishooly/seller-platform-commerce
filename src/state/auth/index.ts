@@ -20,7 +20,7 @@ export function reducer(state = {}, action: any) {
   }
 }
 
-export const setTokens = function(auth: any) {
+export const setStoreTokens = function(auth: any) {
   return { type: SET_AUTH, auth: auth };
 };
 
@@ -29,7 +29,7 @@ export const removeTokens = function() {
 };
 
 
-export interface State {
+export interface loginState {
   accessToken?: string;
   refreshToken?: string;
 }
@@ -37,7 +37,7 @@ export interface State {
 /**
  * Gets initial auth state from storage.
  */
-export function getInitialAuthState(): State {
+export function getInitialAuthState(): loginState {
   const accessToken =
     window.localStorage.getItem(ACCESS_TOKEN_KEY) || undefined;
   const refreshToken =
@@ -73,7 +73,5 @@ export const getTokens = (body: any) => {
       auth: (prev: any, next: any) => next,
     },
   };
-
-
   return queryConfig;
 };

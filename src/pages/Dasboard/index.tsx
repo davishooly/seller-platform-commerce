@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import Menu from './menu';
 import {Avatar, Table} from "antd";
 import { Link } from "react-router-dom"
@@ -17,6 +18,10 @@ import { BarChart } from "components/Charts";
 // const user: any  = JSON.parse(localStorage.getItem('user'));
 
 const Dashboard: React.FC<any> = () => {
+
+
+    const sellerInfo = useSelector(state => state.entities)
+    console.log( {sellerInfo} )
 
   const renderProductContent = (data: any) => (
       <ProductContainer  >

@@ -2,7 +2,7 @@ import React from "react";
 import { Route , Switch } from 'react-router-dom'
 import requireAuthentication from "../RequireAuthentication";
 import MainLayout, { DashboardLayout } from "../../components/Layout";
-import HomeRoutes, {DashboardRoutes, AuthRoutes, AccountActivationRoutes} from "./routes";
+import DashboardRoutes, {HomeRoutes, AuthRoutes, AccountActivationRoutes} from "./routes";
 
 
 const AuthedRoutes: React.FunctionComponent<any> = () => {
@@ -29,7 +29,11 @@ class Routing extends React.Component<any, {}> {
             <Route path={"/activate/:userId/:token"}>
                 <AccountActivationRoutes/>
             </Route>
-            <Routes />
+            <Route path="/dashboard">
+                <DashboardLayout>
+                    <DashboardRoutes />
+                </DashboardLayout>
+            </Route>
             <Route path="/">
                 <MainLayout>
                     <HomeRoutes/>

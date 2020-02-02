@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {withRouter, Link, useHistory} from "react-router-dom";
-import {Icon, Button} from 'antd';
-import {LoginContainer, ModelContent} from './styles'
+import { Icon, Button } from 'antd';
+import { LoginContainer, ModelContent } from './styles'
 import notification from '../../utils/toast'
 import {loginSeller} from "../../state/auth/authQuery";
 import {validate} from '../../utils/validators'
-import {useMutation} from 'redux-query-react';
+import { useDispatch  } from 'react-redux'
+import { useMutation } from 'redux-query-react';
+import { setStoreTokens } from "../../state/auth";
 
 
 const user = {
@@ -20,6 +22,7 @@ const ModalContent = (props: any) => {
     const {userCredentials, handleInputChange} = useInputChange();
     const [error, setInputError] = useState<any>({});
     const [isVisible, setPasswordVisible] = useState(false);
+    const dispatch = useDispatch();
 
 
     const {username, password, email} = userCredentials;
@@ -68,18 +71,21 @@ const ModalContent = (props: any) => {
 
     const redirect = (response: any) => {
         const {status, text} = response;
-        if (status === 200) {
+        const { error , error_description, access_token,refresh_token }  = JSON.parse(text);
+        if (status === 200 && !error ) {
             notification.success({
                 message: "Success",
-                description: "Welcome back OE Seller Center"
+                description: "Welcome back to OE Seller Center"
             });
+            dispatch(setStoreTokens({
+                accessToken:  access_token,
+                refreshToken: refresh_token
+            }))
             history.push("/dashboard")
         } else {
-            console.log(">>>>>>>>>>", JSON.parse(text) )
-            // const { owner: { email } } = JSON.parse(text)
             notification.error({
                 message: "Error",
-                description: ""
+                description: error_description
             });
         }
     };
