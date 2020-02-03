@@ -12,7 +12,7 @@ const Action = styled.div`
     }
 `;
 
-const ProductInfo: React.FC<any> = ({ form, onNext, onPrevClick  }) => {
+const ProductInfo  = ({ form, onNext, onPrevClick  }: any) => {
     const { getFieldDecorator, getFieldError, validateFields, isFieldTouched, getFieldsError } = form;
 
 
@@ -107,4 +107,4 @@ const ProductInfo: React.FC<any> = ({ form, onNext, onPrevClick  }) => {
     );
 }
 
-export default Form.create({ name: 'product_info' })(ProductInfo);
+export default Form.create<any>({ name: 'product_info' })(ProductInfo);

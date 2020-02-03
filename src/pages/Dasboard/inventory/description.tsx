@@ -3,7 +3,7 @@ import { convertToRaw } from 'draft-js';
 import RichEditor from '../../../components/Input/editor';
 import { Action } from './images';
 import { Button, Collapse} from 'antd';
-import { calculateScore } from '../../../Utils/score'
+import { calculateScore } from 'utils/score'
 
 
 const descriptionSet = new Set();

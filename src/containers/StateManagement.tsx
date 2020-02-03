@@ -7,6 +7,10 @@ import {
   compose
 } from "redux";
 import { Provider } from 'react-redux';
+import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+
+import storage from 'redux-persist/lib/storage'
 import { BrowserRouter } from "react-router-dom";
 import superagentInterface from "redux-query-interface-superagent";
 import { Provider as ReduxQueryProvider } from 'redux-query-react';
@@ -14,12 +18,22 @@ import { queryMiddleware, entitiesReducer, queriesReducer } from 'redux-query';
 import { reducer as auth } from "state/auth"
 import { authHeader } from 'state/auth_header';
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['entities']
+}
+
 // Reducers
 const rootReducer = combineReducers({
   auth,
   entities: entitiesReducer,
   queries: queriesReducer,
 });
+
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 
 
 // Initial state - keep it simple, just to prevent basic null selection errs
@@ -50,19 +64,24 @@ if (window && (window as any).__REDUX_DEVTOOLS_EXTENSION__) {
   enhancers.push((window as any).__REDUX_DEVTOOLS_EXTENSION__());
 }
 export const store: any = createStore(
-  rootReducer,
+    persistedReducer,
   initialState as any,
   compose(...enhancers)
 );
+
+ export const  persistor = persistStore(store)
 
 
 
 const StateManagement = (props: any) => {
   return (
+
       <BrowserRouter>
     <Provider store={store}>
       <ReduxQueryProvider queriesSelector={getQueries}>
+        <PersistGate loading={null} persistor={persistor}>
         {props.children}
+        </PersistGate>
       </ReduxQueryProvider>
     </Provider>
       </BrowserRouter>

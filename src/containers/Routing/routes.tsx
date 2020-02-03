@@ -9,11 +9,11 @@ import PayoutTaxes from "pages/Dasboard/payoutTaxes/index";
 import Orders from "pages/Dasboard/orders";
 import Register from "../../pages/Auth";
 import ActivationPage from "../../pages/ActivateAccount";
-import {connect} from "react-redux";
+import {connect } from "react-redux";
 import {connectRequest} from "redux-query-react";
 import {compose} from "redux";
 import {sellerFromToken} from "../../api/src/apis";
-import {useSeller} from "../../state/seller";
+import {getProductsCategories} from "../../state/product";
 
 
 export const HomeRoutes = () => {
@@ -42,8 +42,6 @@ export const AccountActivationRoutes = () => (
 
 
 const DashboardRoutesL = (props: any) => {
-    // const sellers = useSeller()
-    // console.log(sellers)
     return (
         <Switch>
             <Route path="/dashboard/settings" component={Settings}/>
@@ -57,7 +55,8 @@ const DashboardRoutesL = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => ({
-    seller: state.entities.seller
+    seller: state.entities.seller,
+    rootCategories: state.entities.rootCategories
 });
 
 const mapPropsToConfig = (props: any): any => {
@@ -65,7 +64,6 @@ const mapPropsToConfig = (props: any): any => {
         sellerFromToken(
             {
                 transform: (responseBody: any) => {
-                    console.log({responseBody})
                     return {
                         seller: responseBody,
                     }
@@ -74,10 +72,9 @@ const mapPropsToConfig = (props: any): any => {
                     seller: (prev: any, next: any) => next
                 }
             }
-        )
+        ),
+        getProductsCategories(props.rootCategories)
     ];
-
-    console.log({actions})
     return actions;
 };
 

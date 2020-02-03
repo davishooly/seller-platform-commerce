@@ -77,6 +77,7 @@ const ModalContent = (props: any) => {
                 message: "Success",
                 description: "Welcome back to OE Seller Center"
             });
+            localStorage.setItem("refreshToken", refresh_token);
             dispatch(setStoreTokens({
                 accessToken:  access_token,
                 refreshToken: refresh_token
