@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Input, Select, Icon} from 'antd';
-import {Link, useHistory } from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 
 import PopConfirm from 'components/Pop'
 // import {Modal, ModalContent} from '../../../components/modal';
@@ -104,8 +104,9 @@ const Header = () => {
                             />
                         </div>
                     </li>
-                      <div className="pop__container">
-                      <li className='account' onClick={openPopConfirm}> <Icon type="user" />{ username ?  username : "Account"} </li>
+                    <div className="pop__container">
+                        <li className='account' onClick={openPopConfirm}><Icon
+                            type="user"/>{username ? username : "Account"} </li>
                         {username ? '' :
                             (
                                 <PopConfirm isOpen={isOpen} setOpenPop={setOpenPop}>
@@ -147,10 +148,10 @@ const Header = () => {
 };
 
 export const DashboardHeader = () => {
-    const {username } = useCustomUserCheck();
+    const {username} = useCustomUserCheck();
     const dispatch = useDispatch();
     const history = useHistory()
-    const {isOpen, setOpenPop } = useCustomModalChange();
+    const {isOpen, setOpenPop} = useCustomModalChange();
 
     const openPopConfirm = () => {
         setOpenPop(!isOpen);
@@ -174,11 +175,17 @@ export const DashboardHeader = () => {
                         </div>
                     </li>
                     <div className="pop__container">
-                        <li className='account' onClick={openPopConfirm} ><Icon type="user"/> {username} </li>
+                        <li className='account' onClick={openPopConfirm}><Icon type="user"/> {username} </li>
                         {username ? (
-                                <PopConfirm isOpen={isOpen} setOpenPop={setOpenPop}>
-                                    <PopContainer>
-                                        <Button name="sign in" onClick={handleLogout}> Logout </Button>
+                                <PopConfirm logout isOpen={isOpen} setOpenPop={setOpenPop}>
+                                    <PopContainer logout>
+                                        <div className="pop__content">
+                                            <span>Orders</span>
+                                            <span>Addresses</span>
+                                            <span>Payment</span>
+                                            <span>Profile</span>
+                                            <Button name="sign in" onClick={handleLogout}> Logout </Button>
+                                        </div>
                                     </PopContainer>
                                 </PopConfirm>
                             ) :

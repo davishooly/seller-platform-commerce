@@ -32,4 +32,5 @@ const getProductsCategories = (categories: any) => {
 }
 
 
-export {useProducts, getProductsCategories}
+export { useProducts, getProductsCategories }
+
