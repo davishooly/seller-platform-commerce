@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { NavLink } from 'react-router-dom'
-// import { useQuery } from "@apollo/react-hooks";
-import { useSelector } from "react-redux";
-
 import { Table, Select, Icon, Checkbox, Avatar, Switch } from 'antd';
 import {
     DivContainer, ListingContainer, TableSection, ProductContainer, Button, ButtonContainer
 } from './styles';
 import { columns } from "./tableData";
-// import { GET_SELLER_PRODUCTS } from "../../utils/queries/inventory";
 import Search from '../../components/Search'
 import moment from "moment";
 
@@ -16,18 +12,8 @@ const { Option } = Select;
 const options = ['category', 'price'];
 
 
-const  RenderTable = () => {
+const  RenderTable = ({ products: { results, count } }: any ) => {
     const [selectProduct, setSelectedProduct]: any = useState([]);
-    const seller  = useSelector((state: any) => state.seller);
-
-    // const { loading, data , error } = useQuery(GET_SELLER_PRODUCTS);
-
-    // if (loading) {
-    //     //     return <p> loading ... </p>
-    //     // }
-    //     // if(error) {
-    //     //     return <p> error ... </p>
-    //     // }
 
     const onChange = (e: any) => {
         const {value, checked} = e.target;
@@ -106,7 +92,7 @@ const  RenderTable = () => {
                         <Search/>
                     </div>
                 </DivContainer>
-                <Table pagination={{total: 1}} dataSource={[]} columns={columns}/>
+                <Table pagination={{total: count}} dataSource={results} columns={columns}/>
             </TableSection>
         </div>
     )
