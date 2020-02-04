@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
-import { useHistory } from 'react-router-dom'
-import {Spin, Icon, notification } from 'antd';
+import {useHistory} from 'react-router-dom'
+import {Spin, Icon, notification} from 'antd';
 import styled from "styled-components";
-import { useMutation } from 'redux-query-react';
+import {useMutation} from 'redux-query-react';
 
 
-import { sellersInvitationCreate } from "../../api/src/apis";
+import {sellersInvitationCreate} from "../../api/src/apis";
 
 
 const ActivationContainer = styled.div`
@@ -18,7 +18,7 @@ const ActivationContainer = styled.div`
 `
 
 
-const sendInvitation = ( userId: string, token: string) => {
+const sendInvitation = (userId: string, token: string) => {
     return sellersInvitationCreate({
         id: parseInt(atob(userId)),
         data: {
@@ -28,15 +28,13 @@ const sendInvitation = ( userId: string, token: string) => {
 }
 
 
+const ActivationPage: React.FC = (props: any) => {
 
-
-const ActivationPage: React.FC = (props: any ) => {
-
-    const { match: { params : {userId, token } }  } = props;
+    const {match: {params: {userId, token}}} = props;
 
     const history = useHistory();
 
-    const [{ isPending, isFinished, status }, createInvitation] = useMutation(() =>
+    const [{isPending, isFinished, status}, createInvitation] = useMutation(() =>
         sendInvitation(userId, token)
     );
 
@@ -46,7 +44,7 @@ const ActivationPage: React.FC = (props: any ) => {
 
     const antIcon = <Icon type="loading" style={{fontSize: 100}} spin={isPending}/>;
 
-    if(isFinished && status === 200 ){
+    if (isFinished && status === 200) {
         notification.success({
             message: "Success",
             description: "Your seller account has been activated login to access your seller portal"

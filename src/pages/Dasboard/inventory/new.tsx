@@ -18,6 +18,7 @@ const {TabPane} = Tabs;
 
 const CategoriesSelect: React.FC<any> = ({selectedCategories, selectCategory, onNext}) => {
 
+
     const rootCategories = useSelector((state: any) => state.entities.rootCategories)
 
     const [stateSubCategories, setSubCategories] = useState<any>([]);

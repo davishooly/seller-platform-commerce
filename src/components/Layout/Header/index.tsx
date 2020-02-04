@@ -159,6 +159,7 @@ export const DashboardHeader = () => {
 
     const handleLogout = () => {
         dispatch(removeTokens())
+        localStorage.clear();
         setOpenPop(!isOpen);
         history.push('/')
         window.location.reload()
