@@ -2,6 +2,10 @@ import React, {useEffect, useState} from 'react';
 import { Upload, Icon, Modal, Button } from 'antd';
 import styled from "styled-components"
 import notification from '../../../utils/toast';
+import { useMutation } from 'redux-query-react';
+import { useSelector } from 'react-redux';
+import { productAddMedia } from './createProduct';
+import { mutateAsync } from 'redux-query';
 
 
 function getBase64(file: File) {
@@ -56,7 +60,11 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
         previewVisible: false,
         previewImage: '',
         fileList: [],
+        loading: false,
     });
+    const draph = useSelector((state: any) => state.entities.product_draft)
+
+    // const [{}, addMedia] = useMutation((path, file) => productAddMedia(draph.id,file, path ))
 
     useEffect(()=> {
         if(state.fileList.length >= 0){
@@ -77,6 +85,7 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
     const handlePreview = async (file: any) => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
+           
         }
 
         setState({
@@ -85,9 +94,28 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
         });
     };
 
-    const uploadHandleChange = ({ fileList }: any) => {
+
+    const handleUpload = async () => {
+        state.fileList.forEach(async (file: any) => {
+            var reader = new FileReader();
+            reader.onload = function () {
+                mutateAsync(
+                    productAddMedia(draph.id,reader.result, "")
+                )
+               
+            }
+
+            reader.readAsDataURL(file);
+           
+        })
+    }
+
+    const uploadHandleChange = async ({ fileList }: any) => {
         const newFiles = fileList.map( ({ originFileObj }: any) => originFileObj);
+    
         setState({ fileList: newFiles });
+        
+        
         setFiles(newFiles)
     };
 
@@ -110,6 +138,8 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
                     listType="picture-card"
                     onPreview={handlePreview}
                     onChange={uploadHandleChange}
+                    
+                
                 >
                     {files.length >= 4 ? null : uploadButton}
                 </Upload>
@@ -118,6 +148,16 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
                     <img alt="example" style={{ width: '100%' }} src={previewImage} />
                 </Modal>
             </div>
+
+            <Button
+            type="primary"
+            onClick={handleUpload}
+            disabled={state.fileList.length === 0}
+            loading={state.uploading}
+            style={{ marginTop: 16 }}
+          >
+            {state.uploading ? 'Uploading' : 'Start Upload'}
+          </Button>
 
             <Action>
                 <Button onClick={()=>callback("3")}> Back </Button>

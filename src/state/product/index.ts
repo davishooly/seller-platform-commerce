@@ -16,6 +16,10 @@ const useProducts = () => {
 }
 
 
+// const useDraftProduct = () => {
+
+// }
+
 const getProductsCategories = (categories: any) => {
     console.log({categories})
     if(!categories) {
