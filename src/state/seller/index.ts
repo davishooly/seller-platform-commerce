@@ -32,23 +32,3 @@ export const createSeller = (customerDetails: any) => {
         },
     })
 };
-
-
-export const useSeller = () => {
-    const seller = useSelector((state: any) => state.entities.seller)
-    const actions =
-        sellerFromToken({
-            transform: (body: any) => {
-                return {
-                    seller: body.data
-                }},
-            update: {
-                seller: (prev: any, next: any) => next
-            }
-        })
-
-
-    useRequest(actions)
-
-    return seller;
-}

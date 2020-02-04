@@ -6,7 +6,7 @@ const PopContainer =  Styled.div<any>`
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
   z-index: 999;
   position: absolute;
-  right: -8%;
+  right: 10%;
   background-color: #FFFFFF;
   border-radius: 4px;
   

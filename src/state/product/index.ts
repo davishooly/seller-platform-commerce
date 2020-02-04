@@ -17,7 +17,6 @@ const useProducts = () => {
 
 
 const getProductsCategories = (categories: any) => {
-    console.log({categories})
     if(!categories) {
         const config = productsCategoriesRoot({}, {
             transform: (body: any) => ({rootCategories: body}),
