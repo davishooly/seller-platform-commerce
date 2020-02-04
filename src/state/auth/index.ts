@@ -6,13 +6,15 @@ export function reducer(state = {}, action: any) {
     case SET_AUTH:
       return Object.assign({}, state, {
         accessToken: action.auth.accessToken,
-        refreshToken: action.auth.refreshToken
+        refreshToken: action.auth.refreshToken,
+        expiresIn: action.auth.expiresIn
       });
 
     case REMOVE_AUTH:
       return {
         accessToken: "",
-        refreshToken: ""
+        refreshToken: "",
+        expiresIn:''
       };
 
     default:

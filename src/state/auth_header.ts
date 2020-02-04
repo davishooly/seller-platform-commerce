@@ -4,7 +4,7 @@ import {
   RequestAsyncAction,
   MutateAsyncAction
 } from "redux-query";
-// import { State } from "@types";
+import { getTokenRefreshed } from "./refreshToken";
 
 export const authHeader: Middleware = (
   api: MiddlewareAPI<Dispatch<AnyAction>>
@@ -22,6 +22,15 @@ export const authHeader: Middleware = (
       queryAction.meta.authType[0] === "oauth"
     ) {
       const token = api.getState().auth.accessToken;
+      const refreshToken = api.getState().auth.refreshToken;
+
+      const expiry  = api.getState().auth.expiresIn;
+      const now  =  new Date()
+
+      if (now.getTime() > expiry  ) {
+        getTokenRefreshed(refreshToken, api )
+      }
+
       if (token) {
         queryAction.options.headers.authorization = `Bearer ${token}`;
       } else {

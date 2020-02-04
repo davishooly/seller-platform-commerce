@@ -31,8 +31,6 @@ const ManageInventory = () => {
     const [{isFinished, isPending, status}, refresh] = useRequest(getSellerProducts())
     const sellerProducts = useSelector((state: any) => state.entities.sellerProducts)
 
-    console.log({isPending, status})
-
 
     if (!isFinished && status !== 200) {
         return (

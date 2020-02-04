@@ -14,6 +14,7 @@ import {connectRequest} from "redux-query-react";
 import {compose} from "redux";
 import {sellerFromToken} from "../../api/src/apis";
 import {getProductsCategories} from "../../state/product";
+import {getTokenRefreshed} from "../../state/refreshToken";
 
 
 export const HomeRoutes = () => {
@@ -56,7 +57,8 @@ const DashboardRoutesL = (props: any) => {
 
 const mapStateToProps = (state: any) => ({
     seller: state.entities.seller,
-    rootCategories: state.entities.rootCategories
+    rootCategories: state.entities.rootCategories,
+    auth: state.auth
 });
 
 const mapPropsToConfig = (props: any): any => {
