@@ -1,48 +1,55 @@
 import * as React from 'react';
 import {
-  StoreEnhancer,
-  applyMiddleware,
-  createStore,
-  combineReducers,
-  compose
+    StoreEnhancer,
+    applyMiddleware,
+    createStore,
+    combineReducers,
+    compose
 } from "redux";
-import { Provider } from 'react-redux';
-import { persistStore, persistReducer } from 'redux-persist'
-import { PersistGate } from 'redux-persist/integration/react'
+import {Provider} from 'react-redux';
+import {persistStore, persistReducer} from 'redux-persist'
+import {PersistGate} from 'redux-persist/integration/react'
 
 import storage from 'redux-persist/lib/storage'
-import { BrowserRouter } from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import superagentInterface from "redux-query-interface-superagent";
-import { Provider as ReduxQueryProvider } from 'redux-query-react';
-import { queryMiddleware, entitiesReducer, queriesReducer } from 'redux-query';
-import { reducer as auth } from "state/auth"
-import { authHeader } from 'state/auth_header';
+import {Provider as ReduxQueryProvider} from 'redux-query-react';
+import {queryMiddleware, entitiesReducer, queriesReducer} from 'redux-query';
+import {reducer as auth} from "state/auth"
+import {authHeader} from 'state/auth_header';
 
 const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['entities']
+    key: 'root',
+    storage,
+    whitelist: ["auth"],
+    blacklist: ['queries']
 }
+
+const persistEntitiesConfig = {
+    key: 'entities',
+    storage,
+    whitelist: ["rootCategories",  "sellerProducts"],
+    blacklist: ['seller']
+}
+
 
 // Reducers
 const rootReducer = combineReducers({
-  auth,
-  entities: entitiesReducer,
-  queries: queriesReducer,
+    auth,
+    entities: persistReducer(persistEntitiesConfig, entitiesReducer),
+    queries: queriesReducer,
 });
 
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 
-
 // Initial state - keep it simple, just to prevent basic null selection errs
 export const initialState: any = {
-  auth: {},
-  queries: {},
-  entities: {}
+    auth: {},
+    queries: {},
+    entities: {}
 };
-
 
 
 // Middleware / redux query setup
@@ -54,38 +61,37 @@ const getEntities = (state: any) => state.entities;
 // See this issue comment by Dan Abramov:
 // https://github.com/facebook/create-react-app/issues/1114#issuecomment-263650957
 const middleware = [
-  authHeader,
-  queryMiddleware(superagentInterface, getQueries, getEntities),
+    authHeader,
+    queryMiddleware(superagentInterface, getQueries, getEntities),
 ];
 const enhancers: StoreEnhancer<{ dispatch: {} }, {}>[] = [
-  applyMiddleware(...middleware)
+    applyMiddleware(...middleware)
 ];
 if (window && (window as any).__REDUX_DEVTOOLS_EXTENSION__) {
-  enhancers.push((window as any).__REDUX_DEVTOOLS_EXTENSION__());
+    enhancers.push((window as any).__REDUX_DEVTOOLS_EXTENSION__());
 }
 export const store: any = createStore(
     persistedReducer,
-  initialState as any,
-  compose(...enhancers)
+    initialState as any,
+    compose(...enhancers)
 );
 
- export const  persistor = persistStore(store)
-
+export const persistor = persistStore(store)
 
 
 const StateManagement = (props: any) => {
-  return (
+    return (
 
-      <BrowserRouter>
-    <Provider store={store}>
-      <ReduxQueryProvider queriesSelector={getQueries}>
-        <PersistGate loading={null} persistor={persistor}>
-        {props.children}
-        </PersistGate>
-      </ReduxQueryProvider>
-    </Provider>
-      </BrowserRouter>
-  );
+        <BrowserRouter>
+            <Provider store={store}>
+                <ReduxQueryProvider queriesSelector={getQueries}>
+                    <PersistGate loading={null} persistor={persistor}>
+                        {props.children}
+                    </PersistGate>
+                </ReduxQueryProvider>
+            </Provider>
+        </BrowserRouter>
+    );
 };
 
 export default StateManagement;

@@ -12,7 +12,7 @@ const { Option } = Select;
 const options = ['category', 'price'];
 
 
-const  RenderTable = ({ products: { results, count } }: any ) => {
+const  RenderTable = ({ products: { results , count } }: any ) => {
     const [selectProduct, setSelectedProduct]: any = useState([]);
 
     const onChange = (e: any) => {

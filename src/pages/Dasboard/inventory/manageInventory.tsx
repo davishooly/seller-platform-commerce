@@ -28,13 +28,13 @@ const getSellerProducts = () => {
 }
 
 const ManageInventory = () => {
-    const [{isFinished, isPending}, refresh] = useRequest(getSellerProducts())
+    const [{isFinished, isPending, status}, refresh] = useRequest(getSellerProducts())
     const sellerProducts = useSelector((state: any) => state.entities.sellerProducts)
 
-    console.log({isPending})
+    console.log({isPending, status})
 
 
-    if (isPending) {
+    if (!isFinished && status !== 200) {
         return (
             <>
                 loading.......
