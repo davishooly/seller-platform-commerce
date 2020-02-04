@@ -14,7 +14,7 @@ export const Container = styled.div`
   td { color: rgba(70, 66, 66, 0.65); }
 `;
 
-const PreviewSellerInfo: React.FC<any> = ({ customer}) => {
+const PreviewSellerInfo: React.FC<any> = ({ customer }) => {
   const {
     bankName,
     businessName,

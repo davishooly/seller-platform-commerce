@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import Menu from './menu';
 import {Avatar, Table} from "antd";
 import { Link } from "react-router-dom"
@@ -18,6 +19,7 @@ import { BarChart } from "components/Charts";
 
 const Dashboard: React.FC<any> = () => {
 
+    const sellerInfo = useSelector((state : any) => state.entities)
   const renderProductContent = (data: any) => (
       <ProductContainer  >
         <Avatar shape="square" size={44} icon="shopping"/>
@@ -41,7 +43,7 @@ const Dashboard: React.FC<any> = () => {
     return (
         <>
             <Menu>
-                {/*<li>Hey {user ? user.user.name: ''}!.Its great to see you again.</li>*/}
+                <li>Hey {sellerInfo.seller ? sellerInfo.seller.name: ''}!.Its great to see you again.</li>
             </Menu>
           <Container>
             <AnalyticsSection>

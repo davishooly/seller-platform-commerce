@@ -79,7 +79,7 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
         "password",
         setInputError,
         error,
-        "business location"
+        "password"
       );
     }
   }, [password]);

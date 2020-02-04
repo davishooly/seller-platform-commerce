@@ -5,7 +5,8 @@ import { TabsContainer } from './styles'
 import {hasErrors} from "utils/validators";
 
 
-const Pricing: React.FC<any> = ({ product, onNext, form, callback, }: any) => {
+
+const Pricing = ( {product, onNext, form, callback}: any) => {
 
     const [ variants, setVariants ] = useState(["variant"]);
 
@@ -166,4 +167,4 @@ const Pricing: React.FC<any> = ({ product, onNext, form, callback, }: any) => {
 };
 
 
-export default Form.create({ name: 'pricing' })(Pricing);
+export default Form.create<any>({ name: 'pricing' })(Pricing);

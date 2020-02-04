@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Action, AnyAction, Dispatch } from "redux";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 
 interface StateProps {
@@ -19,18 +20,20 @@ export default <P extends {}>(
   ChildComponent: React.ComponentType<P>
 ): React.ComponentType => {
   class AuthenticatedComponent extends Component<P & StateProps> {
-    // componentWillMount() {
-    //   checkAuthentication(this.props);
-    // }
     render() {
-      return <ChildComponent {...(this.props as P)} />;
+      if(this.props.isLoggedIn){
+        return <ChildComponent {...(this.props as P)} />;
+      }
+      else{
+       return  <Redirect exact from="/dashboard"  to='/login'/>
+      }
     }
   }
 
-  const mapStateToProps = (s: any): StateProps => {    
+  const mapStateToProps = (state: any): StateProps => {
     return {
-      isLoggedIn: !!s.auth.refreshToken,
-      refreshToken: s.auth.refreshToken
+      isLoggedIn: !!state.auth.refreshToken,
+      refreshToken: state.auth.refreshToken
     };
   };
 

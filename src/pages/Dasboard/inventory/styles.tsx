@@ -10,7 +10,7 @@ const CategoriesContainer =  styles.div`
       width: 271px;
       overflow: scroll;
       flex-direction: column;
-      margin-left: 20px;
+      margin-right: 20px;
       height: 400px;
       background: #F5F7FA;
       border-radius: 2px;
@@ -30,7 +30,7 @@ const CategoriesContainer =  styles.div`
    }
 `;
 
-const ButtonContainer = styles.div`
+const ButtonContainer = styles.div<any>`
    ${(props: any) => props.list && css `
      display: flex !important;
      justify-content: center

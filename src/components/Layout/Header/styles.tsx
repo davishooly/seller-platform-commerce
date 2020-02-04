@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 const StyledHeader = styled.header`
     grid-area: header;
@@ -26,6 +26,9 @@ const StyledHeader = styled.header`
     .logo {
         font-size: 3em;
         color: #fff ;
+    }
+    .pop__container {
+      position: relative;
     }
     .footer {
         display: flex;
@@ -62,15 +65,28 @@ const Button = styled.button`
    height: 32px;
 `;
 
-const PopContainer = styled.div`
+const PopContainer = styled.div<any>`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   height: fill-available;
   padding: 20px;
+  
+  ${props => props.logout && css`
+    height: 100%;
+    justify-content: unset;
+  `}
   span {
     color: #8D959B;
+    cursor: pointer;
+    border-bottom: 1px solid #8d959b3b;
+  }
+  .pop__content {
+     display: flex;
+     flex-direction: column;
+      height: 100%;
+     justify-content: space-between;
   }
 `;
 const SignUpSpan = styled.span`
@@ -79,4 +95,4 @@ const SignUpSpan = styled.span`
    cursor: pointer;
 `;
 
-export { StyledHeader, Button, PopContainer, SignUpSpan };
+export {StyledHeader, Button, PopContainer, SignUpSpan};

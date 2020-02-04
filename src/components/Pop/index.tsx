@@ -1,15 +1,18 @@
 import React, { useEffect, useRef } from 'react';
-import Styled from 'styled-components';
+import Styled,  { css } from 'styled-components';
 
-const PopContainer =  Styled.div`
+const PopContainer =  Styled.div<any>`
   height: 200px;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
   z-index: 999;
   position: absolute;
-  top: 8%;
   right: 10%;
   background-color: #FFFFFF;
   border-radius: 4px;
+  
+  ${props => props.logout && css `
+     top: 78%;
+  `}
   .ant-popover-arrow {
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
@@ -29,7 +32,7 @@ const PopContainer =  Styled.div`
   }
 `;
 
-const Index = ({isOpen, children, setOpenPop }: any ) => {
+const Index = ({isOpen, children, setOpenPop, logout }: any ) => {
     const ref = useRef(null);
 
     const checkStuff = (e: any) => {
@@ -45,7 +48,7 @@ const Index = ({isOpen, children, setOpenPop }: any ) => {
     return (
         <>{
             isOpen ? (
-                <PopContainer ref={ref}>
+                <PopContainer logout ref={ref}>
                     <div className="ant-popover-arrow"/>
                     {children}
                 </PopContainer>
