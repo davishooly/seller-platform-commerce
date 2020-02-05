@@ -16,6 +16,10 @@ const useProducts = () => {
 }
 
 
+// const useDraftProduct = () => {
+
+// }
+
 const getProductsCategories = (categories: any) => {
     if(!categories) {
         const config = productsCategoriesRoot({}, {
