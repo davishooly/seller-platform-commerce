@@ -1,3 +1,6 @@
+import { requestAsync } from 'redux-query';
+import { getTokenRefreshed } from "../refreshToken";
+
 const SET_AUTH = "SET_AUTH";
 const REMOVE_AUTH = "REMOVE_AUTH";
 
@@ -7,15 +10,19 @@ export function reducer(state = {}, action: any) {
       return Object.assign({}, state, {
         accessToken: action.auth.accessToken,
         refreshToken: action.auth.refreshToken,
-        expiresIn: action.auth.expiresIn
+        smiles: action.auth.expiresIn
       });
 
     case REMOVE_AUTH:
       return {
         accessToken: "",
         refreshToken: "",
-        expiresIn:''
+        smiles:''
       };
+
+    case "AUTH-REFRESH":
+      console.log("finally called", action)
+          return state
 
     default:
       return state;
@@ -30,6 +37,17 @@ export const removeTokens = function() {
   return { type: REMOVE_AUTH };
 };
 
+
+export const setRefreshToken = () => {
+  // api.dispatch(requestAsync(getTokenRefreshed(refreshToken)))
+  const now  =  new Date();
+
+  return {
+    accessToken:  "0d141BBT7b0IhnQ6N0zlyhMuLKuw58",
+    refreshToken: "3YCJzR96yYFz1fdLvyPvrFw4UoPAXk",
+    expiresIn: now.getTime() + 20
+  }
+};
 
 export interface loginState {
   accessToken?: string;

@@ -249,7 +249,8 @@ const ProductDetails = () => {
   );
 
 
-  const [{}, createSellerForSeller ] = useMutation(() => {      
+  const [{}, createProductForSeller ] = useMutation(() => {
+    console.log(draph);
     return createProductSeller(product, draph.id)
   });
 
@@ -261,7 +262,7 @@ const ProductDetails = () => {
 
 
   const saveSellerProduct = () => {
-    createSellerForSeller().then(() => setCurrent(Math.min(4, parseInt(current) + 1).toString()))
+    createProductForSeller().then(() => setCurrent(Math.min(4, parseInt(current) + 1).toString()))
   }
 
   return (

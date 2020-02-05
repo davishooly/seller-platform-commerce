@@ -14,7 +14,7 @@ import {connectRequest} from "redux-query-react";
 import {compose} from "redux";
 import {sellerFromToken} from "../../api/src/apis";
 import {getProductsCategories} from "../../state/product";
-import {getTokenRefreshed} from "../../state/refreshToken";
+import {setRefreshToken} from "../../state/auth";
 
 
 export const HomeRoutes = () => {
@@ -43,6 +43,7 @@ export const AccountActivationRoutes = () => (
 
 
 const DashboardRoutesL = (props: any) => {
+    setRefreshToken();
     return (
         <Switch>
             <Route path="/dashboard/settings" component={Settings}/>

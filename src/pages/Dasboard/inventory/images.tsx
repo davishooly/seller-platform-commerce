@@ -5,7 +5,6 @@ import notification from '../../../utils/toast';
 import { useMutation } from 'redux-query-react';
 import { useSelector } from 'react-redux';
 import { productAddMedia } from './createProduct';
-import { mutateAsync } from 'redux-query';
 
 
 function getBase64(file: File) {
@@ -64,7 +63,7 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
     });
     const draph = useSelector((state: any) => state.entities.product_draft)
 
-    // const [{}, addMedia] = useMutation((path, file) => productAddMedia(draph.id,file, path ))
+    const [{ isPending }, addMedia] = useMutation(( id, file, path) => productAddMedia(id, file, path ))
 
     useEffect(()=> {
         if(state.fileList.length >= 0){
@@ -95,18 +94,11 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
     };
 
 
-    const handleUpload = async () => {
-        state.fileList.forEach(async (file: any) => {
-            var reader = new FileReader();
-            reader.onload = function () {
-                mutateAsync(
-                    productAddMedia(draph.id,reader.result, "")
-                )
-               
-            }
-
-            reader.readAsDataURL(file);
-           
+    const handleUpload = () => {
+        state.fileList.forEach( (file: any) =>  {
+            getBase64(file).then(url => {
+                addMedia(1, url , file.name ).then(()=>{}).catch(()=>{})
+            })
         })
     }
 
@@ -153,7 +145,7 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
             type="primary"
             onClick={handleUpload}
             disabled={state.fileList.length === 0}
-            loading={state.uploading}
+            loading={isPending}
             style={{ marginTop: 16 }}
           >
             {state.uploading ? 'Uploading' : 'Start Upload'}

@@ -4,7 +4,8 @@ import {
   RequestAsyncAction,
   MutateAsyncAction
 } from "redux-query";
-import { getTokenRefreshed } from "./refreshToken";
+import {getTokenRefreshed} from "./refreshToken";
+import {setRefreshToken} from "./auth";
 
 export const authHeader: Middleware = (
   api: MiddlewareAPI<Dispatch<AnyAction>>
@@ -24,11 +25,12 @@ export const authHeader: Middleware = (
       const token = api.getState().auth.accessToken;
       const refreshToken = api.getState().auth.refreshToken;
 
-      const expiry  = api.getState().auth.expiresIn;
+      const expiry  = api.getState().auth.smiles;
       const now  =  new Date()
 
+
       if (now.getTime() > expiry  ) {
-        getTokenRefreshed(refreshToken, api )
+        // setRefreshToken(api, refreshToken)
       }
 
       if (token) {
@@ -41,3 +43,4 @@ export const authHeader: Middleware = (
 
   return next(action);
 };
+

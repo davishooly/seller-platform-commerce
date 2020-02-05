@@ -1,9 +1,8 @@
 import { authRefreshCreate } from "../api/src/apis";
 
 
-export const getTokenRefreshed = ( refreshToken: string, api: any ) => {
-    console.log({ refreshToken, api })
-    const config = authRefreshCreate({
+export const getTokenRefreshed = ( refreshToken: string ) => {
+      return authRefreshCreate({
         data:  {
             grantType: "refreshToken",
             refreshToken: refreshToken
@@ -19,6 +18,4 @@ export const getTokenRefreshed = ( refreshToken: string, api: any ) => {
             }
         }
     })
-
-    return config
-}
+};

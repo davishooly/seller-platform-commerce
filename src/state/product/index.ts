@@ -1,19 +1,4 @@
-import {productsList, productsCategoriesRoot} from "api/src/apis";
-import {useRequest} from "redux-query-react";
-
-
-const useProducts = () => {
-    const config = productsList({
-        // transform: (responseBody: any) => ({
-        //     products: responseBody
-        // }),
-        // update: {
-        //     products: (prev, next) => next
-        // }
-    });
-
-    useRequest(config)
-}
+import {  productsCategoriesRoot} from "api/src/apis";
 
 
 // const useDraftProduct = () => {
@@ -35,5 +20,5 @@ const getProductsCategories = (categories: any) => {
 }
 
 
-export { useProducts, getProductsCategories }
+export { getProductsCategories }
 

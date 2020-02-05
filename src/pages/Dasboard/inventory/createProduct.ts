@@ -34,14 +34,23 @@ export const createProductSeller = (productSeller: any, productId: any) => {
 
 
 
-export const productAddMedia = (productId: any, file: any, path: string) => { 
+export const productAddMedia = (productId: any, file: any, path: any) => {
+    console.log(">>>>>>>>>>>>", file,  productId, path );
     return  productsAddMedia({
         id: productId,
         data: {
-            file,
+            file: file,
             path,
             kind: 2
-            
+        }
+    }, {
+        transform: ( body:any ) => ({
+            response: body
+        }),
+        update: {
+            response: (prev: any, next: any) => {
+                console.log({ next })
+            }
         }
     })
 }
