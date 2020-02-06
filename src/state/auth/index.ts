@@ -1,3 +1,4 @@
+import {store} from "../../containers/StateManagement";
 
 const SET_AUTH = "SET_AUTH";
 const REMOVE_AUTH = "REMOVE_AUTH";
@@ -29,6 +30,7 @@ export function reducer(state:any = {}, action: any) {
       return state;
   }
 }
+
 
 export const setStoreTokens = function(auth: any) {
   return { type: SET_AUTH, auth: auth };

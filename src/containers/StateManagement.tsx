@@ -14,9 +14,10 @@ import storage from 'redux-persist/lib/storage'
 import {BrowserRouter} from "react-router-dom";
 import superagentInterface from "redux-query-interface-superagent";
 import {Provider as ReduxQueryProvider} from 'redux-query-react';
-import {queryMiddleware, entitiesReducer, queriesReducer} from 'redux-query';
+import {queryMiddleware, entitiesReducer, queriesReducer, requestAsync} from 'redux-query';
 import {reducer as auth} from "state/auth"
 import {authHeader} from 'state/auth_header';
+import {getTokenRefreshed} from "../state/refreshToken";
 
 
 const persistConfig = {
@@ -71,11 +72,20 @@ const enhancers: StoreEnhancer<{ dispatch: {} }, {}>[] = [
 if (window && (window as any).__REDUX_DEVTOOLS_EXTENSION__) {
     enhancers.push((window as any).__REDUX_DEVTOOLS_EXTENSION__());
 }
-export const store: any = createStore(
+export const store = createStore(
     persistedReducer,
     initialState as any,
     compose(...enhancers)
 );
+
+store.subscribe(() => {
+
+    const { auth:  { timeout, refreshToken } } = store.getState()
+    if(timeout){
+        store.dispatch(requestAsync(getTokenRefreshed(refreshToken, store.dispatch)))
+    }
+
+})
 
 export const persistor = persistStore(store)
 

@@ -14,8 +14,6 @@ import {connectRequest} from "redux-query-react";
 import {compose} from "redux";
 import {sellerFromToken} from "../../api/src/apis";
 import {getProductsCategories} from "../../state/product";
-import {getTokenRefreshed} from "../../state/refreshToken";
-import {requestAsync} from "redux-query";
 
 
 export const HomeRoutes = () => {
@@ -44,12 +42,6 @@ export const AccountActivationRoutes = () => (
 
 
 const DashboardRoutesL = (props: any) => {
-
-    const { dispatch, auth:{ refreshToken } } = props;
-
-    if(props.auth.timeout){
-      dispatch(requestAsync(getTokenRefreshed(refreshToken, dispatch)))
-    }
 
     return (
         <Switch>

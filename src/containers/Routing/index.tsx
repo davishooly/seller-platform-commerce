@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, withRouter } from 'react-router-dom'
 import requireAuthentication from "../RequireAuthentication";
 import MainLayout, {DashboardLayout} from "../../components/Layout";
 import DashboardRoutes, {HomeRoutes, AuthRoutes, AccountActivationRoutes} from "./routes";
