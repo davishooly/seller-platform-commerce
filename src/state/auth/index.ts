@@ -1,16 +1,15 @@
-import { requestAsync } from 'redux-query';
-import { getTokenRefreshed } from "../refreshToken";
 
 const SET_AUTH = "SET_AUTH";
 const REMOVE_AUTH = "REMOVE_AUTH";
 
-export function reducer(state = {}, action: any) {
+export function reducer(state:any = {}, action: any) {
   switch (action.type) {
     case SET_AUTH:
       return Object.assign({}, state, {
         accessToken: action.auth.accessToken,
         refreshToken: action.auth.refreshToken,
-        smiles: action.auth.expiresIn
+        smiles: action.auth.expiresIn,
+        timeout: false
       });
 
     case REMOVE_AUTH:
@@ -21,9 +20,11 @@ export function reducer(state = {}, action: any) {
       };
 
     case "AUTH-REFRESH":
-      console.log("finally called", action)
-          return state
-
+          return  Object.assign({}, state, {
+            ...state,
+            smiles: state.smiles + 360000,
+            timeout: true
+          });
     default:
       return state;
   }
@@ -37,17 +38,6 @@ export const removeTokens = function() {
   return { type: REMOVE_AUTH };
 };
 
-
-export const setRefreshToken = () => {
-  // api.dispatch(requestAsync(getTokenRefreshed(refreshToken)))
-  const now  =  new Date();
-
-  return {
-    accessToken:  "0d141BBT7b0IhnQ6N0zlyhMuLKuw58",
-    refreshToken: "3YCJzR96yYFz1fdLvyPvrFw4UoPAXk",
-    expiresIn: now.getTime() + 20
-  }
-};
 
 export interface loginState {
   accessToken?: string;
@@ -80,18 +70,3 @@ export const setToken = function(accessToken: any, refreshToken: any) {
   window.localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken)
 };
 
-export const getTokens = (body: any) => {
-  const queryConfig = {
-    url: `/o/token/`,
-    body: body,
-    transform: (responseBody  : any) => {
-      return {
-        auth: responseBody
-      }
-    },
-    update: {
-      auth: (prev: any, next: any) => next,
-    },
-  };
-  return queryConfig;
-};

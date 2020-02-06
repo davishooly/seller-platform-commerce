@@ -18,6 +18,7 @@ import {queryMiddleware, entitiesReducer, queriesReducer} from 'redux-query';
 import {reducer as auth} from "state/auth"
 import {authHeader} from 'state/auth_header';
 
+
 const persistConfig = {
     key: 'root',
     storage,

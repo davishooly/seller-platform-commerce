@@ -14,14 +14,15 @@ import {connectRequest} from "redux-query-react";
 import {compose} from "redux";
 import {sellerFromToken} from "../../api/src/apis";
 import {getProductsCategories} from "../../state/product";
-import {setRefreshToken} from "../../state/auth";
+import {getTokenRefreshed} from "../../state/refreshToken";
+import {requestAsync} from "redux-query";
 
 
 export const HomeRoutes = () => {
     return (
         <Switch>
             <Route path="/" exact component={Home}/>
-            <Route path="/new" exact>
+            <Route path="/new" exact >
                 <NewSeller/>
             </Route>
         </Switch>
@@ -43,7 +44,13 @@ export const AccountActivationRoutes = () => (
 
 
 const DashboardRoutesL = (props: any) => {
-    setRefreshToken();
+
+    const { dispatch, auth:{ refreshToken } } = props;
+
+    if(props.auth.timeout){
+      dispatch(requestAsync(getTokenRefreshed(refreshToken, dispatch)))
+    }
+
     return (
         <Switch>
             <Route path="/dashboard/settings" component={Settings}/>

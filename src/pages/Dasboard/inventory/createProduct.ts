@@ -35,7 +35,6 @@ export const createProductSeller = (productSeller: any, productId: any) => {
 
 
 export const productAddMedia = (productId: any, file: any, path: any) => {
-    console.log(">>>>>>>>>>>>", file,  productId, path );
     return  productsAddMedia({
         id: productId,
         data: {
