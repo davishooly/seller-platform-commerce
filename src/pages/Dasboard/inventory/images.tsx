@@ -3,7 +3,6 @@ import { Upload, Icon, Modal, Button } from 'antd';
 import styled from "styled-components"
 import notification from '../../../utils/toast';
 import { useMutation } from 'redux-query-react';
-import { useSelector } from 'react-redux';
 import { productAddMedia } from './createProduct';
 
 
@@ -54,14 +53,13 @@ export const Action = styled.div`
     }
 `;
 
-const Image = ({ callback, score, setScore, files, setFiles }: any) => {
+const Image = ({ callback, score, setScore, files, setFiles, submit }: any) => {
     const [state, setState] = useState<any>({
         previewVisible: false,
         previewImage: '',
         fileList: [],
         loading: false,
     });
-    const draph = useSelector((state: any) => state.entities.product_draft)
 
     const [{ isPending }, addMedia] = useMutation(( id, file, path) => productAddMedia(id, file, path ))
 
@@ -95,11 +93,15 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
 
 
     const handleUpload = () => {
-        state.fileList.forEach( (file: any) =>  {
-            getBase64(file).then(url => {
-                addMedia(1, url , file.name ).then(()=>{}).catch(()=>{})
+        submit().then((result: any )=>{
+            const { body: { id } } = result;
+            state.fileList.forEach( (file: any) =>  {
+                getBase64(file).then(url => {
+                    addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+                })
             })
         })
+
     }
 
     const uploadHandleChange = async ({ fileList }: any) => {
@@ -141,19 +143,19 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
                 </Modal>
             </div>
 
-            <Button
-            type="primary"
-            onClick={handleUpload}
-            disabled={state.fileList.length === 0}
-            loading={isPending}
-            style={{ marginTop: 16 }}
-          >
-            {state.uploading ? 'Uploading' : 'Start Upload'}
-          </Button>
+          {/*  <Button*/}
+          {/*  type="primary"*/}
+          {/*  onClick={handleUpload}*/}
+          {/*  disabled={state.fileList.length === 0}*/}
+          {/*  loading={isPending}*/}
+          {/*  style={{ marginTop: 16 }}*/}
+          {/*>*/}
+          {/*  {state.uploading ? 'Uploading' : 'Start Upload'}*/}
+          {/*</Button>*/}
 
             <Action>
                 <Button onClick={()=>callback("3")}> Back </Button>
-                <Button onClick={()=>callback("5")} type="primary"> Preview </Button>
+                <Button loading={isPending} onClick={handleUpload} type="primary"> Preview </Button>
             </Action>
             </Container>
         </>

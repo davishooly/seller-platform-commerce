@@ -1,4 +1,4 @@
-import { productsCreate, sellersProductsCreate, productsAddMedia } from "api/src";
+import {productsCreate, sellersProductsCreate, productsAddMedia , Product} from "api/src";
 
 export const createProduct = (product: any) => {    
   return productsCreate(
@@ -20,13 +20,22 @@ export const createProduct = (product: any) => {
 
 
 
-export const createProductSeller = (productSeller: any, productId: any) => {
-    
+export const createProductSeller = (product: any, sellerId: number) => {
     return sellersProductsCreate({
         data: {
-            product: productId,
-            defaultPrice: productSeller.default_price
-            
+            product: {
+                ...product,
+            },
+            seller: sellerId,
+            primaryCategory: 1 ,
+            defaultPrice: product.default_price,
+        }
+    }, {
+        transform: (body: any) => ({
+            product: body
+        }),
+        update: {
+            product: (prev: any , next: any) => next
         }
     })
 }
@@ -35,10 +44,11 @@ export const createProductSeller = (productSeller: any, productId: any) => {
 
 
 export const productAddMedia = (productId: any, file: any, path: any) => {
+    console.log( { productId,file, path })
     return  productsAddMedia({
         id: productId,
         data: {
-            file: file,
+            file,
             path,
             kind: 2
         }
@@ -53,3 +63,4 @@ export const productAddMedia = (productId: any, file: any, path: any) => {
         }
     })
 }
+

@@ -10,7 +10,7 @@ const Action = styled.div`
   }
 `;
 
-const Additional = ({ form, onNext, onPrevClick, save }: any) => {
+const Additional = ({ form, onNext, callback }: any) => {
   const {
     getFieldDecorator,
     getFieldError,
@@ -39,8 +39,6 @@ const Additional = ({ form, onNext, onPrevClick, save }: any) => {
     form.validateFields((err: any, values: any) => {
       if (!err) {
         onNext(values);
-        // save()
-
       }
     });
   };
@@ -61,18 +59,6 @@ const Additional = ({ form, onNext, onPrevClick, save }: any) => {
     )}
   </Form.Item>
 
-
-  {/* <Form.Item>
-    {getFieldDecorator("default_price", {
-      rules: [{ required: true, message: "Please input Default price!" }]
-    })(
-      <InlineInput
-        label="Sale price"
-        tip="required"
-        placeholder="Default price"
-      />
-    )}
-    </Form.Item> */}
 
       <Form.Item
         validateStatus={barcodeError ? "error" : ""}
@@ -197,11 +183,12 @@ const Additional = ({ form, onNext, onPrevClick, save }: any) => {
       </Form.Item>
 
       <Action>
-        <Button onClick={onPrevClick}> Back </Button>
+        <Button onClick={ () => callback("3")}> Back </Button>
         <Button
           type="primary"
           htmlType="submit"
           disabled={hasErrors(getFieldsError())}
+          onClick={() => callback("3")}
         >
           Save and proceed
         </Button>

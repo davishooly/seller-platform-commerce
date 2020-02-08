@@ -80,12 +80,12 @@ export const store = createStore(
 
 store.subscribe(() => {
 
-    const { auth:  { timeout, refreshToken } } = store.getState()
+    const { auth:  { timeout, refreshToken, smiles } } = store.getState()
     if(timeout){
-        store.dispatch(requestAsync(getTokenRefreshed(refreshToken, store.dispatch)))
+        store.dispatch(requestAsync(getTokenRefreshed(refreshToken, store.dispatch, smiles)))
     }
 
-})
+});
 
 export const persistor = persistStore(store)
 

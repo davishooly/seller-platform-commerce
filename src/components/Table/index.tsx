@@ -15,14 +15,21 @@ const options = ['category', 'price'];
 const  RenderTable = ({ products: { results , count } }: any ) => {
     const [selectProduct, setSelectedProduct]: any = useState([]);
 
+    const [ searchValue, setSearchValue] = useState('');
+
     const onChange = (e: any) => {
         const {value, checked} = e.target;
         const products = Object.assign([], selectProduct);
         checked ?
             setSelectedProduct([...products, value])
             :
-            setSelectedProduct(products.filter((product: any) => product.key !== value.key));
+            setSelectedProduct(products.filter((product: any) => product.id !== value.id));
     };
+
+    const handleSearch = (value: any ) => {
+        setSearchValue(value.target.value)
+    }
+
 
     const renderListingContent = (checked: boolean) => (
         <ListingContainer>
@@ -45,26 +52,44 @@ const  RenderTable = ({ products: { results , count } }: any ) => {
         </ProductContainer>
     );
 
-    // const productList = data.sellerProducts.list.map((data: any) => {
-    //     if(data){
-    //         const { id, price, inventoryQuantity,createdAt, compareAtPrice }  = data.variants[0];
-    //         return {
-    //             key: id,
-    //             date: moment(createdAt).format('Do MMMM YYYY'),
-    //             price,
-    //             stock: inventoryQuantity,
-    //             status: !data.publishedAt ? "Live" :  'Unlisted',
-    //             // description: data.description,
-    //             sale: compareAtPrice,
-    //             product: renderProductContent(data),
-    //             listing: data.status === "Unlisted"
-    //                 ? renderListingContent(false)
-    //                 : renderListingContent(true)
-    //         }
-    //     }
-    // });
+    let productList = results.map(({ product, purchasable, defaultPrice }: any) => {
+        if(product){
+            const { id, createdOn, inventoryQuantity, name }  = product;
+            return {
+                key: id,
+                date: moment(createdOn).format('Do MMMM YYYY'),
+                price: Number(defaultPrice),
+                stock: inventoryQuantity,
+                status: purchasable ? "Live" :  'Unlisted',
+                // description: data.description,
+                // sale: compareAtPrice,
+                productName: name,
+                product: renderProductContent(product),
+                listing: !purchasable
+                    ? renderListingContent(false)
+                    : renderListingContent(true)
+            }
+        }
+    });
 
     const products = selectProduct.length;
+
+    let searchProducts: any;
+
+
+    if( searchValue ! == '') {
+        searchProducts = productList
+    }
+    else {
+        searchProducts =  productList.filter((product: any) => {
+            const { productName } = product;
+            if(productName.toLowerCase().includes(searchValue.toLowerCase())){
+                return product
+            }
+        })
+    }
+
+
     return (
         <div>
             <TableSection>
@@ -89,10 +114,10 @@ const  RenderTable = ({ products: { results , count } }: any ) => {
                         <Select defaultValue="Filter products" style={{width: 140}}>
                             {options.map(value => (<Option key={value} value={`${value}`}>{value}</Option>))}
                         </Select>
-                        <Search/>
+                        <Search handleSearch={handleSearch} searchValue={searchValue} />
                     </div>
                 </DivContainer>
-                <Table pagination={{total: count}} dataSource={results} columns={columns}/>
+                <Table pagination={{total: count}} dataSource={searchProducts} columns={columns}/>
             </TableSection>
         </div>
     )
