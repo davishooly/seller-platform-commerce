@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Form, Layout, Menu, Select } from "antd";
+import RichEditor from "components/Input/editor";
 import { InlineInput, Inline } from "components/Input";
 import { SellerProduct } from "api/src";
 
@@ -82,6 +83,16 @@ const BasicInfo: React.FC<IProps> = ({ form, sellerProduct }) => {
             </Select>
           </Inline>
         )}
+      </Form.Item>
+
+      <Form.Item>
+      <Inline label="Description" placeholder="">
+        <RichEditor
+          placeholder="This is a text editor.  Add and edit as you wish."
+          editorType="package"
+        />
+
+        </Inline>
       </Form.Item>
 
       <Button type="primary" size="large">
