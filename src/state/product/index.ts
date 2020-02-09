@@ -1,4 +1,4 @@
-import {  productsCategoriesRoot} from "api/src/apis";
+import {productsCategoriesRoot, productsDelete} from "api/src/apis";
 
 
 // const useDraftProduct = () => {
@@ -6,7 +6,7 @@ import {  productsCategoriesRoot} from "api/src/apis";
 // }
 
 const getProductsCategories = (categories: any) => {
-    if(!categories) {
+    if (!categories) {
         const config = productsCategoriesRoot({}, {
             transform: (body: any) => ({rootCategories: body}),
             update: {
@@ -19,6 +19,24 @@ const getProductsCategories = (categories: any) => {
 
 }
 
+const deleteProduct = (productId: number) => {
 
-export { getProductsCategories }
+    return productsDelete({
+            id: productId
+        },
+        {
+            transform: (body: any) => ({
+                product: body
+            }),
+            update: {
+                product: (prev: any, next: any) => {
+                    console.log({ next })
+                }
+            }
+        })
+
+}
+
+
+export {getProductsCategories, deleteProduct }
 

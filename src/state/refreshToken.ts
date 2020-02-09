@@ -2,7 +2,7 @@ import { authRefreshCreate } from "../api/src/apis";
 import { setStoreTokens } from "./auth";
 
 
-export const getTokenRefreshed = ( refreshToken: string, dispatch: any, smiles: number ) => {
+export const getTokenRefreshed = ( refreshToken: string, dispatch: any ) => {
       return authRefreshCreate({
         data:  {
             grantType: "refresh_token",
@@ -15,7 +15,7 @@ export const getTokenRefreshed = ( refreshToken: string, dispatch: any, smiles: 
         update: {
             token: (prev:any , next: any) => {
                 const { accessToken, refreshToken, expires_in  } = next
-                const now  =  new Date()
+                const now  =  new Date();
                 dispatch(setStoreTokens({
                     accessToken:  accessToken,
                     refreshToken: refreshToken,

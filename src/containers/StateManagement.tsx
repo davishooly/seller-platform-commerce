@@ -80,9 +80,9 @@ export const store = createStore(
 
 store.subscribe(() => {
 
-    const { auth:  { timeout, refreshToken, smiles } } = store.getState()
+    const { auth:  { timeout, refreshToken } } = store.getState()
     if(timeout){
-        store.dispatch(requestAsync(getTokenRefreshed(refreshToken, store.dispatch, smiles)))
+        store.dispatch(requestAsync(getTokenRefreshed(refreshToken, store.dispatch)))
     }
 
 });

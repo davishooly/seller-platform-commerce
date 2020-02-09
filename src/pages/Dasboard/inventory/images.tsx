@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import { Upload, Icon, Modal, Button } from 'antd';
 import styled from "styled-components"
 import notification from '../../../utils/toast';
@@ -61,7 +62,9 @@ const Image = ({ callback, score, setScore, files, setFiles, submit }: any) => {
         loading: false,
     });
 
-    const [{ isPending }, addMedia] = useMutation(( id, file, path) => productAddMedia(id, file, path ))
+    const history = useHistory()
+
+    const [{ isPending, isFinished, status }, addMedia] = useMutation(( id, file, path) => productAddMedia(id, file, path ))
 
     useEffect(()=> {
         if(state.fileList.length >= 0){
@@ -94,13 +97,24 @@ const Image = ({ callback, score, setScore, files, setFiles, submit }: any) => {
 
     const handleUpload = () => {
         submit().then((result: any )=>{
-            const { body: { id } } = result;
-            state.fileList.forEach( (file: any) =>  {
-                getBase64(file).then(url => {
-                    addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+            const { body: { id }, status } = result;
+            if( status ! === 201) {
+                state.fileList.forEach( (file: any) =>  {
+                    getBase64(file).then(url => {
+                        addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+                    })
                 })
-            })
+            }
         })
+
+        if(isFinished && status === 203){
+            notification.success({
+                message: "Success",
+                description: "Product added successfully"
+            });
+
+            history.push('/inventory/manage')
+        }
 
     }
 

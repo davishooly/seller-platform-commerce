@@ -7,6 +7,8 @@ import {
 import { columns } from "./tableData";
 import Search from '../../components/Search'
 import moment from "moment";
+import {useMutation} from "redux-query-react";
+import {deleteProduct} from "../../state/product";
 
 const { Option } = Select;
 const options = ['category', 'price'];
@@ -16,6 +18,8 @@ const  RenderTable = ({ products: { results , count } }: any ) => {
     const [selectProduct, setSelectedProduct]: any = useState([]);
 
     const [ searchValue, setSearchValue] = useState('');
+
+    const [{isPending, isFinished}, deleteProducts ] = useMutation(() => deleteProduct(selectProduct[0].id))
 
     const onChange = (e: any) => {
         const {value, checked} = e.target;
@@ -103,7 +107,7 @@ const  RenderTable = ({ products: { results , count } }: any ) => {
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Export</Button>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Unlist</Button>
                             <Button primary={products === 1 ? 'primary' : ''} className="verticalLine">Edit</Button>
-                            <Button delete={products > 0 ? 'delete' : ''}>Delete</Button>
+                            <Button onClick={deleteProducts} delete={products > 0 ? 'delete' : ''}>Delete</Button>
                         </ButtonContainer>
                         <div className="reload">
                             <Icon type="reload"/>
