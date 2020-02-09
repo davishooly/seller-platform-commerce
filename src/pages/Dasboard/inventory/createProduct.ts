@@ -26,8 +26,10 @@ export const createProductSeller = (product: any, sellerId: number) => {
             product: {
                 ...product,
             },
+            availableUnits: product.stock,
             seller: sellerId,
             primaryCategory: 1 ,
+            salePrice: product.sale_price,
             defaultPrice: product.default_price,
         }
     }, {

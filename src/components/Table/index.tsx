@@ -56,17 +56,16 @@ const  RenderTable = ({ products: { results , count } }: any ) => {
         </ProductContainer>
     );
 
-    let productList = results.map(({ product, purchasable, defaultPrice }: any) => {
+    let productList = results.map(({ product, purchasable, defaultPrice, availableUnits, salePrice }: any) => {
         if(product){
-            const { id, createdOn, inventoryQuantity, name }  = product;
+            const { id, createdOn, name }  = product;
             return {
                 key: id,
                 date: moment(createdOn).format('Do MMMM YYYY'),
                 price: Number(defaultPrice),
-                stock: inventoryQuantity,
+                stock: availableUnits,
                 status: purchasable ? "Live" :  'Unlisted',
-                // description: data.description,
-                // sale: compareAtPrice,
+                sale: Number(salePrice),
                 productName: name,
                 product: renderProductContent(product),
                 listing: !purchasable

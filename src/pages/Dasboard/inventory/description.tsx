@@ -133,7 +133,7 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
 
 
         <Action>
-          <Button onClick={()=> callback("3")}> Back </Button>
+          <Button onClick={()=> callback("2")}> Back </Button>
 
           <Button disabled={descriptionSet.size !== 3 } type="primary" onClick={submitProducts}> Save and proceed </Button>
         </Action>

@@ -59,6 +59,32 @@ const Additional = ({ form, onNext, callback }: any) => {
     )}
   </Form.Item>
 
+        <Form.Item  validateStatus={defaultPriceError ? "error" : ""}
+                    help={defaultPriceError || ""}>
+            {getFieldDecorator("sale_price", {
+                rules: [{ required: true, message: "Please input sale price!" }]
+            })(
+                <InlineInput
+                    label="Sale price"
+                    tip="required"
+                    placeholder="Sales price"
+                />
+            )}
+        </Form.Item>
+
+        <Form.Item  validateStatus={defaultPriceError ? "error" : ""}
+                    help={defaultPriceError || ""}>
+            {getFieldDecorator("stock", {
+                rules: [{ required: true, message: "Please input stock" }]
+            })(
+                <InlineInput
+                    label="Stock"
+                    tip="required"
+                    placeholder="stock"
+                />
+            )}
+        </Form.Item>
+
 
       <Form.Item
         validateStatus={barcodeError ? "error" : ""}
@@ -183,7 +209,7 @@ const Additional = ({ form, onNext, callback }: any) => {
       </Form.Item>
 
       <Action>
-        <Button onClick={ () => callback("3")}> Back </Button>
+        <Button onClick={ () => callback("1")}> Back </Button>
         <Button
           type="primary"
           htmlType="submit"

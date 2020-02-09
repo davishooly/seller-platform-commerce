@@ -97,8 +97,9 @@ const Image = ({ callback, score, setScore, files, setFiles, submit }: any) => {
 
     const handleUpload = () => {
         submit().then((result: any )=>{
-            const { body: { id }, status } = result;
+            const { status } = result;
             if( status ! === 201) {
+                const { body: { id } } = result;
                 state.fileList.forEach( (file: any) =>  {
                     getBase64(file).then(url => {
                         addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
@@ -107,13 +108,13 @@ const Image = ({ callback, score, setScore, files, setFiles, submit }: any) => {
             }
         })
 
-        if(isFinished && status === 203){
+        if(isFinished && status === 201){
             notification.success({
                 message: "Success",
                 description: "Product added successfully"
             });
 
-            history.push('/inventory/manage')
+            history.push('/dashboard/inventory/manage')
         }
 
     }
