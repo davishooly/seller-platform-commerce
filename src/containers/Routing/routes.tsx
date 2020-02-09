@@ -14,6 +14,7 @@ import {connectRequest} from "redux-query-react";
 import {compose} from "redux";
 import {sellerFromToken} from "../../api/src/apis";
 import {getProductsCategories} from "../../state/product";
+import Edit from 'pages/Dasboard/inventory/Edit';
 
 
 export const HomeRoutes = () => {
@@ -47,6 +48,7 @@ const DashboardRoutesL = (props: any) => {
         <Switch>
             <Route path="/dashboard/settings" component={Settings}/>
             <Redirect exact from="/dashboard/inventory" to='/dashboard/inventory/manage'/>
+            <Route path="/dashboard/inventory/edit/:id" component={Edit}/>
             <Route path="/dashboard/inventory" component={Inventory}/>
             <Route path="/dashboard/payout" component={PayoutTaxes}/>
             <Route path="/dashboard/orders" component={Orders}/>

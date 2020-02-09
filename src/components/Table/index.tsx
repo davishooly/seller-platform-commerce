@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from "react";
-import {NavLink} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom'
 import {Table, Select, Icon, Checkbox, Avatar, Switch} from 'antd';
 import {
     DivContainer, ListingContainer, TableSection, ProductContainer, Button, ButtonContainer
@@ -40,17 +40,17 @@ const RenderTable = ({products: {results, count}}: any) => {
     }, [deleteProducts])
 
 
-    const renderListingContent = (checked: boolean) => (
+    const renderListingContent = (checked: boolean, id: any) => (
         <ListingContainer>
             <Switch
                 defaultChecked={checked}
-                onChange={() => {
-                    console.log()
-                }}
+                onChange={()=>{ console.log()}}
                 checkedChildren="on"
                 unCheckedChildren="off"
             />
-            <Icon type="edit"/>
+            <Link to={`/dashboard/inventory/edit/${id}`}>
+                <Icon type="edit"/>
+            </Link>
             <Icon type="eye"/>
         </ListingContainer>
     );
@@ -76,8 +76,8 @@ const RenderTable = ({products: {results, count}}: any) => {
                 productName: name,
                 product: renderProductContent(product),
                 listing: !purchasable
-                    ? renderListingContent(false)
-                    : renderListingContent(true)
+                    ? renderListingContent(false, id)
+                    : renderListingContent(true, id)
             }
         }
     });
