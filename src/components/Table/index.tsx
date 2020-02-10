@@ -35,7 +35,10 @@ const RenderTable = ({products: {results, count}}: any) => {
     }
 
     const handleDeleteProduct = useCallback(optimistic => {
-        deleteProducts(optimistic).then(() => {
+        deleteProducts(optimistic).then(( response: any) => {
+            if(response.status ===  204){
+                setSelectedProduct([])
+            }
         })
     }, [deleteProducts])
 
