@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Upload, Icon, Modal, Button } from 'antd';
 import styled from "styled-components"
 import notification from '../../../utils/toast';
 import { useMutation } from 'redux-query-react';
 import { productAddMedia } from './createProduct';
+import {useDispatch, useSelector} from "react-redux";
 
 
 function getBase64(file: File) {
@@ -54,7 +55,7 @@ export const Action = styled.div`
     }
 `;
 
-const Image = ({ callback, score, setScore, files, setFiles, submit }: any) => {
+const Image = ({ callback, score, setScore, files, setFiles, submit, product }: any) => {
     const [state, setState] = useState<any>({
         previewVisible: false,
         previewImage: '',
@@ -63,6 +64,10 @@ const Image = ({ callback, score, setScore, files, setFiles, submit }: any) => {
     });
 
     const history = useHistory()
+    const dispatch = useDispatch();
+
+    const sellerProducts = useSelector((state: any)=> state.entities.sellerProducts);
+
 
     const [{ isPending, isFinished, status }, addMedia] = useMutation(( id, file, path) => productAddMedia(id, file, path ))
 
@@ -94,30 +99,49 @@ const Image = ({ callback, score, setScore, files, setFiles, submit }: any) => {
         });
     };
 
+    const handleUpload = useCallback(optimistic => {
 
-    const handleUpload = () => {
-        submit().then((result: any )=>{
+        submit(optimistic).then((result: any )=>{
             const { status } = result;
             if( status ! === 201) {
-                const { body: { id } } = result;
-                state.fileList.forEach( (file: any) =>  {
-                    getBase64(file).then(url => {
-                        addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
-                    })
-                })
+                history.push('/dashboard/inventory/manage')
+                // const { body: { id } } = result;
+                // state.fileList.forEach( (file: any) =>  {
+                //     getBase64(file).then(url => {
+                //         addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+                //     })
+                // })
             }
         })
 
-        if(isFinished && status === 201){
-            notification.success({
-                message: "Success",
-                description: "Product added successfully"
-            });
+    }, [submit]);
 
-            history.push('/dashboard/inventory/manage')
-        }
 
-    }
+
+    // const handleUpload = () => {
+    //     submit().then((result: any )=>{
+    //         const { status } = result;
+    //         if( status ! === 201) {
+    //             history.push('/dashboard/inventory/manage')
+    //             // const { body: { id } } = result;
+    //             // state.fileList.forEach( (file: any) =>  {
+    //             //     getBase64(file).then(url => {
+    //             //         addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+    //             //     })
+    //             // })
+    //         }
+    //     })
+    //
+    //     if(isFinished && status === 201){
+    //         notification.success({
+    //             message: "Success",
+    //             description: "Product added successfully"
+    //         });
+    //
+    //         history.push('/dashboard/inventory/manage')
+    //     }
+    //
+    // }
 
     const uploadHandleChange = async ({ fileList }: any) => {
         const newFiles = fileList.map( ({ originFileObj }: any) => originFileObj);

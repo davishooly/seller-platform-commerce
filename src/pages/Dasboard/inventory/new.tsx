@@ -14,7 +14,7 @@ import {useSelector} from "react-redux";
 import Preview from "./preview";
 import Additional from "./additional";
 import {createProduct, createProductSeller} from "./createProduct";
-import {useMutation} from "redux-query-react";
+import { useMutation } from "redux-query-react";
 import {Product} from "../../../api/src/models";
 
 const {TabPane} = Tabs;
@@ -235,8 +235,8 @@ const ProductDetails = () => {
     );
 
 
-    const [{}, createProductForSeller] = useMutation(() => {
-        return createProductSeller(product, 1)
+    const [{}, createProductForSeller] = useMutation((optimistic) => {
+        return createProductSeller(product, 1, optimistic)
     });
 
     return (
@@ -318,6 +318,7 @@ const ProductDetails = () => {
                                             files={files}
                                             setFiles={setFiles}
                                             callback={callback}
+                                            product={product}
                                             submit={createProductForSeller}
                                         />
                                     </TabPane>

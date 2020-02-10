@@ -20,8 +20,8 @@ export const createProduct = (product: any) => {
 
 
 
-export const createProductSeller = (product: any, sellerId: number) => {
-    return sellersProductsCreate({
+export const createProductSeller = (product: any, sellerId: number, optimistic: any) => {
+    const config =  sellersProductsCreate({
         data: {
             product: {
                 ...product,
@@ -34,12 +34,27 @@ export const createProductSeller = (product: any, sellerId: number) => {
         }
     }, {
         transform: (body: any) => ({
-            product: body
+            sellerProducts: body
         }),
         update: {
-            product: (prev: any , next: any) => next
+            sellerProducts: (prev: any , next: any) => {
+                const { results , count  }  = prev
+                const newState = {
+                    count: count + 1,
+                    results: [...results, next ]
+                }
+                return newState
+            }
         }
     })
+
+    if(optimistic){
+         config.optimisticUpdate = {
+             sellerProducts: (body: any ) => body
+         }
+    }
+
+    return config;
 }
 
 

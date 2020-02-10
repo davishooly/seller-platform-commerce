@@ -117,15 +117,15 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
           </Panel>
 
 
-          <Panel header={<h2>More info</h2>} key="3" >
-            <div>
-              {<RichEditor
-                  placeholder="This is a text editor.  Add and edit as you wish."
-                  editorType="moreInfo"
-                  onChange={onChange}
-              />}</div>
+          {/*<Panel header={<h2>More info</h2>} key="3" >*/}
+          {/*  <div>*/}
+          {/*    {<RichEditor*/}
+          {/*        placeholder="This is a text editor.  Add and edit as you wish."*/}
+          {/*        editorType="moreInfo"*/}
+          {/*        onChange={onChange}*/}
+          {/*    />}</div>*/}
 
-          </Panel>
+          {/*</Panel>*/}
 
         </Collapse>
 
@@ -134,8 +134,7 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
 
         <Action>
           <Button onClick={()=> callback("2")}> Back </Button>
-
-          <Button disabled={descriptionSet.size !== 3 } type="primary" onClick={submitProducts}> Save and proceed </Button>
+          <Button type="primary" onClick={submitProducts}> Save and proceed </Button>
         </Action>
       </>
   );
