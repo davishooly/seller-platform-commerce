@@ -10,7 +10,7 @@ const Action = styled.div`
   }
 `;
 
-const ProductInfo = ({ form, onNext, onPrevClick }: any) => {
+const ProductInfo = ({ form, onNext, onPrevClick, callback }: any) => {
   const {
     getFieldDecorator,
     getFieldError,
@@ -129,6 +129,7 @@ const ProductInfo = ({ form, onNext, onPrevClick }: any) => {
           type="primary"
           htmlType="submit"
           disabled={hasErrors(getFieldsError())}
+          onClick={()=> callback("2")}
         >
           Save and proceed
         </Button>

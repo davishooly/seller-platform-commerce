@@ -95,6 +95,10 @@ const ListingContainer = styled.div`
  button {
   width: 22px;
  }
+ 
+ .ant-switch-checked .ant-switch-inner {
+    width: fit-content;
+ }
 `;
 
 const ProductContainer = styled.div`

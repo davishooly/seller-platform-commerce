@@ -1,4 +1,4 @@
-import { productsCreate, sellersProductsCreate, productsAddMedia } from "api/src";
+import {productsCreate, sellersProductsCreate, productsAddMedia , Product} from "api/src";
 
 export const createProduct = (product: any) => {    
   return productsCreate(
@@ -20,28 +20,63 @@ export const createProduct = (product: any) => {
 
 
 
-export const createProductSeller = (productSeller: any, productId: any) => {
-    
-    return sellersProductsCreate({
+export const createProductSeller = (product: any, sellerId: number, optimistic: any) => {
+    const config =  sellersProductsCreate({
         data: {
-            product: productId,
-            defaultPrice: productSeller.default_price
-            
+            product: {
+                ...product,
+            },
+            availableUnits: product.stock,
+            seller: sellerId,
+            primaryCategory: 1 ,
+            salePrice: product.sale_price,
+            defaultPrice: product.default_price,
+        }
+    }, {
+        transform: (body: any) => ({
+            sellerProducts: body
+        }),
+        update: {
+            sellerProducts: (prev: any , next: any) => {
+                const { results , count  }  = prev
+                const newState = {
+                    count: count + 1,
+                    results: [...results, next ]
+                }
+                return newState
+            }
         }
     })
+
+    if(optimistic){
+         config.optimisticUpdate = {
+             sellerProducts: (body: any ) => body
+         }
+    }
+
+    return config;
 }
 
 
 
 
-export const productAddMedia = (productId: any, file: any, path: string) => { 
+export const productAddMedia = (productId: any, file: any, path: any) => {
     return  productsAddMedia({
         id: productId,
         data: {
             file,
             path,
             kind: 2
-            
+        }
+    }, {
+        transform: ( body:any ) => ({
+            response: body
+        }),
+        update: {
+            response: (prev: any, next: any) => {
+                console.log({ next })
+            }
         }
     })
 }
+

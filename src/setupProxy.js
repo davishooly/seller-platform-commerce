@@ -7,7 +7,7 @@ const headers = {
 
   const apiProxy = {
     headers,
-    target: `http://127.0.0.1:6969/api`,
+    target: `http://127.0.0.1:8000/api`,
     secure: false,
     changeOrigin: true,
     logLevel: "debug",
@@ -16,5 +16,5 @@ const headers = {
 
 
 module.exports = function(app) {
-    app.use(["/products","/sellers", "/sellers/login", "/oauth2"], proxy(apiProxy));
+    app.use(["/products","/sellers", "/sellers/login", "/oauth2", "/auth"], proxy(apiProxy));
   };

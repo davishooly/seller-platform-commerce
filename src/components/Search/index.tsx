@@ -4,12 +4,20 @@ import { Input } from 'antd';
 
 const { Search } = Input;
 
-const Index = () => {
+interface Props {
+    handleSearch: Function;
+    searchValue: string;
+
+}
+
+const Index = ( { handleSearch, searchValue }: Props) => {
   return (
       <div>
         <Search
+            onChange={(value) => handleSearch(value)}
+            value={ searchValue }
             placeholder="search products"
-            onSearch={value => console.log(value)}
+            onSearch={value => handleSearch(value)}
             style={{width: 200}}
         />
       </div>

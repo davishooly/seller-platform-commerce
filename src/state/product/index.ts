@@ -1,19 +1,5 @@
-import {productsList, productsCategoriesRoot} from "api/src/apis";
-import {useRequest} from "redux-query-react";
-
-
-const useProducts = () => {
-    const config = productsList({
-        // transform: (responseBody: any) => ({
-        //     products: responseBody
-        // }),
-        // update: {
-        //     products: (prev, next) => next
-        // }
-    });
-
-    useRequest(config)
-}
+import {productsCategoriesRoot, productsDelete} from "api/src/apis";
+import {Product} from "../../api/src/models";
 
 
 // const useDraftProduct = () => {
@@ -21,7 +7,7 @@ const useProducts = () => {
 // }
 
 const getProductsCategories = (categories: any) => {
-    if(!categories) {
+    if (!categories) {
         const config = productsCategoriesRoot({}, {
             transform: (body: any) => ({rootCategories: body}),
             update: {
@@ -34,6 +20,35 @@ const getProductsCategories = (categories: any) => {
 
 }
 
+const deleteProduct = (productId: number, optimistic: any) => {
 
-export { useProducts, getProductsCategories }
+    const config =  productsDelete({
+            id: productId
+        },
+        {
+            transform: (body: any) => ({
+                sellerProducts: body
+            }),
+            update: {
+                sellerProducts: (prev: any, next: any) => {
+                    const { results , count  }  = prev
+                    const newState = {
+                        count: count - 1,
+                        results: results.filter((product: any) => product.id !== productId)
+                    }
+                    return newState
+                }
+            }
+        })
+        if (optimistic) {
+            config.optimisticUpdate = {
+                sellerProducts: (body: any) => body
+            };
+        }
+
+        return config
+}
+
+
+export {getProductsCategories, deleteProduct }
 

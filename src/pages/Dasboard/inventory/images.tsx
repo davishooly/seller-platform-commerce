@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Upload, Icon, Modal, Button } from 'antd';
 import styled from "styled-components"
 import notification from '../../../utils/toast';
 import { useMutation } from 'redux-query-react';
-import { useSelector } from 'react-redux';
 import { productAddMedia } from './createProduct';
-import { mutateAsync } from 'redux-query';
+import {useDispatch, useSelector} from "react-redux";
 
 
 function getBase64(file: File) {
@@ -55,16 +55,21 @@ export const Action = styled.div`
     }
 `;
 
-const Image = ({ callback, score, setScore, files, setFiles }: any) => {
+const Image = ({ callback, score, setScore, files, setFiles, submit, product }: any) => {
     const [state, setState] = useState<any>({
         previewVisible: false,
         previewImage: '',
         fileList: [],
         loading: false,
     });
-    const draph = useSelector((state: any) => state.entities.product_draft)
 
-    // const [{}, addMedia] = useMutation((path, file) => productAddMedia(draph.id,file, path ))
+    const history = useHistory()
+    const dispatch = useDispatch();
+
+    const sellerProducts = useSelector((state: any)=> state.entities.sellerProducts);
+
+
+    const [{ isPending, isFinished, status }, addMedia] = useMutation(( id, file, path) => productAddMedia(id, file, path ))
 
     useEffect(()=> {
         if(state.fileList.length >= 0){
@@ -94,21 +99,49 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
         });
     };
 
+    const handleUpload = useCallback(optimistic => {
 
-    const handleUpload = async () => {
-        state.fileList.forEach(async (file: any) => {
-            var reader = new FileReader();
-            reader.onload = function () {
-                mutateAsync(
-                    productAddMedia(draph.id,reader.result, "")
-                )
-               
+        submit(optimistic).then((result: any )=>{
+            const { status } = result;
+            if( status ! === 201) {
+                history.push('/dashboard/inventory/manage')
+                // const { body: { id } } = result;
+                // state.fileList.forEach( (file: any) =>  {
+                //     getBase64(file).then(url => {
+                //         addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+                //     })
+                // })
             }
-
-            reader.readAsDataURL(file);
-           
         })
-    }
+
+    }, [submit]);
+
+
+
+    // const handleUpload = () => {
+    //     submit().then((result: any )=>{
+    //         const { status } = result;
+    //         if( status ! === 201) {
+    //             history.push('/dashboard/inventory/manage')
+    //             // const { body: { id } } = result;
+    //             // state.fileList.forEach( (file: any) =>  {
+    //             //     getBase64(file).then(url => {
+    //             //         addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+    //             //     })
+    //             // })
+    //         }
+    //     })
+    //
+    //     if(isFinished && status === 201){
+    //         notification.success({
+    //             message: "Success",
+    //             description: "Product added successfully"
+    //         });
+    //
+    //         history.push('/dashboard/inventory/manage')
+    //     }
+    //
+    // }
 
     const uploadHandleChange = async ({ fileList }: any) => {
         const newFiles = fileList.map( ({ originFileObj }: any) => originFileObj);
@@ -149,19 +182,19 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
                 </Modal>
             </div>
 
-            <Button
-            type="primary"
-            onClick={handleUpload}
-            disabled={state.fileList.length === 0}
-            loading={state.uploading}
-            style={{ marginTop: 16 }}
-          >
-            {state.uploading ? 'Uploading' : 'Start Upload'}
-          </Button>
+          {/*  <Button*/}
+          {/*  type="primary"*/}
+          {/*  onClick={handleUpload}*/}
+          {/*  disabled={state.fileList.length === 0}*/}
+          {/*  loading={isPending}*/}
+          {/*  style={{ marginTop: 16 }}*/}
+          {/*>*/}
+          {/*  {state.uploading ? 'Uploading' : 'Start Upload'}*/}
+          {/*</Button>*/}
 
             <Action>
                 <Button onClick={()=>callback("3")}> Back </Button>
-                <Button onClick={()=>callback("5")} type="primary"> Preview </Button>
+                <Button loading={isPending} onClick={handleUpload} type="primary"> Preview </Button>
             </Action>
             </Container>
         </>

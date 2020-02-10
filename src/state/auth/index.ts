@@ -1,24 +1,35 @@
 const SET_AUTH = "SET_AUTH";
 const REMOVE_AUTH = "REMOVE_AUTH";
 
-export function reducer(state = {}, action: any) {
+export function reducer(state:any = {}, action: any) {
   switch (action.type) {
     case SET_AUTH:
       return Object.assign({}, state, {
         accessToken: action.auth.accessToken,
-        refreshToken: action.auth.refreshToken
+        refreshToken: action.auth.refreshToken,
+        smiles: action.auth.expiresIn,
+        timeout: false
       });
 
     case REMOVE_AUTH:
       return {
         accessToken: "",
-        refreshToken: ""
+        refreshToken: "",
+        smiles:''
       };
 
+    case "AUTH-REFRESH":
+      const now  =  new Date()
+          return  Object.assign({}, state, {
+            ...state,
+            smiles: now.getTime() + 36000,
+            timeout: true
+          });
     default:
       return state;
   }
 }
+
 
 export const setStoreTokens = function(auth: any) {
   return { type: SET_AUTH, auth: auth };
@@ -60,18 +71,3 @@ export const setToken = function(accessToken: any, refreshToken: any) {
   window.localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken)
 };
 
-export const getTokens = (body: any) => {
-  const queryConfig = {
-    url: `/o/token/`,
-    body: body,
-    transform: (responseBody  : any) => {
-      return {
-        auth: responseBody
-      }
-    },
-    update: {
-      auth: (prev: any, next: any) => next,
-    },
-  };
-  return queryConfig;
-};

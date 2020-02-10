@@ -43,6 +43,13 @@ const OeExpress = () => {
         setSelectedProduct(products.filter((product: any) => product.key !== value.key));
   };
 
+
+    const handleSearch = (value: string ) => {
+
+        console.log({ value })
+
+    }
+
   const renderOderContent = (data: any) => (
       <ProductContainer>
         <Checkbox value={data} onChange={onSelect}/>
@@ -98,7 +105,7 @@ const OeExpress = () => {
               <Select defaultValue="Filter products" style={{width: 140}}>
                 {options.map(value => (<Option key={value} value={`${value}`}>{value}</Option>))}
               </Select>
-              <Search/>
+              <Search handleSearch={handleSearch} searchValue={''}/>
             </div>
           </DivContainer>
           <Table dataSource={data} columns={columns}/>

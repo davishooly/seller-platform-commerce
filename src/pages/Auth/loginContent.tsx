@@ -70,17 +70,20 @@ const ModalContent = (props: any) => {
     };
 
     const redirect = (response: any) => {
-        const {status, text} = response;
-        const { error , error_description, access_token,refresh_token }  = JSON.parse(text);
+        const {status, text, body: { expires_in , access_token, refresh_token }} = response;
+        const { error , error_description } = JSON.parse(text);
+
+        const now  =  new Date()
+
         if (status === 200 && !error ) {
             notification.success({
                 message: "Success",
                 description: "Welcome back to OE Seller Center"
             });
-            localStorage.setItem("refreshToken", refresh_token);
             dispatch(setStoreTokens({
                 accessToken:  access_token,
-                refreshToken: refresh_token
+                refreshToken: refresh_token,
+                expiresIn: now.getTime() + expires_in
             }))
             history.push("/dashboard")
         } else {

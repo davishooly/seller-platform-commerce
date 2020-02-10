@@ -20,7 +20,7 @@ export const HomeRoutes = () => {
     return (
         <Switch>
             <Route path="/" exact component={Home}/>
-            <Route path="/new" exact>
+            <Route path="/new" exact >
                 <NewSeller/>
             </Route>
         </Switch>
@@ -42,6 +42,7 @@ export const AccountActivationRoutes = () => (
 
 
 const DashboardRoutesL = (props: any) => {
+
     return (
         <Switch>
             <Route path="/dashboard/settings" component={Settings}/>
@@ -56,7 +57,8 @@ const DashboardRoutesL = (props: any) => {
 
 const mapStateToProps = (state: any) => ({
     seller: state.entities.seller,
-    rootCategories: state.entities.rootCategories
+    rootCategories: state.entities.rootCategories,
+    auth: state.auth
 });
 
 const mapPropsToConfig = (props: any): any => {

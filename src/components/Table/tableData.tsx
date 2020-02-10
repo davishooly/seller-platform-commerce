@@ -44,12 +44,6 @@ export const columns = [
     render: (text: any) =>renderPopup(text)
 },
 {
-    title: 'Description',
-        dataIndex: 'description',
-    key: 'description',
-    // render: text => renderPopup( <Editor readOnly toolbarHidden editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(text)))} />)
-},
-{
     title: 'Status',
         dataIndex: 'status',
     key: 'status',

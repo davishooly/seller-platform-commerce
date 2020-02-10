@@ -1,6 +1,4 @@
 import {sellerFromToken, sellersCreate} from "api/src/apis";
-import {useRequest} from "redux-query-react";
-import {useSelector} from "react-redux";
 
 
 export const createSeller = (customerDetails: any) => {
