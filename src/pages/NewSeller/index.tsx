@@ -38,7 +38,7 @@ const customer = {
     password: "",
     email: "",
     lastname: "",
-    firstname: ""
+    firstname: "",
 };
 
 const steps = [
