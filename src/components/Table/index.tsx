@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from "react";
 import {NavLink, Link} from 'react-router-dom'
-import {Table, Select, Icon, Checkbox, Avatar, Switch} from 'antd';
+import {Table, Select, Icon, Checkbox, Avatar, Switch, Popconfirm} from 'antd';
 import {
     DivContainer, ListingContainer, TableSection, ProductContainer, Button, ButtonContainer
 } from './styles';
@@ -19,7 +19,11 @@ const RenderTable = ({products: {results, count}}: any) => {
 
     const [searchValue, setSearchValue] = useState('');
 
+    const [isVisible, setVisible] = useState(false);
+
     const [{isPending, isFinished}, deleteProducts] = useMutation((optimistic) => deleteProduct(selectProduct[0].id, optimistic))
+
+
 
     const onChange = (e: any) => {
         const {value, checked} = e.target;
@@ -41,6 +45,12 @@ const RenderTable = ({products: {results, count}}: any) => {
             }
         })
     }, [deleteProducts])
+
+
+    const confirm = (e:any) => {
+        e.preventDefault()
+        handleDeleteProduct(e)
+    }
 
 
     const renderListingContent = (checked: boolean, id: any) => (
@@ -101,9 +111,9 @@ const RenderTable = ({products: {results, count}}: any) => {
         })
     }
 
-
     return (
         <div>
+
             <TableSection>
                 <div className="head">
                     <span> Product Catalog </span>
@@ -114,8 +124,17 @@ const RenderTable = ({products: {results, count}}: any) => {
                         <ButtonContainer>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Export</Button>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Unlist</Button>
-                            <Button primary={products === 1 ? 'primary' : ''} className="verticalLine">Edit</Button>
-                            <Button onClick={handleDeleteProduct} delete={products > 0 ? 'delete' : ''}>Delete</Button>
+                            <Link to={`/dashboard/inventory/edit/${selectProduct.length && selectProduct[0].id}`}>
+                                <Button primary={products === 1 ? 'primary' : ''} className="verticalLine">Edit</Button>
+                            </Link>
+                            <Popconfirm
+                                title="Are you sure delete this product?"
+                                onConfirm={confirm}
+                                okText="Yes"
+                                cancelText="No"
+                            >
+                                <Button delete={products > 0 ? 'delete' : ''}>Delete</Button>
+                            </Popconfirm>,
                         </ButtonContainer>
                         <div className="reload">
                             <Icon type="reload"/>

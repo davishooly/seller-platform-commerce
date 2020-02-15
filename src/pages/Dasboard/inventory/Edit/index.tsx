@@ -7,6 +7,8 @@ import BasicInfo from "./BasicInfo";
 import Additional from "./Additional";
 import Images from "./Images";
 import { useSellerProduct } from "state/product";
+import {hasErrors} from "../../../../utils/validators";
+import { useMutation } from "redux-query-react";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -21,11 +23,30 @@ const Edit: React.FC<any> = ({ form , match }) => {
   const [ page, setPage ]  = useState("1")
   const id = match.params?.id
 
-  const sellerProduct = useSellerProduct(id)  
+  const sellerProduct = useSellerProduct(id)
+
+  const [productDetails, setDetails] = useState(sellerProduct)
+
+
+  // const [{ isFinished, isPending}, updateProduct] = useMutation( () => (
+  //     // updateSellerProduct()
+  // ))
+
+
+  const handleSubmit = (e:any) => {
+    e.preventDefault()
+    form.validateFields((err: any, values: any) => {
+      if (!err) {
+        console.log({ values })
+        const newProduct = { ...sellerProduct, ...sellerProduct.product, ...values }
+        console.log({ newProduct })
+      }
+    });
+  }
 
   return (
     <Container>
-      <Form onSubmit={() => {}}>
+      <Form onSubmit={handleSubmit}>
         <Layout style={{ padding: "24px 0", background: "#fff" }}>
           <Sider style={{ background: "#fff" }}>
             <Menu
@@ -44,9 +65,17 @@ const Edit: React.FC<any> = ({ form , match }) => {
           <Content
             style={{ padding: "0 24px", minHeight: "200px", maxWidth: "700px" }}
           >
-          { page === "1" && <BasicInfo sellerProduct={sellerProduct} />}
-          { page === "2" && <Additional sellerProduct={sellerProduct} />}
+          { page === "1" && <BasicInfo form={form} sellerProduct={sellerProduct} />}
+          { page === "2" && <Additional form={form} sellerProduct={sellerProduct} />}
           { page === "3" && <Images sellerProduct={sellerProduct} />}
+            <Button
+                type="primary"
+                size="large"
+                htmlType="submit"
+                disabled={hasErrors(getFieldsError())}
+            >
+              Save
+            </Button>
           </Content>
         </Layout>
       </Form>

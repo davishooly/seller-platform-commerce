@@ -94,12 +94,8 @@ const BasicInfo: React.FC<IProps> = ({ form, sellerProduct }) => {
 
         </Inline>
       </Form.Item>
-
-      <Button type="primary" size="large">
-        Save
-      </Button>
     </>
   );
 };
 
-export default Form.create<any>({ name: "basic" })(BasicInfo);
+export default BasicInfo;

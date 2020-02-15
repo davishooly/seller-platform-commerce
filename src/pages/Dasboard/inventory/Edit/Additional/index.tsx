@@ -110,11 +110,8 @@ const Additional: React.FC<IProps> = ({ form, sellerProduct }) => {
         })(<InlineInput label="Keywords " placeholder="Keywords " />)}
       </Form.Item>
 
-      <Button type="primary" size="large">
-        Save
-      </Button>
     </>
   );
 };
 
-export default Form.create<any>({ name: "basic" })(Additional);
+export default Additional;
