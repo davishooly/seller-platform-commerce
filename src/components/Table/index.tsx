@@ -100,7 +100,7 @@ const RenderTable = ({products: {results, count}}: any) => {
     let searchProducts: any;
 
 
-    if (searchValue !== '') {
+    if (searchValue === '') {
         searchProducts = productList
     } else {
         searchProducts = productList.filter((product: any) => {

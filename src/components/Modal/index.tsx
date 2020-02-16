@@ -1,6 +1,6 @@
 import Modal from "./modal";
 // import ModalContent from "modalContent";
-import Overlay from "./Overlay";
+import Overlay from "./overlay";
 
 
 export { Modal , Overlay};

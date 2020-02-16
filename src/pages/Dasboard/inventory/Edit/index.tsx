@@ -9,6 +9,7 @@ import Images from "./Images";
 import { useSellerProduct } from "state/product";
 import {hasErrors} from "../../../../utils/validators";
 import { useMutation } from "redux-query-react";
+import {updateSellerProduct} from "./updateProducts";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -28,18 +29,17 @@ const Edit: React.FC<any> = ({ form , match }) => {
   const [productDetails, setDetails] = useState(sellerProduct)
 
 
-  // const [{ isFinished, isPending}, updateProduct] = useMutation( () => (
-  //     // updateSellerProduct()
-  // ))
+  const [{ isFinished, isPending}, updateProduct] = useMutation(product => (
+      updateSellerProduct(product)
+  ))
 
 
   const handleSubmit = (e:any) => {
     e.preventDefault()
     form.validateFields((err: any, values: any) => {
       if (!err) {
-        console.log({ values })
         const newProduct = { ...sellerProduct, ...sellerProduct.product, ...values }
-        console.log({ newProduct })
+        updateProduct(newProduct);
       }
     });
   }
