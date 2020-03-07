@@ -6,6 +6,7 @@ import  { useCustomModalChange } from 'components/Layout/Header/index'
 import { withRouter } from 'react-router-dom';
 
 import  { ReactComponent as Logo} from "icons/omaar-logo.svg";
+import {device} from "../../mediaScreen/mediaQueries";
 
 
 const HeaderContainer = styled.div`
@@ -39,6 +40,10 @@ const RegisterContainer = styled.div`
  width: 70%;
  display: flex;
  flex-direction: column;
+ @media only screen and ${device.mobileS} and (max-device-width: 425px) {
+    width: unset;
+  } 
+  
  .modal__container {
   display: flex;
   justify-content: center;
@@ -55,6 +60,11 @@ const RegisterContainer = styled.div`
 const Container = styled.div`
  height: 60vh;
  width: 50%;
+ 
+   @media only screen and ${device.mobileS} and (max-width: 425px) {
+    width: unset;
+  }
+ 
  box-shadow: 0 1px 6px rgba(57,73,76,0.35);
  display: flex;
  justify-content: center;
@@ -74,7 +84,7 @@ const Register = (props: any) => {
             </HeaderContainer>
 
             <RegisterContainer>
-                <div className=" modal__container">
+                <div className="modal__container">
                     <Container>
                         <ModalContent modalIcon={false} onClick={handleModalChange} modalChange signUpModal={false}/>
                     </Container>
