@@ -15,6 +15,8 @@ import useBeforeUnload from 'use-before-unload'
 import  { createSeller } from "../../state/seller";
 
 import { useMutation } from 'redux-query-react';
+import {device} from "../../mediaScreen/mediaQueries";
+
 
 
 const {Step} = Steps;
@@ -64,6 +66,15 @@ const Center = styled.div`
   margin-bottom: 60px;
   display: flex;
   place-content: center;
+`;
+
+
+const DivContainer =  styled.div`
+ @media only screen and ${device.mobileS} and (max-device-width: 480px) {
+   .ant-steps-horizontal.ant-steps-label-horizontal {
+    display: flex;
+  }
+  } 
 `;
 
 const stepStyle = {
@@ -203,7 +214,7 @@ const NewSeller: React.FC<IProp> = (props) => {
     });
 
     return (
-        <div>
+        <DivContainer>
             <Steps type="navigation" current={current} style={stepStyle}>
                 {steps.map(step => (
                     <Step key={step.title} title={step.title}/>
@@ -268,7 +279,7 @@ const NewSeller: React.FC<IProp> = (props) => {
                     </Button>
                 )}
             </Center>
-        </div>
+        </DivContainer>
     );
 };
 
