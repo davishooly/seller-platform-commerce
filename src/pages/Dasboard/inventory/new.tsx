@@ -232,7 +232,6 @@ const ProductDetails = () => {
 
 
     const [{}, createProductForSeller] = useMutation((optimistic) => {
-        console.log({ categories })
         const id  = categories.category.id === undefined ? categories.main.id : categories.category.id
         return createProductSeller(product, sellerId , id, optimistic)
     });
