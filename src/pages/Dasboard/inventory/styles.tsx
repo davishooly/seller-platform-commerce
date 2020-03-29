@@ -4,13 +4,15 @@ const CategoriesContainer =  styles.div`
     display: flex;
     width: 1200px;
     overflow: scroll;
+    margin:0;
+    padding:0;
    .categories__options {
       display: flex;
       flex-shrink: 0;
       width: 271px;
       overflow: scroll;
       flex-direction: column;
-      margin-right: 20px;
+      margin-right: 0px;
       height: 400px;
       background: #F5F7FA;
       border-radius: 2px;
@@ -20,6 +22,8 @@ const CategoriesContainer =  styles.div`
       font-size: 16px;
       color: #0065B0;
       padding-bottom: 10px;
+     
+
       }
       span: hover {
       cursor: pointer;

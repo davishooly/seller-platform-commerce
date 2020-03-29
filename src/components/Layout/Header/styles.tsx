@@ -90,9 +90,11 @@ const PopContainer = styled.div<any>`
   }
 `;
 const SignUpSpan = styled.span`
-   color: #0065B0 !important;
-   text-decoration: underline;
+  a {
+     color: #006DBF !important;
+  }
    cursor: pointer;
+   
 `;
 
 export {StyledHeader, Button, PopContainer, SignUpSpan};

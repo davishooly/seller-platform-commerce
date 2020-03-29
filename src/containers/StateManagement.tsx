@@ -31,7 +31,7 @@ const persistEntitiesConfig = {
     key: 'entities',
     storage,
     whitelist: ["rootCategories",  "sellerProducts"],
-    blacklist: ['seller']
+    blacklist: ['seller', 'currentSellerProduct']
 }
 
 

@@ -1,10 +1,11 @@
-import {productsCategoriesRoot, productsDelete} from "api/src/apis";
-import {Product} from "../../api/src/models";
+import {
+  productsCategoriesRoot,
+  productsDelete,
+  sellersProductsRead
+} from "api/src/apis";
+import { useRequest } from "redux-query-react";
+import { useSelector } from "react-redux";
 
-
-// const useDraftProduct = () => {
-
-// }
 
 const getProductsCategories = (categories: any) => {
     if (!categories) {
@@ -48,7 +49,31 @@ const deleteProduct = (productId: number, optimistic: any) => {
 
         return config
 }
+// TODO - Ensure we can get this from sellersProduct to avoid refech
+const useSellerProduct = (id: any) => {
+  const currentSellerProduct = useSelector(
+    (state: any) => state.entities.currentSellerProduct
+  );
+
+  const QueryConfig = sellersProductsRead(
+    {
+      productId: id
+    },
+    {
+      transform: (body: any) => ({
+        currentSellerProduct: body
+      }),
+      update: {
+        currentSellerProduct: (prev: any, next: any) => next
+      },
+      force: true
+    }
+  );
+
+  useRequest(QueryConfig);
+
+  return currentSellerProduct;
+};
 
 
-export {getProductsCategories, deleteProduct }
-
+export { getProductsCategories, deleteProduct, useSellerProduct };

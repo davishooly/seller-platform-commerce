@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from "react";
-import {NavLink} from 'react-router-dom'
-import {Table, Select, Icon, Checkbox, Avatar, Switch} from 'antd';
+import {NavLink, Link} from 'react-router-dom'
+import {Table, Select, Icon, Checkbox, Avatar, Switch, Popconfirm} from 'antd';
 import {
     DivContainer, ListingContainer, TableSection, ProductContainer, Button, ButtonContainer
 } from './styles';
@@ -19,7 +19,11 @@ const RenderTable = ({products: {results, count}}: any) => {
 
     const [searchValue, setSearchValue] = useState('');
 
+    const [isVisible, setVisible] = useState(false);
+
     const [{isPending, isFinished}, deleteProducts] = useMutation((optimistic) => deleteProduct(selectProduct[0].id, optimistic))
+
+
 
     const onChange = (e: any) => {
         const {value, checked} = e.target;
@@ -35,22 +39,31 @@ const RenderTable = ({products: {results, count}}: any) => {
     }
 
     const handleDeleteProduct = useCallback(optimistic => {
-        deleteProducts(optimistic).then(() => {
+        deleteProducts(optimistic).then(( response: any) => {
+            if(response.status ===  204){
+                setSelectedProduct([])
+            }
         })
     }, [deleteProducts])
 
 
-    const renderListingContent = (checked: boolean) => (
+    const confirm = (e:any) => {
+        e.preventDefault()
+        handleDeleteProduct(e)
+    }
+
+
+    const renderListingContent = (checked: boolean, id: any) => (
         <ListingContainer>
             <Switch
                 defaultChecked={checked}
-                onChange={() => {
-                    console.log()
-                }}
+                onChange={()=>{ console.log()}}
                 checkedChildren="on"
                 unCheckedChildren="off"
             />
-            <Icon type="edit"/>
+            <Link to={`/dashboard/inventory/edit/${id}`}>
+                <Icon type="edit"/>
+            </Link>
             <Icon type="eye"/>
         </ListingContainer>
     );
@@ -76,8 +89,8 @@ const RenderTable = ({products: {results, count}}: any) => {
                 productName: name,
                 product: renderProductContent(product),
                 listing: !purchasable
-                    ? renderListingContent(false)
-                    : renderListingContent(true)
+                    ? renderListingContent(false, id)
+                    : renderListingContent(true, id)
             }
         }
     });
@@ -87,7 +100,7 @@ const RenderTable = ({products: {results, count}}: any) => {
     let searchProducts: any;
 
 
-    if (searchValue ! == '') {
+    if (searchValue === '') {
         searchProducts = productList
     } else {
         searchProducts = productList.filter((product: any) => {
@@ -98,9 +111,9 @@ const RenderTable = ({products: {results, count}}: any) => {
         })
     }
 
-
     return (
         <div>
+
             <TableSection>
                 <div className="head">
                     <span> Product Catalog </span>
@@ -111,8 +124,17 @@ const RenderTable = ({products: {results, count}}: any) => {
                         <ButtonContainer>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Export</Button>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Unlist</Button>
-                            <Button primary={products === 1 ? 'primary' : ''} className="verticalLine">Edit</Button>
-                            <Button onClick={handleDeleteProduct} delete={products > 0 ? 'delete' : ''}>Delete</Button>
+                            <Link to={`/dashboard/inventory/edit/${selectProduct.length && selectProduct[0].id}`}>
+                                <Button disabled={products === 1 ? false : true} primary={products === 1 ? 'primary' : ''} className="verticalLine">Edit</Button>
+                            </Link>
+                            <Popconfirm
+                                title="Are you sure delete this product?"
+                                onConfirm={confirm}
+                                okText="Yes"
+                                cancelText="No"
+                            >
+                                <Button disabled={products > 0 ? false : true} delete={products > 0 ? 'delete' : ''}>Delete</Button>
+                            </Popconfirm>,
                         </ButtonContainer>
                         <div className="reload">
                             <Icon type="reload"/>

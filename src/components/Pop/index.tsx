@@ -35,16 +35,18 @@ const PopContainer =  Styled.div<any>`
 const Index = ({isOpen, children, setOpenPop, logout }: any ) => {
     const ref = useRef(null);
 
-    const checkStuff = (e: any) => {
-        // if(ref.current && ref.current.contains(e.target)) {
-        //   console.log("this is in here", isOpen);
-        //   setOpenPop(true);
-        // }
-    };
+    const updatePopView = (e: any) => {
+        // @ts-ignore
+        if (ref.current !== null && !ref.current.contains(e.target)) {
+            // @ts-ignore
+            setOpenPop(!isOpen);
+        };
+    }
+
     useEffect(() => {
-        document.addEventListener("click",checkStuff);
-        return () => document.removeEventListener("click", checkStuff)
-    }, [checkStuff]);
+        document.addEventListener("click",updatePopView);
+        return () => document.removeEventListener("click", updatePopView)
+    }, [updatePopView]);
     return (
         <>{
             isOpen ? (

@@ -71,14 +71,14 @@ export const TermAndCons = (props: any) => (<StyleRadio>
 
 
 const StyledInline = styled.div`
-    margin-top: 1rem;
+    /* margin-top: 5px; */
     /* margin-bottom: 1rem; */
     .label {
         display: flex;
         align-items: baseline;
 
         span {
-            margin-left: 20px;
+            margin-left: 5px;
             
         }
         span:after {
@@ -94,12 +94,26 @@ const StyledInline = styled.div`
 export const InlineInput = (props: any) => (
     <StyledInline>
         <div className="label">
-            <h2> {props.label} </h2>
-            <span> {props.tip} </span>
+            <h4> {props.label} </h4>
+            {props.tip && (<span> {props.tip} </span>)}
         </div>
 
         {!props.textarea ? <InputAnt size="large" {...props}/> : <InputAnt.TextArea {...props}  />}
     </StyledInline>
 )
+
+
+export const Inline = (props: any) => (
+    <StyledInline>
+        <div className="label">
+            <h4> {props.label} </h4>
+            {props.tip && (<span> {props.tip} </span>)}
+        </div>
+
+        { props.children }
+    </StyledInline>
+)
+
+
 
 export default Input

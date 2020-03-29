@@ -112,9 +112,13 @@ const Header = () => {
                                 <PopConfirm isOpen={isOpen} setOpenPop={setOpenPop}>
                                     <PopContainer>
                                         <span> Returning customer? </span>
-                                        <Button name="sign in" onClick={handleModalChange}> Sign in</Button>
+                                        <Button name="sign in" onClick={openPopConfirm}>
+                                            <Link to="/login"> Sign in</Link>
+                                        </Button>
                                         <span> Don't have an account? </span>
-                                        <SignUpSpan id="sign up" onClick={handleModalChange}> Sign up </SignUpSpan>
+                                        <SignUpSpan id="sign up" onClick={openPopConfirm}>
+                                            <Link to="/new"> Sign up</Link>
+                                        </SignUpSpan>
                                     </PopContainer>
                                 </PopConfirm>
                             )

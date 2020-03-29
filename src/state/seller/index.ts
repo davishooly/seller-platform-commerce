@@ -9,6 +9,7 @@ export const createSeller = (customerDetails: any) => {
                 email: customerDetails.email,
                 firstName: customerDetails.firstname,
                 lastName: customerDetails.lastname,
+                username: customerDetails.username
             },
             bank: {
                 name:customerDetails.bankName,

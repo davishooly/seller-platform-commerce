@@ -197,7 +197,7 @@ const ProductDetails = () => {
     });
 
 
-    // const sellerId = useSelector((state: any) => state.entities.seller.id)
+    const sellerId = useSelector((state: any) => state.entities.seller && state.entities.seller.id)
 
     const inputChange = (e: any) => {
         const {name, value} = e.target;
@@ -230,13 +230,10 @@ const ProductDetails = () => {
         return true; // Suppress reload
     });
 
-    const [{isFinished, isPending}, create] = useMutation(() =>
-        createProduct(product)
-    );
-
 
     const [{}, createProductForSeller] = useMutation((optimistic) => {
-        return createProductSeller(product, 1, optimistic)
+        const id  = categories.category.id === undefined ? categories.main.id : categories.category.id
+        return createProductSeller(product, sellerId , id, optimistic)
     });
 
     return (
@@ -298,7 +295,6 @@ const ProductDetails = () => {
                                             product={product}
                                             onChange={inputChange}
                                             onNext={onNext}
-                                            loading={isPending}
                                         />
                                     </TabPane>
 
