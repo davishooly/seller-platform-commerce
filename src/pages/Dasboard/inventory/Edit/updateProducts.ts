@@ -7,17 +7,17 @@ const updateSellerProduct = ( product: any) => {
 
     const config =  sellersProductsUpdate(
         {
-            productId: product.id,
-            data: {
-                primaryCategory: product.primaryCategory,
-                availableUnits: product.availableUnits,
-                salePrice: product.salePrice,
-                defaultPrice: product.defaultPrice,
-                seller: product.seller,
-                product: {
-                    ...product
-                }
-            }
+            id: product.id,
+            // data: {
+            //     primaryCategory: product.primaryCategory,
+            //     availableUnits: product.availableUnits,
+            //     salePrice: product.salePrice,
+            //     defaultPrice: product.defaultPrice,
+            //     seller: product.seller,
+            //     product: {
+            //         ...product
+            //     }
+            // }
         },{
             transform:((body:any) => ({
                 product: body

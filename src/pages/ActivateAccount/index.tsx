@@ -22,6 +22,7 @@ const sendInvitation = (userId: string, token: string) => {
     return sellersInvitationCreate({
         id: parseInt(atob(userId)),
         data: {
+            uid: "",
             token: token
         }
     })

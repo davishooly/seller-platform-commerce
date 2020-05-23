@@ -18,19 +18,14 @@ export const createProduct = (product: any) => {
   );
 };
 
-
-
 export const createProductSeller = (product: any, sellerId: number, categoryId: number,  optimistic: any) => {
     const config =  sellersProductsCreate({
         data: {
             product: {
                 ...product,
             },
-            availableUnits: product.stock,
             seller: sellerId,
             primaryCategory: categoryId ,
-            salePrice: product.sale_price,
-            defaultPrice: product.default_price,
         }
     }, {
         transform: (body: any) => ({

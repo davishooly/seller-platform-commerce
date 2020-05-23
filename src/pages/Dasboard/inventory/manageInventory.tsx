@@ -3,7 +3,7 @@ import {renderCardContent} from "components/Card";
 import TableSection from 'components/Table'
 import styled from "styled-components";
 import details from "components/Card/cardContent";
-import {sellersProductsList} from "../../../api/src/apis";
+import { sellersProductsListList } from "../../../api/src/apis/SellersApi";
 import {useRequest} from "redux-query-react";
 import {useSelector} from "react-redux";
 
@@ -15,7 +15,7 @@ export const CardSection = styled.section`
 
 
 const getSellerProducts = () => {
-    const config = sellersProductsList({}, {
+    const config = sellersProductsListList({}, {
         transform: (body: any) => ({
             sellerProducts: body
         }),

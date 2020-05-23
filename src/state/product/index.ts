@@ -1,8 +1,9 @@
 import {
   productsCategoriesRoot,
   productsDelete,
-  sellersProductsRead
 } from "api/src/apis";
+
+import { sellersProductsDetailsRead } from 'api/src/apis/SellersApi'
 import { useRequest } from "redux-query-react";
 import { useSelector } from "react-redux";
 
@@ -55,9 +56,9 @@ const useSellerProduct = (id: any) => {
     (state: any) => state.entities.currentSellerProduct
   );
 
-  const QueryConfig = sellersProductsRead(
+  const QueryConfig = sellersProductsDetailsRead(
     {
-      productId: id
+      id
     },
     {
       transform: (body: any) => ({

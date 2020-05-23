@@ -31,14 +31,14 @@ const BasicInfo: React.FC<IProps> = ({ form, sellerProduct }) => {
 
       <Form.Item>
         {getFieldDecorator("sku", {
-          initialValue: sellerProduct?.product?.sku,
+          initialValue: sellerProduct?.product,
           rules: [{ required: true, message: "Please input sku!" }]
         })(<InlineInput label="SKU" placeholder="SKU" />)}
       </Form.Item>
 
       <Form.Item hasFeedback>
         {getFieldDecorator("price", {
-          initialValue: sellerProduct?.defaultPrice,
+          initialValue: sellerProduct,
           rules: [{ required: true, message: "Please input price!" }]
         })(
           <InlineInput
@@ -52,7 +52,7 @@ const BasicInfo: React.FC<IProps> = ({ form, sellerProduct }) => {
 
       <Form.Item hasFeedback>
         {getFieldDecorator("sale_price", {
-          initialValue: sellerProduct?.salePrice,
+          initialValue: sellerProduct,
           rules: [{ required: true, message: "Please input price!" }]
         })(
           <InlineInput
@@ -66,7 +66,7 @@ const BasicInfo: React.FC<IProps> = ({ form, sellerProduct }) => {
 
       <Form.Item>
         {getFieldDecorator("visibility", {
-          initialValue: sellerProduct?.visibility,
+          initialValue: sellerProduct,
           rules: [{ required: true, message: "Please input Visibility!" }]
         })(
           <Inline label="Visibility" placeholder="Visibility">
