@@ -7,12 +7,14 @@ const headers = {
 
   const apiProxy = {
     headers,
-    target: `http://127.0.0.1:8000/api`,
+    target: `https://omaarmarketplace.herokuapp.com/api`,
     secure: false,
     changeOrigin: true,
     logLevel: "debug",
     autoRewrite: true
   };
+
+
 
 
 module.exports = function(app) {

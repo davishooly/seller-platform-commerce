@@ -45,7 +45,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "npm run generate",
-    "generate": "rm -rf ./src/api && java -jar ./src/vendor/openapi-generator/openapi-generator-cli.jar generate -i http://127.0.0.1:8000/swagger/swagger.yaml -g typescript-redux-query -o ./src/api"
+    "generate": "rm -rf ./src/api && java -jar ./src/vendor/openapi-generator/openapi-generator-cli.jar generate -i https://omaarmarketplace.herokuapp.com/swagger -g typescript-redux-query -o ./src/api"
   },
   "eslintConfig": {
     "extends": "react-app"
