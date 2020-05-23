@@ -88,7 +88,7 @@ interface IProp {
 const NewSeller: React.FC<IProp> = (props) => {
 
     const history = useHistory();
-    const [current, setCurrent] = useState(0);
+    const [current, setCurrent] = useState(4);
     const [customerDetails, setCustomerDetails] = useState(customer);
     const [isChecked, setIsChecked] = useState(false);
     const [error, setInputError] = useState({});
@@ -118,26 +118,16 @@ const NewSeller: React.FC<IProp> = (props) => {
                 setCurrent(current + 1);
             }
         } else if (current === 2) {
-            const infoFields = [
-                {businessNameLocation: customerDetails.businessNameLocation},
-                {town: customerDetails.town},
-                {county: customerDetails.county},
-                {displayName: customerDetails.displayName},
-                {phone: customerDetails.phone}
-            ];
+            const {businessNameLocation,town,county, displayName, phone } = customerDetails;
+            const infoFields = [{businessNameLocation}, {town}, {county}, {displayName}, {phone}];
             const fieldErrors = validate(infoFields);
             setInputError({...error, ...fieldErrors});
             if (Object.keys(fieldErrors).length === 0) {
                 setCurrent(current + 1);
             }
         } else if (current === 1) {
-            const fields = [
-                {username: customerDetails.username},
-                {email: customerDetails.email},
-                {password: customerDetails.password},
-                {lastname: customerDetails.lastname},
-                {firstname: customerDetails.firstname}
-            ];
+            const { username, email, password, lastname, firstname, confirmPassword} = customerDetails;
+            const fields = [{username}, {email}, {password}, {lastname}, {firstname}, {confirmPassword}];
 
             const fieldErrors = validate(fields);
             setInputError({...error, ...fieldErrors});
@@ -145,13 +135,8 @@ const NewSeller: React.FC<IProp> = (props) => {
                 setCurrent(current + 1);
             }
         } else if (current === 3) {
-            const fields = [
-                {bankName: customerDetails.bankName},
-                {bankLocation: customerDetails.bankLocation},
-                {bankAccountNumber: customerDetails.bankAccountNumber},
-                {bankAccountHoldersName: customerDetails.bankAccountHoldersName},
-                {confirmBankAccount: customerDetails.confirmBankAccount}
-            ];
+            const { bankName, bankAccountHoldersName, bankAccountNumber, bankLocation, confirmBankAccount} =  customerDetails;
+            const fields = [{bankName }, {bankLocation }, {bankAccountNumber }, {bankAccountHoldersName }, {confirmBankAccount }];
             const errors = validate(fields);
             setInputError({...error, ...errors});
             if (Object.keys(errors).length === 0) {
@@ -259,6 +244,7 @@ const NewSeller: React.FC<IProp> = (props) => {
                     customer={customerDetails}
                     submit={submitDetails}
                     loading={isPending}
+                    setCurrent={setCurrent}
                     onClick={() => {
                         prev();
                     }}

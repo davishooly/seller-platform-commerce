@@ -1,24 +1,21 @@
 import React from 'react';
 import { Divider } from "antd";
-
-import  { FormOutlined } from '@ant-design/icons'
-
+import { FormOutlined } from '@ant-design/icons'
 import styled from "styled-components";
-
 
 export const Container = styled.div`
   margin-bottom : 40px;
   .section {
      display: flex;
+     flex-direction:column;
      width: 100%;
-  }
-  
+     
   .section__title {
      display: flex;
      width: 100%;
      justify-content: space-between;
      font-size: 24px;
-     color: rgba(0, 0, 0, 0.85);
+     margin-bottom: 20px;
      
      .anticon {
         color: #1890ff;
@@ -26,46 +23,104 @@ export const Container = styled.div`
         cursor: pointer;
      }
    }
+     
+   .section__content {
+     display: flex;
+     flex-direction:column;
+     width: 100%;
+    .content {
+       display: flex;
+       width: 50%;
+       padding: 16px 0 16px 0;
+       font-size: 18px;
+       justify-content: space-between;
+       span:first-of-type { color: rgba(0, 0, 0, 0.85); }
+    }
+   }
+   
 `;
 
 interface Section {
-  section: string,
-  path: number,
-  content?:string
+    section: string,
+    path: number,
+    details?: any
 }
 
 
 const sections = [
-  { section: "Seller Agreement", path: 0},
-  { section: "User Information", path: 1 },
-  { section: "Business Details", path: 2},
-  { section: "Payment Information", path: 3}
+    { section: "Seller Agreement", path: 0},
+    { section: "User Information", path: 1 },
+    { section: "Business Details", path: 2},
+    { section: "Payment Information", path: 3}
 ];
 
 
 
-const previewSections = ({ section, path}: Section, setCurrent: Function) => (
+const previewSections = ({ section, path, details}: Section, setCurrent: Function) => (
     <>
-      <Divider/>
-      <div className="section">
-        <div className="section__title">
-          <span > { section } </span>
-          <FormOutlined onClick={() => setCurrent(path)}/>
+        <Divider/>
+        <div className="section">
+            <div className="section__title">
+                <span > { section } </span>
+                <FormOutlined onClick={() => setCurrent(path)}/>
+            </div>
+            <div className="section__content">
+                {
+                    Object.keys(details).map(detail => (
+                        <div className="content">
+                            <span> { detail }</span>
+                            <span> { details[detail]} </span>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
-      </div>
     </>
 );
 
 
 const PreviewSellerInfo: React.FC<any> = ({ customer, onClick }) => {
 
-  return (
-      <Container>
-        {
-          sections.map(section => previewSections(section, onClick))
+    const infoSections =  {
+        terms:  {
+            "Business Name": customer.businessName
+        },
+        userInfo: {
+            "First Name" : customer.firstname,
+            "Last Name" : customer.lastname,
+            "email": customer.email,
+            "Username": customer.username
+        },
+        businessInfo: {
+            "Business Location" : customer.businessNameLocation,
+            "County": customer.county,
+            "Display Name":  customer.displayName,
+            "Town": customer.town,
+            "Website": customer.website
+        },
+        bankDetails: {
+            "Bank Name" : customer.bankName,
+            "Bank Location": customer.bankLocation,
+            "Bank Account Holders Name": customer.bankAccountHoldersName,
+            "Bank Account Number": customer.bankAccountNumber
         }
-      </Container>
-  );
+    };
+
+    const updatedSections  = sections.map((section, index) => {
+        const key = Object.keys(infoSections)[index];
+        return {
+            ...section,
+            details: infoSections[key]
+        }
+    });
+
+    return (
+        <Container>
+            {
+                updatedSections.map(section => previewSections(section, onClick))
+            }
+        </Container>
+    );
 };
 
 export default PreviewSellerInfo;
