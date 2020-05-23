@@ -1,49 +1,69 @@
 import React from 'react';
+import { Divider } from "antd";
 
-import { Descriptions } from 'antd'
+import  { FormOutlined } from '@ant-design/icons'
 
 import styled from "styled-components";
 
 
 export const Container = styled.div`
   margin-bottom : 40px;
-  tbody {
-  text-align: left;
+  .section {
+     display: flex;
+     width: 100%;
   }
-  th { color: #000000; }
-  td { color: rgba(70, 66, 66, 0.65); }
+  
+  .section__title {
+     display: flex;
+     width: 100%;
+     justify-content: space-between;
+     font-size: 24px;
+     color: rgba(0, 0, 0, 0.85);
+     
+     .anticon {
+        color: #1890ff;
+        font-size: 16px;
+        cursor: pointer;
+     }
+   }
 `;
 
-const PreviewSellerInfo: React.FC<any> = ({ customer }) => {
-  const {
-    bankName,
-    businessName,
-    businessNameLocation,
-    phone,
-    town,
-    county,
-    displayName,
-    email,
-    website,
-    description,
-    bankLocation,
-    bankAccountNumber,
-    bankAccountHoldersName } = customer;
+interface Section {
+  section: string,
+  path: number,
+  content?:string
+}
+
+
+const sections = [
+  { section: "Seller Agreement", path: 0},
+  { section: "User Information", path: 1 },
+  { section: "Business Details", path: 2},
+  { section: "Payment Information", path: 3}
+];
+
+
+
+const previewSections = ({ section, path}: Section, setCurrent: Function) => (
+    <>
+      <Divider/>
+      <div className="section">
+        <div className="section__title">
+          <span > { section } </span>
+          <FormOutlined onClick={() => setCurrent(path)}/>
+        </div>
+      </div>
+    </>
+);
+
+
+const PreviewSellerInfo: React.FC<any> = ({ customer, onClick }) => {
+
   return (
       <Container>
-        <Descriptions title="Preview" layout="vertical" bordered>
-          <Descriptions.Item label="Bank name">{bankName}</Descriptions.Item>
-          <Descriptions.Item label="Bank Account Number">{bankAccountNumber}</Descriptions.Item>
-          <Descriptions.Item label="Bank location">{bankLocation}</Descriptions.Item>
-          <Descriptions.Item label="Business account holder">{bankAccountHoldersName}</Descriptions.Item>
-          <Descriptions.Item label="Business Name">{businessName}</Descriptions.Item>
-          <Descriptions.Item label="Business Location">{ town }</Descriptions.Item>
-          <Descriptions.Item label="County/Region">{ county }</Descriptions.Item>
-          <Descriptions.Item label="Website">{website}</Descriptions.Item>
-          <Descriptions.Item label="Phone">{phone}</Descriptions.Item>
-          <Descriptions.Item label="Display name">{displayName}</Descriptions.Item>
-          <Descriptions.Item label="Description">{description}</Descriptions.Item>
-        </Descriptions>
+        {
+          sections.map(section => previewSections(section, onClick))
+        }
       </Container>
   );
 };

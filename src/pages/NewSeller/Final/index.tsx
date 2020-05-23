@@ -4,14 +4,14 @@ import { Center } from "components";
 import PreviewSellerInfo from "../Preview";
 
 
-const FinalDetails = ({ onClick , loading, submit, customer}: any) => {
+const FinalDetails = ({ onClick , loading, submit, customer,setCurrent}: any) => {
     return (
         <Center>
             <Result
     status="info"
-    title="You are about to create a new seller. Make sure that the details are collect"
+    title="Thank you for your application. Kindly confirm the information provided is correct."
     extra={[
-        <PreviewSellerInfo  customer={customer}/>,
+        <PreviewSellerInfo  customer={customer} onClick={setCurrent}/>,
       <Button loading={loading} onClick={submit} type="primary" key="console">
         Create Seller
       </Button>,

@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.1.0",
     "@types/prop-types": "^15.7.3"
   }
 }
