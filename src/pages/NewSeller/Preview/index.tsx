@@ -29,11 +29,12 @@ export const Container = styled.div`
      flex-direction:column;
      width: 100%;
     .content {
-       display: flex;
-       width: 50%;
+       display: grid;
+       grid-template-columns: 2fr 2fr;
+       justify-items: start;
+       width: 100%;
        padding: 16px 0 16px 0;
        font-size: 18px;
-       justify-content: space-between;
        span:first-of-type { color: rgba(0, 0, 0, 0.85); }
     }
    }
