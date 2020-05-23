@@ -1,8 +1,16 @@
-import React from "react";
-import {Route, Switch, withRouter } from 'react-router-dom'
+import React, { Suspense, lazy } from "react";
+import { Route, Switch } from 'react-router-dom'
 import requireAuthentication from "../RequireAuthentication";
-import MainLayout, {DashboardLayout} from "../../components/Layout";
-import DashboardRoutes, {HomeRoutes, AuthRoutes, AccountActivationRoutes} from "./routes";
+import { DashboardLayout } from "../../components/Layout";
+import { HomeRoutes, AuthRoutes, AccountActivationRoutes} from "./routes";
+
+/**
+ * code splitting -> faster page load time
+ *  Add dynamic import on route level components to improve performance
+ */
+
+const DashboardRoutes = lazy(() =>import("./routes"));
+const MainLayout  =  lazy(() => import("../../components/Layout"));
 
 
 const AuthedRoutes: React.FunctionComponent<any> = () => {
@@ -16,11 +24,16 @@ const AuthedRoutes: React.FunctionComponent<any> = () => {
 // TODO add code spliting
 class Routing extends React.Component<any, {}> {
 
+    state = {
+        isLoaded: false
+    };
+
     private PreAuthedRoutes = requireAuthentication(AuthedRoutes);
 
     render() {
         const Routes = this.PreAuthedRoutes;
         return (
+            <Suspense fallback={<div>...loading</div>}>
             <Switch>
                 <Route path='/login'>
                     <AuthRoutes/>
@@ -38,6 +51,7 @@ class Routing extends React.Component<any, {}> {
                     </MainLayout>
                 </Route>
             </Switch>
+            </Suspense>
         );
     }
 }
