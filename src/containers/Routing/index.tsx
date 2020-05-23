@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import requireAuthentication from "../RequireAuthentication";
 import { DashboardLayout } from "../../components/Layout";
 import { HomeRoutes, AuthRoutes, AccountActivationRoutes} from "./routes";
@@ -11,6 +11,7 @@ import { HomeRoutes, AuthRoutes, AccountActivationRoutes} from "./routes";
 
 const DashboardRoutes = lazy(() =>import("./routes"));
 const MainLayout  =  lazy(() => import("../../components/Layout"));
+const ErrorPage = lazy(() => import("../../pages/Error/error"));
 
 
 const AuthedRoutes: React.FunctionComponent<any> = () => {
@@ -35,10 +36,10 @@ class Routing extends React.Component<any, {}> {
         return (
             <Suspense fallback={<div>...loading</div>}>
             <Switch>
-                <Route path='/login'>
+                <Route exact path='/login'>
                     <AuthRoutes/>
                 </Route>
-                <Route path={"/activate/:userId/:token"}>
+                <Route exact path={"/activate/:userId/:token"}>
                     <AccountActivationRoutes/>
                 </Route>
                 <Route path="/dashboard">
@@ -50,6 +51,11 @@ class Routing extends React.Component<any, {}> {
                         <HomeRoutes/>
                     </MainLayout>
                 </Route>
+                <Route to={"/404"}>
+                    <ErrorPage/>
+                </Route>
+                <Redirect to={"/404"} />
+
             </Switch>
             </Suspense>
         );

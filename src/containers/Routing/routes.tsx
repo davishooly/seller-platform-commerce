@@ -37,7 +37,7 @@ export const AuthRoutes = () => (
 
 export const AccountActivationRoutes = () => (
     <Switch>
-        <Route path={"/activate/:userId/:token"} render={(props: any) => <ActivationPage {...props} />}/>
+        <Route exact path={"/activate/:userId/:token"} render={(props: any) => <ActivationPage {...props} />}/>
     </Switch>
 );
 
@@ -46,13 +46,13 @@ const DashboardRoutesL = (props: any) => {
 
     return (
         <Switch>
-            <Route path="/dashboard/settings" component={Settings}/>
+            <Route exact path="/dashboard/settings" component={Settings}/>
             <Redirect exact from="/dashboard/inventory" to='/dashboard/inventory/manage'/>
-            <Route path="/dashboard/inventory/edit/:id" component={Edit}/>
-            <Route path="/dashboard/inventory" component={Inventory}/>
-            <Route path="/dashboard/payout" component={PayoutTaxes}/>
-            <Route path="/dashboard/orders" component={Orders}/>
-            <Route path="/dashboard" component={Dashboard}/>
+            <Route exact path="/dashboard/inventory/edit/:id" component={Edit}/>
+            <Route exact path="/dashboard/inventory" component={Inventory}/>
+            <Route exact path="/dashboard/payout" component={PayoutTaxes}/>
+            <Route exact path="/dashboard/orders" component={Orders}/>
+            <Route exact path="/dashboard" component={Dashboard}/>
         </Switch>
     );
 };
