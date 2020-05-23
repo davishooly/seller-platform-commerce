@@ -44,12 +44,6 @@ const Info = ({
   }, [town]);
 
   useEffect(() => {
-    if (website !== "") {
-      setInputError({ ...error, website: "" });
-    }
-  }, [website]);
-
-  useEffect(() => {
     if (county !== "") {
       validateNameFields(county, "county", setInputError, error, "county");
     }

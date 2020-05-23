@@ -123,8 +123,6 @@ const NewSeller: React.FC<IProp> = (props) => {
                 {town: customerDetails.town},
                 {county: customerDetails.county},
                 {displayName: customerDetails.displayName},
-                {website: customerDetails.website},
-
                 {phone: customerDetails.phone}
             ];
             const fieldErrors = validate(infoFields);
