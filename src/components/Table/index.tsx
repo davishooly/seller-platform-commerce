@@ -134,7 +134,7 @@ const RenderTable = ({products: {results, count}}: any) => {
                                 cancelText="No"
                             >
                                 <Button disabled={products > 0 ? false : true} delete={products > 0 ? 'delete' : ''}>Delete</Button>
-                            </Popconfirm>,
+                            </Popconfirm>
                         </ButtonContainer>
                         <div className="reload">
                             <Icon type="reload"/>

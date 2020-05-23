@@ -145,6 +145,10 @@ const ButtonContainer = styled.div<any>`
  align-items: center;
  border: 1px solid #DCDFE6;
  border-radius: 4px;
+ 
+ button {
+   background: unset;
+ }
  .verticalLine {
      border-right: 1px solid #DCDFE6;
  }
