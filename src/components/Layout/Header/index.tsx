@@ -3,7 +3,6 @@ import {Input, Select, Icon} from 'antd';
 import {Link, useHistory} from "react-router-dom"
 
 import PopConfirm from 'components/Pop'
-// import {Modal, ModalContent} from '../../../components/modal';
 import {Button, StyledHeader, PopContainer, SignUpSpan} from "./styles";
 import Logo from "icons/omaar-logo.svg";
 import {useSelector, useDispatch} from "react-redux";

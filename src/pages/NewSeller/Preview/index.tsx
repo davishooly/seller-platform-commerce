@@ -17,6 +17,10 @@ export const Container = styled.div`
      font-size: 24px;
      margin-bottom: 20px;
      
+     span {
+       font-weight: 300;
+     }
+     
      .anticon {
         color: #1890ff;
         font-size: 16px;
@@ -35,7 +39,10 @@ export const Container = styled.div`
        width: 100%;
        padding: 16px 0 16px 0;
        font-size: 18px;
-       span:first-of-type { color: rgba(0, 0, 0, 0.85); }
+       span:first-of-type { 
+          font-weight: 500;
+          color: rgba(0, 0, 0, 0.85);
+        }
     }
    }
    
