@@ -1,5 +1,5 @@
 export type ThemesType = {
-    text: string,
+    textColor: string,
     linearBackground: string,
     footerBackground: string,
     errorComponentBackground: string,

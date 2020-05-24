@@ -1,5 +1,5 @@
  export const homeTheme = {
-     text: "",
+     textColor: "#FFFFFF",
      logoBackground: "#006DBF",
      linearBackground: "linear-gradient(153.43deg,#00B2A9 0%,#0065B0 100%),linear-gradient(177.56deg,#0B6DAC 0%,#085F97 100%),linear-gradient(180deg,#0D609F 0%,#00518B 100%)",
      footerBackground: "#203341",

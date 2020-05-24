@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from "styled-components"
 import Logo from "icons/omaar-logo.svg";
 
+import ThemeContext from "../../../providers/themes/ThemeContext";
+import {themes} from "../../../providers/themes/Themes";
+import { ThemesType } from "../../../providers/themes/ThemeTypes";
 
-const StyledFooter = styled.footer`
-    background: #203341;
+const StyledFooter = styled.footer<ThemesType>`
+    background:  ${props => props.footerBackground};
     grid-area: footer;
     min-height: 60vh;
     display: flex;
     flex-direction: column;
     .container {
         display: flex;
-        color: #FFFFFF;
+        color: ${props => props.textColor};
         width: 91%;
         margin: auto;
     }
@@ -52,8 +55,11 @@ const account = ["Sign In", "Order Status", "My Wishlist"];
 
 
 const Footer = () => {
+
+    const { themes: { footerBackground}} = useContext(ThemeContext);
+
     return (
-        <StyledFooter>
+        <StyledFooter {...themes}>
             <div className="container about">
              <div>
                  <Span> Top Categories </Span>
