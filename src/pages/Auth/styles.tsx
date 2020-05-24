@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../mediaScreen/mediaQueries";
 
-
 const HeaderContainer = styled.div`
     background-color: #fff;
     min-height: 65px;
@@ -12,7 +11,7 @@ const HeaderContainer = styled.div`
     .container {
      position: relative;
      margin-left: auto;
-     width: 990px;
+     width: 90%;
      margin-right: auto;
      padding-right: 15px;
      padding-left: 15px;

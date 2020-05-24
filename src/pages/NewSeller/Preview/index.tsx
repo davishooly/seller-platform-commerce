@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider } from "antd";
+import { Divider, Tooltip } from "antd";
 import { FormOutlined } from '@ant-design/icons'
 import styled from "styled-components";
 
@@ -63,12 +63,14 @@ const previewSections = ({ section, path, details}: Section, setCurrent: Functio
         <div className="section">
             <div className="section__title">
                 <span > { section } </span>
+                <Tooltip title={section}>
                 <FormOutlined onClick={() => setCurrent(path)}/>
+                </Tooltip>
             </div>
             <div className="section__content">
                 {
-                    Object.keys(details).map(detail => (
-                        <div className="content">
+                    Object.keys(details).map((detail, index) => (
+                        <div className="content" key={index.toString()}>
                             <span> { detail }</span>
                             <span> { details[detail]} </span>
                         </div>

@@ -25,7 +25,7 @@ const getSellerProducts = () => {
     })
 
     return config;
-}
+};
 
 const ManageInventory = () => {
     const [{isFinished, isPending, status}, refresh] = useRequest(getSellerProducts())

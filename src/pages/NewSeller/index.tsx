@@ -88,7 +88,7 @@ interface IProp {
 const NewSeller: React.FC<IProp> = (props) => {
 
     const history = useHistory();
-    const [current, setCurrent] = useState(0);
+    const [current, setCurrent] = useState(4);
     const [customerDetails, setCustomerDetails] = useState(customer);
     const [isChecked, setIsChecked] = useState(false);
     const [error, setInputError] = useState({});

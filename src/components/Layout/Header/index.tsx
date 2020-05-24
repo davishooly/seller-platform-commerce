@@ -124,7 +124,6 @@ const Header = () => {
                             )
                         }
                     </div>
-                    <li><Icon type="shopping-cart"/> Cart</li>
                 </ul>
             </div>
 
@@ -163,11 +162,10 @@ export const DashboardHeader = () => {
 
     const handleLogout = () => {
         localStorage.clear();
-        dispatch(removeTokens())
+        dispatch(removeTokens());
         setOpenPop(!isOpen);
-        history.push('/')
         window.location.reload()
-    }
+    };
 
 
     return (
