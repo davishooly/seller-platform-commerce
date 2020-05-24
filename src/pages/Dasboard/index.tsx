@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useSelector } from "react-redux";
 import Menu from "./menu";
 import { Avatar, Table } from "antd";
@@ -17,10 +17,12 @@ import {
 import { RenderCard } from "components/Card";
 import { AnalyticsSection, Span, Div, DivCard } from "./styles";
 import { BarChart } from "components/Charts";
+import ThemeContext from "../../providers/themes/ThemeContext";
 
 // const user: any  = JSON.parse(localStorage.getItem('user'));
 
 const Dashboard: React.FC<any> = () => {
+  const { themes } = useContext(ThemeContext);
   const sellerInfo = useSelector((state: any) => state.entities);
   const renderProductContent = (data: any) => (
     <ProductContainer>
@@ -194,7 +196,7 @@ const Dashboard: React.FC<any> = () => {
             </RenderCard>
           ))}
         </CardSection>
-        <TableSection>
+        <TableSection {...themes}>
           <div className="head">
             <span> Best Selling Products </span>
           </div>

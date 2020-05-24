@@ -46,44 +46,44 @@ const Additional = ({ form, onNext, callback }: any) => {
   return (
     <Form onSubmit={handleSubmit}>
 
-    <Form.Item  validateStatus={defaultPriceError ? "error" : ""}
-    help={defaultPriceError || ""}>
-    {getFieldDecorator("default_price", {
-      rules: [{ required: true, message: "Please input Default price!" }]
-    })(
-      <InlineInput
-        label="Default price"
-        tip="required"
-        placeholder="Default price"
-      />
-    )}
-  </Form.Item>
+  {/*  <Form.Item  validateStatus={defaultPriceError ? "error" : ""}*/}
+  {/*  help={defaultPriceError || ""}>*/}
+  {/*  {getFieldDecorator("default_price", {*/}
+  {/*    rules: [{ required: true, message: "Please input Default price!" }]*/}
+  {/*  })(*/}
+  {/*    <InlineInput*/}
+  {/*      label="Default price"*/}
+  {/*      tip="required"*/}
+  {/*      placeholder="Default price"*/}
+  {/*    />*/}
+  {/*  )}*/}
+  {/*</Form.Item>*/}
 
-        <Form.Item  validateStatus={defaultPriceError ? "error" : ""}
-                    help={defaultPriceError || ""}>
-            {getFieldDecorator("sale_price", {
-                rules: [{ required: true, message: "Please input sale price!" }]
-            })(
-                <InlineInput
-                    label="Sale price"
-                    tip="required"
-                    placeholder="Sales price"
-                />
-            )}
-        </Form.Item>
+  {/*      <Form.Item  validateStatus={defaultPriceError ? "error" : ""}*/}
+  {/*                  help={defaultPriceError || ""}>*/}
+  {/*          {getFieldDecorator("sale_price", {*/}
+  {/*              rules: [{ required: true, message: "Please input sale price!" }]*/}
+  {/*          })(*/}
+  {/*              <InlineInput*/}
+  {/*                  label="Sale price"*/}
+  {/*                  tip="required"*/}
+  {/*                  placeholder="Sales price"*/}
+  {/*              />*/}
+  {/*          )}*/}
+  {/*      </Form.Item>*/}
 
-        <Form.Item  validateStatus={defaultPriceError ? "error" : ""}
-                    help={defaultPriceError || ""}>
-            {getFieldDecorator("stock", {
-                rules: [{ required: true, message: "Please input stock" }]
-            })(
-                <InlineInput
-                    label="Stock"
-                    tip="required"
-                    placeholder="stock"
-                />
-            )}
-        </Form.Item>
+        {/*<Form.Item  validateStatus={defaultPriceError ? "error" : ""}*/}
+        {/*            help={defaultPriceError || ""}>*/}
+        {/*    {getFieldDecorator("stock", {*/}
+        {/*        rules: [{ required: true, message: "Please input stock" }]*/}
+        {/*    })(*/}
+        {/*        <InlineInput*/}
+        {/*            label="Stock"*/}
+        {/*            tip="required"*/}
+        {/*            placeholder="stock"*/}
+        {/*        />*/}
+        {/*    )}*/}
+        {/*</Form.Item>*/}
 
 
       <Form.Item
@@ -125,7 +125,7 @@ const Additional = ({ form, onNext, callback }: any) => {
         })(
           <InlineInput
             label="Width"
-            tip="The main color of the product"
+            tip="The width of the product"
             placeholder="Example: Red, Green, Blue"
           />
         )}
@@ -140,7 +140,7 @@ const Additional = ({ form, onNext, callback }: any) => {
         })(
           <InlineInput
             label="Height"
-            tip="Color family of the product"
+            tip="Height  product"
             placeholder="Color family"
           />
         )}
@@ -155,7 +155,7 @@ const Additional = ({ form, onNext, callback }: any) => {
         })(
           <InlineInput
             label="Depth"
-            tip="Add relevant search queries to help find your product on the site via search"
+            tip="Add Depth of the product"
             placeholder="Example: Digital Camera, Light Camera "
           />
         )}
@@ -172,7 +172,7 @@ const Additional = ({ form, onNext, callback }: any) => {
         })(
           <InlineInput
             label="Net weight"
-            tip="Add relevant search queries to help find your product on the site via search"
+            tip="Add Net weight of the Product"
             placeholder="Example: Digital Camera, Light Camera "
           />
         )}
@@ -187,7 +187,7 @@ const Additional = ({ form, onNext, callback }: any) => {
         })(
           <InlineInput
             label="Gross Weight"
-            tip="Add relevant search queries to help find your product on the site via search"
+            tip="Add Gross weight of the Product"
             placeholder="Example: Digital Camera, Light Camera "
           />
         )}

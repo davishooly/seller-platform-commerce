@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from "react";
+import React, {useState, useCallback, useContext} from "react";
 import {NavLink, Link} from 'react-router-dom'
 import {Table, Select, Icon, Checkbox, Avatar, Switch, Popconfirm} from 'antd';
 import {
@@ -9,6 +9,7 @@ import Search from '../../components/Search'
 import moment from "moment";
 import {useMutation} from "redux-query-react";
 import {deleteProduct} from "../../state/product";
+import ThemeContext from "../../providers/themes/ThemeContext";
 
 const {Option} = Select;
 const options = ['category', 'price'];
@@ -16,6 +17,9 @@ const options = ['category', 'price'];
 
 const RenderTable = ({products: {results, count}}: any) => {
     const [selectProduct, setSelectedProduct]: any = useState([]);
+
+    const { themes } = useContext(ThemeContext);
+
 
     const [searchValue, setSearchValue] = useState('');
 
@@ -114,7 +118,7 @@ const RenderTable = ({products: {results, count}}: any) => {
     return (
         <div>
 
-            <TableSection>
+            <TableSection {...themes}>
                 <div className="head">
                     <span> Product Catalog </span>
                     <NavLink to="/dashboard/inventory/new" activeClassName="active" exact> Add products </NavLink>

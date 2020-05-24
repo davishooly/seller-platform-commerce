@@ -1,25 +1,27 @@
+import { themes } from "../../../providers/themes/Themes";
+
 const details = [
   {
     title: "Rate of Pending Orders",
-    backgroundColor: "#F15B40",
+    backgroundColor: themes.lightRedBackground,
     percentage: 0,
     increase: 0
   },
   {
     title: "Shop Rating",
-    backgroundColor: "#CDC884",
+    backgroundColor: themes.lightYellowBackground,
     percentage: 0,
     increase: 0,
   },
   {
     title: "Stock Check",
-    backgroundColor: "#F56C6C",
+    backgroundColor: themes.lightRedBackground,
     percentage:  0,
     increase: 0,
   },
   {
     title: "New Products",
-    backgroundColor: "#0065B0",
+    backgroundColor: themes.darkBlueBackground,
     cancellationRate: 0,
     created: 0,
   }

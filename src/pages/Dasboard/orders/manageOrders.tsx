@@ -1,5 +1,5 @@
 import {Checkbox, Icon, Input, Select, Table} from "antd";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import { CardSection }  from '../inventory/manageInventory'
 import {renderCardContent} from 'components/Card/index'
 import Styled from 'styled-components';
@@ -7,6 +7,7 @@ import details from "./fixtures/details";
 import {columns} from "./fixtures/tableColumns";
 import dataSources from "./fixtures/dataSources";
 import { Button, ButtonContainer, DivContainer, TableSection } from "components/Table/styles";
+import ThemeContext from "../../../providers/themes/ThemeContext";
 
 
 const OrderContainer  = Styled.div`
@@ -21,6 +22,8 @@ const options = ['category', 'price'];
 const ManageOrders = () => {
 
   const [selectedOrders, SelectOrders] = useState<any>([]);
+  const { themes } = useContext(ThemeContext);
+
   const onSelect = (e: any) => {
     const {value, checked} = e.target;
     const products = Object.assign([], selectedOrders);
@@ -55,7 +58,7 @@ const ManageOrders = () => {
           ))}
         </CardSection>
 
-        <TableSection>
+        <TableSection {...themes}>
           <div className="head">
             <span> Orders </span>
           </div>

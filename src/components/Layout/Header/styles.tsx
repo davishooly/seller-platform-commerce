@@ -1,12 +1,13 @@
 import styled, {css} from "styled-components";
+import { ThemesType } from "../../../providers/themes/ThemeTypes";
 
-const StyledHeader = styled.header`
+const StyledHeader = styled.header<ThemesType>`
     grid-area: header;
-    background: linear-gradient(153.43deg, #00B2A9 0%, #0065B0 100%), linear-gradient(177.56deg, #0B6DAC 0%, #085F97 100%), linear-gradient(180deg, #0D609F 0%, #00518B 100%);
+    background: ${props => props.linearBackground};
     padding: 20px 100px;
     color: #fff;
     a {
-        color:#FFF;
+        color: ${props => props.textColor};
     }
     li {
         line-height: 30px;
@@ -25,7 +26,7 @@ const StyledHeader = styled.header`
     }
     .logo {
         font-size: 3em;
-        color: #fff ;
+        color:  ${props => props.textColor} ;
     }
     .pop__container {
       position: relative;
@@ -38,7 +39,7 @@ const StyledHeader = styled.header`
             border: 1px solid rgba(255, 255, 255, 0.35);	
             	
             border-radius: 4px;
-            color: #FFFFFF;
+            color:  ${props => props.textColor};
 
             padding: 5px;
         }
@@ -55,8 +56,8 @@ const StyledHeader = styled.header`
     }
 `;
 
-const Button = styled.button`
-   background: #006DBF;
+const Button = styled.button<ThemesType>`
+   background: ${props => props.logoBackground};
    border: none;
    border-radius: 4px;
    cursor: pointer;
@@ -89,9 +90,9 @@ const PopContainer = styled.div<any>`
      justify-content: space-between;
   }
 `;
-const SignUpSpan = styled.span`
+const SignUpSpan = styled.span<ThemesType>`
   a {
-     color: #006DBF !important;
+     color: ${props => props.logoBackground} !important;
   }
    cursor: pointer;
    

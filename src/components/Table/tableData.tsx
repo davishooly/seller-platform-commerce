@@ -1,6 +1,7 @@
 import React from "react";
 
 import {Popconfirm, Input} from 'antd';
+import {themes} from "../../providers/themes/Themes";
 
 const renderPopup = (text: any) => (
     <Popconfirm
@@ -49,8 +50,9 @@ export const columns = [
     key: 'status',
     render:
         (text: any) => <span style={{
-    color: text === 'Live' ? '#67C23A' :
-        text === 'In Review' ? '#E6A441' : '#F56C6C'
+    color: text === 'Live' ? themes.greenBright :
+        text === 'In Review' ? '#E6A441' : themes.lightRedBackground
+
 }
 }
 >

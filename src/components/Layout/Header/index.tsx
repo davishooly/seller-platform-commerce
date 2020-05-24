@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Input, Select, Icon} from 'antd';
-import {Link, useHistory} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import PopConfirm from 'components/Pop'
 import {Button, StyledHeader, PopContainer, SignUpSpan} from "./styles";
 import Logo from "icons/omaar-logo.svg";
 import {useSelector, useDispatch} from "react-redux";
 import {removeTokens} from "../../../state/auth";
-
+import ThemeContext from "../../../providers/themes/ThemeContext";
 
 const NavLink = (props: any) => (
     <Link
@@ -81,13 +81,14 @@ const useCustomUserCheck = () => {
 
 
 const Header = () => {
-    const {isOpen, setOpenPop, openModal, modalState, signUpModal, handleModalChange} = useCustomModalChange();
-    const {username, setIsLoggedIn} = useCustomUserCheck();
+    const {isOpen, setOpenPop } = useCustomModalChange();
+    const { themes } = useContext(ThemeContext);
+    const { username } = useCustomUserCheck();
     const openPopConfirm = () => {
         setOpenPop(!isOpen);
     };
     return (
-        <StyledHeader>
+        <StyledHeader {...themes}>
             <div className="header">
                 <img src={Logo} alt='logo' style={{filter: "invert(0)", paddingBottom: 20}}/>
 
@@ -111,11 +112,11 @@ const Header = () => {
                                 <PopConfirm isOpen={isOpen} setOpenPop={setOpenPop}>
                                     <PopContainer>
                                         <span> Returning customer? </span>
-                                        <Button name="sign in" onClick={openPopConfirm}>
+                                        <Button {...themes} name="sign in" onClick={openPopConfirm}>
                                             <Link to="/login"> Sign in</Link>
                                         </Button>
                                         <span> Don't have an account? </span>
-                                        <SignUpSpan id="sign up" onClick={openPopConfirm}>
+                                        <SignUpSpan {...themes} id="sign up" onClick={openPopConfirm}>
                                             <Link to="/new"> Sign up</Link>
                                         </SignUpSpan>
                                     </PopContainer>
@@ -142,9 +143,6 @@ const Header = () => {
                     <li> Blog</li>
                 </ul>
             </div>
-            {/*<Modal isOpen={modalState}>*/}
-            {/*   <ModalContent modalIcon onClick={handleModalChange} modalChange={openModal} setIsLoggedIn={setIsLoggedIn} signUpModal={signUpModal}/>*/}
-            {/*</Modal>*/}
         </StyledHeader>
     )
 };
@@ -152,7 +150,7 @@ const Header = () => {
 export const DashboardHeader = () => {
     const {username} = useCustomUserCheck();
     const dispatch = useDispatch();
-    const history = useHistory()
+    const { themes } = useContext(ThemeContext);
     const {isOpen, setOpenPop} = useCustomModalChange();
 
     const openPopConfirm = () => {
@@ -168,7 +166,7 @@ export const DashboardHeader = () => {
 
 
     return (
-        <StyledHeader>
+        <StyledHeader {...themes}>
             <div className="header">
                 <img src={Logo} alt='logo' style={{filter: "invert(0)", paddingBottom: 20}}/>
                 <ul>
@@ -186,7 +184,7 @@ export const DashboardHeader = () => {
                                             <span>Addresses</span>
                                             <span>Payment</span>
                                             <span>Profile</span>
-                                            <Button name="sign in" onClick={handleLogout}> Logout </Button>
+                                            <Button {...themes} name="sign in" onClick={handleLogout}> Logout </Button>
                                         </div>
                                     </PopContainer>
                                 </PopConfirm>

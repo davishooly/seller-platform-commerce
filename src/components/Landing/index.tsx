@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link } from 'react-router-dom';
 import styled from "styled-components";
 import Button from "components/Button";
 import Image from 'icons/background.jpeg'
+import ThemeContext from "../../providers/themes/ThemeContext";
+import {ThemesType} from "../../providers/themes/ThemeTypes";
 
 
-const StyledLanding = styled.div`
+const StyledLanding = styled.div<ThemesType>`
     display: flex;
     height: 82vh;
     justify-content: center;
     align-items: center;
     background-image: url(${Image});
-    background-color: #cccccc;
+    background-color: ${props => props.greyBackground};
     background-repeat:  no-repeat;
     background-size: cover;
     position: relative;
@@ -22,7 +24,7 @@ const StyledLanding = styled.div`
         right: 0;
         bottom: 0;
         left: 0;
-        background: radial-gradient(circle, rgba(96,116,131,0.95) 0%, rgba(33,45,56,0.9) 100%);
+        background: ${props => props.radialGradient};
         opacity: 1;
   }
     .landing {
@@ -32,7 +34,7 @@ const StyledLanding = styled.div`
         z-index: 1;
     }
     span {
-    color: #FFFFFF;
+    color: ${props => props.textColor};
     }
     .title {
      font-size: 28px;
@@ -53,9 +55,12 @@ const ButtonContainer = styled.div`
 
 const Landing = () => {
 
+    const { themes } = useContext(ThemeContext);
+
+
     return (
         <>
-            <StyledLanding>
+            <StyledLanding { ...themes }>
                 <div className="landing">
                     <span className="title">Want to Sell Your Items on OE?</span>
                     <span>Start selling where thousands of customers are shopping every day.</span>

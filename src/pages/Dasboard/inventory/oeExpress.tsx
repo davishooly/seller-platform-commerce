@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Button,
   ButtonContainer,
@@ -13,6 +13,7 @@ import Search from 'components/Search'
 
 import {columns} from "./expressFixture/tableData";
 import dataSources from "./expressFixture/dataSources";
+import ThemeContext from "../../../providers/themes/ThemeContext";
 
 const { Option } = Select;
 const options = ['category', 'price'];
@@ -30,8 +31,10 @@ const Div = Styled.div`
 
 const OeExpress = () => {
   const [selectProduct, setSelectedProduct] = useState<any>([]);
+    const { themes } = useContext(ThemeContext);
 
-  const products = selectProduct.length;
+
+    const products = selectProduct.length;
 
 
   const onSelect = (e: any) => {
@@ -85,7 +88,7 @@ const OeExpress = () => {
   return (
       <Div>
         <Span> Manage products fulfilled by OE </Span>
-        <TableSection>
+        <TableSection {...themes}>
           <div className="head">
             <span> Product Catalog </span>
           </div>

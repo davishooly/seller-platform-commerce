@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import styled from "styled-components";
 
 import { ReactComponent as ErrorSvg } from "../../icons/error.svg";
+import {ThemesType} from "../../providers/themes/ThemeTypes";
+import ThemeContext from "../../providers/themes/ThemeContext";
 
-const ErrorContainer = styled.section`
+const ErrorContainer = styled.section<ThemesType>`
    width: 100%;
    height: 600px;
    display: flex;
@@ -21,6 +23,7 @@ const ErrorContainer = styled.section`
      color: rgba(0, 0, 0, 0.85);
      span:last-of-type {
       color: red;
+      font-weight: 300;
      } 
    }
    
@@ -37,9 +40,10 @@ const ErrorContainer = styled.section`
    
 `;
 
-export default () =>  {
+const ErrorComponent =  () =>  {
+    const { theme } = useContext(ThemeContext);
     return (
-        <ErrorContainer>
+        <ErrorContainer {...theme} >
             <ErrorSvg />
             <div className="error__text">
                 <span>
@@ -51,3 +55,5 @@ export default () =>  {
     )
 }
 
+
+export default ErrorComponent;

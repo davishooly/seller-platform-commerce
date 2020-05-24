@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Table} from "antd";
 import Styled from 'styled-components';
 
 import {TableSection} from "components/Table/styles";
 import { columns } from './fixtures/tableColumns'
 import dataSources from "./fixtures/dataSources";
+import ThemeContext from "../../../providers/themes/ThemeContext";
+import {ThemesType} from "../../../providers/themes/ThemeTypes";
+import Container  from "../../../components/Common/Container";
 
-const Contianer = Styled.div`
+const PayoutContainer = Styled.div`
    display: flex;
    width: 97.09%;
    height: 111px;
@@ -20,16 +23,16 @@ const Contianer = Styled.div`
      line-height 21px;
      letter-spacing: .5px;
    }
-   
+
    .summary__container{
      display: flex;
      justify-content: space-between;
    }
-   
+
 `;
 
-const Span = Styled.span`
-    color:#FFFFFF;
+const Span = Styled.span<ThemesType>`
+    color: ${props => props.textColor};
     font-size: 14px;
     line-height 16px;
     letter-spacing: .44px;
@@ -45,13 +48,13 @@ const Div = Styled.div`
    }
 `;
 
-const Button = Styled.button`
+const Button = Styled.button<ThemesType>`
   background: #E6F1FC;
   border: none;
   border-radius: 3px;
   font-family: "Proxima Nova Regular";
   font-size: 12px;
-  color: #203341;
+  color: ${props => props.footerBackground};
   line-height 14px;
 `;
 
@@ -59,31 +62,33 @@ const Button = Styled.button`
 
 
 const Payout = () => {
-  return (
-      <>
-       <Contianer>
+    const { themes } = useContext(ThemeContext);
+
+    return (
+      <Container>
+       <PayoutContainer>
          <div className="container__title">Payment Summary</div>
          <div className="summary__container">
-           <Span> Most recent payment </Span>
+           <Span { ...themes }> Most recent payment </Span>
            <Div>
-             <Span> KES 1,009,078 </Span>
-             <Span> Balance </Span>
+             <Span { ...themes } > KES 1,009,078 </Span>
+             <Span{ ...themes } > Balance </Span>
            </Div>
            <Div>
-             <Span> KES 29,009.55 </Span>
-             <Span> All Payments </Span>
+             <Span { ...themes }> KES 29,009.55 </Span>
+             <Span { ...themes }> All Payments </Span>
            </Div>
-           <Span> KES 2,029,078.55 </Span>
+           <Span { ...themes }> KES 2,029,078.55 </Span>
          </div>
-       </Contianer>
-        <TableSection>
+       </PayoutContainer>
+        <TableSection {...themes}>
           <div className="head">
             <span> Payout History </span>
-            <Button> Download CSV </Button>
+            <Button {...themes}> Download CSV </Button>
           </div>
           <Table columns={columns}  dataSource={dataSources}/>
         </TableSection>
-      </>
+      </Container>
   )
 };
 

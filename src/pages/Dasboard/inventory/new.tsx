@@ -13,7 +13,7 @@ import {Center} from "components";
 import {useSelector} from "react-redux";
 import Preview from "./preview";
 import Additional from "./additional";
-import {createProduct, createProductSeller} from "./createProduct";
+import { createProductSeller } from "./createProduct";
 import { useMutation } from "redux-query-react";
 import {Product} from "../../../api/src/models";
 
@@ -299,13 +299,13 @@ const ProductDetails = () => {
                                     </TabPane>
 
 
-                                    {/*  <TabPane tab="Product Pricing" key="4">
+                                    <TabPane tab="Product Pricing" key="4">
                                                 <Pricing
                                                     callback={callback}
                                                     onNext={onNext}
                                                     product={product}
                                                 />
-                                            </TabPane> */}
+                                            </TabPane>
 
                                     <TabPane tab="Images" key="4" disabled={current < "4"}>
                                         <Image

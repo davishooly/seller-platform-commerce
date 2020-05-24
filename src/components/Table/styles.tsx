@@ -1,18 +1,19 @@
 import styled, { css } from "styled-components";
+import {ThemesType} from "../../providers/themes/ThemeTypes";
 
-const TableSection = styled.section`
+const TableSection = styled.section<ThemesType>`
   width: 97.09%;
   box-sizing: border-box;
   border: 1px solid #E2E7F2;
   border-radius: 3px;
-  background-color: #FFFFFF;
+  background-color: ${props => props.textColor};
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
   margin-top: 20px;
   padding: 20px;
   
   th {
     background-color: #00ACDC !important;
-    span {color: #FFFFFF;}
+    span {color: ${props => props.textColor};}
   }
   .ant-table-thead > tr:first-child > th:first-child {
      border-top-left-radius: 0; 
@@ -32,7 +33,7 @@ const TableSection = styled.section`
     height: 37px;
   }    
   .ant-switch-checked {
-  background-color : #67C23A;
+  background-color : ${props => props.greenBright};
   }
   
   .head {
@@ -43,7 +44,7 @@ const TableSection = styled.section`
    
    span {
    font-weight: bold;
-   color: #0065B0;
+   color: ${props => props.blueText};
    letter-spacing: 0.39px;
    line-height: 16px;
    font-size: 14px;

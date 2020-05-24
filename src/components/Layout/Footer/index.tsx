@@ -3,7 +3,6 @@ import styled from "styled-components"
 import Logo from "icons/omaar-logo.svg";
 
 import ThemeContext from "../../../providers/themes/ThemeContext";
-import {themes} from "../../../providers/themes/Themes";
 import { ThemesType } from "../../../providers/themes/ThemeTypes";
 
 const StyledFooter = styled.footer<ThemesType>`
@@ -26,7 +25,7 @@ const StyledFooter = styled.footer<ThemesType>`
     .terms {
       justify-content: space-between;
       align-items: center;
-      color:rgba(255,255,255,0.6);
+      color:  ${props => props.dullTextColor};
       font-size: 14px;
       border-top: 2px solid #64696E;
       height: 20vh;
@@ -56,7 +55,7 @@ const account = ["Sign In", "Order Status", "My Wishlist"];
 
 const Footer = () => {
 
-    const { themes: { footerBackground}} = useContext(ThemeContext);
+    const { themes } = useContext(ThemeContext);
 
     return (
         <StyledFooter {...themes}>

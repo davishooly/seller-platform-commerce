@@ -101,6 +101,8 @@ const Image = ({ callback, score, setScore, files, setFiles, submit, product }: 
 
     const handleUpload = useCallback(optimistic => {
 
+        callback("5");
+
         submit(optimistic).then((result: any )=>{
             const { status } = result;
             if( status ! === 201) {

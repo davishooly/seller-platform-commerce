@@ -1,6 +1,6 @@
 import {
   productsCategoriesRoot,
-  productsDelete,
+  sellersProductsDelete,
 } from "api/src/apis";
 
 import { sellersProductsDetailsRead } from 'api/src/apis/SellersApi'
@@ -10,7 +10,10 @@ import { useSelector } from "react-redux";
 
 const getProductsCategories = (categories: any) => {
     if (!categories) {
-        const config = productsCategoriesRoot({}, {
+        const config = productsCategoriesRoot({
+            offset: 1,
+            limit:10
+        }, {
             transform: (body: any) => ({rootCategories: body}),
             update: {
                 rootCategories: (prev: any, next: any) => next
@@ -24,7 +27,7 @@ const getProductsCategories = (categories: any) => {
 
 const deleteProduct = (productId: number, optimistic: any) => {
 
-    const config =  productsDelete({
+    const config =  sellersProductsDelete({
             id: productId
         },
         {
