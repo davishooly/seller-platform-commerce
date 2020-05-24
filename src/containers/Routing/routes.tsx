@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {lazy} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom'
 import Home from 'pages/Home/index';
 import NewSeller from 'pages/NewSeller';
@@ -16,6 +16,20 @@ import {sellerFromToken} from "../../api/src/apis";
 import {getProductsCategories} from "../../state/product";
 import Edit from 'pages/Dasboard/inventory/Edit';
 
+const ErrorPage = lazy(() => import("../../pages/Error/error"));
+
+
+
+const errorPageRoute = () => (
+    <>
+        <Route path={"/404"}>
+            <ErrorPage/>
+        </Route>
+        <Redirect to={"/404"} />
+        </>
+);
+
+
 
 export const HomeRoutes = () => {
     return (
@@ -24,6 +38,7 @@ export const HomeRoutes = () => {
             <Route path="/new" exact >
                 <NewSeller/>
             </Route>
+            { errorPageRoute() }
         </Switch>
     );
 };
@@ -31,13 +46,15 @@ export const HomeRoutes = () => {
 export const AuthRoutes = () => (
     <Switch>
         <Route path="/login" exact component={Register}/>
+        { errorPageRoute() }
+
     </Switch>
 
 );
 
 export const AccountActivationRoutes = () => (
     <Switch>
-        <Route exact path={"/activate/:userId/:token"} render={(props: any) => <ActivationPage {...props} />}/>
+        <Route path={"/activate/:userId/:token"} render={(props: any) => <ActivationPage {...props} />}/>
     </Switch>
 );
 
@@ -48,11 +65,12 @@ const DashboardRoutesL = (props: any) => {
         <Switch>
             <Route exact path="/dashboard/settings" component={Settings}/>
             <Redirect exact from="/dashboard/inventory" to='/dashboard/inventory/manage'/>
-            <Route exact path="/dashboard/inventory/edit/:id" component={Edit}/>
-            <Route exact path="/dashboard/inventory" component={Inventory}/>
+            <Route  path="/dashboard/inventory/edit/:id" component={Edit}/>
+            <Route  path="/dashboard/inventory" component={Inventory}/>
             <Route exact path="/dashboard/payout" component={PayoutTaxes}/>
             <Route exact path="/dashboard/orders" component={Orders}/>
             <Route exact path="/dashboard" component={Dashboard}/>
+            { errorPageRoute() }
         </Switch>
     );
 };
