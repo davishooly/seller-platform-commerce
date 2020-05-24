@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import { ReactComponent as ErrorSvg } from "../../icons/error.svg";
 
-
 const ErrorContainer = styled.section`
    width: 100%;
    height: 600px;

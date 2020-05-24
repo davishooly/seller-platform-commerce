@@ -1,95 +1,99 @@
 import styled from "styled-components";
-const  LoginContainer = styled.div`
+import { device } from "../../mediaScreen/mediaQueries";
+
+
+const HeaderContainer = styled.div`
+    background-color: #fff;
+    min-height: 65px;
+    box-shadow: 0 1px 6px rgba(57,73,76,.35);
+    svg path {
+     fill: #006DBF;
+   }    
+    .container {
+     position: relative;
+     margin-left: auto;
+     width: 990px;
+     margin-right: auto;
+     padding-right: 15px;
+     padding-left: 15px;
+    }
+   .navbar-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 65px;
+    height: 55px;
+    flex-basis: 100%;
+    }
+`;
+
+const RegisterContainer = styled.div`
+ margin: 60px auto 60px auto;
+ width: 70%;
  display: flex;
  flex-direction: column;
- align-items: center;
-    span {
-      color: #1C2C38;
+ @media only screen and ${device.mobileS} and (max-device-width: 425px) {
+    width: unset;
+  } 
+  
+ .modal__container {
+  display: flex;
+  justify-content: center;
+  span {
+     font-size: 18px;
+  }
+ }
+ .title {
+    margin-top: 20px;
+  }
+  
+  .ant-form  {
+    width: 70%;
+    
+    .ant-btn-primary, .ant-input{
+     height: 50px;
+    }
+      
+  .login-form {
+      max-width: 300px;
+   }
+  .login-form-forgot {
+    float: right;
+   }
+   .ant-col-rtl .login-form-forgot {
+     float: left;
+   }
+   .login-form-button {
+    width: 100%;
+   }
+
+   .remember__section { 
+     .ant-form-item-children {
+       display: flex;
+       justify-content: space-between;
     } 
-   .input__field {
-     border: none;
-     padding: 20px 0 8px 0;
-     width: 361px;
-     border-bottom: 1px solid rgba(28,44,56,0.3);
-     color: #000000;
-     font-family: "Roboto";
-     font-size: 14px;
-     outline: none;
-   }
-   form {
-     padding: 10px;
-   }
-   .btn {
-    height: 50px;
-   border: 1px solid #006DBF;
-   border-radius: 4px;
-    background-color: #006DBF;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    span {
-       color: #FFFFFF;
-       font-family: "Roboto";
-       font-size: 20px;
-       font-weight: bold;
+  }
+    .create {
+      text-align: center;
+      margin-top: 20px;
     }
-    &:focus {
-        outline: 0;
-    }
-   }
-   .action__container{
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: space-around;
-     span {
-     font-size: 16px !important;
-     }
-   } 
-   .bottom__section {
-     display: flex;
-     justify-content: center;
-     min-height: 5vh;
-     font-family: "Roboto Regular";
-     span { font-size: 16px; }
-     span: last-of-type{
-     cursor: pointer;
-     padding-left: 6px;
-     text-decoration: underline;
-    }
-   };
-   .create {
-    display: flex;
-    align-items: center;
-    border-top: 1px solid rgba(28,44,56,0.2);
-    min-height: 10vh;
-    width: 98%;
-     span {
-       font-family: "Roboto";
-       font-size: 16px !important;
-       line-height: 24px;
-       color: #1C2C38;
-     }
-   }
-   .error {
-     padding-top: 10px;
-     align-self: self-end;
-   }
-   .password__container {
-     position:relative;
-     i {
-      position: absolute;
-      right: 2%;
-      top: 54%;
-     }
-     i:hover {
-         color: #006DBF;
-         cursor:pointer;
-     }
-   }
+}
+
 `;
-const ModelContent = styled.div`  
-   display: flex;
-   justify-content: center;
-   flex-direction: column;
+
+const Container = styled.div`
+ height: 60vh;
+ width: 50%;
+ 
+   @media only screen and ${device.mobileS} and (max-width: 425px) {
+    width: unset;
+  }
+  display: flex;
+ justify-content: center;
+ align-items: center;
 `;
-export { ModelContent, LoginContainer};
+
+
+
+export { HeaderContainer, Container, RegisterContainer };

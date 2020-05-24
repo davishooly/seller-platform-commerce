@@ -1,31 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {withRouter, Link, useHistory} from "react-router-dom";
-import { Icon, Button } from 'antd';
-import { LoginContainer, ModelContent } from './styles'
+import React  from 'react';
+import { Link, useHistory } from "react-router-dom";
+import {Button, Form, Checkbox, Input, Divider} from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import notification from '../../utils/toast'
 import {loginSeller} from "../../state/auth/authQuery";
-import {validate} from '../../utils/validators'
 import { useDispatch  } from 'react-redux'
 import { useMutation } from 'redux-query-react';
 import { setStoreTokens } from "../../state/auth";
 
-
-const user = {
-    password: '',
-    username: '',
-    email: ''
-};
-
-const ModalContent = (props: any) => {
-    const {onClick, modalIcon, signUpModal} = props;
-
-    const {userCredentials, handleInputChange} = useInputChange();
-    const [error, setInputError] = useState<any>({});
-    const [isVisible, setPasswordVisible] = useState(false);
+const Login = ( { form }: any) => {
+    const { getFieldDecorator } = form;
     const dispatch = useDispatch();
 
-
-    const {username, password, email} = userCredentials;
     const history = useHistory();
 
     const [{isFinished, isPending}, loginMutation] = useMutation((user: any) =>
@@ -35,38 +21,18 @@ const ModalContent = (props: any) => {
     )
 
 
-    useEffect(() => {
-        if (password !== '') {
-            setInputError({...error, password: ''})
-        }
-
-    }, [password]);
-
-    useEffect(() => {
-        if (email !== '') {
-            setInputError({...error, email: ''})
-        }
-
-    }, [email]);
-
-    useEffect(() => {
-        if (username !== '') {
-            setInputError({...error, username: ''})
-        }
-    }, [username]);
-
-    const logInUser = (e: any) => {
+    const onFinish = (e:any) => {
         e.preventDefault();
-        const infoFields = [
-            {password},
-            {email}
-        ];
-        const fieldErrors = validate(infoFields);
-        setInputError({...error, ...fieldErrors});
-        if (Object.keys(fieldErrors).length === 0) {
-            loginMutation({email, password}).then(redirect).catch((error: any) => {
-            })
-        }
+        form.validateFields((err: any, values: any) => {
+            if (!err) {
+                logInUser(values);
+            }
+        });
+    };
+
+    const logInUser = (values: any) => {
+        loginMutation({ ...values }).then(redirect).catch((error: any) => {
+        })
     };
 
     const redirect = (response: any) => {
@@ -95,72 +61,55 @@ const ModalContent = (props: any) => {
     };
 
     return (
-        <ModelContent>
-            {modalIcon ?
-                <Icon onClick={onClick} type="close" style={{fontSize: 20, color: "#000000", cursor: "pointer"}}/> : ''}
-            <LoginContainer>
-                <div className="modal__container title">
-                    <h1> OE Seller center </h1>
-                </div>
-                <form action="">
-                    <div className="action__container">
-                        {signUpModal ? (
-                            <>
-                                <input style={{borderColor: error.username ? "red" : ''}} required name='username'
-                                       value={username} autoComplete="email" className="input__field"
-                                       onChange={handleInputChange} placeholder="Username"/>
-                                <span className="error" style={{color: "red"}}>{error.username}</span>
-                            </>
-                        ) : ''}
-                        <input name='email' style={{borderColor: error.email ? "red" : ''}} autoComplete="phone"
-                               value={email} className="input__field" onChange={handleInputChange}
-                               placeholder="E-mail"/>
-                        <span className="error" style={{color: "red"}}>{error.email}</span>
-                        <div className="password__container">
-                            <input
-                                name='password'
-                                style={{borderColor: error.password ? "red" : ''}}
-                                autoComplete="new-password"
-                                type={isVisible ? 'text' : 'password'}
-                                value={password}
-                                className="input__field"
-                                onChange={handleInputChange}
-                                placeholder="Password"/>
-                            {signUpModal ? '' : <Icon onClick={() => setPasswordVisible(!isVisible)} type="eye"/>}
-                        </div>
-                        <span className="error" style={{color: "red"}}>{error.password}</span>
-                        <Button className='btn' onClick={logInUser} loading={isPending}
-                                style={{width: 223}}> Sign in </Button>
-                        <div className="bottom__section">
-                            <span>Can’t remember your password?</span>
-                            <span> Recover it. </span>
-                        </div>
-                    </div>
-                </form>
-                <div className="bottom__section create">
+        <Form onSubmit={onFinish}>
+            <div className="modal__container title">
+                <h1> Welcome back! </h1>
+             </div>
+            <Divider/>
+            <Form.Item>
+                {getFieldDecorator("email", {
+                    rules: [{ required: true, message:  'Please input your email!' }]
+                })(
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="email" />
+                )}
+
+            </Form.Item>
+            <Form.Item>
+                {getFieldDecorator("password", {
+                    rules: [{ required: true, message:   'Please input your Password!' }]
+                })(
+                    <Input
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
+                        placeholder="Password"
+                    />
+                )}
+
+            </Form.Item>
+            <Form.Item className="remember__section">
+                <Form.Item>
+
+                    <Checkbox>Remember me</Checkbox>
+                </Form.Item>
+                <span className="login-form-forgot">
+                    <Link to={"/forgot"} >  Forgot password </Link>
+               </span>
+            </Form.Item>
+
+            <Form.Item>
+                <Button loading={isPending} type="primary" htmlType="submit" className="login-form-button">
+                    Log in
+                </Button>
+                <div className="create">
                     <span> Don’t have an account?  </span>
-                    <span id="sign up" onClick={onClick}>
-                        <Link to={"/new"}> Create it </Link>
-                    </span>
+                    <span id="sign up">
+                <Link to={"/new"}> Create it </Link>
+            </span>
                 </div>
-            </LoginContainer>
-        </ModelContent>
+            </Form.Item>
+        </Form>
+
     );
 };
 
-export default withRouter(ModalContent);
-
-
-const useInputChange = () => {
-    const [userCredentials, setUserCredentials] = useState(user);
-
-    const handleInputChange = (e: any) => {
-        const {name, value} = e.target;
-        setUserCredentials({...userCredentials, [name]: value});
-    };
-    return {
-        userCredentials,
-        handleInputChange
-    }
-};
-
+export default Form.create<any>({ name: 'login' })(Login);
