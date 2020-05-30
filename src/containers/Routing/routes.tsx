@@ -15,6 +15,7 @@ import {compose} from "redux";
 import { sellerFromToken } from "../../api/src/apis";
 import {getProductsCategories} from "../../state/product";
 import Edit from 'pages/Dasboard/inventory/Edit';
+import ResetPassword from "../../pages/Auth/resetPassword";
 
 const ErrorPage = lazy(() => import("../../pages/Error/error"));
 
@@ -47,9 +48,15 @@ export const AuthRoutes = () => (
     <Switch>
         <Route path="/login" exact component={Register}/>
         { errorPageRoute() }
-
     </Switch>
 
+);
+
+export const ResetPasswordRoute = () => (
+    <Switch>
+        <Route path="/checkpoint/request-password-reset" exact component={ResetPassword}/>
+        { errorPageRoute() }
+    </Switch>
 );
 
 export const AccountActivationRoutes = () => (

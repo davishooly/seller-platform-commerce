@@ -94,5 +94,33 @@ const Container = styled.div`
 `;
 
 
+const ResetPasswordContainer = styled.section`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    
+    .title {
+      h1 {
+         font-size: 24px;
+      }
+      h3 {
+         font-weight: 300;
+      }
+    }
+    
+    .ant-form  {
+    width: 30%;
+    
+    .ant-btn-primary, .ant-input{
+     height: 50px;
+    }
+    .login-form-button {
+       width: 30%;
+       margin-right: 20px;
+    }
+`;
 
-export { HeaderContainer, Container, RegisterContainer };
+
+
+export { HeaderContainer, Container, RegisterContainer, ResetPasswordContainer };

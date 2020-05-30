@@ -92,7 +92,7 @@ const Login = ( { form }: any) => {
                     <Checkbox>Remember me</Checkbox>
                 </Form.Item>
                 <span className="login-form-forgot">
-                    <Link to={"/forgot"} >  Forgot password </Link>
+                    <Link to={"/checkpoint/request-password-reset"} >  Forgot password </Link>
                </span>
             </Form.Item>
 

@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Route, Switch } from 'react-router-dom'
 import requireAuthentication from "../RequireAuthentication";
 import { DashboardLayout } from "../../components/Layout";
-import { HomeRoutes, AuthRoutes, AccountActivationRoutes} from "./routes";
+import {HomeRoutes, AuthRoutes, AccountActivationRoutes, ResetPasswordRoute} from "./routes";
 
 /**
  * code splitting -> faster page load time
@@ -35,8 +35,11 @@ class Routing extends React.Component<any, {}> {
         return (
             <Suspense fallback={<div>...loading</div>}>
             <Switch>
-                <Route exact path='/login'>
+                    <Route exact path='/login'>
                     <AuthRoutes/>
+                </Route>
+                <Route path={"/checkpoint"}>
+                    <ResetPasswordRoute/>
                 </Route>
                 <Route exact path={"/activate/:userId/:token"}>
                     <AccountActivationRoutes/>
