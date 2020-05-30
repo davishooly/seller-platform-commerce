@@ -83,7 +83,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapPropsToConfig = (props: any): any => {
     const actions = [
-        sellerFromToken( {},
+        sellerFromToken(
             {
                 transform: (responseBody: any) => {
                     return {
