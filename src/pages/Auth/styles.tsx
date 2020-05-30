@@ -123,6 +123,7 @@ const ResetPasswordContainer = styled.section`
     min-height: calc(50vh - 72px);
     
     .title {
+    height: 100px;
       h1 {
          font-size: 24px;
       }
@@ -132,8 +133,7 @@ const ResetPasswordContainer = styled.section`
     }
     
     .ant-form  {
-    width: 30%;
-    
+      width: 24%;
     .ant-input{
      height: 50px;
     }
