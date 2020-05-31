@@ -1,7 +1,7 @@
-import {sellerFromToken, sellersCreate} from "api/src/apis";
+import {sellersCreate, sellersProductsListList} from "api/src/apis";
 
 
-export const createSeller = (customerDetails: any) => {
+const createSeller = (customerDetails: any) => {
     return  sellersCreate({
         data: {
             owner: {
@@ -31,3 +31,19 @@ export const createSeller = (customerDetails: any) => {
         },
     })
 };
+
+
+const getSellerProducts = () => {
+    const config = sellersProductsListList({}, {
+        transform: (body: any) => ({
+            sellerProducts: body
+        }),
+        update: {
+            sellerProducts: (prev: any, next: any) => next
+        }
+    })
+
+    return config;
+};
+
+export { createSeller, getSellerProducts };

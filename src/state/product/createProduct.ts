@@ -1,23 +1,5 @@
 import { sellersProductsCreate, productsAddMedia } from "api/src";
 
-// export const createProduct = (product: any) => {
-//   return productsCreate(
-//     {
-//       data: {
-//         ...product
-//       }
-//     },
-//     {
-//       transform: (requestBody: any) => ({
-//         product_draft: requestBody
-//       }),
-//       update: {
-//         product_draft: (prev: any, next: any) => next
-//       }
-//     }
-//   );
-// };
-
 export const createProductSeller = (product: any, sellerId: number, categoryId: number,  optimistic: any) => {
     const config =  sellersProductsCreate({
         data: {

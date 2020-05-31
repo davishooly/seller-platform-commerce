@@ -18,5 +18,7 @@ const headers = {
 
 
 module.exports = function(app) {
-    app.use(["/products","/sellers", "/sellers/login", "/oauth2", "/auth"], proxy(apiProxy));
+    app.use(
+        ["/products","/sellers", "/sellers/login", "/oauth2", "/auth", "/sellers/products/orders/"],
+        proxy(apiProxy));
   };

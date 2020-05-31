@@ -5,9 +5,11 @@ import {renderCardContent} from 'components/Card/index'
 import Styled from 'styled-components';
 import details from "./fixtures/details";
 import {columns} from "./fixtures/tableColumns";
-import dataSources from "./fixtures/dataSources";
 import { Button, ButtonContainer, DivContainer, TableSection } from "components/Table/styles";
 import ThemeContext from "../../../providers/themes/ThemeContext";
+import { useRequest } from "redux-query-react";
+import {getSellerProductsOrders} from "../../../state/orders";
+import {useSelector} from "react-redux";
 
 
 const OrderContainer  = Styled.div`
@@ -23,6 +25,19 @@ const ManageOrders = () => {
 
   const [selectedOrders, SelectOrders] = useState<any>([]);
   const { themes } = useContext(ThemeContext);
+
+
+  const [{isFinished, isPending, status}, refresh] = useRequest( getSellerProductsOrders());
+
+  const sellerOrders = useSelector((state: any) => state.entities.sellerOrders);
+
+  if(!isFinished && status !== 200){
+    return (
+        <>
+          loading.......
+          </>
+    )
+  }
 
   const onSelect = (e: any) => {
     const {value, checked} = e.target;
@@ -42,7 +57,7 @@ const ManageOrders = () => {
       </OrderContainer>
   );
 
-  const data = dataSources.map(data => {
+  const data = sellerOrders.results.length && sellerOrders.results.map((data: any) => {
     return {
       ...data, order: renderOderContent(data)
     }

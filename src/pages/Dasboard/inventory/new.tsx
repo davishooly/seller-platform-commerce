@@ -13,7 +13,7 @@ import {Center} from "components";
 import {useSelector} from "react-redux";
 import Preview from "./preview";
 import Additional from "./additional";
-import { createProductSeller } from "./createProduct";
+import { createProductSeller } from "../../../state/product/createProduct";
 import { useMutation } from "redux-query-react";
 import {Product} from "../../../api/src/models";
 

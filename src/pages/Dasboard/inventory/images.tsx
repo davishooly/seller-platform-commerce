@@ -4,7 +4,7 @@ import { Upload, Icon, Modal, Button } from 'antd';
 import styled from "styled-components"
 import notification from '../../../utils/toast';
 import { useMutation } from 'redux-query-react';
-import { productAddMedia } from './createProduct';
+import { productAddMedia } from '../../../state/product/createProduct';
 import {useDispatch, useSelector} from "react-redux";
 
 
