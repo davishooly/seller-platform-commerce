@@ -151,10 +151,11 @@ const Pricing = ( {product, onNext, form, callback}: any) => {
 
                 <Action>
                     <Button
-                    onClick={()=>callback("2")}> Back </Button>
+                    onClick={()=>callback("3")}> Back </Button>
                     <Button
                         type="primary"
                         htmlType="submit"
+                        onClick={()=>callback("5")}
                         disabled={hasErrors(getFieldsError())}
                     >
                         Save and proceed

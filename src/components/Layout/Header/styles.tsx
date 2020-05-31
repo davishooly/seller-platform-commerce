@@ -34,7 +34,6 @@ const StyledHeader = styled.header<ThemesType>`
     .footer {
         display: flex;
         justify-content: space-between;
-
         .active {
             border: 1px solid rgba(255, 255, 255, 0.35);	
             	

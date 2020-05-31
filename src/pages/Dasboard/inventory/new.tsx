@@ -299,7 +299,7 @@ const ProductDetails = () => {
                                     </TabPane>
 
 
-                                    <TabPane tab="Product Pricing" key="4">
+                                    <TabPane tab="Product Pricing" key="4" disabled={current < "4"}>
                                                 <Pricing
                                                     callback={callback}
                                                     onNext={onNext}
@@ -307,7 +307,7 @@ const ProductDetails = () => {
                                                 />
                                             </TabPane>
 
-                                    <TabPane tab="Images" key="4" disabled={current < "4"}>
+                                    <TabPane tab="Images" key="5" disabled={current < "5"}>
                                         <Image
                                             score={contentScore}
                                             setScore={setContentScore}
@@ -315,16 +315,16 @@ const ProductDetails = () => {
                                             setFiles={setFiles}
                                             callback={callback}
                                             product={product}
-                                            submit={createProductForSeller}
                                         />
                                     </TabPane>
 
-                                    <TabPane tab="Preview" key="5" disabled={current < "5"}>
+                                    <TabPane tab="Preview" key="6" disabled={current < "6"}>
                                         <Preview
                                             files={files}
                                             callback={callback}
                                             product={product}
                                             categoryId={categories.main.id}
+                                            submit={createProductForSeller}
                                         />
                                     </TabPane>
                                 </Tabs>

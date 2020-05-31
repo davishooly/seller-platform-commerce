@@ -1,70 +1,14 @@
-import React  from 'react'
-// import { withRouter } from "react-router-dom";
+import React, {useCallback} from 'react'
 import { Action } from "./images";
 import { Button, notification, Icon } from 'antd';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertFromRaw, EditorState } from 'draft-js';
 import { ImageContainer, PreviewProductDetailsContainer, Container} from "./styles";
-// import {useMutation} from "@apollo/react-hooks";
-// import {ADD_PRODUCT_IMAGE_MUTATION, CREATE_PRODUCT_MUTATION} from "../../../utils/mutations/products";
-// import { cacheProduct } from "../../../utils/queries/inventory/customQueries";
-// import { ROUTES } from "../../../router";
+import {useMutation} from "redux-query-react";
+import {productAddMedia} from "../../../state/product/createProduct";
 
-const PreviewComponent: React.FC<any> = ({ callback, product, history, files, categoryId }) => {
+const PreviewComponent: React.FC<any> = ({ callback, product, history, files, categoryId, submit }) => {
 
-  // create product mutation
-  // const [ createProduct ] = useMutation(CREATE_PRODUCT_MUTATION, {
-  //   onCompleted(data) {
-  //     // cacheProduct(data.createProduct);
-  //     const { id } = data.createProduct;
-  //     afterMutation(id);
-  //   },
-  //   onError(error) {
-  //     if(error.graphQLErrors && error.graphQLErrors.length > 0){
-  //       const errorMessage = error.graphQLErrors[0].message;
-  //       notification.error({
-  //         message: "Error",
-  //         description: errorMessage
-  //       });
-  //     }
-  //   }
-  // });
-
-  //add product image mutation
-  // const afterMutation = (id: any) => {
-  //   saveImages(
-  //       {
-  //         variables: {
-  //           files: files,
-  //           productVariantID: id
-  //         }
-  //       }
-  //   )
-  // };
-
-  // // upload product image mutation
-  // const [saveImages,  { loading }] = useMutation( ADD_PRODUCT_IMAGE_MUTATION, {
-  //   onCompleted(data) {
-  //     notification.success({
-  //       message: "Success",
-  //       description: "Product created successfully"
-  //     });
-  //     setTimeout(() => {
-  //       history.push(ROUTES.inventory)
-  //     }, 1000)
-  //   },
-  //   onError(error) {
-  //     if(error.graphQLErrors && error.graphQLErrors.length > 0){
-  //       const errorMessage = error.graphQLErrors[0].message;
-  //       notification.error({
-  //         message: "Error",
-  //         description: errorMessage
-  //       });
-  //     }
-  //   }
-  // });
-
-  // //submit details
   // const onFinish = () => {
   //   createProduct({
   //     variables: {
@@ -76,7 +20,10 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, ca
 
   const formattedFiles = [ ...files].splice(1, files.length - 1);
 
-  const formatVariant = () => {
+  const [{ isPending, isFinished, status }, addMedia] = useMutation(( id, file, path) => productAddMedia(id, file, path ))
+
+
+    const formatVariant = () => {
     let variant;
     Object.keys(product).forEach(productKey => {
       if (typeof product[productKey] === 'object') {
@@ -94,6 +41,39 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, ca
   };
 
   const variant: any = formatVariant();
+
+
+    const handleUpload = useCallback(optimistic => {
+        callback("6");
+
+        // submit(optimistic).then((result: any )=>{
+        //     const { status } = result;
+        //     if( status ! === 201) {
+        //         history.push('/dashboard/inventory/manage')
+        //         // const { body: { id } } = result;
+        //         // state.fileList.forEach( (file: any) =>  {
+        //         //     getBase64(file).then(url => {
+        //         //         addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+        //         //     })
+        //         // })
+        //     }
+        // })
+
+    }, [submit]);
+
+
+
+    //     if(isFinished && status === 201){
+    //         notification.success({
+    //             message: "Success",
+    //             description: "Product added successfully"
+    //         });
+    //
+    //         history.push('/dashboard/inventory/manage')
+    //     }
+
+
+
 
   return (
       <>
@@ -131,7 +111,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, ca
 
           <div className="title__container">
             <span className="title">Product Information </span>
-            <Icon onClick={() =>callback("1")} type="form" />
+            <Icon onClick={() =>callback("2")} type="form" />
           </div>
 
             {
@@ -153,7 +133,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, ca
 
          <div className="title__container">
            <span className="title">Product Description </span>
-           <Icon onClick={() =>callback("2")} type="form" />
+           <Icon onClick={() =>callback("3")} type="form" />
          </div>
             {
               Object.keys(product).map((productKey, index) => {
@@ -177,7 +157,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, ca
             <Container>
               <div className="title__container">
                 <span className="title">Product Pricing </span>
-                <Icon onClick={() =>callback("3")} type="form" />
+                <Icon onClick={() =>callback("4")} type="form" />
               </div>
               {
                 typeof variant !== "undefined" ?
@@ -195,7 +175,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, ca
           </div>
         </PreviewProductDetailsContainer>
         <Action>
-          <Button onClick={()=>callback("4")}> Back </Button>
+          <Button onClick={()=>callback("5")}> Back </Button>
           <Button type="primary" > Submit and Finish </Button>
         </Action>
         </>

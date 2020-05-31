@@ -79,7 +79,7 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
       description: productDescription.description && JSON.stringify( convertToRaw(productDescription.description.getCurrentContent()) )
     })
     callback("4")
-  }
+  };
 
   const onChange = (state: any, editor: any) => {
     setDescription({ ...productDescription, [`${editor}`]: state});
