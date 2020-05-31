@@ -27,7 +27,7 @@ const errorPageRoute = () => (
             <ErrorPage/>
         </Route>
         <Redirect to={"/404"} />
-        </>
+    </>
 );
 
 
@@ -35,7 +35,9 @@ const errorPageRoute = () => (
 export const HomeRoutes = () => {
     return (
         <Switch>
-            <Route path="/" exact component={Home}/>
+            <Route path="/" exact>
+                <Home/>
+            </Route>
             <Route path="/new" exact >
                 <NewSeller/>
             </Route>
@@ -46,7 +48,9 @@ export const HomeRoutes = () => {
 
 export const AuthRoutes = () => (
     <Switch>
-        <Route path="/login" exact component={Register}/>
+        <Route path="/login" exact>
+            <Register/>
+        </Route>
         { errorPageRoute() }
     </Switch>
 
@@ -54,7 +58,9 @@ export const AuthRoutes = () => (
 
 export const ResetPasswordRoute = () => (
     <Switch>
-        <Route path="/checkpoint/request-password-reset" exact component={ResetPassword}/>
+        <Route path="/checkpoint/request-password-reset" exact>
+            <ResetPassword/>
+        </Route>
         { errorPageRoute() }
     </Switch>
 );
@@ -70,13 +76,25 @@ const DashboardRoutesL = (props: any) => {
 
     return (
         <Switch>
-            <Route exact path="/dashboard/settings" component={Settings}/>
+            <Route exact path="/dashboard/settings">
+                <Settings/>
+            </Route>
             <Redirect exact from="/dashboard/inventory" to='/dashboard/inventory/manage'/>
-            <Route  path="/dashboard/inventory/edit/:id" component={Edit}/>
-            <Route  path="/dashboard/inventory" component={Inventory}/>
-            <Route exact path="/dashboard/payout" component={PayoutTaxes}/>
-            <Route exact path="/dashboard/orders" component={Orders}/>
-            <Route exact path="/dashboard" component={Dashboard}/>
+            <Route  path="/dashboard/inventory/edit/:id">
+                <Edit/>
+            </Route>
+            <Route  path="/dashboard/inventory">
+                <Inventory/>
+            </Route>
+            <Route exact path="/dashboard/payout">
+                <PayoutTaxes/>
+            </Route>
+            <Route exact path="/dashboard/orders">
+                <Orders/>
+            </Route>
+            <Route exact path="/dashboard">
+                <Dashboard/>
+            </Route>
             { errorPageRoute() }
         </Switch>
     );

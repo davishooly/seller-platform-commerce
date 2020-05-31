@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../mediaScreen/mediaQueries";
-import {ThemesType} from "../../providers/themes/ThemeTypes";
+import { ThemesType } from "../../providers/themes/ThemeTypes";
 
 const HeaderContainer = styled.div<ThemesType>`
     background-color: #fff;

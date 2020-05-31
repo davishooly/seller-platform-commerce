@@ -34,26 +34,26 @@ class Routing extends React.Component<any, {}> {
         const Routes = this.PreAuthedRoutes;
         return (
             <Suspense fallback={<div>...loading</div>}>
-            <Switch>
+                <Switch>
                     <Route exact path='/login'>
-                    <AuthRoutes/>
-                </Route>
-                <Route path={"/checkpoint"}>
-                    <ResetPasswordRoute/>
-                </Route>
-                <Route exact path={"/activate/:userId/:token"}>
-                    <AccountActivationRoutes/>
-                </Route>
-                <Route path="/dashboard">
-                    <Routes/>
-                </Route>
+                        <AuthRoutes/>
+                    </Route>
+                    <Route path={"/checkpoint"}>
+                        <ResetPasswordRoute/>
+                    </Route>
+                    <Route exact path={"/activate/:userId/:token"}>
+                        <AccountActivationRoutes/>
+                    </Route>
+                    <Route path="/dashboard">
+                        <Routes/>
+                    </Route>
 
-                <Route path="/">
-                    <MainLayout>
-                        <HomeRoutes/>
-                    </MainLayout>
-                </Route>
-            </Switch>
+                    <Route path="/">
+                        <MainLayout>
+                            <HomeRoutes/>
+                        </MainLayout>
+                    </Route>
+                </Switch>
             </Suspense>
         );
     }

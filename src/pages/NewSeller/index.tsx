@@ -11,7 +11,7 @@ import Owner from "./Info/owner";
 import BillAndPay from "./BillAndPay";
 import FinalDetails from "./Final";
 import { compose } from "redux";
-import useBeforeUnload from 'use-before-unload'
+import useBeforeUnload from 'use-before-unload';
 import  { createSeller } from "../../state/seller";
 
 import { useMutation } from 'redux-query-react';

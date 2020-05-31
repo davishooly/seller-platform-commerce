@@ -106,7 +106,7 @@ const Header = () => {
                     </li>
                     <div className="pop__container">
                         <li className='account' onClick={openPopConfirm}><Icon
-                            type="user"/>{username ? username : "Account"} </li>
+                            type="user"/>{username ? username : " Account"} </li>
                         {username ? '' :
                             (
                                 <PopConfirm isOpen={isOpen} setOpenPop={setOpenPop}>
@@ -184,7 +184,7 @@ export const DashboardHeader = () => {
                                             <span>Addresses</span>
                                             <span>Payment</span>
                                             <span>Profile</span>
-                                            <Button {...themes} name="sign in" onClick={handleLogout}> Logout </Button>
+                                            <Button {...themes} name="log out" onClick={handleLogout}> Logout </Button>
                                         </div>
                                     </PopContainer>
                                 </PopConfirm>
