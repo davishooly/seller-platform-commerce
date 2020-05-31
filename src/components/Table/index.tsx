@@ -10,6 +10,7 @@ import moment from "moment";
 import {useMutation} from "redux-query-react";
 import {deleteProduct} from "../../state/product";
 import ThemeContext from "../../providers/themes/ThemeContext";
+import {PlusCircleOutlined} from "@ant-design/icons/lib";
 
 const {Option} = Select;
 const options = ['category', 'price'];
@@ -121,7 +122,10 @@ const RenderTable = ({products: {results, count}}: any) => {
             <TableSection {...themes}>
                 <div className="head">
                     <span> Product Catalog </span>
-                    <NavLink to="/dashboard/inventory/new" activeClassName="active" exact> Add products </NavLink>
+                    <NavLink to="/dashboard/inventory/new" activeClassName="active" exact>
+                        <PlusCircleOutlined />
+                        Add products
+                    </NavLink>
                 </div>
                 <DivContainer>
                     <div className="filterSection">

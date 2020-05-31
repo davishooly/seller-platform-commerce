@@ -40,6 +40,17 @@ const TableSection = styled.section<ThemesType>`
    display: flex;
    justify-content: space-between;
    padding-bottom: 20px;
+   .anticon {
+     margin-right: 4px;
+     color: ${props => props.blueText} !important;
+   }
+   
+   .anticon:hover { color: #40a9ff !important; }
+   
+   a {
+      font-size: 18px;
+      font-weight: 700;
+   }
 
    
    span {
@@ -69,7 +80,7 @@ const DivContainer = styled.div<any>`
    
    .filterSection {
      width: 35%;
-     ${(props: any) => props.order && css `width:25%`}
+     ${(props: any) => props.order && css `width:25%;`}
      display: flex;
      justify-content: space-between;
    }

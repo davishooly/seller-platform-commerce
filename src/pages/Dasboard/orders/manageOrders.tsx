@@ -27,7 +27,7 @@ const ManageOrders = () => {
   const { themes } = useContext(ThemeContext);
 
 
-  const [{isFinished, isPending, status}, refresh] = useRequest( getSellerProductsOrders());
+  const [{isFinished, isPending, status}, refresh] = useRequest(getSellerProductsOrders());
 
   const sellerOrders = useSelector((state: any) => state.entities.sellerOrders);
 
