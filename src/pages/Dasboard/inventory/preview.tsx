@@ -5,9 +5,10 @@ import { Editor } from 'react-draft-wysiwyg';
 import { convertFromRaw, EditorState } from 'draft-js';
 import { ImageContainer, PreviewProductDetailsContainer, Container} from "./styles";
 import {useMutation} from "redux-query-react";
-import {productAddMedia} from "../../../state/product/createProduct";
+import {createProductVariation, productAddMedia} from "../../../state/product/createProduct";
 
-const PreviewComponent: React.FC<any> = ({ callback, product, history, files, categoryId, submit }) => {
+
+const PreviewComponent: React.FC<any> = ({ callback, product, history, files, submit }) => {
 
   // const onFinish = () => {
   //   createProduct({
@@ -43,21 +44,29 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, ca
   const variant: any = formatVariant();
 
 
-    const handleUpload = useCallback(optimistic => {
-        callback("6");
+    const [{}, createProductVariant] = useMutation((id) => {
+        return createProductVariation({id , values: product.variants})
+    });
 
-        // submit(optimistic).then((result: any )=>{
-        //     const { status } = result;
-        //     if( status ! === 201) {
-        //         history.push('/dashboard/inventory/manage')
-        //         // const { body: { id } } = result;
-        //         // state.fileList.forEach( (file: any) =>  {
-        //         //     getBase64(file).then(url => {
-        //         //         addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
-        //         //     })
-        //         // })
-        //     }
-        // })
+
+    const handleUpload = useCallback(optimistic => {
+        submit(optimistic).then((result: any )=>{
+            const { status } = result;
+            if( status ! === 201) {
+                // history.push('/dashboard/inventory/manage')
+                const { body: { id } } = result;
+                createProductVariant(id).then((result: any) =>{
+                    const { status } = result;
+                    console.log(status);
+                });
+
+                // state.fileList.forEach( (file: any) =>  {
+                //     getBase64(file).then(url => {
+                //         addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+                //     })
+                // })
+            }
+        })
 
     }, [submit]);
 
@@ -176,7 +185,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, ca
         </PreviewProductDetailsContainer>
         <Action>
           <Button onClick={()=>callback("5")}> Back </Button>
-          <Button type="primary" > Submit and Finish </Button>
+          <Button onClick={handleUpload} type="primary" > Submit and Finish </Button>
         </Action>
         </>
   );

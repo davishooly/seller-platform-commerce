@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback } from 'react';
+import React, {useEffect, useState } from 'react';
 import { Upload, Icon, Modal, Button } from 'antd';
 import styled from "styled-components"
 import notification from '../../../utils/toast';
@@ -89,10 +89,7 @@ const Image = ({ callback, score, setScore, files, setFiles, product }: any) => 
 
     const uploadHandleChange = async ({ fileList }: any) => {
         const newFiles = fileList.map( ({ originFileObj }: any) => originFileObj);
-    
         setState({ fileList: newFiles });
-        
-        
         setFiles(newFiles)
     };
 
@@ -115,8 +112,6 @@ const Image = ({ callback, score, setScore, files, setFiles, product }: any) => 
                     listType="picture-card"
                     onPreview={handlePreview}
                     onChange={uploadHandleChange}
-                    
-                
                 >
                     {files.length >= 4 ? null : uploadButton}
                 </Upload>

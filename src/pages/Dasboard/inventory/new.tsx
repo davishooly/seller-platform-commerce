@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 import Box from "components/Box";
 import useBeforeUnload from "use-before-unload";
 
-import {Tabs, Breadcrumb, Progress, Col, Row, Steps} from "antd";
+import {Tabs, Breadcrumb, Progress, Col, Row } from "antd";
 import ProductInfo from "./productInfo";
 import Image from "./images";
 import Description from "./description";
@@ -230,9 +230,9 @@ const ProductDetails = () => {
         return true; // Suppress reload
     });
 
-
+    // create root product product
     const [{}, createProductForSeller] = useMutation((optimistic) => {
-        const id  = categories.category.id === undefined ? categories.main.id : categories.category.id
+        const id  = categories.category.id === undefined ? categories.main.id : categories.category.id;
         return createProductSeller(product, sellerId , id, optimistic)
     });
 
