@@ -3,6 +3,7 @@ import { InlineInput } from "components/Input";
 import { Button, Form } from "antd";
 import styled from "styled-components";
 import { hasErrors } from "utils/validators";
+import {size} from "../../../mediaScreen/devices";
 
 const Action = styled.div`
   button {
@@ -23,16 +24,12 @@ const Additional = ({ form, onNext, callback }: any) => {
     validateFields();
   }, []);
 
+  // field validations
   const barcodeError = isFieldTouched("barcode") && getFieldError("barcode");
   const gtinError = isFieldTouched("gtin") && getFieldError("gtin");
-  const widthError = isFieldTouched("width") && getFieldError("width");
-  const heightError = isFieldTouched("height") && getFieldError("height");
-  const depthError = isFieldTouched("depth") && getFieldError("depth");
   const netWeightError = isFieldTouched("net_weight") && getFieldError("net_weight");
-  const grossWeightError = isFieldTouched("gross_weight") && getFieldError("gross_weight");
-  const defaultPriceError = isFieldTouched("default_price") && getFieldError("default_price");
-  const slugError =
-    isFieldTouched("slug") && getFieldError("slug");
+  const sizeError =
+    isFieldTouched("size") && getFieldError("size");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -45,46 +42,6 @@ const Additional = ({ form, onNext, callback }: any) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-
-  {/*  <Form.Item  validateStatus={defaultPriceError ? "error" : ""}*/}
-  {/*  help={defaultPriceError || ""}>*/}
-  {/*  {getFieldDecorator("default_price", {*/}
-  {/*    rules: [{ required: true, message: "Please input Default price!" }]*/}
-  {/*  })(*/}
-  {/*    <InlineInput*/}
-  {/*      label="Default price"*/}
-  {/*      tip="required"*/}
-  {/*      placeholder="Default price"*/}
-  {/*    />*/}
-  {/*  )}*/}
-  {/*</Form.Item>*/}
-
-  {/*      <Form.Item  validateStatus={defaultPriceError ? "error" : ""}*/}
-  {/*                  help={defaultPriceError || ""}>*/}
-  {/*          {getFieldDecorator("sale_price", {*/}
-  {/*              rules: [{ required: true, message: "Please input sale price!" }]*/}
-  {/*          })(*/}
-  {/*              <InlineInput*/}
-  {/*                  label="Sale price"*/}
-  {/*                  tip="required"*/}
-  {/*                  placeholder="Sales price"*/}
-  {/*              />*/}
-  {/*          )}*/}
-  {/*      </Form.Item>*/}
-
-        {/*<Form.Item  validateStatus={defaultPriceError ? "error" : ""}*/}
-        {/*            help={defaultPriceError || ""}>*/}
-        {/*    {getFieldDecorator("stock", {*/}
-        {/*        rules: [{ required: true, message: "Please input stock" }]*/}
-        {/*    })(*/}
-        {/*        <InlineInput*/}
-        {/*            label="Stock"*/}
-        {/*            tip="required"*/}
-        {/*            placeholder="stock"*/}
-        {/*        />*/}
-        {/*    )}*/}
-        {/*</Form.Item>*/}
-
 
       <Form.Item
         validateStatus={barcodeError ? "error" : ""}
@@ -117,53 +74,6 @@ const Additional = ({ form, onNext, callback }: any) => {
       </Form.Item>
 
       <Form.Item
-        validateStatus={widthError ? "error" : ""}
-        help={widthError || ""}
-      >
-        {getFieldDecorator("width", {
-          rules: [{ required: true, message: "Please input a width!" }]
-        })(
-          <InlineInput
-            label="Width"
-            tip="The width of the product"
-            placeholder="Example: Red, Green, Blue"
-          />
-        )}
-      </Form.Item>
-
-      <Form.Item
-        validateStatus={heightError ? "error" : ""}
-        help={heightError || ""}
-      >
-        {getFieldDecorator("height", {
-          rules: [{ required: false }]
-        })(
-          <InlineInput
-            label="Height"
-            tip="Height  product"
-            placeholder="Color family"
-          />
-        )}
-      </Form.Item>
-
-      <Form.Item
-        validateStatus={depthError ? "error" : ""}
-        help={depthError || ""}
-      >
-        {getFieldDecorator("depth", {
-          rules: [{ required: true, message: "Please input a keywords name!" }]
-        })(
-          <InlineInput
-            label="Depth"
-            tip="Add Depth of the product"
-            placeholder="Example: Digital Camera, Light Camera "
-          />
-        )}
-      </Form.Item>
-
-    
-
-      <Form.Item
         validateStatus={netWeightError ? "error" : ""}
         help={netWeightError || ""}
       >
@@ -171,39 +81,24 @@ const Additional = ({ form, onNext, callback }: any) => {
           rules: [{ required: true, message: "Please input a Net weight!" }]
         })(
           <InlineInput
-            label="Net weight"
-            tip="Add Net weight of the Product"
-            placeholder="Example: Digital Camera, Light Camera "
+            label="Weight"
+            tip="kg"
+            placeholder="Example: 20kg"
           />
         )}
       </Form.Item>
 
       <Form.Item
-        validateStatus={grossWeightError ? "error" : ""}
-        help={grossWeightError || ""}
+        validateStatus={sizeError ? "error" : ""}
+        help={sizeError || ""}
       >
-        {getFieldDecorator("gross_weight", {
-          rules: [{ required: true, message: "Please input a keywords name!" }]
+        {getFieldDecorator("size", {
+          rules: [{ required: true, message: "Please input size!" }]
         })(
           <InlineInput
-            label="Gross Weight"
-            tip="Add Gross weight of the Product"
-            placeholder="Example: Digital Camera, Light Camera "
-          />
-        )}
-      </Form.Item>
-
-      <Form.Item
-        validateStatus={slugError ? "error" : ""}
-        help={slugError || ""}
-      >
-        {getFieldDecorator("slug", {
-          rules: [{ required: true, message: "Please input a slug!" }]
-        })(
-          <InlineInput
-            label="Slug"
-            tip="Add relevant search queries to help find your product on the site via search"
-            placeholder="Example: Digital Camera, Light Camera "
+            label="Size"
+            tip="Add measurements in centimeter"
+            placeholder="Example 5 X 10"
           />
         )}
       </Form.Item>

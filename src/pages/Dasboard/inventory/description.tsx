@@ -19,7 +19,7 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
 
   const [changeDescription, setChangeDescription ] = useState('');
 
-  useEffect(()=>{
+  useEffect(()=> {
     if(changeDescription === "description" && productDescription.description !== ''){
       const blocks = convertToRaw(productDescription.description?.getCurrentContent()).blocks;
       let blockedText = '';
@@ -77,7 +77,7 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
   const submitProducts = () => {
     onNext({
       description: productDescription.description && JSON.stringify( convertToRaw(productDescription.description.getCurrentContent()) )
-    })
+    });
     callback("4")
   };
 
@@ -91,6 +91,10 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
       descriptionSet.delete(key);
     }
   };
+
+  const filled = productDescription.description.length && productDescription.package.length;
+
+  console.log( filled, productDescription);
 
   return (
       <>
@@ -117,20 +121,9 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
           </Panel>
 
 
-          {/*<Panel header={<h2>More info</h2>} key="3" >*/}
-          {/*  <div>*/}
-          {/*    {<RichEditor*/}
-          {/*        placeholder="This is a text editor.  Add and edit as you wish."*/}
-          {/*        editorType="moreInfo"*/}
-          {/*        onChange={onChange}*/}
-          {/*    />}</div>*/}
-
-          {/*</Panel>*/}
-
         </Collapse>
 
         <h2> </h2>
-
 
         <Action>
           <Button onClick={()=> callback("2")}> Back </Button>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Layout, Menu } from "antd";
+import { useParams } from  'react-router-dom';
 import Container from "components/Common/Container";
-import { InlineInput } from "components/Input";
 
 import BasicInfo from "./BasicInfo";
 import Additional from "./Additional";
@@ -10,6 +10,7 @@ import { useSellerProduct } from "state/product";
 import {hasErrors} from "../../../../utils/validators";
 import { useMutation } from "redux-query-react";
 import {updateSellerProduct} from "./updateProducts";
+
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -21,12 +22,13 @@ const Edit: React.FC<any> = ({ form , match }) => {
     isFieldTouched,
     getFieldsError
   } = form;
-  const [ page, setPage ]  = useState("1")
-  const id = match.params?.id
+  const [ page, setPage ]  = useState("1");
 
-  const sellerProduct = useSellerProduct(id)
+  const { id } = useParams();
 
-  const [productDetails, setDetails] = useState(sellerProduct)
+  const sellerProduct = useSellerProduct(id);
+
+  const [productDetails, setDetails] = useState(sellerProduct);
 
 
   const [{ isFinished, isPending}, updateProduct] = useMutation(product => (
