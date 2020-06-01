@@ -4,8 +4,7 @@ import {Spin, Icon, notification} from 'antd';
 import styled from "styled-components";
 import {useMutation} from 'redux-query-react';
 
-
-import {sellersInvitationCreate} from "../../api/src/apis";
+import { sellersActivateCreate } from "../../api/src/apis";
 
 
 const ActivationContainer = styled.div`
@@ -15,18 +14,17 @@ const ActivationContainer = styled.div`
     span {
       text-align: center;
     }
-`
+`;
 
 
 const sendInvitation = (userId: string, token: string) => {
-    return sellersInvitationCreate({
-        id: parseInt(atob(userId)),
+    return sellersActivateCreate({
         data: {
-            uid: "",
+            uid: userId,
             token: token
         }
     })
-}
+};
 
 
 const ActivationPage: React.FC = (props: any) => {
