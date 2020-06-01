@@ -1,18 +1,10 @@
-import { sellersProductsCreate, productsAddMedia, sellersProductsVariablesUpdateVariable } from "api/src";
+import { sellersProductsCreate, productsAddMedia, sellersProductsVariablesCreate } from "api/src";
 
 export const createProductSeller = (product: any, sellerId: number, categoryId: number,  optimistic: any) => {
     const config =  sellersProductsCreate({
         data: {
             product: {
                 ...product,
-                variationVariables: [
-                    {
-                        values: [{
-                            ...product
-                        }],
-                        variant: ''
-                    }
-                ]
             },
             seller: sellerId,
             primaryCategory: categoryId ,
@@ -44,7 +36,7 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
 
 
 export const createProductVariation = ({ id, values }: any) => {
-    return sellersProductsVariablesUpdateVariable({
+    return sellersProductsVariablesCreate({
         id,
         data: {
           values,
