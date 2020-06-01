@@ -70,20 +70,6 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, su
 
     }, [submit]);
 
-
-
-    //     if(isFinished && status === 201){
-    //         notification.success({
-    //             message: "Success",
-    //             description: "Product added successfully"
-    //         });
-    //
-    //         history.push('/dashboard/inventory/manage')
-    //     }
-
-
-
-
   return (
       <>
         <PreviewProductDetailsContainer>

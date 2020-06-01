@@ -14,7 +14,7 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
   const [ productDescription, setDescription ] = useState<any>( {
     description: '',
     package:'',
-    moreInfo: ''
+    isFilled: false
   });
 
   const [changeDescription, setChangeDescription ] = useState('');
@@ -42,6 +42,7 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
     }
 
     if( changeDescription === "package" && productDescription.package !== ''){
+      productDescription.description !== '' && !productDescription.isFilled && setDescription({ ...productDescription, isFilled: true });
       // the score for package is dependants on blocks
       // blocks are new lines of text
       const blocks = convertToRaw(productDescription.package.getCurrentContent()).blocks;
@@ -92,10 +93,6 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
     }
   };
 
-  const filled = productDescription.description.length && productDescription.package.length;
-
-  console.log( filled, productDescription);
-
   return (
       <>
         <Collapse
@@ -127,7 +124,7 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
 
         <Action>
           <Button onClick={()=> callback("2")}> Back </Button>
-          <Button type="primary" onClick={submitProducts}> Save and proceed </Button>
+          <Button disabled={!productDescription.isFilled} type="primary" onClick={submitProducts}> Save and proceed </Button>
         </Action>
       </>
   );
