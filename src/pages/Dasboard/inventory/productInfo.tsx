@@ -24,12 +24,8 @@ const ProductInfo = ({ form, onNext, onPrevClick, callback }: any) => {
   }, []);
 
   const nameError = isFieldTouched("name") && getFieldError("name");
-  const skuError = isFieldTouched("sku") && getFieldError("sku");
   const brandError = isFieldTouched("brand") && getFieldError("brand");
-  const colorError = isFieldTouched("color") && getFieldError("color");
   const keywordsError = isFieldTouched("keywords") && getFieldError("keywords");
-  const colorFamilyError =
-    isFieldTouched("color_family") && getFieldError("color_family");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -57,12 +53,6 @@ const ProductInfo = ({ form, onNext, onPrevClick, callback }: any) => {
         )}
       </Form.Item>
 
-      {/*<Form.Item validateStatus={skuError ? "error" : ""} help={skuError || ""}>*/}
-      {/*  {getFieldDecorator("sku", {*/}
-      {/*    rules: [{ required: true, message: "Please input a SKU!" }]*/}
-      {/*  })(<InlineInput label="SKU" tip="Enter SKU" placeholder="xxxxxxxx" />)}*/}
-      {/*</Form.Item>*/}
-
       <Form.Item
         validateStatus={brandError ? "error" : ""}
         help={brandError || ""}
@@ -77,36 +67,6 @@ const ProductInfo = ({ form, onNext, onPrevClick, callback }: any) => {
           />
         )}
       </Form.Item>
-
-      {/*<Form.Item*/}
-      {/*  validateStatus={colorError ? "error" : ""}*/}
-      {/*  help={colorError || ""}*/}
-      {/*>*/}
-      {/*  {getFieldDecorator("color", {*/}
-      {/*    rules: [{ required: true, message: "Please input a color name!" }]*/}
-      {/*  })(*/}
-      {/*    <InlineInput*/}
-      {/*      label="Color"*/}
-      {/*      tip="The main color of the product"*/}
-      {/*      placeholder="Example: Red, Green, Blue"*/}
-      {/*    />*/}
-      {/*  )}*/}
-      {/*</Form.Item>*/}
-
-      {/*<Form.Item*/}
-      {/*  validateStatus={colorFamilyError ? "error" : ""}*/}
-      {/*  help={colorFamilyError || ""}*/}
-      {/*>*/}
-      {/*  {getFieldDecorator("color_family", {*/}
-      {/*    rules: [{ required: false }]*/}
-      {/*  })(*/}
-      {/*    <InlineInput*/}
-      {/*      label="Color Family"*/}
-      {/*      tip="Color family of the product"*/}
-      {/*      placeholder="Color family"*/}
-      {/*    />*/}
-      {/*  )}*/}
-      {/*</Form.Item>*/}
 
       <Form.Item
         validateStatus={keywordsError ? "error" : ""}

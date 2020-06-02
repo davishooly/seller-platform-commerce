@@ -188,7 +188,7 @@ const ProductDetails = () => {
         } = contentScore;
         return description + info + images + variants + bold + packages;
     };
-    const [current, setCurrent] = useState("1");
+    const [current, setCurrent] = useState("2");
     const [categoryPage, setCategoryPage] = useState(true);
     const [categories, setCategories] = useState<any>({
         main: {},
@@ -224,6 +224,9 @@ const ProductDetails = () => {
     function callback(key: any): void {
         setCurrent(key);
     }
+
+    const [variations, setVariations] = useState<Array<string>>([]);
+
 
     useBeforeUnload(evt => {
         /* Do some checks here if you like */
@@ -283,11 +286,21 @@ const ProductDetails = () => {
                                             onChange={inputChange}
                                             onNext={onNext}
                                             callback={callback}
+                                            setSize={setVariations}
 
                                         />
                                     </TabPane>
 
-                                    <TabPane tab="Description" key="3" disabled={current < "3"}>
+                                    <TabPane tab="Product Pricing" key="3" disabled={current < "3"}>
+                                        <Pricing
+                                            callback={callback}
+                                            onNext={onNext}
+                                            product={product}
+                                            variations={variations}
+                                        />
+                                    </TabPane>
+
+                                    <TabPane tab="Description" key="4" disabled={current < "4"}>
                                         <Description
                                             score={contentScore}
                                             setScore={setContentScore}
@@ -298,14 +311,6 @@ const ProductDetails = () => {
                                         />
                                     </TabPane>
 
-
-                                    <TabPane tab="Product Pricing" key="4" disabled={current < "4"}>
-                                                <Pricing
-                                                    callback={callback}
-                                                    onNext={onNext}
-                                                    product={product}
-                                                />
-                                            </TabPane>
 
                                     <TabPane tab="Images" key="5" disabled={current < "5"}>
                                         <Image

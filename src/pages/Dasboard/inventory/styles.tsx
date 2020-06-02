@@ -47,6 +47,10 @@ const TabsContainer = styles.div`
    display: flex;
    align-items: center;
    
+   .ant-input{
+    height: 36px;
+   }
+   
    .variants__buttons {
      margin-bottom: 20px;
    }

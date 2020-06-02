@@ -3,10 +3,11 @@ import { Row, Col, Input, Form, Button, Icon } from 'antd';
 import { Action } from './images';
 import { TabsContainer } from './styles'
 import {hasErrors} from "utils/validators";
+import {InlineInput} from "../../../components/Input";
 
 
 
-const Pricing = ( {product, onNext, form, callback}: any) => {
+const Pricing = ( {product, onNext, form, callback, variations}: any) => {
 
     const [ variants, setVariants ] = useState(["variant"]);
 
@@ -58,19 +59,41 @@ const Pricing = ( {product, onNext, form, callback}: any) => {
         setDeletedVariants([...deletedVariants, variantId])
     };
 
+    const renderVariationFields = (index: number) => {
+        return variations.map((variation: string ) => (
+            <>
+                <Form.Item
+                    validateStatus={labelError(`${variation}${index}`) ? 'error': '' }
+                    help={labelError(variation) || '' }
+                >
+                    {getFieldDecorator(`${variation}${index}`, {
+                        rules: [{ required: true, message: `Please provide ${variation}`  }]
+                    })(
+                        <>
+                            {
+                                index < 1 ?
+                                    (<InlineInput
+                                        label={variation}
+                                        tip={variation}
+                                        placeholder={variation}
+                                    />)
+                                    :
+                                    <Input  placeholder={variation} />
+                            }
+                        </>
+                    )}
+                </Form.Item>
+
+
+            </>
+        ));
+    }
+
     const renderFormContent = (index: number) => (
             <TabsContainer id={`variant${index}`}>
                 <Col className="price__tabs">
 
-                    <Form.Item
-                        validateStatus={labelError(`name${index}`) ? 'error': '' }
-                        help={labelError("name") || '' }
-                    >
-                        {getFieldDecorator(`name${index}`, {
-                            rules: [{ required: true, message: 'Please provide variant name'  }]
-                        })(<Input  placeholder="name" />)}
-                    </Form.Item>
-
+                    { variations.length && renderVariationFields(index)}
 
                     <Form.Item
                         validateStatus={labelError(`sku${index}`) ? 'error': '' }
@@ -78,7 +101,20 @@ const Pricing = ( {product, onNext, form, callback}: any) => {
                     >
                         {getFieldDecorator(`sku${index}`, {
                             rules: [{ required: true, message: 'Please provide stock keeping unit!'  }]
-                        })(<Input  placeholder="sku" />)}
+                        })(
+                            <>
+                                {
+                                    index < 1 ?
+                                        ( <InlineInput
+                                            label="SKU"
+                                            tip="kg"
+                                            placeholder="sku"
+                                        />):
+                                        <Input  placeholder="sku" type="number"/>
+                                }
+                            </>
+                        )
+                        }
                     </Form.Item>
 
                     <Form.Item
@@ -87,9 +123,22 @@ const Pricing = ( {product, onNext, form, callback}: any) => {
                     >
                         {getFieldDecorator(`quantity${index}`, {
                             rules: [
-                                { required: true, message: 'How many units do you care for!'  },
+                                {required: true, message: 'How many units do you care for!'},
                             ]
-                        })(<Input  placeholder="Quantity" type="number" />)}
+                        })(
+                            <>
+                                {
+                                    index < 1 ?
+                                        (<InlineInput
+                                            label="Stock"
+                                            tip="quantity"
+                                            placeholder="Stock"
+                                        />) :
+                                        <Input placeholder="Stock" type="number"/>
+                                }
+                            </>
+                        )
+                        }
                     </Form.Item>
 
                     <Form.Item
@@ -100,7 +149,22 @@ const Pricing = ( {product, onNext, form, callback}: any) => {
                             rules: [
                                 {required: true, message: 'Please provide price!'},
                             ]
-                        })(<Input prefix="$" placeholder="price" suffix="KSH" type="number"/>) }
+                        })(
+                            <>
+                                {
+                                    index < 1 ?
+                                        (<InlineInput
+                                            label="Price"
+                                            tip="Price"
+                                            placeholder="Price"
+                                            suffix="KSH"
+                                            type="number"
+                                        />) :
+                                        <Input placeholder="price" suffix="KSH" type="number"/>
+                                }
+                            </>
+                        )
+                        }
                     </Form.Item>
 
                     <Form.Item
@@ -111,7 +175,22 @@ const Pricing = ( {product, onNext, form, callback}: any) => {
                             rules: [
                                 {required: true, message: 'Please provide sale price!'},
                             ]
-                        })( <Input name="" prefix="$" placeholder="Sale Price" suffix="KSH" type="number" />) }
+                        })(
+                            <>
+                                {
+                                    index < 1 ?
+                                        (<InlineInput
+                                            label="Sale Price"
+                                            tip="Price"
+                                            placeholder="Sale Price"
+                                            suffix="KSH"
+                                            type="number"
+                                        />) :
+                                        <Input name="" placeholder="Sale Price" suffix="KSH" type="number" />
+                                }
+                            </>
+                        )
+                        }
                     </Form.Item>
                     <>
                         {
@@ -140,9 +219,9 @@ const Pricing = ( {product, onNext, form, callback}: any) => {
                             }) }
                         <Form.Item>
                             <TabsContainer>
-                            <Button className="variants__buttons" type="dashed" onClick={() =>incrementVariants(variants.length -1)}  >
-                                <Icon type="plus" /> Add product Variation
-                            </Button>
+                                <Button className="variants__buttons" type="dashed" onClick={() =>incrementVariants(variants.length -1)}  >
+                                    <Icon type="plus" /> Add product Variation
+                                </Button>
                             </TabsContainer>
                         </Form.Item>
                     </div>
@@ -151,11 +230,11 @@ const Pricing = ( {product, onNext, form, callback}: any) => {
 
                 <Action>
                     <Button
-                    onClick={()=>callback("3")}> Back </Button>
+                        onClick={()=>callback("2")}> Back </Button>
                     <Button
                         type="primary"
                         htmlType="submit"
-                        onClick={()=>callback("5")}
+                        onClick={()=>callback("4")}
                         disabled={hasErrors(getFieldsError())}
                     >
                         Save and proceed

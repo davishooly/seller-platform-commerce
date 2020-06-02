@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { InlineInput } from "components/Input";
-import { Button, Form } from "antd";
+import { Button, Form, Tag, Select } from "antd";
 import styled from "styled-components";
 import { hasErrors } from "utils/validators";
-import {size} from "../../../mediaScreen/devices";
+
 
 const Action = styled.div`
   button {
@@ -11,7 +11,18 @@ const Action = styled.div`
   }
 `;
 
-const Additional = ({ form, onNext, callback }: any) => {
+const { Option } = Select;
+
+
+const children: Array<any> = [];
+
+const options = [ { value: "Size"}, { value: "Color"}];
+
+for (let i = 0; i < options.length; i++) {
+    children.push(<Option key={options[i].value}>{options[i].value}</Option>);
+}
+
+const Additional: React.FC = ({ form, onNext, callback, setSize }: any) => {
   const {
     getFieldDecorator,
     getFieldError,
@@ -19,6 +30,12 @@ const Additional = ({ form, onNext, callback }: any) => {
     isFieldTouched,
     getFieldsError
   } = form;
+
+
+
+  const handleSizeChange = (e: any) => {
+      setSize(e);
+  };
 
   useEffect(() => {
     validateFields();
@@ -102,6 +119,25 @@ const Additional = ({ form, onNext, callback }: any) => {
           />
         )}
       </Form.Item>
+
+
+        <Form.Item
+            validateStatus={sizeError ? "error" : ""}
+            help={sizeError || ""}
+        >
+            {getFieldDecorator("Variant types", {
+                rules: [{ required: true, message: "Please input product variants" }]
+            })(
+                <Select
+                    mode="tags"
+                    placeholder="Please product variants"
+                    onChange={handleSizeChange}
+                    style={{ width: '100%' , height: "40px"}}
+                >
+                    {children}
+                </Select>
+            )}
+        </Form.Item>
 
       <Action>
         <Button onClick={ () => callback("1")}> Back </Button>

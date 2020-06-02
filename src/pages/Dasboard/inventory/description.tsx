@@ -79,7 +79,7 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
     onNext({
       description: productDescription.description && JSON.stringify( convertToRaw(productDescription.description.getCurrentContent()) )
     });
-    callback("4")
+    callback("5")
   };
 
   const onChange = (state: any, editor: any) => {
@@ -123,7 +123,7 @@ const Description = ({ onNext, callback, setScore, score, submit  }: any) => {
         <h2> </h2>
 
         <Action>
-          <Button onClick={()=> callback("2")}> Back </Button>
+          <Button onClick={()=> callback("3")}> Back </Button>
           <Button disabled={!productDescription.isFilled} type="primary" onClick={submitProducts}> Save and proceed </Button>
         </Action>
       </>

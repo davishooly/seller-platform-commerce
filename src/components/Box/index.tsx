@@ -1,5 +1,5 @@
 
-import styled,  { css } from "styled-components"
+import styled  from "styled-components"
 
 const Box = styled.div`
   box-sizing: border-box;
@@ -29,6 +29,9 @@ const Box = styled.div`
     z-index: 999;
     position: sticky;
     top: 60px;
+  }
+  .ant-select-selection{
+   height: 40px;
   }
   
   .ant-progress-text > div {
