@@ -26,10 +26,10 @@ const Pricing = ( {product, onNext, form, callback}: any) => {
         Object.keys(data).forEach((value, i) => {
             if(data[`price${i}`] !== undefined) {
                 formattedData.push({
-                    price: Number(data[`price${i}`]),
-                    inventoryQuantity: Number(data[`quantity${i}`]),
-                    compareAtPrice: data[`salesPrice${i}`],
-                    name: data[`name${i}`],
+                    minimumPrice: Number(data[`price${i}`]),
+                    availableUnits: Number(data[`quantity${i}`]),
+                    salePrice: data[`salesPrice${i}`],
+                    value: data[`name${i}`],
                     requiresShipping: true,
                     sku: data[`sku${i}`],
                     barcode:"",

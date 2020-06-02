@@ -36,6 +36,7 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
 
 
 export const createProductVariation = ({ id, values }: any) => {
+    console.log({ values })
     return sellersProductsVariablesCreate({
         id,
         data: {
