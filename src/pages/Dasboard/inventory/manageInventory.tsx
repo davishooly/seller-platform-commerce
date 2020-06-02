@@ -86,7 +86,7 @@ const ManageInventory = () => {
         </ProductContainer>
     );
 
-    sellerProducts.results.forEach(({ product }: any) => {
+    sellerProducts && sellerProducts.results.forEach(({ product }: any) => {
         if (product) {
             const {id, createdOn, name, variationVariables} = product;
 
@@ -121,7 +121,7 @@ const ManageInventory = () => {
                     renderCardContent(detail, i.toString(), 340)
                 ))}
             </CardSection>
-            < TableSection products={{productList, count: sellerProducts.count, selectProduct, handleDeleteProduct, confirm}}/>
+            < TableSection { ...{productList, count: sellerProducts.count, selectProduct, confirm }}/>
         </div>
     )
 };

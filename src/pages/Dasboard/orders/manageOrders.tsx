@@ -57,7 +57,7 @@ const ManageOrders = () => {
       </OrderContainer>
   );
 
-  const data = sellerOrders.results.length && sellerOrders.results.map((data: any) => {
+  const data = sellerOrders && sellerOrders.results.map((data: any) => {
     return {
       ...data, order: renderOderContent(data)
     }
