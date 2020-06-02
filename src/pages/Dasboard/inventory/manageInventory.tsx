@@ -22,7 +22,7 @@ export const CardSection = styled.section`
 const ManageInventory = () => {
 
     const [{isFinished, status}, refresh] = useRequest(getSellerProducts());
-    const { results, count } = useSelector((state: any) => state.entities.sellerProducts);
+    const sellerProducts = useSelector((state: any) => state.entities.sellerProducts);
     const [selectProduct, setSelectedProduct]: any = useState([]);
 
     const [{isPending, isFinished: finished}, deleteProducts] = useMutation((optimistic) => deleteProduct(selectProduct[0].id, optimistic));
@@ -86,7 +86,7 @@ const ManageInventory = () => {
         </ProductContainer>
     );
 
-    results.forEach(({ product }: any) => {
+    sellerProducts.results.forEach(({ product }: any) => {
         if (product) {
             const {id, createdOn, name, variationVariables} = product;
 
@@ -121,7 +121,7 @@ const ManageInventory = () => {
                     renderCardContent(detail, i.toString(), 340)
                 ))}
             </CardSection>
-            < TableSection products={{productList,count, selectProduct, handleDeleteProduct, confirm}}/>
+            < TableSection products={{productList, count: sellerProducts.count, selectProduct, handleDeleteProduct, confirm}}/>
         </div>
     )
 };
