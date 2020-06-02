@@ -23,7 +23,7 @@ const getProductsCategories = (categories: any) => {
     }
     return
 
-}
+};
 
 const deleteProduct = (productId: number, optimistic: any) => {
 
@@ -52,8 +52,8 @@ const deleteProduct = (productId: number, optimistic: any) => {
         }
 
         return config
-}
-// TODO - Ensure we can get this from sellersProduct to avoid refech
+};
+// TODO - Ensure we can get this from sellersProduct to avoid re-fetch
 const useSellerProduct = (id: any) => {
   const currentSellerProduct = useSelector(
     (state: any) => state.entities.currentSellerProduct
