@@ -5,8 +5,7 @@ import { TabsContainer } from './styles'
 import {hasErrors} from "utils/validators";
 
 
-
-const Pricing = ( {product, onNext, form, callback, variations}: any) => {
+const Pricing = ( {onNext, form, callback, variations}: any) => {
 
     const [ variants, setVariants ] = useState(["variant"]);
 

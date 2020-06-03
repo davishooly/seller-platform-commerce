@@ -65,7 +65,7 @@ const renderSearchInputs = (searchType: string) => {
 };
 
 
-const RenderTable = ({productList, count, selectProduct, confirm} : any) => {
+const RenderTable = ({productList, count, selectProduct, confirm, refresh} : any) => {
 
     const { themes } = useContext(ThemeContext);
 
@@ -129,7 +129,7 @@ const RenderTable = ({productList, count, selectProduct, confirm} : any) => {
                                 <Button disabled={products < 0} delete={products > 0 ? 'delete' : ''}>Delete</Button>
                             </Popconfirm>
                         </ButtonContainer>
-                        <div className="reload">
+                        <div className="reload" onClick={refresh}>
                             <Icon type="reload"/>
                             Refresh
                         </div>

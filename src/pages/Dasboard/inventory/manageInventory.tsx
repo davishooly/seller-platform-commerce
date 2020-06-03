@@ -18,7 +18,6 @@ export const CardSection = styled.section`
  width: 97.09%;
 `;
 
-
 const ManageInventory = () => {
 
     const [{isFinished, status}, refresh] = useRequest(getSellerProducts());
@@ -121,7 +120,7 @@ const ManageInventory = () => {
                     renderCardContent(detail, i.toString(), 340)
                 ))}
             </CardSection>
-            < TableSection { ...{productList, count: sellerProducts.count, selectProduct, confirm }}/>
+            < TableSection { ...{productList, refresh, count: sellerProducts.count, selectProduct, confirm }}/>
         </div>
     )
 };
