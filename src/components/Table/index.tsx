@@ -1,14 +1,68 @@
 import React, { useContext, useState} from "react";
 import {Link, NavLink} from 'react-router-dom'
-import { Icon, Popconfirm, Select, Table} from 'antd';
+import { Icon, Popconfirm, Select, Table, Input, AutoComplete}  from 'antd';
 import {Button, ButtonContainer, DivContainer, TableSection} from './styles';
 import {columns} from "./tableData";
 import Search from '../../components/Search'
 import ThemeContext from "../../providers/themes/ThemeContext";
 import {PlusCircleOutlined} from "@ant-design/icons/lib";
 
-const {Option} = Select;
+const { Option } = Select;
 const options = ['category', 'price'];
+
+
+const searchFilter = [
+    { value: 'Burns Bay Road' },
+    { value: 'Downing Street' },
+    { value: 'Wall Street' },
+];
+
+
+const renderSearchInputs = (searchType: string) => {
+
+    return searchType === "category" ?
+        (
+            <AutoComplete
+                style={{ width: 200 }}
+                // options={searchFilter}
+                placeholder="try to type `b`"
+                filterOption={(inputValue, option: any) =>
+                    option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+            />
+        )
+        :
+        (
+            <>
+                <Input.Group compact>
+                    <Select defaultValue="1">
+                        <Option value="1">Between</Option>
+                    </Select>
+                    <Input style={{ width: 100, textAlign: 'center' }} placeholder="Minimum" />
+                    <Input
+                        className="site-input-split"
+                        style={{
+                            width: 30,
+                            borderLeft: 0,
+                            borderRight: 0,
+                            pointerEvents: 'none',
+                        }}
+                        placeholder="~"
+                        disabled
+                    />
+                    <Input
+                        className="site-input-right"
+                        style={{
+                            width: 100,
+                            textAlign: 'center',
+                        }}
+                        placeholder="Maximum"
+                    />
+                </Input.Group>
+            </>
+        )
+
+};
 
 
 const RenderTable = ({productList, count, selectProduct, confirm} : any) => {
@@ -20,9 +74,15 @@ const RenderTable = ({productList, count, selectProduct, confirm} : any) => {
 
     const [isVisible, setVisible] = useState(false);
 
+    const [searchType, setSearchType ] = useState('');
+
 
     const handleSearch = (value: any) => {
         setSearchValue(value.target.value)
+    };
+
+    const handleSelect = (value: string) => {
+         setSearchType(value);
     };
 
     const products = selectProduct.length;
@@ -33,7 +93,7 @@ const RenderTable = ({productList, count, selectProduct, confirm} : any) => {
     if (searchValue === '') {
         searchProducts = productList
     } else {
-        searchProducts = productList.filter((product: any) => {
+        searchProducts = productList.length && productList.filter((product: any) => {
             const {productName} = product;
             if (productName.toLowerCase().includes(searchValue.toLowerCase())) {
                 return product
@@ -75,10 +135,14 @@ const RenderTable = ({productList, count, selectProduct, confirm} : any) => {
                         </div>
                     </div>
                     <div className="filterSection">
-                        <Select defaultValue="Filter products" style={{width: 140}}>
+                        <Select defaultValue="Filter products" onChange={handleSelect} style={{width: 140}}>
                             {options.map(value => (<Option key={value} value={`${value}`}>{value}</Option>))}
                         </Select>
                         <Search handleSearch={handleSearch} searchValue={searchValue}/>
+
+                        {/* render search entry fields  */}
+                        { searchType.length && renderSearchInputs(searchType)}
+
                     </div>
                 </DivContainer>
                 <Table pagination={{total: count}} dataSource={searchProducts} columns={columns}/>

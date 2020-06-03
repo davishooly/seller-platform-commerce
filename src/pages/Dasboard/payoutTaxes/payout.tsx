@@ -86,7 +86,7 @@ const Payout = () => {
             <span> Payout History </span>
             <Button {...themes}> Download CSV </Button>
           </div>
-          <Table columns={columns}  dataSource={dataSources}/>
+          <Table columns={columns}  dataSource={[]}/>
         </TableSection>
       </Container>
   )

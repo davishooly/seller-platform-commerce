@@ -111,7 +111,7 @@ const OeExpress = () => {
               <Search handleSearch={handleSearch} searchValue={''}/>
             </div>
           </DivContainer>
-          <Table dataSource={data} columns={columns}/>
+          <Table dataSource={[]} columns={columns}/>
         </TableSection>
       </Div>
   );
