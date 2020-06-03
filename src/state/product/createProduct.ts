@@ -19,11 +19,11 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
                 const newState = {
                     count: count + 1,
                     results: [...results, next ]
-                }
+                };
                 return newState
             }
         }
-    })
+    });
 
     if(optimistic){
          config.optimisticUpdate = {
@@ -36,17 +36,15 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
 
 
 export const createProductVariation = ({ id, values }: any) => {
-    console.log({ values })
     return sellersProductsVariablesCreate({
         id,
         data: {
           values,
-          variable : 0
+          variable: values.variations[0]
         }
     },{
 
     })
-
 };
 
 export const productAddMedia = (productId: any, file: any, path: any) => {
@@ -67,5 +65,5 @@ export const productAddMedia = (productId: any, file: any, path: any) => {
             }
         }
     })
-}
+};
 

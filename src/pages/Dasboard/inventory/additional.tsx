@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { InlineInput } from "components/Input";
-import { Button, Form, Tag, Select } from "antd";
+import { Button, Form, Select } from "antd";
 import styled from "styled-components";
 import { hasErrors } from "utils/validators";
 
@@ -16,7 +16,7 @@ const { Option } = Select;
 
 const children: Array<any> = [];
 
-const options = [
+export const options = [
     { value: "Size", index: 0},
     { value: "Color", index:1},
     { value: "packaging", index:2 },
@@ -37,7 +37,6 @@ const Additional: React.FC = ({ form, onNext, callback, setSize }: any) => {
     isFieldTouched,
     getFieldsError
   } = form;
-
 
 
   const handleSizeChange = (e: any) => {

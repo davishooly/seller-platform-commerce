@@ -3,7 +3,6 @@ import { Row, Col, Input, Form, Button, Icon } from 'antd';
 import { Action } from './images';
 import { TabsContainer } from './styles'
 import {hasErrors} from "utils/validators";
-import {InlineInput} from "../../../components/Input";
 
 
 
@@ -30,9 +29,10 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
                     minimumPrice: Number(data[`price${i}`]),
                     availableUnits: Number(data[`quantity${i}`]),
                     salePrice: data[`salesPrice${i}`],
-                    value: data[`name${i}`],
+                    variations: data[`name${i}`],
                     requiresShipping: true,
                     sku: data[`sku${i}`],
+                    values: variations,
                     barcode:"",
                     trackInventory: true,
                     taxable: true,
@@ -48,18 +48,12 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
         e.preventDefault();
         form.validateFields((err: any, values: any) => {
             if (!err) {
-                console.log({values})
                 const formattedData = formatData(values);
-                console.log({formattedData})
                 onNext({variants: formattedData});
             }
         })
 
     };
-
-    const skuError = isFieldTouched("sku0") && getFieldError("sku0");
-    const brandError = isFieldTouched("brand") && getFieldError("brand");
-    const keywordsError = isFieldTouched("keywords") && getFieldError("keywords");
 
     const deleteVariant = (variantId: any) => {
         setDeletedVariants([...deletedVariants, variantId])
@@ -71,7 +65,7 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
                 <Form.Item
                     key={index.toString()}
                     validateStatus={labelError(`${variation}${index}`) ? 'error': '' }
-                    help={skuError || '' }
+                    help={ labelError(variation) || '' }
                 >
                     {getFieldDecorator(`${variation}${index}`, {
                         rules: [{ required: true, message: `Please provide ${variation}`  }]
@@ -177,7 +171,7 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
                         type="primary"
                         htmlType="submit"
                         onClick={()=>callback("3")}
-                        // disabled={hasErrors(getFieldsError())}
+                        disabled={hasErrors(getFieldsError())}
                     >
                         Save and proceed
                     </Button>

@@ -4,7 +4,8 @@ import styled from "styled-components"
 import notification from '../../../utils/toast';
 
 
-function getBase64(file: File) {
+// get base64 from an uploaded image
+export function getBase64(file: File) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -51,7 +52,7 @@ export const Action = styled.div`
     }
 `;
 
-const Image = ({ callback, score, setScore, files, setFiles, product }: any) => {
+const Image = ({ callback, score, setScore, files, setFiles }: any) => {
     const [state, setState] = useState<any>({
         previewVisible: false,
         previewImage: '',
