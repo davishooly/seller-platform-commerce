@@ -121,16 +121,6 @@ const Image = ({ callback, score, setScore, files, setFiles, product }: any) => 
                 </Modal>
             </div>
 
-          {/*  <Button*/}
-          {/*  type="primary"*/}
-          {/*  onClick={handleUpload}*/}
-          {/*  disabled={state.fileList.length === 0}*/}
-          {/*  loading={isPending}*/}
-          {/*  style={{ marginTop: 16 }}*/}
-          {/*>*/}
-          {/*  {state.uploading ? 'Uploading' : 'Start Upload'}*/}
-          {/*</Button>*/}
-
             <Action>
                 <Button onClick={()=>callback("4")}> Back </Button>
                 <Button onClick={() => callback("6")} type="primary"> Preview </Button>

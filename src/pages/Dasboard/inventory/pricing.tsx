@@ -48,12 +48,18 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
         e.preventDefault();
         form.validateFields((err: any, values: any) => {
             if (!err) {
+                console.log({values})
                 const formattedData = formatData(values);
+                console.log({formattedData})
                 onNext({variants: formattedData});
             }
         })
 
     };
+
+    const skuError = isFieldTouched("sku0") && getFieldError("sku0");
+    const brandError = isFieldTouched("brand") && getFieldError("brand");
+    const keywordsError = isFieldTouched("keywords") && getFieldError("keywords");
 
     const deleteVariant = (variantId: any) => {
         setDeletedVariants([...deletedVariants, variantId])
@@ -63,34 +69,26 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
         return variations.map((variation: string ) => (
             <>
                 <Form.Item
+                    key={index.toString()}
                     validateStatus={labelError(`${variation}${index}`) ? 'error': '' }
-                    help={labelError(variation) || '' }
+                    help={skuError || '' }
                 >
                     {getFieldDecorator(`${variation}${index}`, {
                         rules: [{ required: true, message: `Please provide ${variation}`  }]
                     })(
-                        <>
-                            {
-                                index < 1 ?
-                                    (<InlineInput
-                                        label={variation}
-                                        tip={variation}
-                                        placeholder={variation}
-                                    />)
-                                    :
-                                    <Input  placeholder={variation} />
-                            }
-                        </>
+
+                        <Input  placeholder={variation} />
+
                     )}
                 </Form.Item>
 
 
             </>
         ));
-    }
+    };
 
     const renderFormContent = (index: number) => (
-            <TabsContainer id={`variant${index}`}>
+            <TabsContainer key={index.toString()} id={`variant${index}`}>
                 <Col className="price__tabs">
 
                     { variations.length && renderVariationFields(index)}
@@ -101,20 +99,7 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
                     >
                         {getFieldDecorator(`sku${index}`, {
                             rules: [{ required: true, message: 'Please provide stock keeping unit!'  }]
-                        })(
-                            <>
-                                {
-                                    index < 1 ?
-                                        ( <InlineInput
-                                            label="SKU"
-                                            tip="kg"
-                                            placeholder="sku"
-                                        />):
-                                        <Input  placeholder="sku" type="number"/>
-                                }
-                            </>
-                        )
-                        }
+                        })(<Input  placeholder="sku" />)}
                     </Form.Item>
 
                     <Form.Item
@@ -123,22 +108,9 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
                     >
                         {getFieldDecorator(`quantity${index}`, {
                             rules: [
-                                {required: true, message: 'How many units do you care for!'},
+                                { required: true, message: 'How many units do you care for!'  },
                             ]
-                        })(
-                            <>
-                                {
-                                    index < 1 ?
-                                        (<InlineInput
-                                            label="Stock"
-                                            tip="quantity"
-                                            placeholder="Stock"
-                                        />) :
-                                        <Input placeholder="Stock" type="number"/>
-                                }
-                            </>
-                        )
-                        }
+                        })(<Input  placeholder="Quantity" type="number" />)}
                     </Form.Item>
 
                     <Form.Item
@@ -149,22 +121,7 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
                             rules: [
                                 {required: true, message: 'Please provide price!'},
                             ]
-                        })(
-                            <>
-                                {
-                                    index < 1 ?
-                                        (<InlineInput
-                                            label="Price"
-                                            tip="Price"
-                                            placeholder="Price"
-                                            suffix="KSH"
-                                            type="number"
-                                        />) :
-                                        <Input placeholder="price" suffix="KSH" type="number"/>
-                                }
-                            </>
-                        )
-                        }
+                        })(<Input placeholder="price" type="number"/>) }
                     </Form.Item>
 
                     <Form.Item
@@ -175,22 +132,7 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
                             rules: [
                                 {required: true, message: 'Please provide sale price!'},
                             ]
-                        })(
-                            <>
-                                {
-                                    index < 1 ?
-                                        (<InlineInput
-                                            label="Sale Price"
-                                            tip="Price"
-                                            placeholder="Sale Price"
-                                            suffix="KSH"
-                                            type="number"
-                                        />) :
-                                        <Input name="" placeholder="Sale Price" suffix="KSH" type="number" />
-                                }
-                            </>
-                        )
-                        }
+                        })( <Input name="" placeholder="Sale Price" type="number" />) }
                     </Form.Item>
                     <>
                         {
@@ -234,8 +176,8 @@ const Pricing = ( {product, onNext, form, callback, variations}: any) => {
                     <Button
                         type="primary"
                         htmlType="submit"
-                        onClick={()=>callback("4")}
-                        disabled={hasErrors(getFieldsError())}
+                        onClick={()=>callback("3")}
+                        // disabled={hasErrors(getFieldsError())}
                     >
                         Save and proceed
                     </Button>

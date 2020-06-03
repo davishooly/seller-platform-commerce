@@ -9,16 +9,6 @@ import {createProductVariation, productAddMedia} from "../../../state/product/cr
 
 
 const PreviewComponent: React.FC<any> = ({ callback, product, history, files, submit }) => {
-
-  // const onFinish = () => {
-  //   createProduct({
-  //     variables: {
-  //       ...product,
-  //       category:categoryId
-  //     }
-  //   })
-  // };
-
   const formattedFiles = [ ...files].splice(1, files.length - 1);
 
   const [{ isPending, isFinished, status }, addMedia] = useMutation(( id, file, path) => productAddMedia(id, file, path ))
@@ -50,6 +40,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, su
 
 
     const handleUpload = useCallback(optimistic => {
+        optimistic.preventDefault();
         submit(optimistic).then((result: any )=>{
             const { status } = result;
             if( status ! === 201) {

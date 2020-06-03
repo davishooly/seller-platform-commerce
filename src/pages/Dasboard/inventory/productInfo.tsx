@@ -77,6 +77,7 @@ const ProductInfo = ({ form, onNext, onPrevClick, callback }: any) => {
         })(
           <InlineInput
             label="Keywords"
+            type="string"
             tip="Add relevant search queries to help find your product on the site via search"
             placeholder="Example: Digital Camera, Light Camera "
           />

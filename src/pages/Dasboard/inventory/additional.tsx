@@ -16,7 +16,14 @@ const { Option } = Select;
 
 const children: Array<any> = [];
 
-const options = [ { value: "Size"}, { value: "Color"}];
+const options = [
+    { value: "Size", index: 0},
+    { value: "Color", index:1},
+    { value: "packaging", index:2 },
+    { value:"local", index:3 },
+    {value: "imported", index:4 }
+
+    ];
 
 for (let i = 0; i < options.length; i++) {
     children.push(<Option key={options[i].value}>{options[i].value}</Option>);
@@ -45,8 +52,8 @@ const Additional: React.FC = ({ form, onNext, callback, setSize }: any) => {
   const barcodeError = isFieldTouched("barcode") && getFieldError("barcode");
   const gtinError = isFieldTouched("gtin") && getFieldError("gtin");
   const netWeightError = isFieldTouched("net_weight") && getFieldError("net_weight");
-  const sizeError =
-    isFieldTouched("size") && getFieldError("size");
+  const variantError =
+        isFieldTouched("variation types") && getFieldError("variation types");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -105,32 +112,16 @@ const Additional: React.FC = ({ form, onNext, callback, setSize }: any) => {
         )}
       </Form.Item>
 
-      <Form.Item
-        validateStatus={sizeError ? "error" : ""}
-        help={sizeError || ""}
-      >
-        {getFieldDecorator("size", {
-          rules: [{ required: true, message: "Please input size!" }]
-        })(
-          <InlineInput
-            label="Size"
-            tip="Add measurements in centimeter"
-            placeholder="Example 5 X 10"
-          />
-        )}
-      </Form.Item>
-
-
         <Form.Item
-            validateStatus={sizeError ? "error" : ""}
-            help={sizeError || ""}
+            validateStatus={variantError ? "error" : ""}
+            help={variantError || ""}
         >
-            {getFieldDecorator("Variant types", {
-                rules: [{ required: true, message: "Please input product variants" }]
+            {getFieldDecorator("Variation types", {
+                rules: [{ required: true, message: "Please input product variations" }]
             })(
                 <Select
                     mode="tags"
-                    placeholder="Please product variants"
+                    placeholder="Example color, size"
                     onChange={handleSizeChange}
                     style={{ width: '100%' , height: "40px"}}
                 >
