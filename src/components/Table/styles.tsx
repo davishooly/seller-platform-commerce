@@ -88,14 +88,22 @@ const DivContainer = styled.div<any>`
     width: 35%;
    }
    
+   .ant-input-group {
+     text-align: center;
+   }
+   
    
    .reload {
-    width: 20%;
+    width: 22% !important;
     ${(props: any) => props.order && css` width: 32%;`}
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     cursor: pointer;
+    transition: all .2s ease-in-out;
+   }
+   .reload:hover {
+     transform: scale(1.1);
    }
 `;
 

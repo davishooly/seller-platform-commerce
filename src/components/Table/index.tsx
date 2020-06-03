@@ -25,7 +25,7 @@ const renderSearchInputs = (searchType: string) => {
             <AutoComplete
                 style={{ width: 200 }}
                 // options={searchFilter}
-                placeholder="try to type `b`"
+                placeholder="categories"
                 filterOption={(inputValue, option: any) =>
                     option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                 }
@@ -35,10 +35,7 @@ const renderSearchInputs = (searchType: string) => {
         (
             <>
                 <Input.Group compact>
-                    <Select defaultValue="1">
-                        <Option value="1">Between</Option>
-                    </Select>
-                    <Input style={{ width: 100, textAlign: 'center' }} placeholder="Minimum" />
+                    <Input style={{ width: 100, textAlign: 'center' }} placeholder="Minimum" type="number"/>
                     <Input
                         className="site-input-split"
                         style={{
@@ -52,6 +49,7 @@ const renderSearchInputs = (searchType: string) => {
                     />
                     <Input
                         className="site-input-right"
+                        type="number"
                         style={{
                             width: 100,
                             textAlign: 'center',
@@ -138,10 +136,13 @@ const RenderTable = ({productList, count, selectProduct, confirm, refresh} : any
                         <Select defaultValue="Filter products" onChange={handleSelect} style={{width: 140}}>
                             {options.map(value => (<Option key={value} value={`${value}`}>{value}</Option>))}
                         </Select>
-                        <Search handleSearch={handleSearch} searchValue={searchValue}/>
+
 
                         {/* render search entry fields  */}
-                        { searchType.length && renderSearchInputs(searchType)}
+                        { searchType.length ?
+                            renderSearchInputs(searchType)
+                            : <Search handleSearch={handleSearch} searchValue={searchValue}/>
+                        }
 
                     </div>
                 </DivContainer>

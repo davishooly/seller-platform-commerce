@@ -83,7 +83,7 @@ const ManageOrders = () => {
                 <Button primary={orders > 0 ? 'primary' : ''} className="verticalLine">Export</Button>
                 <Button primary={orders > 0 ? 'primary' : ''}>Fulfill</Button>
               </ButtonContainer>
-              <div className="reload">
+              <div className="reload" onClick={refresh}>
                 <Icon type="reload"/>
                 Refresh
               </div>
