@@ -55,6 +55,10 @@ const TabsContainer = styles.div`
      margin-bottom: 20px;
    }
    
+   .ant-input-prefix {
+     left: 4px !important;
+   }
+   
    .ant-col {
      display: flex;
      align-items: center;

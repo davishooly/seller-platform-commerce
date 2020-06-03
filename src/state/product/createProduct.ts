@@ -40,7 +40,7 @@ export const createProductVariation = ({ id, values }: any) => {
         id,
         data: {
           values,
-          variable: values.variations[0]
+          variable: 0
         }
     },{
 

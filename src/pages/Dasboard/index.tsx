@@ -1,11 +1,13 @@
 import React, {useContext} from "react";
 import { useSelector } from "react-redux";
 import Menu from "./menu";
-import { Avatar, Table } from "antd";
+import {Avatar, Icon, Table} from "antd";
 import { Link } from "react-router-dom";
 import { columns } from "./dashboardFixtures/tableColumns";
 import dataSources from "./dashboardFixtures/dataSources";
 import Container from "../../components/Common/Container";
+import {useRequest} from "redux-query-react";
+
 
 import { ProductContainer, TableSection } from "../../components/Table/styles";
 import { CardSection } from "./inventory/manageInventory";
@@ -18,12 +20,17 @@ import { RenderCard } from "components/Card";
 import { AnalyticsSection, Span, Div, DivCard } from "./styles";
 import { BarChart } from "components/Charts";
 import ThemeContext from "../../providers/themes/ThemeContext";
+import {bestSellingProducts} from "../../state/dashboard";
 
-// const user: any  = JSON.parse(localStorage.getItem('user'));
 
 const Dashboard: React.FC<any> = () => {
+
+  const [{ isFinished, status}, refresh ] = useRequest(bestSellingProducts());
+
   const { themes } = useContext(ThemeContext);
   const sellerInfo = useSelector((state: any) => state.entities);
+
+
   const renderProductContent = (data: any) => (
     <ProductContainer>
       <Avatar shape="square" size={44} icon="shopping" />
@@ -52,157 +59,172 @@ const Dashboard: React.FC<any> = () => {
           see you again.
         </li>
       </Menu>
-      <Container>
-        <AnalyticsSection>
-          <RenderCard style={{ color: "#28A197", width: 282, height: 479 }}>
-            <Span>Your Orders </Span>
-            <div className="summary">
-              {orderSummary.map(summary => (
-                <div className="summary__section">
-                  <span> {summary.status}</span>
-                  <span> {summary.amount} </span>
-                </div>
-              ))}
-            </div>
-            <div>
-              {fullFilledSummary.map(summary => (
-                <div className="fulfilled">
-                  <Span>
-                    {" "}
-                    {summary.fullFilled === "seller"
-                      ? "Seller fulfilled"
-                      : "Fulfilled by OE"}
-                  </Span>
-                  <Div>
+      {
+        !isFinished && status !== 200  ?
+            (
+                <>
+                  loading.......
+                </>
+            ) :
+            (
+                <Container>
+                  <AnalyticsSection>
+                    <RenderCard style={{ color: "#28A197", width: 282, height: 479 }}>
+                      <Span>Your Orders </Span>
+                      <div className="summary">
+                        {orderSummary.map(summary => (
+                            <div className="summary__section">
+                              <span> {summary.status}</span>
+                              <span> {summary.amount} </span>
+                            </div>
+                        ))}
+                      </div>
+                      <div>
+                        {fullFilledSummary.map(summary => (
+                            <div className="fulfilled">
+                              <Span>
+                                {" "}
+                                {summary.fullFilled === "seller"
+                                    ? "Seller fulfilled"
+                                    : "Fulfilled by OE"}
+                              </Span>
+                              <Div>
                     <span style={{ paddingTop: 4, paddingBottom: 4 }}>
                       {" "}
                       in last day{" "}
                     </span>
-                    <span>{summary.day}</span>
-                  </Div>
-                  <Div>
+                                <span>{summary.day}</span>
+                              </Div>
+                              <Div>
                     <span style={{ paddingTop: 4, paddingBottom: 4 }}>
                       {" "}
                       in last 7 days{" "}
                     </span>
-                    <span>{summary.week}</span>
-                  </Div>
-                </div>
-              ))}
-              <div className="link__orders">
-                <Link to="/d/orders">
-                  <Span> View your orders </Span>
-                </Link>
-              </div>
-            </div>
-          </RenderCard>
-          <RenderCard style={{ color: "#FFFFFF", width: 510, height: 479 }}>
-            <Span style={{ color: "#203341" }}>Sales Summary </Span>
-            <BarChart />
-          </RenderCard>
-          <div className="payments">
-            <RenderCard style={{ color: "#7073AF", width: 354, height: 277 }}>
-              <Span> Payment Summary </Span>
-              <div className="payments__summary">
-                <div>
-                  <Div>
+                                <span>{summary.week}</span>
+                              </Div>
+                            </div>
+                        ))}
+                        <div className="link__orders">
+                          <Link to="/d/orders">
+                            <Span> View your orders </Span>
+                          </Link>
+                        </div>
+                      </div>
+                    </RenderCard>
+                    <RenderCard style={{ color: "#FFFFFF", width: 510, height: 479 }}>
+                      <Span style={{ color: "#203341" }}>Sales Summary </Span>
+                      <BarChart />
+                    </RenderCard>
+                    <div className="payments">
+                      <RenderCard style={{ color: "#7073AF", width: 354, height: 277 }}>
+                        <Span> Payment Summary </Span>
+                        <div className="payments__summary">
+                          <div>
+                            <Div>
                     <span style={{ paddingTop: 4, paddingBottom: 4 }}>
                       {" "}
                       Most recent payment{" "}
                     </span>
-                    <span> KES 0 </span>
-                  </Div>
-                  <p>
-                    Disbursed to your bank account ending in 8970 on August 10,
-                    2019
-                  </p>
-                </div>
+                              <span> KES 0 </span>
+                            </Div>
+                            <p>
+                              Disbursed to your bank account ending in 8970 on August 10,
+                              2019
+                            </p>
+                          </div>
 
-                <Div>
+                          <Div>
                   <span style={{ paddingTop: 4, paddingBottom: 4 }}>
                     {" "}
                     Balance{" "}
                   </span>
-                  <span> KES 0 </span>
-                </Div>
-              </div>
-              <div className="link__orders">
-                <Span> View Payment Summary </Span>
-              </div>
-            </RenderCard>
+                            <span> KES 0 </span>
+                          </Div>
+                        </div>
+                        <div className="link__orders">
+                          <Span> View Payment Summary </Span>
+                        </div>
+                      </RenderCard>
 
-            <RenderCard style={{ color: "#DB6E9B", width: 354, height: 182 }}>
-              <Span> Manage Disputes </Span>
-              <div className="disputes">
-                <Div>
+                      <RenderCard style={{ color: "#DB6E9B", width: 354, height: 182 }}>
+                        <Span> Manage Disputes </Span>
+                        <div className="disputes">
+                          <Div>
                   <span style={{ paddingTop: 4, paddingBottom: 4 }}>
                     {" "}
                     pending{" "}
                   </span>
-                  <span> 0 </span>
-                </Div>
-                <Div>
+                            <span> 0 </span>
+                          </Div>
+                          <Div>
                   <span style={{ paddingTop: 4, paddingBottom: 4 }}>
                     {" "}
                     resolve{" "}
                   </span>
-                  <span> 0 </span>
-                </Div>
-              </div>
-              <div className="link__orders">
-                <Span> View your dispute logs </Span>
-              </div>
-            </RenderCard>
-          </div>
-        </AnalyticsSection>
+                            <span> 0 </span>
+                          </Div>
+                        </div>
+                        <div className="link__orders">
+                          <Span> View your dispute logs </Span>
+                        </div>
+                      </RenderCard>
+                    </div>
+                  </AnalyticsSection>
 
-        <CardSection>
-          {details.map((detail, i) => (
-            <RenderCard
-              key={i.toString()}
-              style={{
-                color: detail.backgroundColor,
-                width: 282,
-                height: "auto"
-              }}
-            >
-              <Span> {detail.title} </Span>
-              {detail.percentage ? (
-                <DivCard>
+                  <CardSection>
+                    {details.map((detail, i) => (
+                        <RenderCard
+                            key={i.toString()}
+                            style={{
+                              color: detail.backgroundColor,
+                              width: 282,
+                              height: "auto"
+                            }}
+                        >
+                          <Span> {detail.title} </Span>
+                          {detail.percentage ? (
+                              <DivCard>
                   <span style={{ paddingTop: 4, paddingBottom: 4 }}>
                     {" "}
                     {detail.percentage}{" "}
                   </span>
-                  <span> increase{detail.increase}% </span>
-                </DivCard>
-              ) : (
-                <div>
-                  <Div>
+                                <span> increase{detail.increase}% </span>
+                              </DivCard>
+                          ) : (
+                              <div>
+                                <Div>
                     <span style={{ paddingTop: 4, paddingBottom: 4 }}>
                       {" "}
                       Cancellation rate{" "}
                     </span>
-                    <span> {detail.increase} </span>
-                  </Div>
-                  <Div>
+                                  <span> {detail.increase} </span>
+                                </Div>
+                                <Div>
                     <span style={{ paddingTop: 4, paddingBottom: 4 }}>
                       {" "}
                       Created in Last 14 days{" "}
                     </span>
-                    <span> {detail.created} </span>
-                  </Div>
-                </div>
-              )}
-            </RenderCard>
-          ))}
-        </CardSection>
-        <TableSection {...themes}>
-          <div className="head">
-            <span> Best Selling Products </span>
-          </div>
-          <Table columns={columns} dataSource={[]} />
-        </TableSection>
-      </Container>
+                                  <span> {detail.created} </span>
+                                </Div>
+                              </div>
+                          )}
+                        </RenderCard>
+                    ))}
+                  </CardSection>
+                  <TableSection {...themes}>
+                    <div className="head">
+                      <span> Best Selling Products </span>
+                      <div className="reload" onClick={refresh}>
+                        <Icon type="reload"/>
+                        Refresh
+                      </div>
+                    </div>
+                    <Table columns={columns} dataSource={[]} />
+                  </TableSection>
+                </Container>
+
+            )
+      }
     </>
   );
 };

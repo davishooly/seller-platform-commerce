@@ -21,10 +21,9 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, su
             if (typeof product[productKey] === 'object') {
                 const variantDetail =  product[productKey][0];
                 variant =  {
-                    "inventory Quantity": variantDetail.availableUnits,
+                    "Stock": variantDetail.availableUnits,
                     "weight": variantDetail.weight,
-                    "actual price": variantDetail.minimumPrice,
-                    price: variantDetail.salePrice,
+                     price: variantDetail.salePrice,
                 }
             }
         });

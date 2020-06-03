@@ -188,7 +188,7 @@ const ProductDetails = () => {
         } = contentScore;
         return description + info + images + variants + bold + packages;
     };
-    const [current, setCurrent] = useState("2");
+    const [current, setCurrent] = useState("1");
     const [categoryPage, setCategoryPage] = useState(true);
     const [categories, setCategories] = useState<any>({
         main: {},

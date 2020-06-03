@@ -112,7 +112,6 @@ const ManageInventory = () => {
         }
     });
 
-
     return (
         <div>
             <CardSection>
@@ -120,7 +119,7 @@ const ManageInventory = () => {
                     renderCardContent(detail, i.toString(), 340)
                 ))}
             </CardSection>
-            < TableSection { ...{productList, refresh, count: sellerProducts.count, selectProduct, confirm }}/>
+            < TableSection { ...{productList, refresh, count: sellerProducts && sellerProducts.count, selectProduct, confirm }}/>
         </div>
     )
 };

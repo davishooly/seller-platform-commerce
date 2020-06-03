@@ -31,7 +31,7 @@ const Pricing = ( {onNext, form, callback, variations}: any) => {
                     variations: data[`name${i}`],
                     requiresShipping: true,
                     sku: data[`sku${i}`],
-                    values: variations,
+                    value: variations[0],
                     barcode:"",
                     trackInventory: true,
                     taxable: true,
@@ -114,7 +114,7 @@ const Pricing = ( {onNext, form, callback, variations}: any) => {
                             rules: [
                                 {required: true, message: 'Please provide price!'},
                             ]
-                        })(<Input placeholder="price" type="number"/>) }
+                        })(<Input prefix="ksh" placeholder="price" type="number"/>) }
                     </Form.Item>
 
                     <Form.Item
@@ -125,7 +125,7 @@ const Pricing = ( {onNext, form, callback, variations}: any) => {
                             rules: [
                                 {required: true, message: 'Please provide sale price!'},
                             ]
-                        })( <Input name="" placeholder="Sale Price" type="number" />) }
+                        })( <Input prefix="ksh" name="" placeholder="Sale Price" type="number" />) }
                     </Form.Item>
                     <>
                         {
@@ -169,7 +169,7 @@ const Pricing = ( {onNext, form, callback, variations}: any) => {
                     <Button
                         type="primary"
                         htmlType="submit"
-                        onClick={()=>callback("3")}
+                        onClick={()=>callback("4")}
                         disabled={hasErrors(getFieldsError())}
                     >
                         Save and proceed

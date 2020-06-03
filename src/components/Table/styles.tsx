@@ -45,6 +45,18 @@ const TableSection = styled.section<ThemesType>`
      color: ${props => props.blueText} !important;
    }
    
+   .reload {
+    width: 6% !important;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+   }
+   .reload:hover {
+     transform: scale(1.1);
+   }
+   
    .anticon:hover { color: #40a9ff !important; }
    
    a {
