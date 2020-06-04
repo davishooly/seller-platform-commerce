@@ -10,34 +10,44 @@ import {PlusCircleOutlined} from "@ant-design/icons/lib";
 const { Option } = Select;
 const options = ['category', 'price'];
 
+const renderSearchInputs = (
+    searchType: string,
+    setFilterValue: Function,
+    filterValue: any,
+) => {
 
-const searchFilter = [
-    { value: 'Burns Bay Road' },
-    { value: 'Downing Street' },
-    { value: 'Wall Street' },
-];
+    const handleChange = (e:any) => {
+        const { name, value } = e.target;
+        setFilterValue({ ...filterValue,  [name]: name === "category" ? value : Number(value)})
 
-
-const renderSearchInputs = (searchType: string) => {
+    };
 
     return searchType === "category" ?
         (
-            <AutoComplete
-                style={{ width: 200 }}
-                // options={searchFilter}
-                placeholder="categories"
-                filterOption={(inputValue, option: any) =>
-                    option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                }
+            <Input
+                value={filterValue?.category}
+                onChange={handleChange}
+                name="category"
+                style={{ width: 100, textAlign: 'center' }}
+                placeholder="category"
             />
+
         )
         :
         (
             <>
                 <Input.Group compact>
-                    <Input style={{ width: 100, textAlign: 'center' }} placeholder="Minimum" type="number"/>
+                    <Input
+                        value={filterValue?.minPrice}
+                        onChange={handleChange}
+                        name="minPrice"
+                        style={{ width: 100, textAlign: 'center' }}
+                        placeholder="Minimum"
+                        type="number"
+                    />
                     <Input
                         className="site-input-split"
+
                         style={{
                             width: 30,
                             borderLeft: 0,
@@ -49,11 +59,14 @@ const renderSearchInputs = (searchType: string) => {
                     />
                     <Input
                         className="site-input-right"
+                        name="maxPrice"
+                        onChange={handleChange}
                         type="number"
                         style={{
                             width: 100,
                             textAlign: 'center',
                         }}
+                        value={filterValue?.maxPrice}
                         placeholder="Maximum"
                     />
                 </Input.Group>
@@ -66,7 +79,9 @@ const renderSearchInputs = (searchType: string) => {
 const RenderTable = ({
                          productList,
                          count,
+                         filterValue,
                          selectedProduct,
+                         setFilterValue,
                          confirm ,
                          refresh,
                          deletePending,
@@ -74,7 +89,6 @@ const RenderTable = ({
                          : any) => {
 
     const { themes } = useContext(ThemeContext);
-
 
     const [searchValue, setSearchValue] = useState('');
 
@@ -146,7 +160,7 @@ const RenderTable = ({
 
                         {/* render search entry fields  */}
                         { searchType.length ?
-                            renderSearchInputs(searchType)
+                            renderSearchInputs(searchType, setFilterValue, filterValue)
                             : <Search handleSearch={handleSearch} searchValue={searchValue}/>
                         }
 
@@ -158,3 +172,5 @@ const RenderTable = ({
     )
 };
 export default RenderTable;
+
+

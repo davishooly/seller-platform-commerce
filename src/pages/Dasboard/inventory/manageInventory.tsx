@@ -18,12 +18,22 @@ export const CardSection = styled.section`
  width: 97.09%;
 `;
 
+const filter = { minPrice: "", maxPrice: "", category:''};
+
+
 const ManageInventory = () => {
 
-    const [{isFinished, isPending: productFetchPending, status}, refresh] = useRequest(getSellerProducts());
+    const [filterValue, setFilterValue]= useState(filter);
+
+    const [compoundFilter, setCompoundFilter ] = useState({});
+
+
+    const [{isFinished, isPending: productFetchPending, status}, refresh] = useRequest(getSellerProducts({
+        ...filterValue
+    }));
+
     const sellerProducts = useSelector((state: any) => state.entities.sellerProducts);
     const [selectedProduct, setSelectedProduct]: any = useState([]);
-
 
     const [{ isPending: deletePending}, deleteProducts] = useMutation((optimistic) => deleteProduct(selectedProduct[0].id, optimistic));
 
@@ -122,10 +132,15 @@ const ManageInventory = () => {
             < TableSection { ...{productList,
                 productFetchPending,
                 deletePending,
+                setFilterValue,
+                compoundFilter,
+                setCompoundFilter,
+                filterValue,
                 refresh ,
                 count: sellerProducts && sellerProducts.count,
                 selectedProduct,
-                confirm }}
+                confirm
+            }}
             />
         </div>
     )
