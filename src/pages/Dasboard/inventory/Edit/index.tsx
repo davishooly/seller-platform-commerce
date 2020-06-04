@@ -14,7 +14,7 @@ import {updateSellerProduct} from "./updateProducts";
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const Edit: React.FC<any> = ({ form , match }) => {
+const Edit: React.FC<any> = ({ form }) => {
   const {
     getFieldDecorator,
     getFieldError,
@@ -60,8 +60,8 @@ const Edit: React.FC<any> = ({ form , match }) => {
               <Menu.Item key="1" onClick={() => setPage("1")}>Basic Information</Menu.Item>
               <Menu.Item key="2" onClick={() => setPage("2")}>Additional Details</Menu.Item>
               <Menu.Item key="3" onClick={() => setPage("3")} >Product Images</Menu.Item>
-              <Menu.Item key="4" onClick={() => setPage("4")}>Stock management</Menu.Item>
-              <Menu.Item key="5" onClick={() => setPage("5")}>Orders</Menu.Item>
+              {/*<Menu.Item key="4" onClick={() => setPage("4")}>Stock management</Menu.Item>*/}
+              {/*<Menu.Item key="5" onClick={() => setPage("5")}>Orders</Menu.Item>*/}
             </Menu>
           </Sider>
           <Content

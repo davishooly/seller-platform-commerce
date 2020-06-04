@@ -20,10 +20,13 @@ const apiProxy = {
 module.exports = function(app) {
   app.use(
       [
-        "/products","/sellers",
-        "/sellers/login", "/oauth2",
-        "/auth",
-        "/sellers/products/orders/"
+          "/products",
+          "/sellers",
+          "/sellers/login",
+          "/sellers/products/",
+          "/oauth2",
+          "/auth",
+          "/sellers/products/orders/"
       ],
       proxy(apiProxy));
 };

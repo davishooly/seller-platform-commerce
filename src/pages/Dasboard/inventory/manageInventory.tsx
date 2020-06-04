@@ -20,11 +20,12 @@ export const CardSection = styled.section`
 
 const ManageInventory = () => {
 
-    const [{isFinished, status}, refresh] = useRequest(getSellerProducts());
+    const [{isFinished, isPending: productFetchPending, status}, refresh] = useRequest(getSellerProducts());
     const sellerProducts = useSelector((state: any) => state.entities.sellerProducts);
-    const [selectProduct, setSelectedProduct]: any = useState([]);
+    const [selectedProduct, setSelectedProduct]: any = useState([]);
 
-    const [{isPending, isFinished: finished}, deleteProducts] = useMutation((optimistic) => deleteProduct(selectProduct[0].id, optimistic));
+
+    const [{ isPending: deletePending}, deleteProducts] = useMutation((optimistic) => deleteProduct(selectedProduct[0].id, optimistic));
 
     const handleDeleteProduct = useCallback(optimistic => {
         deleteProducts(optimistic).then(( response: any) => {
@@ -35,7 +36,7 @@ const ManageInventory = () => {
         })
     }, [deleteProducts]);
 
-    if (!isFinished && status !== 200) {
+    if (!isFinished && status !== 200 && !sellerProducts) {
         return (
             <>
                 loading.......
@@ -53,7 +54,7 @@ const ManageInventory = () => {
 
     const onChange = (e: any) => {
         const {value, checked} = e.target;
-        const products = Object.assign([], selectProduct);
+        const products = Object.assign([], selectedProduct);
         checked ?
             setSelectedProduct([...products, value])
             :
@@ -76,11 +77,11 @@ const ManageInventory = () => {
         </ListingContainer>
     );
 
-    const renderProductContent = (data: any) => (
+    const renderProductContent = (product: any) => (
         <ProductContainer>
-            <Checkbox value={data} onChange={onChange}/>
+            <Checkbox value={product} onChange={onChange}/>
             <Avatar shape="square" size={44} icon="shopping"/>
-            <span>{data.name} </span>
+            <span>{product.name} </span>
         </ProductContainer>
     );
 
@@ -89,12 +90,12 @@ const ManageInventory = () => {
             const {id, createdOn, name, variationVariables} = product;
 
             variationVariables.forEach((variable: any) => {
-                const {values} = variable;
+                const {values, pk} = variable;
 
                 values.forEach((value: any) => {
                     const {selling_price, sku, in_stock,} = value;
                     productList.push({
-                        key: id,
+                        key: pk,
                         date: moment(createdOn).format('Do MMMM YYYY'),
                         price: Number(selling_price),
                         stock: in_stock,
@@ -118,7 +119,14 @@ const ManageInventory = () => {
                     renderCardContent(detail, i.toString(), 340)
                 ))}
             </CardSection>
-            < TableSection { ...{productList, refresh , count: sellerProducts && sellerProducts.count, selectProduct, confirm }}/>
+            < TableSection { ...{productList,
+                productFetchPending,
+                deletePending,
+                refresh ,
+                count: sellerProducts && sellerProducts.count,
+                selectedProduct,
+                confirm }}
+            />
         </div>
     )
 };

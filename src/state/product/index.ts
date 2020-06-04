@@ -1,9 +1,11 @@
 import {
-  productsCategoriesRoot,
-  sellersProductsDelete,
+    productsCategoriesRoot,
+    sellersProductsVariableDetails,
+    sellersProductsVariablesDestroyDelete,
+    sellersProductsDelete,
+    sellersProductsDetailsRead
 } from "api/src/apis";
 
-import { sellersProductsDetailsRead } from 'api/src/apis/SellersApi'
 import { useRequest } from "redux-query-react";
 import { useSelector } from "react-redux";
 

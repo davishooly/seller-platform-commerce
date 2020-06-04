@@ -31,7 +31,7 @@ const ManageOrders = () => {
 
   const sellerOrders = useSelector((state: any) => state.entities.sellerOrders);
 
-  if(!isFinished && status !== 200){
+  if(!isFinished && status !== 200 && !sellerOrders){
     return (
         <>
           loading.......
@@ -99,7 +99,7 @@ const ManageOrders = () => {
               />
             </div>
           </DivContainer>
-          <Table columns={columns} dataSource={data}/>
+          <Table loading={isPending} columns={columns} dataSource={data}/>
         </TableSection>
       </>
   )

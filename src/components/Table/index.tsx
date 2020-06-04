@@ -63,14 +63,20 @@ const renderSearchInputs = (searchType: string) => {
 };
 
 
-const RenderTable = ({productList, count, selectProduct, confirm , refresh } : any) => {
+const RenderTable = ({
+                         productList,
+                         count,
+                         selectedProduct,
+                         confirm ,
+                         refresh,
+                         deletePending,
+                         productFetchPending }
+                         : any) => {
 
     const { themes } = useContext(ThemeContext);
 
 
     const [searchValue, setSearchValue] = useState('');
-
-    const [isVisible, setVisible] = useState(false);
 
     const [searchType, setSearchType ] = useState('');
 
@@ -80,10 +86,10 @@ const RenderTable = ({productList, count, selectProduct, confirm , refresh } : a
     };
 
     const handleSelect = (value: string) => {
-         setSearchType(value);
+        setSearchType(value);
     };
 
-    const products = selectProduct.length;
+    const products = selectedProduct.length;
 
     let searchProducts: any;
 
@@ -115,7 +121,7 @@ const RenderTable = ({productList, count, selectProduct, confirm , refresh } : a
                         <ButtonContainer>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Export</Button>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Unlist</Button>
-                            <Link  to={`/dashboard/inventory/edit/${selectProduct.length && selectProduct[0].id}`}>
+                            <Link  to={`/dashboard/inventory/edit/${selectedProduct.length && selectedProduct[0].id}`}>
                                 <Button disabled={products !== 1} primary={products === 1 ? 'primary' : ''} className="verticalLine">Edit</Button>
                             </Link>
                             <Popconfirm
@@ -146,7 +152,7 @@ const RenderTable = ({productList, count, selectProduct, confirm , refresh } : a
 
                     </div>
                 </DivContainer>
-                <Table pagination={{total: count}} dataSource={searchProducts} columns={columns}/>
+                <Table loading={deletePending || productFetchPending} pagination={{total: count}} dataSource={searchProducts} columns={columns}/>
             </TableSection>
         </div>
     )
