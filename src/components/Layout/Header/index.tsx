@@ -181,7 +181,7 @@ export const DashboardHeader = () => {
                                     <PopContainer logout>
                                         <div className="pop__content">
                                             <span><NavLink to="/dashboard/orders" activeClassName="active"> Orders </NavLink></span>
-                                            {/*<span>Payment</span>*/}
+                                            <span><NavLink to="/dashboard/payout" activeClassName="active"> Payouts </NavLink></span>
                                             <span><NavLink to="/dashboard/settings" activeClassName="active"> Profile </NavLink></span>
                                             <Button {...themes} name="log out" onClick={handleLogout}> Logout </Button>
                                         </div>

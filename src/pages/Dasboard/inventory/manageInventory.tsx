@@ -30,7 +30,7 @@ const ManageInventory = () => {
         deleteProducts(optimistic).then(( response: any) => {
             if(response.status ===  204){
                 setSelectedProduct([])
-                refresh();
+                // refresh();
             }
         })
     }, [deleteProducts]);

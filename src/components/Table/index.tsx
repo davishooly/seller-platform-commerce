@@ -115,7 +115,7 @@ const RenderTable = ({productList, count, selectProduct, confirm , refresh } : a
                         <ButtonContainer>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Export</Button>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Unlist</Button>
-                            <Link to={`/dashboard/inventory/edit/${selectProduct.length && selectProduct[0].id}`}>
+                            <Link  to={`/dashboard/inventory/edit/${selectProduct.length && selectProduct[0].id}`}>
                                 <Button disabled={products !== 1} primary={products === 1 ? 'primary' : ''} className="verticalLine">Edit</Button>
                             </Link>
                             <Popconfirm
@@ -124,7 +124,7 @@ const RenderTable = ({productList, count, selectProduct, confirm , refresh } : a
                                 okText="Yes"
                                 cancelText="No"
                             >
-                                <Button disabled={products < 0} delete={products > 0 ? 'delete' : ''}>Delete</Button>
+                                <Button disabled={products < 1} delete={products > 0 ? 'delete' : ''}>Delete</Button>
                             </Popconfirm>
                         </ButtonContainer>
                         <div className="reload"  onClick={refresh}>

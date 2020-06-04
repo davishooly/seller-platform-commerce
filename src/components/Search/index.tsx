@@ -17,7 +17,7 @@ const Index = ( { handleSearch, searchValue }: Props) => {
             onChange={(value) => handleSearch(value)}
             value={ searchValue }
             placeholder="search products"
-            onSearch={value => handleSearch(value)}
+            // onSearch={value => handleSearch(value)}
             style={{width: 200}}
         />
       </div>
