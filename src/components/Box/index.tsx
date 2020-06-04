@@ -41,7 +41,14 @@ const Box = styled.div`
      min-height: 6vh;
     justify-content: space-between;
   }
-  `;
+  
+   .ant-select-selection__rendered > ul > li {
+    height: 24px;
+    margin-top: 6px;
+    maring-left: 2px;
+    line-height: 22px;
+   }
+ `;
 
 
 export default Box

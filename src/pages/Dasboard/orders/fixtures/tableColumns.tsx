@@ -10,7 +10,7 @@ const Div = Styled.div`
 
 export const columns =  [
   {
-    title: 'Order #',
+    title: 'Order',
     dataIndex: 'order',
     key: 'order'
   },

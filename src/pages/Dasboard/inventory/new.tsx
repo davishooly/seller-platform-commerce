@@ -234,10 +234,10 @@ const ProductDetails = () => {
     });
 
     // create root product product
-    // const [{}, createProductForSeller] = useMutation((optimistic) => {
-        // const id  = categories.category.id === undefined ? categories.main.id : categories.category.id;
-        // return createProductSeller(product, sellerId , id, optimistic)
-    // });
+    const [{}, createProductForSeller] = useMutation((optimistic) => {
+        const id  = categories.category.id === undefined ? categories.main.id : categories.category.id;
+        return createProductSeller(product, sellerId , id, optimistic)
+    });
 
     return (
         <>
@@ -329,7 +329,7 @@ const ProductDetails = () => {
                                             callback={callback}
                                             product={product}
                                             categoryId={categories.main.id}
-                                            // submit={createProductForSeller}
+                                            submit={createProductForSeller}
                                         />
                                     </TabPane>
                                 </Tabs>

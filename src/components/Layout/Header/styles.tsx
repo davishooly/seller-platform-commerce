@@ -83,6 +83,10 @@ const PopContainer = styled.div<any>`
     border-bottom: 1px solid #8d959b3b;
   }
   .pop__content {
+  
+      a { 
+        color: #000000;
+      }
      display: flex;
      flex-direction: column;
       height: 100%;

@@ -20,7 +20,7 @@ export const CardSection = styled.section`
 
 const ManageInventory = () => {
 
-    // const [{isFinished, status}, refresh] = useRequest(getSellerProducts());
+    const [{isFinished, status}, refresh] = useRequest(getSellerProducts());
     const sellerProducts = useSelector((state: any) => state.entities.sellerProducts);
     const [selectProduct, setSelectedProduct]: any = useState([]);
 
@@ -34,15 +34,13 @@ const ManageInventory = () => {
         })
     }, [deleteProducts]);
 
-
-    //
-    // if (!isFinished && status !== 200) {
-    //     return (
-    //         <>
-    //             loading.......
-    //         </>
-    //     )
-    // }
+    if (!isFinished && status !== 200) {
+        return (
+            <>
+                loading.......
+            </>
+        )
+    }
 
     let productList: Array<any> = [];
 
@@ -119,7 +117,7 @@ const ManageInventory = () => {
                     renderCardContent(detail, i.toString(), 340)
                 ))}
             </CardSection>
-            < TableSection { ...{productList, count: sellerProducts && sellerProducts.count, selectProduct, confirm }}/>
+            < TableSection { ...{productList, refresh , count: sellerProducts && sellerProducts.count, selectProduct, confirm }}/>
         </div>
     )
 };

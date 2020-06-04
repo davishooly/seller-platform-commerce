@@ -180,10 +180,9 @@ export const DashboardHeader = () => {
                                 <PopConfirm logout isOpen={isOpen} setOpenPop={setOpenPop}>
                                     <PopContainer logout>
                                         <div className="pop__content">
-                                            <span>Orders</span>
-                                            <span>Addresses</span>
-                                            <span>Payment</span>
-                                            <span>Profile</span>
+                                            <span><NavLink to="/dashboard/orders" activeClassName="active"> Orders </NavLink></span>
+                                            {/*<span>Payment</span>*/}
+                                            <span><NavLink to="/dashboard/settings" activeClassName="active"> Profile </NavLink></span>
                                             <Button {...themes} name="log out" onClick={handleLogout}> Logout </Button>
                                         </div>
                                     </PopContainer>

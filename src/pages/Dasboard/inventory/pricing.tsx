@@ -84,7 +84,7 @@ const Pricing = ( {onNext, form, callback, variations}: any) => {
             <TabsContainer key={index.toString()} id={`variant${index}`}>
                 <Col className="price__tabs">
 
-                    { variations.length && renderVariationFields(index)}
+                    { variations.length ?  renderVariationFields(index) : ''}
 
                     <Form.Item
                         validateStatus={labelError(`sku${index}`) ? 'error': '' }

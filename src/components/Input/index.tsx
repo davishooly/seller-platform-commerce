@@ -89,7 +89,7 @@ const StyledInline = styled.div`
             content: "(";
         }
     }
-`
+`;
 
 export const InlineInput = (props: any) => (
     <StyledInline>

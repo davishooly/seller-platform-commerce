@@ -1,4 +1,5 @@
 import React, {useCallback} from 'react'
+import { useHistory }  from "react-router-dom";
 import {Action, getBase64} from "./images";
 import { Button, notification, Icon } from 'antd';
 import { Editor } from 'react-draft-wysiwyg';
@@ -8,10 +9,13 @@ import {useMutation} from "redux-query-react";
 import {createProductVariation, productAddMedia} from "../../../state/product/createProduct";
 
 
-const PreviewComponent: React.FC<any> = ({ callback, product, history, files, submit }) => {
+const PreviewComponent: React.FC<any> = ({ callback, product , files, submit }) => {
+
+    const history = useHistory();
+
     const formattedFiles = [ ...files].splice(1, files.length - 1);
 
-    const [{ isPending, isFinished, status }, addMedia] =
+    const [{ status }, addMedia] =
         useMutation(( id, file, path) => productAddMedia(id, file, path ));
 
 
@@ -33,32 +37,33 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, su
     const variant: any = formatVariant();
 
 
-    const [{}, createProductVariant] = useMutation((id) => {
+    const [{ isPending }, createProductVariant] = useMutation((id) => {
         return createProductVariation({id , values: product.variants })
     });
 
 
-    // const handleUpload = useCallback(optimistic => {
-    //     optimistic.preventDefault();
-    //     submit(optimistic).then((result: any )=>{
-    //         const { status } = result;
-    //         if( status === 201) {
-    //             const { body: { id } } = result;
-    //             createProductVariant(id).then((result: any) =>{
-    //                 const { status } = result;
-    //                 if(status === 201){
-    //                     files.fileList.forEach( (file: any) =>  {
-    //                         getBase64(file).then(url => {
-    //                             addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
-    //                         })
-    //                     })
-    //                 }
-    //             });
-    //
-    //         }
-    //     })
-    //
-    // }, [submit]);
+    const handleUpload = useCallback(optimistic => {
+        optimistic.preventDefault();
+        submit(optimistic).then((result: any )=>{
+            const { status } = result;
+            if( status === 201) {
+                const { body: { id } } = result;
+                createProductVariant(id).then((result: any) =>{
+                    const { status } = result;
+                    if(status === 201){
+                        history.push("/dashboard/inventory/manage");
+                        files.fileList.forEach( (file: any) =>  {
+                            getBase64(file).then(url => {
+                                addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+                            })
+                        })
+                    }
+                });
+
+            }
+        })
+
+    }, [submit]);
 
     return (
         <>
@@ -161,7 +166,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, su
             </PreviewProductDetailsContainer>
             <Action>
                 <Button onClick={()=>callback("5")}> Back </Button>
-                <Button loading={isPending}  type="primary" > Submit and Finish </Button>
+                <Button loading={isPending} onClick={handleUpload}  type="primary" > Submit and Finish </Button>
             </Action>
         </>
     );

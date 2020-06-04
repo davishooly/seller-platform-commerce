@@ -101,22 +101,23 @@ const Additional: React.FC = ({ form, onNext, callback, setSize }: any) => {
         help={netWeightError || ""}
       >
         {getFieldDecorator("net_weight", {
-          rules: [{ required: true, message: "Please input a Net weight!" }]
+          rules: [{ required: true, message: "Please input weight!" }]
         })(
           <InlineInput
             label="Weight"
             tip="kg"
+            type="number"
             placeholder="Example: 20kg"
           />
         )}
       </Form.Item>
-
+        <span > Choose product variant attribute (Example variant by color, size, material) </span>
         <Form.Item
             validateStatus={variantError ? "error" : ""}
             help={variantError || ""}
         >
             {getFieldDecorator("Variation types", {
-                rules: [{ required: true, message: "Please input product variations" }]
+                // rules: [{ required: true, message: "Please input product variations" }]
             })(
                 <Select
                     mode="tags"
