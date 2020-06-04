@@ -9,7 +9,7 @@ import {useMutation} from "redux-query-react";
 import {createProductVariation, productAddMedia} from "../../../state/product/createProduct";
 
 
-const PreviewComponent: React.FC<any> = ({ callback, product , files, submit }) => {
+const PreviewComponent: React.FC<any> = ({ callback, product , files, submit, submitting }) => {
 
     const history = useHistory();
 
@@ -51,8 +51,12 @@ const PreviewComponent: React.FC<any> = ({ callback, product , files, submit }) 
                 createProductVariant(id).then((result: any) =>{
                     const { status } = result;
                     if(status === 201){
+                        notification.success({
+                            message: "Success",
+                            description: "Your Product has been created successfully"
+                        });
                         history.push("/dashboard/inventory/manage");
-                        files.fileList.forEach( (file: any) =>  {
+                        files.forEach( (file: any) =>  {
                             getBase64(file).then(url => {
                                 addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
                             })
@@ -166,7 +170,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product , files, submit }) 
             </PreviewProductDetailsContainer>
             <Action>
                 <Button onClick={()=>callback("5")}> Back </Button>
-                <Button loading={isPending} onClick={handleUpload}  type="primary" > Submit and Finish </Button>
+                <Button loading={isPending || submitting} onClick={handleUpload}  type="primary" > Submit and Finish </Button>
             </Action>
         </>
     );

@@ -49,7 +49,7 @@ const getSellerProducts = () => {
 
 const readSeller = (id: any) => {
     const config = sellersRead ({
-        sellerId:id
+        id
     },{
         transform: (body: any) => ({
             sellerInfo: body

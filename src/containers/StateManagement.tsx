@@ -25,14 +25,14 @@ const persistConfig = {
     storage,
     whitelist: ["auth"],
     blacklist: ['queries']
-}
+};
 
 const persistEntitiesConfig = {
     key: 'entities',
     storage,
-    whitelist: ["rootCategories",  "sellerProducts"],
-    blacklist: ['seller', 'currentSellerProduct']
-}
+    whitelist: ["rootCategories",  "sellerProducts", 'seller'],
+    blacklist: ['currentSellerProduct']
+};
 
 
 // Reducers

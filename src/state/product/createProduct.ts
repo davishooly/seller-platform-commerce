@@ -1,5 +1,7 @@
 import { productsAddMedia, sellersProductsVariablesCreate, sellersProductsCreate  } from "api/src";
 
+import { options } from "../../pages/Dasboard/inventory/additional";
+
 export const createProductSeller = (product: any, sellerId: number, categoryId: number,  optimistic: any) => {
     const config =  sellersProductsCreate({
         data: {
@@ -35,12 +37,15 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
 };
 
 
+
 export const createProductVariation = ({ id, values }: any) => {
+    const { variation } = values[0];
+
     return sellersProductsVariablesCreate({
         id,
         data: {
           values,
-          variable: 0
+          variable: options.filter( ({ value}):any => value === variation)[0].index
         }
     },{
 
@@ -51,7 +56,7 @@ export const productAddMedia = (productId: any, file: any, path: any) => {
     return  productsAddMedia({
         id: productId,
         data: {
-            file,
+            file: file,
             path,
             kind: 2
         }

@@ -234,7 +234,7 @@ const ProductDetails = () => {
     });
 
     // create root product product
-    const [{}, createProductForSeller] = useMutation((optimistic) => {
+    const [{ isPending }, createProductForSeller] = useMutation((optimistic) => {
         const id  = categories.category.id === undefined ? categories.main.id : categories.category.id;
         return createProductSeller(product, sellerId , id, optimistic)
     });
@@ -327,6 +327,7 @@ const ProductDetails = () => {
                                         <Preview
                                             files={files}
                                             callback={callback}
+                                            submitting={isPending}
                                             product={product}
                                             categoryId={categories.main.id}
                                             submit={createProductForSeller}
