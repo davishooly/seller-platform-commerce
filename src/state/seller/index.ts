@@ -1,4 +1,4 @@
-import {sellersCreate, sellersProductsListList} from "api/src/apis";
+import {sellersCreate, sellersProductsList, sellersRead } from "api/src/apis";
 
 
 const createSeller = (customerDetails: any) => {
@@ -34,7 +34,7 @@ const createSeller = (customerDetails: any) => {
 
 
 const getSellerProducts = () => {
-    const config = sellersProductsListList({}, {
+    const config = sellersProductsList({}, {
         transform: (body: any) => ({
             sellerProducts: body
         }),
@@ -46,4 +46,21 @@ const getSellerProducts = () => {
     return config;
 };
 
-export { createSeller, getSellerProducts };
+
+const readSeller = (id: any) => {
+    const config = sellersRead ({
+        sellerId:id
+    },{
+        transform: (body: any) => ({
+            sellerInfo: body
+        }),
+        update: {
+            sellerInfo: (prev: any , next: any) => next
+        }
+
+    });
+    return config;
+};
+
+
+export { createSeller, getSellerProducts, readSeller };

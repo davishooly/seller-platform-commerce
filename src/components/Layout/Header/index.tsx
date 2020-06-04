@@ -207,7 +207,7 @@ export const DashboardHeader = () => {
                 </ul>
 
                 <ul>
-                    <li><Link to="/new"> Help & FAQs </Link></li>
+                    <li> Help & FAQs </li>
                     <li> View Shop</li>
                 </ul>
             </div>

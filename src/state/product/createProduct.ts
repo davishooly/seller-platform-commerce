@@ -1,4 +1,4 @@
-import { sellersProductsCreate, productsAddMedia, sellersProductsVariablesCreate } from "api/src";
+import { productsAddMedia, sellersProductsVariablesCreate, sellersProductsCreate  } from "api/src";
 
 export const createProductSeller = (product: any, sellerId: number, categoryId: number,  optimistic: any) => {
     const config =  sellersProductsCreate({

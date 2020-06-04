@@ -38,27 +38,27 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, su
     });
 
 
-    const handleUpload = useCallback(optimistic => {
-        optimistic.preventDefault();
-        submit(optimistic).then((result: any )=>{
-            const { status } = result;
-            if( status === 201) {
-                const { body: { id } } = result;
-                createProductVariant(id).then((result: any) =>{
-                    const { status } = result;
-                    if(status === 201){
-                        files.fileList.forEach( (file: any) =>  {
-                            getBase64(file).then(url => {
-                                addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
-                            })
-                        })
-                    }
-                });
-
-            }
-        })
-
-    }, [submit]);
+    // const handleUpload = useCallback(optimistic => {
+    //     optimistic.preventDefault();
+    //     submit(optimistic).then((result: any )=>{
+    //         const { status } = result;
+    //         if( status === 201) {
+    //             const { body: { id } } = result;
+    //             createProductVariant(id).then((result: any) =>{
+    //                 const { status } = result;
+    //                 if(status === 201){
+    //                     files.fileList.forEach( (file: any) =>  {
+    //                         getBase64(file).then(url => {
+    //                             addMedia(id, url , file.name ).then(()=>{}).catch(()=>{})
+    //                         })
+    //                     })
+    //                 }
+    //             });
+    //
+    //         }
+    //     })
+    //
+    // }, [submit]);
 
     return (
         <>
@@ -161,7 +161,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, history, files, su
             </PreviewProductDetailsContainer>
             <Action>
                 <Button onClick={()=>callback("5")}> Back </Button>
-                <Button loading={isPending} onClick={handleUpload} type="primary" > Submit and Finish </Button>
+                <Button loading={isPending}  type="primary" > Submit and Finish </Button>
             </Action>
         </>
     );

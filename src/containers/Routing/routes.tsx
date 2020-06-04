@@ -21,7 +21,7 @@ const ErrorPage = lazy(() => import("../../pages/Error/error"));
 
 
 
-const errorPageRoute = () => (
+export const errorPageRoute = () => (
     <>
         <Route path={"/404"}>
             <ErrorPage/>
@@ -76,7 +76,7 @@ const DashboardRoutesL = (props: any) => {
 
     return (
         <Switch>
-            <Route exact path="/dashboard/settings">
+            <Route path="/dashboard/settings">
                 <Settings/>
             </Route>
             <Redirect exact from="/dashboard/inventory" to='/dashboard/inventory/manage'/>
