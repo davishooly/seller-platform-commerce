@@ -21,6 +21,7 @@ import { AnalyticsSection, Span, Div, DivCard } from "./styles";
 import { BarChart } from "components/Charts";
 import ThemeContext from "../../providers/themes/ThemeContext";
 import {bestSellingProducts} from "../../state/dashboard";
+import useBeforeUnload from "use-before-unload/lib";
 
 
 const Dashboard: React.FC<any> = () => {
@@ -49,6 +50,11 @@ const Dashboard: React.FC<any> = () => {
       ...data,
       product: renderProductContent(data)
     };
+  });
+
+  useBeforeUnload(evt => {
+    /* Do some checks here if you like */
+    return true; // Suppress reload
   });
 
   return (

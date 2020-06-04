@@ -16,6 +16,7 @@ import { sellerFromToken } from "../../api/src/apis";
 import {getProductsCategories} from "../../state/product";
 import Edit from 'pages/Dasboard/inventory/Edit';
 import ResetPassword from "../../pages/Auth/resetPassword";
+import useBeforeUnload from "use-before-unload/lib";
 
 const ErrorPage = lazy(() => import("../../pages/Error/error"));
 
@@ -73,6 +74,11 @@ export const AccountActivationRoutes = () => (
 
 
 const DashboardRoutesL = (props: any) => {
+
+    useBeforeUnload(evt => {
+        /* Do some checks here if you like */
+        return true; // Suppress reload
+    });
 
     return (
         <Switch>
