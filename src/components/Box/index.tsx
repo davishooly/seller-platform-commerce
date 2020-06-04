@@ -45,7 +45,7 @@ const Box = styled.div`
    .ant-select-selection__rendered > ul > li {
     height: 24px;
     margin-top: 6px;
-    maring-left: 2px;
+    margin-left: 2px;
     line-height: 22px;
    }
  `;
