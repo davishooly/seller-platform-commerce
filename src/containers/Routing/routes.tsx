@@ -120,7 +120,7 @@ const mapPropsToConfig = (props: any): any => {
                 }
             }
         ),
-        getProductsCategories(props.rootCategories)
+        getProductsCategories(props.rootCategories),
     ];
     return actions;
 };

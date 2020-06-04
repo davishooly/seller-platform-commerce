@@ -8,9 +8,9 @@ import Users from './users';
 import {errorPageRoute} from "../../../containers/Routing/routes";
 import Payment from "./payments";
 import useBeforeUnload from "use-before-unload/lib";
-
-
-
+import {useSelector} from "react-redux";
+import {useRequest} from "redux-query-react";
+import {readSeller} from "../../../state/seller";
 
 
 const StyledSettings = styled.div`
@@ -18,6 +18,9 @@ const StyledSettings = styled.div`
 `;
 
 const Settings = () => {
+
+    const seller = useSelector((state: any) => state.entities.seller);
+    const [ {}] = useRequest(readSeller(seller?.id));
 
     useBeforeUnload(evt => {
         /* Do some checks here if you like */

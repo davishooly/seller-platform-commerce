@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 
 const ShopInfo = ({ form }: any ) => {
 
-    const seller = useSelector((state: any) => state.entities.seller);
+    const seller = useSelector((state: any) => state.entities.sellerInfo);
 
     const {
         getFieldDecorator,
@@ -18,7 +18,7 @@ const ShopInfo = ({ form }: any ) => {
             <Row gutter={16}>
                 <Col span={12}>
 
-                    <Form.Item>
+                    <Form.Item hasFeedback>
                         {getFieldDecorator("Business Name", {
                             initialValue: seller?.businessName,
                             rules: [{ required: true, message: "Please add Business Name" }]
@@ -28,14 +28,35 @@ const ShopInfo = ({ form }: any ) => {
                             placeholder="Business Name" />)}
                     </Form.Item>
 
-                    <Form.Item>
-                        {getFieldDecorator("Bank location", {
+                    <Form.Item hasFeedback>
+                        {getFieldDecorator("Business street", {
+                            initialValue: seller?.address?.street,
+                            rules: [{ required: true, message: "Please add Business Location" }]
+                        })(<InlineInput
+                            tip="What is business display name?"
+                            label="Business Name"
+                            placeholder="Business Name" />)}
+                    </Form.Item>
+
+
+                    <Form.Item hasFeedback>
+                        {getFieldDecorator("City", {
+                            initialValue: seller?.address?.city,
+                            rules: [{ required: true, message: "Please add Business Name" }]
+                        })(<InlineInput
+                            tip="What is business display name?"
+                            label="Business Name"
+                            placeholder="Business Name" />)}
+                    </Form.Item>
+
+                    <Form.Item hasFeedback>
+                        {getFieldDecorator("Business Description", {
                             initialValue: seller?.shortDescription,
                             rules: [{ required: true, message: "Please add Bank location!" }]
                         })(<InlineInput
                             textarea
                             rows={5}
-                            label="Bank location"
+                            label="Business Description"
                             placeholder="About the Shop"
                         />)}
                     </Form.Item>
