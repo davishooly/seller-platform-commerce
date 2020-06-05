@@ -11,6 +11,8 @@ import {ListingContainer, ProductContainer} from "../../../components/Table/styl
 import {Avatar, Checkbox, Icon, Switch, Tooltip} from "antd";
 import {Link} from "react-router-dom";
 import {deleteProduct} from "../../../state/product";
+import Loader from "components/Loader";
+
 
 export const CardSection = styled.section`
  display: flex;
@@ -52,7 +54,7 @@ const ManageInventory = () => {
     if (!isFinished && status !== 200 && !sellerProducts) {
         return (
             <>
-                loading.......
+                <Loader />
             </>
         )
     }
