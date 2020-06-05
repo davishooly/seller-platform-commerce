@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Link } from 'react-router-dom';
 import styled from "styled-components";
 import Button from "components/Button";
-import Image from 'icons/background.jpeg'
+import Image from 'icons/background.jpeg';
 import ThemeContext from "../../providers/themes/ThemeContext";
 import {ThemesType} from "../../providers/themes/ThemeTypes";
 
