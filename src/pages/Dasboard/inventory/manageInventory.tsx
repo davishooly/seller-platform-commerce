@@ -8,7 +8,7 @@ import {useSelector} from "react-redux";
 import { getSellerProducts } from '../../../state/seller';
 import moment from "moment";
 import {ListingContainer, ProductContainer} from "../../../components/Table/styles";
-import {Avatar, Checkbox, Icon, Switch} from "antd";
+import {Avatar, Checkbox, Icon, Switch, Tooltip} from "antd";
 import {Link} from "react-router-dom";
 import {deleteProduct} from "../../../state/product";
 
@@ -74,22 +74,32 @@ const ManageInventory = () => {
 
     const renderListingContent = (checked: boolean, id: any) => (
         <ListingContainer>
+            <Tooltip title="set product visible">
             <Switch
                 defaultChecked={checked}
                 onChange={()=>{ console.log()}}
                 checkedChildren="on"
                 unCheckedChildren="off"
             />
+            </Tooltip>
+            <Tooltip title="edit product">
             <Link to={`/dashboard/inventory/edit/${id}`}>
                 <Icon type="edit"/>
             </Link>
+            </Tooltip>
+
+            <Tooltip title="view product">
             <Icon type="eye"/>
+            </Tooltip>
+
         </ListingContainer>
     );
 
     const renderProductContent = (product: any) => (
         <ProductContainer>
+            <Tooltip title="select product">
             <Checkbox value={product} onChange={onChange}/>
+            </Tooltip>
             <Avatar shape="square" size={44} icon="shopping"/>
             <span>{product.name} </span>
         </ProductContainer>
