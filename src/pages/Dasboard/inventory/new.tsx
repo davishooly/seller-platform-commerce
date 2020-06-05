@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import Box from "components/Box";
 import useBeforeUnload from "use-before-unload";
 
@@ -7,7 +7,7 @@ import ProductInfo from "./productInfo";
 import Image from "./images";
 import Description from "./description";
 import Pricing from "./pricing";
-import {CategoriesContainer, ButtonContainer} from "./styles";
+import {CategoriesContainer, ButtonContainer, Button, UploadContainer} from "./styles";
 import Buttons from "components/Button";
 import {Center} from "components";
 import {useSelector} from "react-redux";
@@ -16,6 +16,8 @@ import Additional from "./additional";
 import { createProductSeller } from "../../../state/product/createProduct";
 import { useMutation } from "redux-query-react";
 import {Product} from "../../../api/src/models";
+import ThemeContext from "../../../providers/themes/ThemeContext";
+
 
 const {TabPane} = Tabs;
 
@@ -27,6 +29,7 @@ const CategoriesSelect: React.FC<any> = ({
     const rootCategories = useSelector(
         (state: any) => state.entities.rootCategories
     );
+    const { themes } = useContext(ThemeContext);
 
     const [stateSubCategories, setSubCategories] = useState<any>([]);
     const [list, setList] = useState(false);
@@ -119,7 +122,11 @@ const CategoriesSelect: React.FC<any> = ({
 
     return (
         <>
-            <h1>Create a new product</h1>
+            <UploadContainer>
+                <h1>Create a new product</h1>
+                <a href={`${process.env.PUBLIC_URL}/ProductCreationTemplate.xlsx`} download="product_template">Download CSV </a>
+            </UploadContainer>
+
             <p>
                 To start creating a detail page, first select a primary category for
                 your product.
@@ -162,6 +169,7 @@ const CategoriesSelect: React.FC<any> = ({
 };
 
 const ProductDetails = () => {
+
     const [product, setProduct] = useState<any>({
         name: "",
         brand: "",

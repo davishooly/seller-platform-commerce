@@ -4,7 +4,6 @@ import Styled from 'styled-components';
 
 import {TableSection} from "components/Table/styles";
 import { columns } from './fixtures/tableColumns'
-import dataSources from "./fixtures/dataSources";
 import ThemeContext from "../../../providers/themes/ThemeContext";
 import {ThemesType} from "../../../providers/themes/ThemeTypes";
 import Container  from "../../../components/Common/Container";

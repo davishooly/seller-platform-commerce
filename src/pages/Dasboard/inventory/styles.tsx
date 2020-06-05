@@ -1,4 +1,5 @@
 import styles, { css } from 'styled-components';
+import {ThemesType} from "../../../providers/themes/ThemeTypes";
 
 const CategoriesContainer =  styles.div`
     display: flex;
@@ -149,6 +150,21 @@ const PreviewProductDetailsContainer =  styles.div`
     }
 `;
 
+
+const Button = styles.button<ThemesType>`
+  background: #E6F1FC;
+  border: none;
+  height: 40px;
+  width: auto;
+  cursor: pointer;
+  border-radius: 3px;
+  font-family: "Proxima Nova Regular";
+  font-size: 12px;
+  color: ${props => props.footerBackground};
+  line-height 14px;
+`;
+
+
 const Container = styles.div`
      margin-bottom : 20px;
      
@@ -179,4 +195,19 @@ const Container = styles.div`
   `
 ;
 
-export { CategoriesContainer, ButtonContainer, TabsContainer , ImageContainer, PreviewProductDetailsContainer, Container};
+const UploadContainer = styles.div`
+   display: flex;
+   width: 97%;
+   justify-content: space-between;
+`;
+
+export {
+    CategoriesContainer,
+    ButtonContainer,
+    TabsContainer ,
+    ImageContainer,
+    PreviewProductDetailsContainer,
+    Container,
+    Button,
+    UploadContainer
+};

@@ -36,8 +36,6 @@ const createSeller = (customerDetails: any) => {
 const getSellerProducts = (param: any) => {
     const config = sellersProductsList({
         ...param,
-        offset: 1,
-        limit: 10
     }, {
         transform: (body: any) => ({
             sellerProducts: body
