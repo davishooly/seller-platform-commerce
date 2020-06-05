@@ -1,29 +1,23 @@
-import { sellersProductsUpdate } from "../../../../api/src/apis";
+import { sellersProductsVariablesUpdateVariable } from "api/src/apis";
 
 
 const updateSellerProduct = ( product: any) => {
+    console.log( ">>>>>>>.", product);
 
-    const config =  sellersProductsUpdate(
+    const config =  sellersProductsVariablesUpdateVariable(
         {
             id: product.id,
             data: {
-                primaryCategory: product.primaryCategory,
-                // availableUnits: product.availableUnits,
-                // salePrice: product.salePrice,
-                // defaultPrice: product.defaultPrice,
-                seller: product.seller,
-                product: {
-                    ...product
-                }
+                product: product,
+                values: product.values,
+                variable: 0
             }
         },{
             transform:((body:any) => ({
                 product: body
             })),
             update: {
-                product: (prev: any, next: any) => {
-
-                }
+                product: (prev: any, next: any) => next
             }
         }
     );

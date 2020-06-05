@@ -125,7 +125,7 @@ const ManageInventory = () => {
                         status: !product.deleted ? "Live" : 'Unlisted',
                         sale: Number(selling_price),
                         productName: name,
-                        product: renderProductContent(product),
+                        product: renderProductContent({ name, id:pk}),
                         listing: !product.deleted
                             ? renderListingContent(false, id)
                             : renderListingContent(true, id)

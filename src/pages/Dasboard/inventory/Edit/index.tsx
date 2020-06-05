@@ -6,13 +6,14 @@ import Container from "components/Common/Container";
 import BasicInfo from "./BasicInfo";
 import Additional from "./Additional";
 import Images from "./Images";
-import { useSellerProduct } from "state/product";
+import { getSellerProduct } from "state/product";
 import {hasErrors} from "../../../../utils/validators";
-import { useMutation } from "redux-query-react";
+import {useMutation, useRequest} from "redux-query-react";
 import {updateSellerProduct} from "./updateProducts";
+import {useSelector} from "react-redux";
 
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 const Edit: React.FC<any> = ({ form }) => {
   const {
@@ -26,19 +27,24 @@ const Edit: React.FC<any> = ({ form }) => {
 
   const { id } = useParams();
 
-  const sellerProduct = useSellerProduct(id);
+  const [{ isPending }] = useRequest(getSellerProduct(id));
+
+  const sellerProduct = useSelector(
+      (state: any) => state.entities.currentSellerProduct
+  );
 
   const [productDetails, setDetails] = useState(sellerProduct);
 
 
-  const [{ isFinished, isPending}, updateProduct] = useMutation(product => (
+  const [{ isFinished, isPending: updateProductPending }, updateProduct] = useMutation(product => (
       updateSellerProduct(product)
-  ))
+  ));
 
 
   const handleSubmit = (e:any) => {
-    e.preventDefault()
+    e.preventDefault();
     form.validateFields((err: any, values: any) => {
+      console.log(">>>>>>>>>>>>")
       if (!err) {
         const newProduct = { ...sellerProduct, ...sellerProduct.product, ...values }
         updateProduct(newProduct);
@@ -60,8 +66,6 @@ const Edit: React.FC<any> = ({ form }) => {
               <Menu.Item key="1" onClick={() => setPage("1")}>Basic Information</Menu.Item>
               <Menu.Item key="2" onClick={() => setPage("2")}>Additional Details</Menu.Item>
               <Menu.Item key="3" onClick={() => setPage("3")} >Product Images</Menu.Item>
-              {/*<Menu.Item key="4" onClick={() => setPage("4")}>Stock management</Menu.Item>*/}
-              {/*<Menu.Item key="5" onClick={() => setPage("5")}>Orders</Menu.Item>*/}
             </Menu>
           </Sider>
           <Content

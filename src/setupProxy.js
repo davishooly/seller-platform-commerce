@@ -24,6 +24,7 @@ module.exports = function(app) {
           "/sellers",
           "/sellers/login",
           "/sellers/products/",
+          "/sellers/products/variables",
           "/oauth2",
           "/auth",
           "/sellers/products/orders/"

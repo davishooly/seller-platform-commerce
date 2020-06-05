@@ -1,6 +1,6 @@
 import {
     productsCategoriesRoot,
-    sellersProductsVariableDetails,
+    sellersProductsVariablesRead,
     sellersProductsVariablesDestroyDelete,
     sellersProductsDelete,
     sellersProductsDetailsRead
@@ -20,7 +20,7 @@ const getProductsCategories = (categories: any) => {
             update: {
                 rootCategories: (prev: any, next: any) => next
             }
-        })
+        });
         return config
     }
     return
@@ -46,7 +46,7 @@ const deleteProduct = (productId: number, optimistic: any) => {
                     return newState
                 }
             }
-        })
+        });
         if (optimistic) {
             config.optimisticUpdate = {
                 sellerProducts: (body: any) => body
@@ -55,13 +55,10 @@ const deleteProduct = (productId: number, optimistic: any) => {
 
         return config
 };
-// TODO - Ensure we can get this from sellersProduct to avoid re-fetch
-const useSellerProduct = (id: any) => {
-  const currentSellerProduct = useSelector(
-    (state: any) => state.entities.currentSellerProduct
-  );
 
-  const QueryConfig = sellersProductsDetailsRead(
+const getSellerProduct = (id: any) => {
+
+  const QueryConfig = sellersProductsVariablesRead(
     {
       id
     },
@@ -76,10 +73,8 @@ const useSellerProduct = (id: any) => {
     }
   );
 
-  useRequest(QueryConfig);
-
-  return currentSellerProduct;
+  return QueryConfig;
 };
 
 
-export { getProductsCategories, deleteProduct, useSellerProduct };
+export { getProductsCategories, deleteProduct, getSellerProduct };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, Layout, Menu, Select } from "antd";
+import { Form, Select } from "antd";
 import RichEditor from "components/Input/editor";
 import { InlineInput, Inline } from "components/Input";
 import { SellerProduct } from "api/src";
@@ -11,7 +11,7 @@ interface IProps {
   sellerProduct: SellerProduct;
 }
 
-const BasicInfo: React.FC<IProps> = ({ form, sellerProduct }) => {
+const BasicInfo: React.FC<any> = ({ form, sellerProduct }) => {
   const {
     getFieldDecorator,
     getFieldError,
@@ -22,8 +22,8 @@ const BasicInfo: React.FC<IProps> = ({ form, sellerProduct }) => {
 
   return (
     <>
-      <Form.Item>
-        {getFieldDecorator("name", {
+      <Form.Item hasFeedback>
+        {getFieldDecorator("product", {
           initialValue: sellerProduct?.product?.name,
           rules: [{ required: true, message: "Please input product name" }]
         })(<InlineInput label="Name" placeholder="Product Name" />)}
@@ -31,14 +31,14 @@ const BasicInfo: React.FC<IProps> = ({ form, sellerProduct }) => {
 
       <Form.Item>
         {getFieldDecorator("sku", {
-          initialValue: sellerProduct?.product,
+          initialValue: sellerProduct?.values[0]?.sku,
           rules: [{ required: true, message: "Please input sku!" }]
         })(<InlineInput label="SKU" placeholder="SKU" />)}
       </Form.Item>
 
       <Form.Item hasFeedback>
-        {getFieldDecorator("price", {
-          initialValue: sellerProduct,
+        {getFieldDecorator("minimumPrice", {
+          initialValue: sellerProduct?.values[0]?.minimumPrice,
           rules: [{ required: true, message: "Please input price!" }]
         })(
           <InlineInput
@@ -51,8 +51,8 @@ const BasicInfo: React.FC<IProps> = ({ form, sellerProduct }) => {
       </Form.Item>
 
       <Form.Item hasFeedback>
-        {getFieldDecorator("sale_price", {
-          initialValue: sellerProduct,
+        {getFieldDecorator("salePrice", {
+          initialValue: sellerProduct?.values[0]?.minimumPrice,
           rules: [{ required: true, message: "Please input price!" }]
         })(
           <InlineInput
@@ -64,7 +64,35 @@ const BasicInfo: React.FC<IProps> = ({ form, sellerProduct }) => {
         )}
       </Form.Item>
 
-      <Form.Item>
+        <Form.Item hasFeedback>
+            {getFieldDecorator("availableUnits", {
+                initialValue: sellerProduct?.values[0]?.availableUnits,
+                rules: [{ required: true, message: "Please input price!" }]
+            })(
+                <InlineInput
+                    label="stock"
+                    placeholder="stock"
+                    type="number"
+                />
+            )}
+        </Form.Item>
+
+        {/*<Form.Item hasFeedback>*/}
+        {/*    {getFieldDecorator("stock", {*/}
+        {/*        initialValue: sellerProduct?.values[0]?.availableUnits,*/}
+        {/*        rules: [{ required: true, message: "Please input price!" }]*/}
+        {/*    })(*/}
+        {/*        <InlineInput*/}
+        {/*            label="stock"*/}
+        {/*            placeholder="stock"*/}
+        {/*            type="number"*/}
+        {/*        />*/}
+        {/*    )}*/}
+        {/*</Form.Item>*/}
+
+
+
+        <Form.Item>
         {getFieldDecorator("visibility", {
           initialValue: sellerProduct,
           rules: [{ required: true, message: "Please input Visibility!" }]

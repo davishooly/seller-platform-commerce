@@ -19,19 +19,19 @@ const Additional: React.FC<IProps> = ({ form, sellerProduct }) => {
 
   return (
     <>
-      <Form.Item>
+      <Form.Item hasFeedback>
         {getFieldDecorator("Barcode", {
           initialValue: sellerProduct?.product?.barcode,
           rules: [{ required: true, message: "Please input barcode" }]
         })(<InlineInput label="Barcode" placeholder="Barcode" />)}
       </Form.Item>
 
-      <Form.Item>
-        {getFieldDecorator("gtin", {
-          initialValue: sellerProduct?.product?.gtin,
-          rules: [{ required: true, message: "Please GTIN!" }]
-        })(<InlineInput label="GTIN" placeholder="GTIN" />)}
-      </Form.Item>
+      {/*<Form.Item hasFeedback>*/}
+      {/*  {getFieldDecorator("gtin", {*/}
+      {/*    initialValue: sellerProduct?.product?.gtin,*/}
+      {/*    rules: [{ required: true, message: "Please GTIN!" }]*/}
+      {/*  })(<InlineInput label="GTIN" placeholder="GTIN" />)}*/}
+      {/*</Form.Item>*/}
 
       <Form.Item hasFeedback>
         {getFieldDecorator("Keywords", {
