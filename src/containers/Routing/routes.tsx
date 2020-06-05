@@ -95,7 +95,7 @@ const DashboardRoutesL = (props: any) => {
             <Route exact path="/dashboard/payout">
                 <PayoutTaxes/>
             </Route>
-            <Route exact path="/dashboard/orders">
+            <Route path="/dashboard/orders">
                 <Orders/>
             </Route>
             <Route exact path="/dashboard">

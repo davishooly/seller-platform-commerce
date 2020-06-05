@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, { useState } from "react";
 import Box from "components/Box";
 import useBeforeUnload from "use-before-unload";
 
@@ -16,7 +16,6 @@ import Additional from "./additional";
 import { createProductSeller } from "../../../state/product/createProduct";
 import { useMutation } from "redux-query-react";
 import {Product} from "../../../api/src/models";
-import ThemeContext from "../../../providers/themes/ThemeContext";
 
 
 const {TabPane} = Tabs;
@@ -29,8 +28,6 @@ const CategoriesSelect: React.FC<any> = ({
     const rootCategories = useSelector(
         (state: any) => state.entities.rootCategories
     );
-    const { themes } = useContext(ThemeContext);
-
     const [stateSubCategories, setSubCategories] = useState<any>([]);
     const [list, setList] = useState(false);
     const [indices, setIndices] = useState<any>([]);

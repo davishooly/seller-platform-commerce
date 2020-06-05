@@ -1,4 +1,4 @@
-import { sellersProductsOrders } from 'api/src';
+import { sellersProductsOrders, sellersProductsReturns } from 'api/src';
 
 const getSellerProductsOrders = () => {
    const config =  sellersProductsOrders({
@@ -17,4 +17,22 @@ const getSellerProductsOrders = () => {
 };
 
 
-export { getSellerProductsOrders };
+const getOrderReturns = () => {
+    const config =  sellersProductsReturns({
+        limit: 10,
+        offset: 1
+    },  {
+        transform: (body: any) => ({
+            orderReturns: body
+        }),
+        update: {
+            orderReturns: (prev: any, next: any) => next
+        }
+    });
+
+    return config;
+
+};
+
+
+export { getSellerProductsOrders, getOrderReturns };

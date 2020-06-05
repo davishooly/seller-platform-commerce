@@ -2,9 +2,9 @@ import React from "react";
 
 export const columns =  [
   {
-    title: 'Requested',
-    dataIndex: 'requested',
-    key: 'requested',
+    title: 'Product',
+    dataIndex: 'Product',
+    key: 'Product',
   },
   {
     title: 'Amount submitted',

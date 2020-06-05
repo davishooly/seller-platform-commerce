@@ -14,7 +14,6 @@ const Inventory = () => {
 
                 <li> <NavLink to="/dashboard/inventory/manage" activeClassName="active" exact> Manage Inventory </NavLink></li>
                 <li> <NavLink to="/dashboard/inventory/new" activeClassName="active" exact> Add a Product </NavLink> </li>
-                <li> <NavLink to="/dashboard/inventory/import" activeClassName="active" exact>  Import Products </NavLink></li>
                 <li> <NavLink to="/dashboard/inventory/oeexpress" activeClassName="active" exact>  OE Express </NavLink></li>
 
             </Menu>
