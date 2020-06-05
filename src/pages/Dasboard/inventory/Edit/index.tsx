@@ -69,7 +69,7 @@ const Edit: React.FC<any> = ({ form }) => {
             </Menu>
           </Sider>
           <Content
-            style={{ padding: "0 24px", minHeight: "200px", maxWidth: "700px" }}
+            style={{ padding: "0 46px", minHeight: "200px", maxWidth: "700px" }}
           >
           { page === "1" && <BasicInfo form={form} sellerProduct={sellerProduct} />}
           { page === "2" && <Additional form={form} sellerProduct={sellerProduct} />}

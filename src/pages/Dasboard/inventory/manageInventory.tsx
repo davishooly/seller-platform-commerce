@@ -129,8 +129,8 @@ const ManageInventory = () => {
                         productName: name,
                         product: renderProductContent({ name, id:pk}),
                         listing: !product.deleted
-                            ? renderListingContent(false, id)
-                            : renderListingContent(true, id)
+                            ? renderListingContent(false, pk)
+                            : renderListingContent(true, pk)
                     })
                 })
             });

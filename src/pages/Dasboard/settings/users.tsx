@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Col, Divider, Form, Row} from "antd";
+import {Col, Divider, Form, Row} from "antd";
 import {InlineInput} from "../../../components/Input";
 import {useSelector} from "react-redux";
 
@@ -53,11 +53,6 @@ const Users = ({ form }: any ) => {
                             rules: [{ required: true, message: "Please input phone number!" }]
                         })(<InlineInput label="phone number" placeholder="Keywords " />)}
                     </Form.Item>
-
-                    <Button type="primary" style={{ marginTop: "2rem" }}>
-                        Update
-                    </Button>
-
                 </Col>
             </Row>
         </>

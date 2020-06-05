@@ -38,11 +38,6 @@ const Payment = ({ form }: any ) => {
                             rules: [{ required: true, message: "Please input bank account number!" }]
                         })(<InlineInput label="Bank Account" placeholder="account number" />)}
                     </Form.Item>
-
-                    <Button type="primary" style={{ marginTop: "2rem" }}>
-                        Update
-                    </Button>
-
                 </Col>
             </Row>
 

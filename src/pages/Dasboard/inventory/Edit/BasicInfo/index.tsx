@@ -22,7 +22,7 @@ const BasicInfo: React.FC<any> = ({ form, sellerProduct }) => {
 
   return (
     <>
-      <Form.Item hasFeedback>
+      <Form.Item>
         {getFieldDecorator("product", {
           initialValue: sellerProduct?.product?.name,
           rules: [{ required: true, message: "Please input product name" }]

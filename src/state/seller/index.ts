@@ -1,4 +1,4 @@
-import {sellersCreate, sellersProductsList, sellersRead } from "api/src/apis";
+import {sellersCreate, sellersProductsList, sellersRead, sellersUpdate } from "api/src/apis";
 
 
 const createSeller = (customerDetails: any) => {
@@ -30,6 +30,38 @@ const createSeller = (customerDetails: any) => {
         update: () => {
         },
     })
+};
+
+
+const updateSeller = ( id: any, customerDetails: any) => {
+
+    console.log({customerDetails})
+    const config = sellersUpdate({
+        id,
+        data: {
+            owner: {
+                email: customerDetails.owner.email,
+                firstName: customerDetails.owner.firstName,
+                lastName: customerDetails.owner.lastName,
+                username: customerDetails.owner.username
+            },
+            bank: {
+                name:customerDetails.bank.name,
+                accNumber: customerDetails.bank.accNumber,
+                location: customerDetails.bank.location
+            },
+            address: {
+                street:customerDetails.address.street,
+                city:customerDetails.address.city,
+                name: customerDetails.address.name
+            },
+            logo: '',
+            businessName: customerDetails.businessName,
+            phoneNumber: customerDetails.phone,
+            name: customerDetails.displayName
+        },
+    });
+    return config;
 };
 
 
@@ -66,4 +98,4 @@ const readSeller = (id: any) => {
 };
 
 
-export { createSeller, getSellerProducts, readSeller };
+export { createSeller, getSellerProducts, readSeller, updateSeller };

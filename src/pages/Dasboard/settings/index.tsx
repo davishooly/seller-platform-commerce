@@ -9,8 +9,9 @@ import {errorPageRoute} from "../../../containers/Routing/routes";
 import Payment from "./payments";
 import useBeforeUnload from "use-before-unload/lib";
 import {useSelector} from "react-redux";
-import {useRequest} from "redux-query-react";
-import {readSeller} from "../../../state/seller";
+import {useMutation, useRequest} from "redux-query-react";
+import {readSeller, updateSeller} from "../../../state/seller";
+import {Button, Col} from "antd";
 
 
 const StyledSettings = styled.div`
@@ -21,6 +22,15 @@ const Settings = () => {
 
     const seller = useSelector((state: any) => state.entities.seller);
     const [ {}] = useRequest(readSeller(seller?.id));
+
+    const sellerInfo = useSelector(((state: any) => state.entities.sellerInfo));
+
+    const [{ isPending }, updateSellerDetails] =  useMutation( () => updateSeller(seller.id, sellerInfo));
+
+    const handleSubmit = (e:any) => {
+        e.preventDefault();
+        updateSellerDetails();
+    };
 
     useBeforeUnload(evt => {
         /* Do some checks here if you like */
@@ -43,6 +53,11 @@ const Settings = () => {
                     <Route path="/dashboard/settings/payments" exact component={Payment}/>
                     { errorPageRoute() }
                 </Switch>
+
+                <Button loading={isPending} onClick={handleSubmit} type="primary" style={{ marginTop: "2rem" }}>
+                    Update
+                </Button>
+
 
             </Container>
 

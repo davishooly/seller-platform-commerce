@@ -60,12 +60,6 @@ const ShopInfo = ({ form }: any ) => {
                             placeholder="About the Shop"
                         />)}
                     </Form.Item>
-
-
-                    <Button type="primary" style={{ marginTop: "2rem" }}>
-                        Update
-                    </Button>
-
                 </Col>
             </Row>
         </>
