@@ -10,6 +10,7 @@ import ThemeContext from "../../../providers/themes/ThemeContext";
 import { useRequest } from "redux-query-react";
 import {getSellerProductsOrders} from "../../../state/orders";
 import {useSelector} from "react-redux";
+import Loader from "components/Loader";
 
 
 const OrderContainer  = Styled.div`
@@ -34,8 +35,8 @@ const ManageOrders = () => {
   if(!isFinished && status !== 200 && !sellerOrders){
     return (
         <>
-          loading.......
-          </>
+          <Loader />
+        </>
     )
   }
 

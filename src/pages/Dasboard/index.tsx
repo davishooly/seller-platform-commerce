@@ -8,7 +8,6 @@ import dataSources from "./dashboardFixtures/dataSources";
 import Container from "../../components/Common/Container";
 import {useRequest} from "redux-query-react";
 
-
 import { ProductContainer, TableSection } from "../../components/Table/styles";
 import { CardSection } from "./inventory/manageInventory";
 import {
@@ -17,11 +16,13 @@ import {
   fullFilledSummary
 } from "./dashboardFixtures/details";
 import { RenderCard } from "components/Card";
+import Loader from "components/Loader";
 import { AnalyticsSection, Span, Div, DivCard } from "./styles";
 import { BarChart } from "components/Charts";
 import ThemeContext from "../../providers/themes/ThemeContext";
 import {bestSellingProducts} from "../../state/dashboard";
 import useBeforeUnload from "use-before-unload/lib";
+
 
 
 const Dashboard: React.FC<any> = () => {
@@ -70,9 +71,7 @@ const Dashboard: React.FC<any> = () => {
         {
           !isFinished && status !== 200 && !bestSellerProducts ?
               (
-                  <>
-                    loading.......
-                  </>
+                  <Loader/>
               ) :
               (
                   <Container>
