@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { Overlay } from "./index";
+import {Icon} from "antd";
 
 const ModalComponent = styled.div`
    div: first-of-type {
@@ -18,17 +19,30 @@ const ModalComponent = styled.div`
    position: fixed;
    background-color: #FFFFFF;
    border-radius: 4px;
+   
+   span {
+    font-weight: normal !important;
+   }
 `;
 
-const Modal = ({isOpen, children}: any) => {
+const Modal = ({isOpen, children, close, styles}: any) => {
     return (
         isOpen ?(
             <Overlay>
-                <ModalComponent>
+                <ModalComponent style={{...styles}}>
+                    <div style={{
+                        textAlign: "end"
+                    }}
+                    >
+                        <Icon type="close" onClick={() => close(!isOpen)}/>
+                    </div>
                     {children}
                 </ModalComponent>
             </Overlay>
-        ) : ''
+        ) : (
+            <>
+            </>
+        )
     );
 };
 

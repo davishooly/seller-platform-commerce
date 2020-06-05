@@ -27,6 +27,9 @@ const ManageInventory = () => {
 
     const [compoundFilter, setCompoundFilter ] = useState({});
 
+    const [isOpen, setModalOpen] = useState(false);
+
+
 
     const [{isFinished, isPending: productFetchPending, status}, refresh] = useRequest(getSellerProducts({
         ...filterValue
@@ -89,7 +92,7 @@ const ManageInventory = () => {
             </Tooltip>
 
             <Tooltip title="view product">
-            <Icon type="eye"/>
+            <Icon type="eye" onClick={() => setModalOpen(!isOpen)}/>
             </Tooltip>
 
         </ListingContainer>
@@ -146,7 +149,9 @@ const ManageInventory = () => {
                 compoundFilter,
                 setCompoundFilter,
                 filterValue,
-                refresh ,
+                refresh,
+                isOpen,
+                setModalOpen,
                 count: sellerProducts && sellerProducts.count,
                 selectedProduct,
                 confirm
