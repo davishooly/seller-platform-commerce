@@ -6,7 +6,7 @@ const updateSellerProduct = ( product: any) => {
 
     const config =  sellersProductsVariablesUpdateVariable(
         {
-            id: product.id,
+            id: product.pk,
             data: {
                 product: product,
                 values: product.values,

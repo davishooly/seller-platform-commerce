@@ -35,8 +35,8 @@ const Dashboard: React.FC<any> = () => {
   const sellerInfo = useSelector((state: any) => state.entities);
 
 
-  const renderProductContent = (data: any) => (
-      <ProductContainer>
+  const renderProductContent = (data: any, index: number) => (
+      <ProductContainer key={index.toString()}>
         <Avatar shape="square" size={44} icon="shopping" />
         <div>
           <span>LG SK8Y Sound bar system for home theater</span>
@@ -48,10 +48,10 @@ const Dashboard: React.FC<any> = () => {
       </ProductContainer>
   );
 
-  const data = dataSources.map(data => {
+  const data = dataSources.map((data, index) => {
     return {
       ...data,
-      product: renderProductContent(data)
+      product: renderProductContent(data, index)
     };
   });
 
@@ -79,16 +79,16 @@ const Dashboard: React.FC<any> = () => {
                       <RenderCard style={{ color: "#28A197", width: 282, height: 479 }}>
                         <Span>Your Orders </Span>
                         <div className="summary">
-                          {orderSummary.map(summary => (
-                              <div className="summary__section">
+                          {orderSummary.map((summary, index) => (
+                              <div className="summary__section" key={index.toString()}>
                                 <span> {summary.status}</span>
                                 <span> {summary.amount} </span>
                               </div>
                           ))}
                         </div>
                         <div>
-                          {fullFilledSummary.map(summary => (
-                              <div className="fulfilled">
+                          {fullFilledSummary.map((summary, index) => (
+                              <div className="fulfilled" key={index.toString()}>
                                 <Span>
                                   {" "}
                                   {summary.fullFilled === "seller"

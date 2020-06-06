@@ -169,7 +169,11 @@ const RenderTable = ({
 
                     </div>
                 </DivContainer>
-                <Table loading={deletePending || productFetchPending} pagination={{total: count}} dataSource={searchProducts} columns={columns}/>
+                <Table loading={deletePending || productFetchPending}
+                       pagination={{total: count, defaultPageSize: 2}}
+                       dataSource={searchProducts}
+                       columns={columns}
+                />
             </TableSection>
         </div>
     )

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Layout, Menu } from "antd";
+import {Button, Form, Layout, Menu, notification} from "antd";
 import { useParams } from  'react-router-dom';
 import Container from "components/Common/Container";
 
@@ -17,17 +17,13 @@ const { Sider, Content } = Layout;
 
 const Edit: React.FC<any> = ({ form }) => {
   const {
-    getFieldDecorator,
-    getFieldError,
-    validateFields,
-    isFieldTouched,
     getFieldsError
   } = form;
   const [ page, setPage ]  = useState("1");
 
   const { id } = useParams();
 
-  const [{ isPending }] = useRequest(getSellerProduct(id));
+  useRequest(getSellerProduct(id));
 
   const sellerProduct = useSelector(
       (state: any) => state.entities.currentSellerProduct
@@ -36,7 +32,7 @@ const Edit: React.FC<any> = ({ form }) => {
   const [productDetails, setDetails] = useState(sellerProduct);
 
 
-  const [{ isFinished, isPending: updateProductPending }, updateProduct] = useMutation(product => (
+  const [{ isPending }, updateProduct] = useMutation(product => (
       updateSellerProduct(product)
   ));
 
@@ -44,13 +40,19 @@ const Edit: React.FC<any> = ({ form }) => {
   const handleSubmit = (e:any) => {
     e.preventDefault();
     form.validateFields((err: any, values: any) => {
-      console.log(">>>>>>>>>>>>")
       if (!err) {
         const newProduct = { ...sellerProduct, ...sellerProduct.product, ...values }
-        updateProduct(newProduct);
+        updateProduct(newProduct).then((result: any) => {
+          if(result.status === 200){
+            notification.success({
+              message: "Success",
+              description: "Your Product details has been updated successfully"
+            });
+          }
+        })
       }
     });
-  }
+  };
 
   return (
     <Container>
@@ -78,6 +80,7 @@ const Edit: React.FC<any> = ({ form }) => {
                 type="primary"
                 size="large"
                 htmlType="submit"
+                loading={isPending}
                 disabled={hasErrors(getFieldsError())}
             >
               Save
