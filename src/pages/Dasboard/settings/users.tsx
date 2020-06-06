@@ -1,16 +1,50 @@
 import React from 'react';
-import {Col, Divider, Form, Row} from "antd";
+import {Button, Col, Divider, Form, notification, Row} from "antd";
 import {InlineInput} from "../../../components/Input";
 import {useSelector} from "react-redux";
+import {useUpdateSeller} from "./index";
 
 
 const Users = ({ form }: any ) => {
 
     const seller = useSelector((state: any) => state.entities.sellerInfo);
+    const { isPending,  updateSellerDetails } = useUpdateSeller();
 
     const {
         getFieldDecorator,
     } = form;
+
+
+    const handleSubmit = (e:any) => {
+        e.preventDefault();
+        form.validateFields((err: any, values: any) => {
+            if(!err){
+                const updatedInfo =  {
+                    businessName: seller.businessName,
+                    phoneNumber: seller.phoneNumber,
+                    name: seller.displayName,
+                    ...seller.bank,
+                    bankName: seller.bank.name,
+                    addressName: seller.address.name,
+                    personalMail: seller.owner.email,
+                    ...seller.address,
+                    ...seller.owner,
+                    ...values
+                };
+                updateSellerDetails(updatedInfo).then((result: any) => {
+
+                    const { status } = result;
+                    if(status === 200) {
+                        notification.success({
+                            message: "Success",
+                            description: "Your user details has been updated successfully"
+                        });
+                    }
+                })
+            }
+        })
+    };
+
 
     return (
         <>
@@ -18,8 +52,9 @@ const Users = ({ form }: any ) => {
             <Divider />
             <Row gutter={16}>
                 <Col span={12}>
+                    <Form onSubmit={handleSubmit}>
                     <Form.Item hasFeedback>
-                        {getFieldDecorator("Username", {
+                        {getFieldDecorator("username", {
                             initialValue: seller?.owner?.username,
                             rules: [{ required: true, message: "Please input Username" }]
                         })(<InlineInput label="username" placeholder="username" />)}
@@ -33,14 +68,14 @@ const Users = ({ form }: any ) => {
                     </Form.Item>
 
                     <Form.Item hasFeedback>
-                        {getFieldDecorator("first name", {
+                        {getFieldDecorator("firstName", {
                             initialValue: seller?.owner?.firstName,
                             rules: [{ required: true, message: "Please enter a valid first name!" }]
                         })(<InlineInput label="first name" placeholder="first name" />)}
                     </Form.Item>
 
                     <Form.Item hasFeedback>
-                        {getFieldDecorator("last name", {
+                        {getFieldDecorator("lastName", {
                             initialValue: seller?.owner?.lastName,
                             rules: [{ required: true, message: "Please enter a valid last name!" }]
                         })(<InlineInput label="last name" placeholder="last name" />)}
@@ -48,11 +83,15 @@ const Users = ({ form }: any ) => {
 
 
                     <Form.Item hasFeedback>
-                        {getFieldDecorator("phone number", {
+                        {getFieldDecorator("phoneNumber", {
                             initialValue: seller?.phoneNumber,
                             rules: [{ required: true, message: "Please input phone number!" }]
                         })(<InlineInput label="phone number" placeholder="Keywords " />)}
                     </Form.Item>
+                        <Button  htmlType="submit" loading={isPending} type="primary" style={{ marginTop: "2rem" }}>
+                            Update
+                        </Button>
+                    </Form>
                 </Col>
             </Row>
         </>

@@ -20,6 +20,9 @@ const Payment = ({ form }: any ) => {
         form.validateFields((err: any, values: any) => {
             if(!err){
                 const updatedInfo =  {
+                    businessName: seller.businessName,
+                    phoneNumber: seller.phoneNumber,
+                    name: seller.displayName,
                     ...seller.bank,
                     bankName: values.name,
                     ...values,
@@ -66,7 +69,7 @@ const Payment = ({ form }: any ) => {
                     </Form.Item>
 
                     <Form.Item hasFeedback>
-                        {getFieldDecorator("account", {
+                        {getFieldDecorator("accNumber", {
                             initialValue: seller?.bank?.accNumber,
                             rules: [{ required: true, message: "Please input bank account number!" }]
                         })(<InlineInput label="Bank Account" placeholder="account number" />)}

@@ -19,6 +19,9 @@ const ShopInfo = ({ form }: any ) => {
         form.validateFields((err: any, values: any) => {
             if(!err){
                 const updatedInfo =  {
+                    businessName: values.businessName,
+                    phoneNumber: seller.phoneNumber,
+                    name: seller.displayName,
                     ...seller.bank,
                     bankName: seller.bank.name,
                     addressName: seller.address.name,

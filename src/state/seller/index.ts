@@ -35,6 +35,8 @@ const createSeller = (customerDetails: any) => {
 
 const updateSeller = ( id: any, customerDetails: any) => {
 
+    console.log(customerDetails)
+
     const data = {
             owner: {
                 email: customerDetails.personalMail,
@@ -44,7 +46,7 @@ const updateSeller = ( id: any, customerDetails: any) => {
             },
             bank: {
                 name:customerDetails.bankName,
-                accNumber: customerDetails.account,
+                accNumber: customerDetails.accNumber,
                 location: customerDetails.location
             },
             address: {
@@ -54,7 +56,7 @@ const updateSeller = ( id: any, customerDetails: any) => {
             },
             logo: '',
             businessName: customerDetails.businessName,
-            phoneNumber: customerDetails.phone,
+            phoneNumber: customerDetails.phoneNumber,
             name: customerDetails.displayName
         };
 
