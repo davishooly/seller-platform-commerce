@@ -1,5 +1,5 @@
 import React  from 'react';
-import {Button, Col, Divider, Form, Row} from "antd";
+import {Button, Col, Divider, Form, notification, Row} from "antd";
 import {InlineInput} from "../../../components/Input";
 import {useSelector} from "react-redux";
 import { useUpdateSeller } from './index';
@@ -30,6 +30,13 @@ const Payment = ({ form }: any ) => {
                 };
                 updateSellerDetails(updatedInfo).then((result: any) => {
 
+                    const { status } = result;
+                    if(status === 200) {
+                        notification.success({
+                            message: "Success",
+                            description: "Your Bank details has been updated successfully"
+                        });
+                    }
                 })
             }
         })
