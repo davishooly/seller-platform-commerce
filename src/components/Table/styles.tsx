@@ -89,6 +89,10 @@ const DivContainer = styled.div<any>`
     display: flex;
     justify-content: space-between;
     padding-bottom: 20px;
+    
+    .disable-link { 
+      pointer-events: none;
+    }
    
    .filterSection {
      width: 35%;
@@ -106,8 +110,8 @@ const DivContainer = styled.div<any>`
    
    
    .reload {
-    width: 22% !important;
-    ${(props: any) => props.order && css` width: 32%;`}
+    width: 16%;
+    ${(props: any) => props.order && css` width: 22%;`}
     display: flex;
     justify-content: space-around;
     align-items: center;

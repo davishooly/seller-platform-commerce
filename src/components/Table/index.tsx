@@ -138,8 +138,8 @@ const RenderTable = ({
                         <ButtonContainer>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Export</Button>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Unlist</Button>
-                            <Link  to={`/dashboard/inventory/edit/${selectedProduct.length && selectedProduct[0].id}`}>
-                                <Button disabled={products !== 1} primary={products === 1 ? 'primary' : ''} className="verticalLine">Edit</Button>
+                            <Link className={ products !== 1 ? "disable-link" : ''} to={`/dashboard/inventory/edit/${selectedProduct.length && selectedProduct[0].id}`}>
+                                <Button primary={products === 1 ? 'primary' : ''} className="verticalLine">Edit</Button>
                             </Link>
                             <Popconfirm
                                 title="Are you sure delete this product?"
