@@ -11,7 +11,6 @@ import useBeforeUnload from "use-before-unload/lib";
 import {useSelector} from "react-redux";
 import {useMutation, useRequest} from "redux-query-react";
 import {readSeller, updateSeller} from "../../../state/seller";
-import {Button, Col} from "antd";
 
 
 const StyledSettings = styled.div`
@@ -22,15 +21,6 @@ const Settings = () => {
 
     const seller = useSelector((state: any) => state.entities.seller);
     const [ {}] = useRequest(readSeller(seller?.id));
-
-    const sellerInfo = useSelector(((state: any) => state.entities.sellerInfo));
-
-    const [{ isPending }, updateSellerDetails] =  useMutation( () => updateSeller(seller.id, sellerInfo));
-
-    const handleSubmit = (e:any) => {
-        e.preventDefault();
-        updateSellerDetails();
-    };
 
     useBeforeUnload(evt => {
         /* Do some checks here if you like */
@@ -46,6 +36,7 @@ const Settings = () => {
                 <li> <NavLink to="/dashboard/settings/payments" activeClassName="active" exact>  Payment Info </NavLink></li>
             </Menu>
 
+
             <Container>
                 <Switch>
                     <Route path="/dashboard/settings" exact component={ShopInfo}/>
@@ -54,16 +45,23 @@ const Settings = () => {
                     { errorPageRoute() }
                 </Switch>
 
-                <Button loading={isPending} onClick={handleSubmit} type="primary" style={{ marginTop: "2rem" }}>
-                    Update
-                </Button>
-
-
             </Container>
-
-
 
         </StyledSettings>
     );
 };
 export default Settings;
+
+
+export const useUpdateSeller = () => {
+
+    const seller = useSelector((state: any) => state.entities.seller);
+
+    const [{ isPending }, updateSellerDetails] =  useMutation( (sellerDetails: any) => updateSeller(seller.id, sellerDetails));
+
+    return {
+        isPending,
+        updateSellerDetails
+    }
+};
+

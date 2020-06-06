@@ -34,26 +34,24 @@ const createSeller = (customerDetails: any) => {
 
 
 const updateSeller = ( id: any, customerDetails: any) => {
-
-    console.log({customerDetails})
     const config = sellersUpdate({
         id,
         data: {
             owner: {
-                email: customerDetails.owner.email,
-                firstName: customerDetails.owner.firstName,
-                lastName: customerDetails.owner.lastName,
-                username: customerDetails.owner.username
+                email: customerDetails.personalMail,
+                firstName: customerDetails.firstName,
+                lastName: customerDetails.lastName,
+                username: customerDetails.username
             },
             bank: {
-                name:customerDetails.bank.name,
-                accNumber: customerDetails.bank.accNumber,
-                location: customerDetails.bank.location
+                name:customerDetails.bankName,
+                accNumber: customerDetails.account,
+                location: customerDetails.location
             },
             address: {
-                street:customerDetails.address.street,
-                city:customerDetails.address.city,
-                name: customerDetails.address.name
+                street:customerDetails.street,
+                city:customerDetails.city,
+                name: customerDetails.addressName
             },
             logo: '',
             businessName: customerDetails.businessName,
