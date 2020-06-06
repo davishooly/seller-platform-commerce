@@ -34,9 +34,8 @@ const createSeller = (customerDetails: any) => {
 
 
 const updateSeller = ( id: any, customerDetails: any) => {
-    const config = sellersUpdate({
-        id,
-        data: {
+
+    const data = {
             owner: {
                 email: customerDetails.personalMail,
                 firstName: customerDetails.firstName,
@@ -57,8 +56,20 @@ const updateSeller = ( id: any, customerDetails: any) => {
             businessName: customerDetails.businessName,
             phoneNumber: customerDetails.phone,
             name: customerDetails.displayName
+        };
+
+    const config = sellersUpdate({
+        id,
+        data: {
+         ...data
         },
-    });
+    }, {
+            update: {
+                sellerInfo: (prev: any, next: any) => {
+                    return {...prev, ...data}
+                }
+            }
+        });
     return config;
 };
 
@@ -73,7 +84,7 @@ const getSellerProducts = (param: any) => {
         update: {
             sellerProducts: (prev: any, next: any) => next
         }
-    })
+    });
 
     return config;
 };
