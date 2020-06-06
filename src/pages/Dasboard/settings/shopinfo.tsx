@@ -1,15 +1,45 @@
 import React from 'react';
-import {Row, Col, Button, Divider, Form} from 'antd';
+import {Row, Col, Button, Divider, Form, notification} from 'antd';
 import { InlineInput } from 'components/Input';
 import {useSelector} from "react-redux";
+import {useUpdateSeller} from "./index";
 
 const ShopInfo = ({ form }: any ) => {
 
     const seller = useSelector((state: any) => state.entities.sellerInfo);
+    const { isPending,  updateSellerDetails } = useUpdateSeller();
 
     const {
         getFieldDecorator,
     } = form;
+
+
+    const handleSubmit = (e:any) => {
+        e.preventDefault();
+        form.validateFields((err: any, values: any) => {
+            if(!err){
+                const updatedInfo =  {
+                    ...seller.bank,
+                    bankName: seller.bank.name,
+                    addressName: seller.address.name,
+                    personalMail: seller.owner.email,
+                    ...seller.address,
+                    ...seller.owner,
+                    ...values,
+                };
+                updateSellerDetails(updatedInfo).then((result: any) => {
+
+                    const { status } = result;
+                    if(status === 200) {
+                        notification.success({
+                            message: "Success",
+                            description: "Your Business details has been updated successfully"
+                        });
+                    }
+                })
+            }
+        })
+    };
 
     return (
         <>
@@ -17,42 +47,41 @@ const ShopInfo = ({ form }: any ) => {
             <Divider />
             <Row gutter={16}>
                 <Col span={12}>
-
+                    <Form onSubmit={handleSubmit}>
                     <Form.Item hasFeedback>
-                        {getFieldDecorator("Business Name", {
+                        {getFieldDecorator("businessName", {
                             initialValue: seller?.businessName,
                             rules: [{ required: true, message: "Please add Business Name" }]
                         })(<InlineInput
-                            tip="What is business display name?"
+                            tip="update your business name"
                             label="Business Name"
                             placeholder="Business Name" />)}
                     </Form.Item>
 
                     <Form.Item hasFeedback>
-                        {getFieldDecorator("Business street", {
+                        {getFieldDecorator("street", {
                             initialValue: seller?.address?.street,
                             rules: [{ required: true, message: "Please add Business Location" }]
                         })(<InlineInput
-                            tip="What is business display name?"
-                            label="Business Name"
-                            placeholder="Business Name" />)}
+                            tip="update your street"
+                            label="Street"
+                            placeholder="street" />)}
                     </Form.Item>
 
 
                     <Form.Item hasFeedback>
-                        {getFieldDecorator("City", {
+                        {getFieldDecorator("city", {
                             initialValue: seller?.address?.city,
                             rules: [{ required: true, message: "Please add Business Name" }]
                         })(<InlineInput
-                            tip="What is business display name?"
-                            label="Business Name"
-                            placeholder="Business Name" />)}
+                            tip="update your city"
+                            label="City"
+                            placeholder="city" />)}
                     </Form.Item>
 
                     <Form.Item hasFeedback>
-                        {getFieldDecorator("Business Description", {
+                        {getFieldDecorator("shortDescription", {
                             initialValue: seller?.shortDescription,
-                            rules: [{ required: true, message: "Please add Bank location!" }]
                         })(<InlineInput
                             textarea
                             rows={5}
@@ -60,6 +89,10 @@ const ShopInfo = ({ form }: any ) => {
                             placeholder="About the Shop"
                         />)}
                     </Form.Item>
+                        <Button  htmlType="submit" loading={isPending} type="primary" style={{ marginTop: "2rem" }}>
+                            Update
+                        </Button>
+                    </Form>
                 </Col>
             </Row>
         </>
