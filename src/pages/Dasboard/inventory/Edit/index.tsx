@@ -41,7 +41,16 @@ const Edit: React.FC<any> = ({ form }) => {
     e.preventDefault();
     form.validateFields((err: any, values: any) => {
       if (!err) {
-        const newProduct = { ...sellerProduct, ...sellerProduct.product, ...values }
+        const newProduct = {
+          id: sellerProduct.pk,
+          product: {
+            ...sellerProduct.product,
+            ...values },
+          value:[{...sellerProduct.values[0],
+            ...values,
+            id: sellerProduct.pk
+          }]
+        };
         updateProduct(newProduct).then((result: any) => {
           if(result.status === 200){
             notification.success({

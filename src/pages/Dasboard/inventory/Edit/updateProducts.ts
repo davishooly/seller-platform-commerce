@@ -1,15 +1,14 @@
 import { sellersProductsVariablesUpdateVariable } from "api/src/apis";
 
 
-const updateSellerProduct = ( product: any) => {
-    console.log( ">>>>>>>.", product);
+const updateSellerProduct = ( { id, product, value } : any) => {
 
     const config =  sellersProductsVariablesUpdateVariable(
         {
-            id: product.pk,
+            id,
             data: {
                 product: product,
-                values: product.values,
+                values: value ,
                 variable: 0
             }
         },{

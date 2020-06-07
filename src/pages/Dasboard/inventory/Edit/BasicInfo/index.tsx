@@ -14,16 +14,12 @@ interface IProps {
 const BasicInfo: React.FC<any> = ({ form, sellerProduct }) => {
   const {
     getFieldDecorator,
-    getFieldError,
-    validateFields,
-    isFieldTouched,
-    getFieldsError
   } = form;
 
   return (
     <>
       <Form.Item>
-        {getFieldDecorator("product", {
+        {getFieldDecorator("name", {
           initialValue: sellerProduct?.product?.name,
           rules: [{ required: true, message: "Please input product name" }]
         })(<InlineInput label="Name" placeholder="Product Name" />)}
@@ -33,7 +29,11 @@ const BasicInfo: React.FC<any> = ({ form, sellerProduct }) => {
         {getFieldDecorator("sku", {
           initialValue: sellerProduct?.values[0]?.sku,
           rules: [{ required: true, message: "Please input sku!" }]
-        })(<InlineInput label="SKU" placeholder="SKU" />)}
+        })(<InlineInput
+            tip="stock keeping unit"
+            label="SKU"
+            placeholder="SKU"
+        />)}
       </Form.Item>
 
       <Form.Item hasFeedback>
@@ -52,7 +52,7 @@ const BasicInfo: React.FC<any> = ({ form, sellerProduct }) => {
 
       <Form.Item hasFeedback>
         {getFieldDecorator("salePrice", {
-          initialValue: sellerProduct?.values[0]?.minimumPrice,
+          initialValue: sellerProduct?.values[0]?.salePrice,
           rules: [{ required: true, message: "Please input price!" }]
         })(
           <InlineInput
@@ -77,41 +77,26 @@ const BasicInfo: React.FC<any> = ({ form, sellerProduct }) => {
             )}
         </Form.Item>
 
-        {/*<Form.Item hasFeedback>*/}
-        {/*    {getFieldDecorator("stock", {*/}
-        {/*        initialValue: sellerProduct?.values[0]?.availableUnits,*/}
-        {/*        rules: [{ required: true, message: "Please input price!" }]*/}
-        {/*    })(*/}
-        {/*        <InlineInput*/}
-        {/*            label="stock"*/}
-        {/*            placeholder="stock"*/}
-        {/*            type="number"*/}
-        {/*        />*/}
-        {/*    )}*/}
-        {/*</Form.Item>*/}
-
-
-
-        <Form.Item>
-        {getFieldDecorator("visibility", {
-          initialValue: sellerProduct,
-          rules: [{ required: true, message: "Please input Visibility!" }]
-        })(
-          <Inline label="Visibility" placeholder="Visibility">
-            <Select
-              showSearch
-              // style={{ }}
-              placeholder="Select  Visibility"
-              optionFilterProp="children"
-            >
-              <Option value={1}>not visible</Option>
-              <Option value={2}>Searchable</Option>
-              <Option value={3}>Listed</Option>
-              <Option value={4}>Always Visible</Option>
-            </Select>
-          </Inline>
-        )}
-      </Form.Item>
+      {/*  <Form.Item>*/}
+      {/*  {getFieldDecorator("visibility", {*/}
+      {/*    initialValue: sellerProduct,*/}
+      {/*    rules: [{ required: true, message: "Please input Visibility!" }]*/}
+      {/*  })(*/}
+      {/*    <Inline label="Visibility" placeholder="Visibility">*/}
+      {/*      <Select*/}
+      {/*        showSearch*/}
+      {/*        // style={{ }}*/}
+      {/*        placeholder="Select  Visibility"*/}
+      {/*        optionFilterProp="children"*/}
+      {/*      >*/}
+      {/*        <Option value={1}>not visible</Option>*/}
+      {/*        <Option value={2}>Searchable</Option>*/}
+      {/*        <Option value={3}>Listed</Option>*/}
+      {/*        <Option value={4}>Always Visible</Option>*/}
+      {/*      </Select>*/}
+      {/*    </Inline>*/}
+      {/*  )}*/}
+      {/*</Form.Item>*/}
 
       <Form.Item>
       <Inline label="Description" placeholder="">
