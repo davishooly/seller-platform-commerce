@@ -8,9 +8,9 @@ import {useSelector} from "react-redux";
 import { getSellerProducts } from '../../../state/seller';
 import moment from "moment";
 import {ListingContainer, ProductContainer} from "../../../components/Table/styles";
-import {Avatar, Checkbox, Icon, Switch, Tooltip} from "antd";
+import {Avatar, Checkbox, Icon, notification, Switch, Tooltip} from "antd";
 import {Link} from "react-router-dom";
-import {deleteProduct} from "../../../state/product";
+import {deleteProductVariant} from "../../../state/product";
 import Loader from "components/Loader";
 
 
@@ -37,11 +37,15 @@ const ManageInventory = () => {
     const sellerProducts = useSelector((state: any) => state.entities.sellerProducts);
     const [selectedProduct, setSelectedProduct]: any = useState([]);
 
-    const [{ isPending: deletePending}, deleteProducts] = useMutation((optimistic) => deleteProduct(17, optimistic));
+    const [{ isPending: deletePending}, deleteProducts] = useMutation((optimistic) => deleteProductVariant(selectedProduct[0], optimistic));
 
     const handleDeleteProduct = useCallback(optimistic => {
         deleteProducts(optimistic).then(( response: any) => {
             if(response.status ===  204){
+                notification.success({
+                    message: "Success",
+                    description: "Your Product has been deleted successfully"
+                });
                 setSelectedProduct([])
             }
         })
@@ -123,7 +127,9 @@ const ManageInventory = () => {
                         status: !product.deleted ? "Live" : 'Unlisted',
                         sale: Number(minimum_price),
                         productName: name,
-                        product: renderProductContent({ name, id:pk}),
+                        product: renderProductContent({
+                            variations: variationVariables.length, productId: id, name, variantId:pk
+                        }),
                         listing: !product.deleted
                             ? renderListingContent(false, pk)
                             : renderListingContent(true, pk)

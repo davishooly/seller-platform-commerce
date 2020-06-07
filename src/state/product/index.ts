@@ -1,13 +1,10 @@
 import {
     productsCategoriesRoot,
     sellersProductsVariablesRead,
-    sellersProductsVariablesDestroyDelete,
-    sellersProductsDelete,
-    sellersProductsDetailsRead
+    sellersProductsVariablesRemoveVariable,
+    sellersProductsDelete
 } from "api/src/apis";
 
-import { useRequest } from "redux-query-react";
-import { useSelector } from "react-redux";
 
 
 const getProductsCategories = (categories: any) => {
@@ -27,10 +24,38 @@ const getProductsCategories = (categories: any) => {
 
 };
 
-const deleteProduct = (productId: number, optimistic: any) => {
+const deleteProductVariant = ( { variations, productId, variantId } : any, optimistic: any) => {
 
-    const config =  sellersProductsDelete({
-            id: productId
+    if (variations < 2) {
+        const config =  sellersProductsDelete({
+                id: productId
+            },
+            {
+                transform: (body: any) => ({
+                    sellerProducts: body
+                }),
+                update: {
+                    sellerProducts: (prev: any, next: any) => {
+                        const { results , count  }  = prev
+                        const newState = {
+                            count: count - 1,
+                            results: results.filter((product: any) => product.id !== productId)
+                        };
+                        return newState
+                    }
+                }
+            });
+        if (optimistic) {
+            config.optimisticUpdate = {
+                sellerProducts: (body: any) => body
+            };
+        }
+
+        return config
+    }
+
+    const config =  sellersProductsVariablesRemoveVariable({
+            id: variantId
         },
         {
             transform: (body: any) => ({
@@ -38,11 +63,24 @@ const deleteProduct = (productId: number, optimistic: any) => {
             }),
             update: {
                 sellerProducts: (prev: any, next: any) => {
-                    const { results , count  }  = prev
+                    const { results , count  }  = prev;
                     const newState = {
-                        count: count - 1,
-                        results: results.filter((product: any) => product.id !== productId)
-                    }
+                        count: count,
+                        results: results.map((product: any) => {
+                            let filteredVariables = [];
+                            if(product.id === productId){
+                                filteredVariables = product.product.variationVariables.filter((variation: any) => variation.pk !== variantId)
+                            }
+
+                            return {
+                                ...product,
+                                product: {
+                                    ...product.product,
+                                    variationVariables: filteredVariables
+                                }
+                            }
+                        })
+                    };
                     return newState
                 }
             }
@@ -77,4 +115,4 @@ const getSellerProduct = (id: any) => {
 };
 
 
-export { getProductsCategories, deleteProduct, getSellerProduct };
+export { getProductsCategories, deleteProductVariant, getSellerProduct };
