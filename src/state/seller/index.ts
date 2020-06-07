@@ -35,8 +35,6 @@ const createSeller = (customerDetails: any) => {
 
 const updateSeller = ( id: any, customerDetails: any) => {
 
-    console.log(customerDetails)
-
     const data = {
             owner: {
                 email: customerDetails.personalMail,

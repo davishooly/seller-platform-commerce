@@ -105,7 +105,7 @@ const DivContainer = styled.div<any>`
    }
    
    .ant-input-group {
-     text-align: center;
+     text-align: end;
    }
    
    

@@ -5,17 +5,20 @@ import { Button, notification, Icon } from 'antd';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertFromRaw, EditorState } from 'draft-js';
 import { ImageContainer, PreviewProductDetailsContainer, Container} from "./styles";
-import {useMutation} from "redux-query-react";
+import { useMutation } from "redux-query-react";
 import {createProductVariation, productAddMedia} from "../../../state/product/createProduct";
+import {useSelector} from "react-redux";
 
 
 const PreviewComponent: React.FC<any> = ({ callback, product , files, submit, submitting }) => {
 
     const history = useHistory();
 
+    const sellerProducts = useSelector((state: any) => state.entities?.sellerProducts);
+
     const formattedFiles = [ ...files].splice(1, files.length - 1);
 
-    const [{ status }, addMedia] =
+    const [{}, addMedia] =
         useMutation(( id, file, path) => productAddMedia(id, file, path ));
 
 
@@ -37,8 +40,9 @@ const PreviewComponent: React.FC<any> = ({ callback, product , files, submit, su
     const variant: any = formatVariant();
 
 
+    // @ts-ignore
     const [{ isPending }, createProductVariant] = useMutation((id) => {
-        return createProductVariation({id , values: product.variants })
+        return createProductVariation({id , currentProduct: product, products: sellerProducts })
     });
 
 
@@ -48,7 +52,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product , files, submit, su
             const { status } = result;
             if( status === 201) {
                 const { body: { id } } = result;
-                createProductVariant(id).then((result: any) =>{
+                createProductVariant(id ).then((result: any) =>{
                     const { status } = result;
                     if(status === 201){
                         notification.success({

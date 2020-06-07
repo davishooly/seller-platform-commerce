@@ -28,7 +28,7 @@ const renderSearchInputs = (
                 value={filterValue[searchType]}
                 onChange={handleChange}
                 name={searchType}
-                style={{ width: 100, textAlign: 'center' }}
+                style={{ width: 200, textAlign: 'start' }}
                 placeholder={searchType}
             />
 
@@ -138,7 +138,7 @@ const RenderTable = ({
                         <ButtonContainer>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Export</Button>
                             <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">Unlist</Button>
-                            <Link className={ products !== 1 ? "disable-link" : ''} to={`/dashboard/inventory/edit/${selectedProduct.length && selectedProduct[0].id}`}>
+                            <Link className={ products !== 1 ? "disable-link" : ''} to={`/dashboard/inventory/edit/${selectedProduct.length && selectedProduct[0].variantId}`}>
                                 <Button primary={products === 1 ? 'primary' : ''} className="verticalLine">Edit</Button>
                             </Link>
                             <Popconfirm

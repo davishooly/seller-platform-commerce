@@ -64,7 +64,7 @@ const deleteProductVariant = ( { variations, productId, variantId } : any, optim
             update: {
                 sellerProducts: (prev: any, next: any) => {
                     const { results , count  }  = prev;
-                    const newState = {
+                    return  {
                         count: count,
                         results: results.map((product: any) => {
                             let filteredVariables = [];
@@ -81,7 +81,6 @@ const deleteProductVariant = ( { variations, productId, variantId } : any, optim
                             }
                         })
                     };
-                    return newState
                 }
             }
         });

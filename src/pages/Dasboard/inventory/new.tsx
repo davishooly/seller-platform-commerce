@@ -16,6 +16,7 @@ import Additional from "./additional";
 import { createProductSeller } from "../../../state/product/createProduct";
 import { useMutation } from "redux-query-react";
 import {Product} from "../../../api/src/models";
+import Loader from "../../../components/Loader";
 
 
 const {TabPane} = Tabs;
@@ -114,7 +115,7 @@ const CategoriesSelect: React.FC<any> = ({
     };
 
     if (!rootCategories) {
-        return <>loading ......</>;
+        return <Loader />;
     }
 
     return (

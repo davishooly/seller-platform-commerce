@@ -19,9 +19,9 @@ export const getTokenRefreshed = ( refreshToken: string, dispatch: any ) => {
                 dispatch(setStoreTokens({
                     accessToken:  accessToken,
                     refreshToken: refreshToken,
-                    expiresIn: now.getTime() + expiresIn,
+                    expiresIn: now.getTime() + 360000,
                     timeout: false
-                }))
+                }));
                 return next
             }
         }
