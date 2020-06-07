@@ -29,12 +29,12 @@ const ManageInventory = () => {
 
     const [isOpen, setModalOpen] = useState(false);
 
+    const sellerProducts = useSelector((state: any) => state.entities.sellerProducts);
 
     const [{isFinished, isPending: productFetchPending, status}, refresh] = useRequest(getSellerProducts({
         ...filterValue
     }));
 
-    const sellerProducts = useSelector((state: any) => state.entities.sellerProducts);
     const [selectedProduct, setSelectedProduct]: any = useState([]);
 
     const [{ isPending: deletePending}, deleteProducts] = useMutation((optimistic) => deleteProductVariant(selectedProduct[0], optimistic));

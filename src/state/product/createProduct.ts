@@ -29,9 +29,9 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
     });
 
     if(optimistic){
-         config.optimisticUpdate = {
-             sellerProducts: (body: any ) => body
-         }
+        config.optimisticUpdate = {
+            sellerProducts: (body: any ) => body
+        }
     }
 
     return config;
@@ -43,25 +43,37 @@ export const createProductVariation = ({ id, products, currentProduct }: any) =>
 
     const { variants } = currentProduct;
 
-    const { variation } = variants[0];
+    const { variation, salePrice, minimumPrice, availableUnits } = variants[0];
 
-    let newProduct  = { ...currentProduct, variationVariables: variants};
+    let newProduct  = {
+        ...currentProduct,
+        product: {
+            ...currentProduct,
+            variationVariables:
+                [ {
+                    values: [{
+                        sale_price: salePrice,
+                        minimum_price: minimumPrice,
+                        available_units: availableUnits
+                    }],
+                    variant: variation } ]
+        }
+    };
 
     return sellersProductsVariablesCreate({
         id,
         data: {
             values: variants,
-          variable: options.filter( ({ value}):any => value === variation)[0].index
+            variable: options.filter( ({ value}):any => value === variation)[0].index
         }
     },{
-
         update: {
             sellerProducts: (prev: any, next: any) => {
                 return  {
                     count: products.count,
                     results: [ ...products.results, newProduct ]
                 };
-          }
+            }
         }
     })
 };

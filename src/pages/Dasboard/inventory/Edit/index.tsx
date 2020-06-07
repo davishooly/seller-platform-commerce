@@ -51,6 +51,9 @@ const Edit: React.FC<any> = ({ form }) => {
             id: sellerProduct.pk
           }]
         };
+
+        console.log({ newProduct });
+
         updateProduct(newProduct).then((result: any) => {
           if(result.status === 200){
             notification.success({

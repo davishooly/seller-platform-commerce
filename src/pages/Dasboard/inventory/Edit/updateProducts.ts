@@ -13,10 +13,10 @@ const updateSellerProduct = ( { id, product, value } : any) => {
             }
         },{
             transform:((body:any) => ({
-                product: body
+                currentSellerProduct: body
             })),
             update: {
-                product: (prev: any, next: any) => next
+                currentSellerProduct: (prev: any, next: any) => next
             }
         }
     );
