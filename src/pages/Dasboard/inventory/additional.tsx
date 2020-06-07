@@ -115,7 +115,7 @@ const Additional: React.FC = ({ form, onNext, callback, setSize }: any) => {
             validateStatus={netWeightError ? "error" : ""}
             help={netWeightError || ""}
         >
-            {getFieldDecorator("basePrise", {
+            {getFieldDecorator("basePrice", {
                 rules: [{ required: true, message: "Please input base prose !" }]
             })(
                 <InlineInput

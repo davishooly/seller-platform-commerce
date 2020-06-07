@@ -20,17 +20,14 @@ export const CardSection = styled.section`
  width: 97.09%;
 `;
 
-const filter = { minPrice: "", maxPrice: "", category:''};
+const filter = { minPrice: "", maxPrice: "", category: '', keywords: ''};
 
 
 const ManageInventory = () => {
 
     const [filterValue, setFilterValue]= useState(filter);
 
-    const [compoundFilter, setCompoundFilter ] = useState({});
-
     const [isOpen, setModalOpen] = useState(false);
-
 
 
     const [{isFinished, isPending: productFetchPending, status}, refresh] = useRequest(getSellerProducts({
@@ -40,13 +37,12 @@ const ManageInventory = () => {
     const sellerProducts = useSelector((state: any) => state.entities.sellerProducts);
     const [selectedProduct, setSelectedProduct]: any = useState([]);
 
-    const [{ isPending: deletePending}, deleteProducts] = useMutation((optimistic) => deleteProduct(selectedProduct[0].id, optimistic));
+    const [{ isPending: deletePending}, deleteProducts] = useMutation((optimistic) => deleteProduct(17, optimistic));
 
     const handleDeleteProduct = useCallback(optimistic => {
         deleteProducts(optimistic).then(( response: any) => {
             if(response.status ===  204){
                 setSelectedProduct([])
-                // refresh();
             }
         })
     }, [deleteProducts]);
@@ -148,8 +144,6 @@ const ManageInventory = () => {
                 productFetchPending,
                 deletePending,
                 setFilterValue,
-                compoundFilter,
-                setCompoundFilter,
                 filterValue,
                 refresh,
                 isOpen,

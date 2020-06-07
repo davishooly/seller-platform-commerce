@@ -1,19 +1,19 @@
 import React from "react";
 
-import {Popconfirm, Input} from 'antd';
+import {Input, Popconfirm} from 'antd';
 import {themes} from "../../providers/themes/Themes";
 
-const renderPopup = (text: any) => (
+const renderPopup = (text: any, title: string) => (
     <Popconfirm
-        icon={<Input value={text}/>}
-       placement="bottom"
-       title="update price"
-        // onConfirm=''
-      okText="Update"
-     cancelText="Cancel">
-<span style={{color: '#0065B0'}}>{text}</span>
+    icon={<Input value={text}/>}
+    placement="bottom"
+    title={`update ${title}`}
+    okText="Update"
+    cancelText="Cancel">
+    <span style={{color: '#0065B0'}}>{text}</span>
 </Popconfirm>
 );
+
 
 export const columns = [
     {
@@ -30,37 +30,37 @@ export const columns = [
         title: 'Price',
         dataIndex: 'price',
         key: 'price',
-        render: (text: any) => renderPopup(text)
+        render: (text: any) => renderPopup(text,"price")
     },
     {
         title: 'Sale Price',
         dataIndex: 'sale',
         key: 'sale',
-        render: (text: any) => renderPopup(<span style={{color: '#0065B0'}}>{text}</span>)
-},
-{
-    title: 'Stock',
+        render: (text: any ) => renderPopup(text,'Sale Price')
+    },
+    {
+        title: 'Stock',
         dataIndex: 'stock',
-    key: 'stock',
-    render: (text: any) =>renderPopup(text)
-},
-{
-    title: 'Status',
+        key: 'stock',
+        render: (text: any ) =>renderPopup(text, "Stock")
+    },
+    {
+        title: 'Status',
         dataIndex: 'status',
-    key: 'status',
-    render:
-        (text: any) => <span style={{
-    color: text === 'Live' ? themes.greenBright :
-        text === 'In Review' ? '#E6A441' : themes.lightRedBackground
+        key: 'status',
+        render:
+            (text: any) => <span style={{
+                color: text === 'Live' ? themes.greenBright :
+                    text === 'In Review' ? '#E6A441' : themes.lightRedBackground
 
-}
-}
->
+            }
+            }
+            >
     {text}
     </span>
-}, {
-    title: 'Listing',
+    }, {
+        title: 'Listing',
         dataIndex: 'listing',
         key: 'listing',
-},
+    },
 ];

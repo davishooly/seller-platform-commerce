@@ -9,7 +9,7 @@ import {PlusCircleOutlined} from "@ant-design/icons/lib";
 import {ProductPreview} from "./productPreview";
 
 const { Option } = Select;
-const options = ['category', 'price'];
+const options = ['category', 'price', "keywords"];
 
 const renderSearchInputs = (
     searchType: string,
@@ -19,18 +19,17 @@ const renderSearchInputs = (
 
     const handleChange = (e:any) => {
         const { name, value } = e.target;
-        setFilterValue({ ...filterValue,  [name]: name === "category" ? value : Number(value)})
-
+            setFilterValue({ ...filterValue, [name]: value });
     };
 
-    return searchType === "category" ?
+    return searchType !== "price" ?
         (
             <Input
-                value={filterValue?.category}
+                value={filterValue[searchType]}
                 onChange={handleChange}
-                name="category"
+                name={searchType}
                 style={{ width: 100, textAlign: 'center' }}
-                placeholder="category"
+                placeholder={searchType}
             />
 
         )
@@ -104,6 +103,7 @@ const RenderTable = ({
 
     const handleSelect = (value: string) => {
         setSearchType(value);
+        setFilterValue({ minPrice: "", maxPrice: "", category: '', keywords: ''});
     };
 
     const products = selectedProduct.length;

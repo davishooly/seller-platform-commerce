@@ -9,6 +9,7 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
                 ...product,
             },
             seller: sellerId,
+            basePrice: product.basePrice,
             primaryCategory: categoryId ,
         }
     }, {
