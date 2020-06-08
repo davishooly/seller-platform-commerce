@@ -24,10 +24,9 @@ const ErrorPage = lazy(() => import("../../pages/Error/error"));
 
 export const errorPageRoute = () => (
     <>
-        <Route path={"/404"}>
+        <Route path={"/"}>
             <ErrorPage/>
         </Route>
-        <Redirect to={"/404"} />
     </>
 );
 
