@@ -11,7 +11,7 @@ const getProductsCategories = (categories: any) => {
     if (!categories) {
         const config = productsCategoriesRoot({
             offset: 1,
-            limit:10
+            limit:3
         }, {
             transform: (body: any) => ({rootCategories: body}),
             update: {

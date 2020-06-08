@@ -47,7 +47,8 @@ const StyledAgreement = styled.div<Props>`
   .images {
     display: flex;
     width: 100%;
-    justify-content: space-between h3 {
+    justify-content: space-between;
+     h3 {
       margin-top: 20px;
     }
   }
@@ -104,13 +105,6 @@ const Agreement = ({
             <img src={Bank} alt="bank" />
           </div>
           <h3> Bank </h3>
-        </div>
-
-        <div>
-          <div className="oval">
-            <img src={Taxes} alt="taxes" />
-          </div>
-          <h3> Taxes </h3>
         </div>
       </div>
       <Divider />
