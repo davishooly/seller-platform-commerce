@@ -4,6 +4,8 @@ import Header, { DashboardHeader } from "./Header";
 import Footer from "./Footer";
 
 import { device } from "mediaScreen/mediaQueries";
+import {useWindowSize} from "react-use";
+import {Hamburger} from "../Menu/hamburger";
 
 
 
@@ -29,14 +31,30 @@ const StyledLayout = styled.div`
 
 `;
 
+const menuItems = [
+    { path: '/', name:'Home'},
+    { path: "/login", name:'Login'},
+    { path: "/new", name:'New seller'}
+];
+
+
+
 const MainLayout = ({ children }: any) => {
+
+    const { width } = useWindowSize();
     return (
         <StyledLayout>
-            <Header />
-        <Content>
-            { children }
-        </Content>
-        <Footer />
+            {
+                width > 768 ?
+                    (  <Header /> )
+                    :
+                    Hamburger(menuItems)
+
+            }
+            <Content>
+                { children }
+            </Content>
+            <Footer />
         </StyledLayout>
     );
 };
@@ -45,9 +63,9 @@ export const DashboardLayout = ({ children }: any) => {
     return (
         <StyledLayout>
             <DashboardHeader />
-        <Content>
-            { children }
-        </Content>
+            <Content>
+                { children }
+            </Content>
         </StyledLayout>
     );
 };

@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import requireAuthentication from "../RequireAuthentication";
 import { DashboardLayout } from "../../components/Layout";
 import {HomeRoutes, AuthRoutes, AccountActivationRoutes, ResetPasswordRoute} from "./routes";
+import Loader from "../../components/Loader";
 
 /**
  * code splitting -> faster page load time
@@ -33,7 +34,7 @@ class Routing extends React.Component<any, {}> {
     render() {
         const Routes = this.PreAuthedRoutes;
         return (
-            <Suspense fallback={<div>...loading</div>}>
+            <Suspense fallback={<Loader/>}>
                 <Switch>
                     <Route exact path='/login'>
                         <AuthRoutes/>
