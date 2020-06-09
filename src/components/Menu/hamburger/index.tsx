@@ -22,6 +22,10 @@ export const Hamburger = (menuItems: Array<Menu>) => {
 
     const history = useHistory();
 
+    //prevent scrolls when menu is open
+    const preventScroll = (type: any) => document.body.style.overflow = type;
+
+
     const toggleMenus = (e: any) => {
         e.preventDefault();
         toggleMenu(!isMenuOpen);
@@ -66,7 +70,12 @@ export const Hamburger = (menuItems: Array<Menu>) => {
             </div>
             </div>
             <div className="menu__items--section">
-                { isMenuOpen && renderMenuItems()}
+                { isMenuOpen ?
+                    preventScroll("hidden")
+                    && renderMenuItems()
+                    :
+                    preventScroll("unset")
+                }
             </div>
 
         </HamburgerContainer>

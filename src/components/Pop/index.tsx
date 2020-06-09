@@ -40,8 +40,8 @@ const Index = ({isOpen, children, setOpenPop, logout }: any ) => {
         if (ref.current !== null && !ref.current.contains(e.target)) {
             // @ts-ignore
             setOpenPop(!isOpen);
-        };
-    }
+        }
+    };
 
     useEffect(() => {
         document.addEventListener("click",updatePopView);
