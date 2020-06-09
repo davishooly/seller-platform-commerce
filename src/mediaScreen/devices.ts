@@ -1,3 +1,4 @@
+// break points and devices
 export const size = {
     mobileS: '320px',
     mobileM: '375px',

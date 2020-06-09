@@ -18,7 +18,7 @@ const Login = ( { form }: any) => {
         loginSeller({
             ...user
         })
-    )
+    );
 
 
     const onFinish = (e:any) => {

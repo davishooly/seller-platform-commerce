@@ -19,7 +19,7 @@ export function reducer(state:any = {}, action: any) {
       };
 
     case "AUTH-REFRESH":
-      const now  =  new Date()
+      const now  =  new Date();
           return  Object.assign({}, state, {
             ...state,
             smiles: now.getTime() + 36000,

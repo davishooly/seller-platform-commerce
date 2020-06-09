@@ -53,7 +53,7 @@ const RegisterContainer = styled.div`
  width: 70%;
  display: flex;
  flex-direction: column;
- @media only screen and ${device.mobileS} and (max-device-width: 425px) {
+ @media only screen and ${device.mobileS} and (max-device-width: 768px) {
     width: unset;
   } 
   
@@ -70,6 +70,14 @@ const RegisterContainer = styled.div`
   
   .ant-form  {
     width: 70%;
+    
+    @media only screen and ${device.mobileS} and (max-device-width: 600px) {
+       width: 100%;
+    } 
+    
+    @media only screen and ${device.tablet} and (max-device-width: 1024px) {
+       width: 100%;
+    } 
     
     .ant-btn-primary, .ant-input{
      height: 50px;
@@ -106,9 +114,16 @@ const Container = styled.div`
  height: 60vh;
  width: 50%;
  
-   @media only screen and ${device.mobileS} and (max-width: 425px) {
+   @media only screen and ${device.mobileS} and (max-width: 768px) {
     width: unset;
+    height: 70vh;
   }
+  
+  @media only screen and ${device.tablet} and (max-device-width: 1024px) {
+       width: 100%;
+       height: unset;
+    }
+    
   display: flex;
  justify-content: center;
  align-items: center;
