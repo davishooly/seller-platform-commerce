@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useHistory  } from "react-router-dom";
 import { MenuUnfoldOutlined, CloseOutlined } from "@ant-design/icons/lib";
 
@@ -23,7 +23,15 @@ export const Hamburger = (menuItems: Array<Menu>) => {
     const history = useHistory();
 
     //prevent scrolls when menu is open
-    const preventScroll = (type: any) => document.body.style.overflow = type;
+    useEffect(() => {
+
+        if(isMenuOpen){
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+
+    },[isMenuOpen]);
 
 
     const toggleMenus = (e: any) => {
@@ -34,6 +42,7 @@ export const Hamburger = (menuItems: Array<Menu>) => {
 
     const handleMenuNavigation = (path: string) => {
         toggleMenu(false);
+        document.body.style.overflow = "unset";
         history.push(path);
     };
 
@@ -55,28 +64,31 @@ export const Hamburger = (menuItems: Array<Menu>) => {
     return (
         <HamburgerContainer {...{themes, isMenuOpen}} >
             <div className={"top__section"}>
-            <div className="toggle__container">
-                <div className="brand__section">
-                    <Logo />
-                    <span> Omar Marketplace</span>
-                </div>
-                {
-                    isMenuOpen ?
-                        <CloseOutlined onClick={toggleMenus} />
-                        :
-                        <MenuUnfoldOutlined onClick={toggleMenus}/>
+                <div className="toggle__container">
+                    <div className="brand__section">
+                        <Logo />
+                        <span> Omar Marketplace</span>
+                    </div>
+                    {
+                        isMenuOpen ?
+                            <CloseOutlined onClick={toggleMenus} />
+                            :
+                            <MenuUnfoldOutlined onClick={toggleMenus}/>
 
-                }
+                    }
+                </div>
             </div>
-            </div>
-            <div className="menu__items--section">
-                { isMenuOpen ?
-                    preventScroll("hidden")
-                    && renderMenuItems()
-                    :
-                    preventScroll("unset")
-                }
-            </div>
+
+            { isMenuOpen ?
+                (
+                    <div className="menu__items--section">
+                        { renderMenuItems() }
+                    </div>
+                )
+                :
+                ''
+            }
+
 
         </HamburgerContainer>
     );
