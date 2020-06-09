@@ -15,6 +15,11 @@ interface Props {
   error?: boolean;
 }
 
+
+const DivContainer = styled.div` 
+  width: 90%;
+`;
+
 const StyledAgreement = styled.div<Props>`
   display: grid;
   place-content: center;
@@ -26,6 +31,16 @@ const StyledAgreement = styled.div<Props>`
      width: 100%;
      padding: 1rem;
      justify-items: center;
+     
+     h1 {
+      margin-bottom: unset !important;
+     }
+     
+     h1, h4 {
+       text-align: start;
+       width: 90%;
+       margin: 1rem;
+     }
   } 
 
   .ant-checkbox {
@@ -64,7 +79,7 @@ const StyledAgreement = styled.div<Props>`
     width: 100%;
     justify-content: space-between;
      @media only screen and ${device.mobileS} and (max-device-width: 768px) {
-       width: 74%;
+       width: 90%;
     } 
      h3 {
       margin-top: 20px;
@@ -103,7 +118,7 @@ const Agreement = ({
       <Title>Set up your OE seller account</Title>
 
       <Title level={4}> Have the following available: </Title>
-      <div className="images">
+      <DivContainer className="images">
         <div>
           <div className="oval">
             <img src={Business} alt="business" />
@@ -124,10 +139,10 @@ const Agreement = ({
           </div>
           <h3> Bank </h3>
         </div>
-      </div>
+      </DivContainer>
       <Divider />
 
-      <div>
+      <DivContainer>
         <Input
           name="businessName"
           style={{ borderColor: error.businessName ? "red" : "" }}
@@ -137,9 +152,9 @@ const Agreement = ({
           label="Business Name"
         />
         <span style={{ color: "red" }}>{error.businessName} </span>
-      </div>
+      </DivContainer>
 
-      <div>
+      <DivContainer>
         <TermAndCons
           error={error}
           onChange={agreeTerms}
@@ -147,7 +162,7 @@ const Agreement = ({
           label="Seller Agreement"
           tip="I have read and accepted the terms and conditions of the OE seller Agreement"
         />
-      </div>
+      </DivContainer>
     </StyledAgreement>
   );
 };

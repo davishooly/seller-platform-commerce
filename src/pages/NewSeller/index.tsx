@@ -78,12 +78,28 @@ const DivContainer =  styled.div<any>`
       display: none;
     }
     
-    .ant-steps-item::after, .ant-steps-item::before {
+    .ant-steps-item::before {
       display: none;
+    }
+    
+    .ant-steps-item::after {
+      right: 35px;
+      position: absolute;
+      top: 23px;
+      left: unset;
+      display: block;
+      width: 14px;
+      height: 14px;
+      transform: rotate(40deg);
     }
     
     .ant-steps-item: nth-child(${ props => props.current }) {
       display: block;
+      cursor: pointer;
+      pointer-events: none;
+      .ant-steps-item-container {
+        padding-bottom: unset;
+      }
     }
   }
  } 
