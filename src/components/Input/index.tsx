@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
-import { Input as InputAnt, Radio, Checkbox, Typography } from "antd"
+import { Input as InputAnt , Checkbox } from "antd"
+import { device } from "mediaScreen/mediaQueries";
 
 const StyledInput = styled.div`
     display: flex;
     flex-direction: column;
     text-align: left;
     margin-bottom: 20px;
+   
     span {
         padding-bottom: 1rem;
         color: #009D98;
@@ -24,11 +26,15 @@ const StyledInput = styled.div`
     h2 {
         max-width: 400px;
     }
-`
+`;
 
 const StyleRadio = styled.div`
     display: flex;
     text-align: left;
+    
+    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+     text-align: center;
+    } 
 
     flex-direction: column;
     padding-top: 1rem;

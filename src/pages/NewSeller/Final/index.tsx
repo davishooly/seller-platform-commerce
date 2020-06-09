@@ -4,11 +4,16 @@ import { Center } from "components";
 import PreviewSellerInfo from "../Preview";
 import styled from "styled-components";
 
+import { device } from 'mediaScreen/mediaQueries';
+
 
 const Container = styled.div`
    display: flex;
    height : auto;
    width: 60%;
+    @media only screen and ${device.mobileS} and (max-device-width: 600px) {
+       width: 100%;
+    } 
    flex-direction: column;
    justify-content: space-between;
    text-align: center;
@@ -21,6 +26,10 @@ const Container = styled.div`
      }
    span:last-of-type {
       font-weight: 300;
+      
+    @media only screen and ${device.mobileS} and (max-device-width: 600px) {
+      text-align: start;
+    } 
    }
 `;
 

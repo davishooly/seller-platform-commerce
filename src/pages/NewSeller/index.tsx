@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import { useHistory } from "react-router-dom";
 
 import {Steps, Button, notification} from "antd";
 import Agreement from "./Terms";
@@ -15,7 +14,7 @@ import useBeforeUnload from 'use-before-unload';
 import  { createSeller } from "../../state/seller";
 
 import { useMutation } from 'redux-query-react';
-import {device} from "../../mediaScreen/mediaQueries";
+import {device} from "mediaScreen/mediaQueries";
 
 
 
@@ -69,12 +68,25 @@ const Center = styled.div`
 `;
 
 
-const DivContainer =  styled.div`
+const DivContainer =  styled.div<any>`
  @media only screen and ${device.mobileS} and (max-device-width: 480px) {
    .ant-steps-horizontal.ant-steps-label-horizontal {
     display: flex;
+    flex-direction: column;
+    
+    .ant-steps-item {
+      display: none;
+    }
+    
+    .ant-steps-item::after, .ant-steps-item::before {
+      display: none;
+    }
+    
+    .ant-steps-item: nth-child(${ props => props.current }) {
+      display: block;
+    }
   }
-  } 
+ } 
 `;
 
 const stepStyle = {
@@ -86,16 +98,14 @@ interface IProp {
 }
 
 const NewSeller: React.FC<IProp> = (props) => {
-
-    const history = useHistory();
     const [current, setCurrent] = useState(0);
     const [customerDetails, setCustomerDetails] = useState(customer);
     const [isChecked, setIsChecked] = useState(false);
     const [error, setInputError] = useState({});
 
-    const [ { isFinished, isPending}, sellerCreate ] = useMutation(() =>
+    const [ {isPending}, sellerCreate ] = useMutation(() =>
         createSeller(customerDetails)
-    )
+    );
 
 
     const agreeTerms = () => {
@@ -197,7 +207,7 @@ const NewSeller: React.FC<IProp> = (props) => {
     });
 
     return (
-        <DivContainer>
+        <DivContainer current={current + 1 }>
             <Steps type="navigation" current={current} style={stepStyle}>
                 {steps.map(step => (
                     <Step key={step.title} title={step.title}/>

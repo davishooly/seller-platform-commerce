@@ -5,8 +5,9 @@ import Input, { TermAndCons } from "components/Input";
 import Bank from "icons/bank-24px.svg";
 import Business from "icons/logistics-24px.svg";
 import Phone from "icons/phone-24px.svg";
-import Taxes from "icons/receipt-24px.svg";
 import { validateNameFields } from "utils/validators";
+
+import { device } from 'mediaScreen/mediaQueries';
 
 const { Title } = Typography;
 
@@ -19,6 +20,13 @@ const StyledAgreement = styled.div<Props>`
   place-content: center;
   padding: 3rem;
   text-align: center;
+  
+    
+   @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+     width: 100%;
+     padding: 1rem;
+     justify-items: center;
+  } 
 
   .ant-checkbox {
     ${(props: any) =>
@@ -31,6 +39,7 @@ const StyledAgreement = styled.div<Props>`
   img {
     width: 36.84px;
     height: 26.32px;
+    
   }
   .oval {
     border-radius: 50%;
@@ -42,12 +51,21 @@ const StyledAgreement = styled.div<Props>`
     justify-content: center;
     align-items: center;
     margin: 1rem;
+    
+    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+       margin: unset;
+        height: 63px;
+        width: 63px;
+    } 
   }
 
   .images {
     display: flex;
     width: 100%;
     justify-content: space-between;
+     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+       width: 74%;
+    } 
      h3 {
       margin-top: 20px;
     }
