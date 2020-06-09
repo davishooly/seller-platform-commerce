@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {Steps, Button, notification} from "antd";
 import Agreement from "./Terms";
@@ -127,6 +127,13 @@ const NewSeller: React.FC<IProp> = (props) => {
     const agreeTerms = () => {
         setIsChecked(!isChecked);
     };
+
+    // scroll to top on every section change
+    useEffect(()=> {
+
+        window.scrollTo(0,0);
+
+    }, [current]);
 
     const next = () => {
         if (current === 0) {

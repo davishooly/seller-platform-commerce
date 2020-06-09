@@ -5,6 +5,7 @@ import Button from "components/Button";
 import Image from 'icons/background.jpeg'
 import ThemeContext from "../../providers/themes/ThemeContext";
 import {ThemesType} from "../../providers/themes/ThemeTypes";
+import { device } from 'mediaScreen/mediaQueries';
 
 
 const StyledLanding = styled.div<ThemesType>`
@@ -32,6 +33,9 @@ const StyledLanding = styled.div<ThemesType>`
         place-items: center;
         height: 35vh;
         z-index: 1;
+         @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+          text-align: center;
+        } 
     }
     span {
     color: ${props => props.textColor};

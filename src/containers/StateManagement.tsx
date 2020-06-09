@@ -18,6 +18,8 @@ import {queryMiddleware, entitiesReducer, queriesReducer, requestAsync} from 're
 import {reducer as auth} from "state/auth"
 import {authHeader} from 'state/auth_header';
 import {getTokenRefreshed} from "../state/refreshToken";
+import { ScrollToTop } from "containers/Routing/routeHelper";
+
 
 
 const persistConfig = {
@@ -94,6 +96,7 @@ const StateManagement = (props: any) => {
     return (
 
         <BrowserRouter>
+            <ScrollToTop/>
             <Provider store={store}>
                 <ReduxQueryProvider queriesSelector={getQueries}>
                     <PersistGate loading={null} persistor={persistor}>
