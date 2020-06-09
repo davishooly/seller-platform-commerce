@@ -28,7 +28,7 @@ const Container = styled.div`
       font-weight: 300;
       
     @media only screen and ${device.mobileS} and (max-device-width: 600px) {
-      text-align: start;
+      text-align: center;
     } 
    }
 `;

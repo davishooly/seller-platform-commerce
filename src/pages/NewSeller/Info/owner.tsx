@@ -4,14 +4,21 @@ import { Input } from "components";
 import { Col, Row } from "antd";
 import {validateEmail, validateNameFields} from "utils/validators";
 
+import  { device } from 'mediaScreen/mediaQueries';
+
 const StyledInfo = styled.div`
   display: grid;
 
   place-content: center;
   padding: 3rem;
-
-  .input {
-  }
+  
+  @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+   
+     .ant-col-8, .ant-col-16, .ant-col-12 {
+       width: 100% !important;
+     }
+    } 
+    
 
   .verify {
     background-color: #203341;
@@ -101,8 +108,9 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
         label="User details"
         placeholder="Username"
         style={{ borderColor: error.username ? "red" : "" }}
-        tip="Whats your username"
+        tip="Whats your username ?"
         className="input"
+        allowClear
         name="username"
         value={username}
         onChange={changeCustomerDetails}
@@ -112,6 +120,8 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
       <Input
         style={{ borderColor: error.email ? "red" : "" }}
         name="email"
+        allowClear
+        tip="Enter email"
         onChange={changeCustomerDetails}
         value={email}
         placeholder="example@mail.com"
@@ -123,10 +133,12 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
           <Col span={12}>
             <Input
               style={{ borderColor: error.firstname ? "red" : "" }}
+              allowClear
               name="firstname"
               onChange={changeCustomerDetails}
               value={firstname}
-              placeholder="firstname"
+              tip="Enter first name"
+              placeholder="first name"
             />
             <span style={{ color: "red" }}>{error.firstname}</span>
           </Col>
@@ -135,9 +147,11 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
             <Input
               style={{ borderColor: error.lastname ? "red" : "" }}
               name="lastname"
+              tip="Enter last name"
+              allowClear
               onChange={changeCustomerDetails}
               value={lastname}
-              placeholder="lastname"
+              placeholder="last name"
             />
             <span style={{ color: "red" }}>{error.lastname}</span>
           </Col>
@@ -145,6 +159,8 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
         <Input
           style={{ borderColor: error.password ? "red" : "" }}
           name="password"
+          allowClear
+          tip="Enter  password"
           onChange={changeCustomerDetails}
           value={password}
           type="password"
@@ -156,6 +172,8 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
             style={{ borderColor: error.password ? "red" : "" }}
             name="confirmPassword"
             type="password"
+            tip="confirm password"
+            allowClear
             onChange={changeCustomerDetails}
             value={confirmPassword}
             placeholder="confirm password"

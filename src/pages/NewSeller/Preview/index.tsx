@@ -3,6 +3,9 @@ import { Divider, Tooltip } from "antd";
 import { FormOutlined } from '@ant-design/icons'
 import styled from "styled-components";
 
+import { device } from "mediaScreen/mediaQueries";
+
+
 export const Container = styled.div`
   margin-bottom : 40px;
   .section {
@@ -42,7 +45,13 @@ export const Container = styled.div`
        span:first-of-type { 
           font-weight: 500;
           color: rgba(0, 0, 0, 0.85);
-        }
+          font-size: 14px;
+     }
+      span { 
+         @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+          text-align: start;
+        } 
+      }
     }
    }
    

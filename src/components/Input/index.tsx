@@ -34,6 +34,8 @@ const StyleRadio = styled.div`
     
     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
      text-align: center;
+     
+     .text { width: 100% !important;}
     } 
 
     flex-direction: column;

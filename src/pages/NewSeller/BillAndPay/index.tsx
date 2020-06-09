@@ -68,6 +68,7 @@ const BillAndPay = ({customer, changeCustomerDetails, setInputError, error}: any
               <Input label="Bank Name"
                      style={{ borderColor: error.bankLocation ? "red" : ''}}
                      value={bankName}
+                     allowClear
                      name='bankName'
                      onChange={changeCustomerDetails}
               />
@@ -76,6 +77,7 @@ const BillAndPay = ({customer, changeCustomerDetails, setInputError, error}: any
                 <Input label="Bank Location"
                        style={{ borderColor: error.bankLocation ? "red" : ''}}
                        value={bankLocation}
+                       allowClear
                        name='bankLocation'
                        onChange={changeCustomerDetails}
                 />
@@ -83,6 +85,7 @@ const BillAndPay = ({customer, changeCustomerDetails, setInputError, error}: any
                 <Input label="Account Holder's Name"
                        style={{ borderColor: error.bankAccountHoldersName ? "red" : ''}}
                        value={bankAccountHoldersName}
+                       allowClear
                        name='bankAccountHoldersName'
                        onChange={changeCustomerDetails}
                 />
@@ -90,11 +93,13 @@ const BillAndPay = ({customer, changeCustomerDetails, setInputError, error}: any
                 <Input label="Bank Account Number "
                        style={{ borderColor: error.bankAccountNumber ? "red" : ''}}
                        value={bankAccountNumber}
+                       allowClear
                        name='bankAccountNumber'
                        onChange={changeCustomerDetails}
                 />
                 <span style={{color: "red" }}>{error.bankAccountNumber}</span>
                 <Input label="Confirm Bank Account Number"
+                       allowClear
                        style={{ borderColor: error.confirmBankAccount ? "red" : ''}}
                        value={confirmBankAccount}
                        name='confirmBankAccount'

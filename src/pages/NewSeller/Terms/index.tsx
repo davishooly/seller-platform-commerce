@@ -34,6 +34,7 @@ const StyledAgreement = styled.div<Props>`
      
      h1 {
       margin-bottom: unset !important;
+      font-size: 30px !important;
      }
      
      h1, h4 {

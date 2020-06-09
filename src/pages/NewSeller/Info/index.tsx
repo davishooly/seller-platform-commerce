@@ -4,14 +4,20 @@ import Input from "components/Input";
 import { Col, Row } from "antd";
 import { validateNameFields } from "utils/validators";
 
+import  { device } from 'mediaScreen/mediaQueries';
+
 const StyledInfo = styled.div`
   display: grid;
 
   place-content: center;
   padding: 3rem;
 
-  .input {
-  }
+    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+   
+     .ant-col-8, .ant-col-16, .ant-col-12 {
+       width: 100% !important;
+     }
+    } 
 
   .verify {
     background-color: #203341;
@@ -88,6 +94,8 @@ const Info = ({
         name="businessNameLocation"
         value={businessNameLocation}
         onChange={changeCustomerDetails}
+        tip='Building and street'
+        allowClear
         label="Business Location"
         placeholder="Building and street"
         className="input"
@@ -101,7 +109,9 @@ const Info = ({
               style={{ borderColor: error.town ? "red" : "" }}
               name="town"
               onChange={changeCustomerDetails}
+              tip='Town/City'
               value={town}
+              allowClear
               placeholder="Town/City"
             />
             <span style={{ color: "red" }}>{error.town}</span>
@@ -111,6 +121,8 @@ const Info = ({
             <Input
               style={{ borderColor: error.county ? "red" : "" }}
               name="county"
+              tip='County'
+              allowClear
               onChange={changeCustomerDetails}
               value={county}
               placeholder="County/Region"
@@ -127,6 +139,7 @@ const Info = ({
         tip="What is business display name?"
         className="input"
         name="displayName"
+        allowClear
         value={displayName}
         onChange={changeCustomerDetails}
       />
@@ -138,6 +151,7 @@ const Info = ({
         tip="Why do we ask for this?"
         style={{ borderColor: error.website ? "red" : "" }}
         value={website}
+        allowClear
         name="website"
         onChange={changeCustomerDetails}
       />
@@ -149,6 +163,8 @@ const Info = ({
             <Input
               placeholder="E.g +254076786786"
               name="phone"
+              tip={"Enter your mobile number "}
+              allowClear
               value={phone}
               onChange={changeCustomerDetails}
             />
