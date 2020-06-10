@@ -26,7 +26,7 @@ const CategoriesContainer =  styles.div`
      
 
       }
-      span: hover {
+      span:hover {
         cursor: pointer;
       }
     }
@@ -122,8 +122,6 @@ const ImageContainer = styles.div`
       height: 6em;
     }
   }
-    }
-
 `;
 
 const PreviewProductDetailsContainer =  styles.div`
@@ -158,10 +156,10 @@ const Button = styles.button<ThemesType>`
   width: auto;
   cursor: pointer;
   border-radius: 3px;
-  font-family: "Proxima Nova Regular";
+  font-family: "Proxima Nova Regular", sans-serif;
   font-size: 12px;
   color: ${props => props.footerBackground};
-  line-height 14px
+  line-height: 14px
 `;
 
 
@@ -179,21 +177,19 @@ const Container = styles.div`
       color: #1890ff;
     }
   }
+  
+  .title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #131A1E;
+    font-family: Roboto, sans-serif;
+  }
      
   .title:first-of-type { 
     display: inline-block;
     margin-bottom: 10px
   }
-  .title {
-    font-size: 16px;
-    font-weight: 500;
-    color: #131A1E;
-    font-weight: bold;
-    font-family: Roboto;
-  }
-  }
-  `
-;
+  `;
 
 const UploadContainer = styles.div`
     display: flex;

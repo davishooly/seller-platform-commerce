@@ -9,7 +9,6 @@ const PopContainer =  Styled.div<any>`
   right: 10%;
   background-color: #FFFFFF;
   border-radius: 4px;
-  
   ${props => props.logout && css `
   top: 78%;
   `}

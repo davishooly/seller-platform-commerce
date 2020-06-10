@@ -42,15 +42,16 @@ export const Container = styled.div`
         width: 100%;
         padding: 16px 0 16px 0;
         font-size: 18px;
-        span:first-of-type { 
-          font-weight: 500;
-          color: rgba(0, 0, 0, 0.85);
-          font-size: 14px;
-        }
         span { 
           @media only screen and ${device.mobileS} and (max-device-width: 768px) {
             text-align: start;
           } 
+        }
+        
+        span:first-of-type { 
+          font-weight: 500;
+          color: rgba(0, 0, 0, 0.85);
+          font-size: 14px;
         }
       }
     }

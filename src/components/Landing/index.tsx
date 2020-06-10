@@ -43,10 +43,10 @@ const StyledLanding = styled.div<ThemesType>`
   .title {
     font-size: 28px;
   }
-  span: nth-child(2){
+  span:nth-child(2) {
     font-size: 20px;
   }
-  span: nth-child(3){
+  span:nth-child(3) {
     font-size: 16px;
   }
 `;

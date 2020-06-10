@@ -19,7 +19,7 @@ const PayoutContainer = Styled.div`
     .container__title {
       color:#FFFFFF;
       font-size: 18px;
-      line-height 21px
+      line-height: 21px;
       letter-spacing: .5px;
     }
 
@@ -33,16 +33,16 @@ const PayoutContainer = Styled.div`
 const Span = Styled.span<ThemesType>`
     color: ${props => props.textColor};
     font-size: 14px;
-    line-height 16px
+    line-height: 16px;
     letter-spacing: .44px;
 `;
 
 const Div = Styled.div`
-    span: last-of-type {
+    span:last-of-type {
       border-left: 1px solid rgba(255,255,255,0.5);
       padding: 10px;
     }
-    span: first-of-type {
+    span:first-of-type {
       padding-right: 10px
     }
 `;
@@ -51,10 +51,10 @@ const Button = Styled.button<ThemesType>`
   background: #E6F1FC;
   border: none;
   border-radius: 3px;
-  font-family: "Proxima Nova Regular";
+  font-family: "Proxima Nova Regular", sans-serif;
   font-size: 12px;
   color: ${props => props.footerBackground};
-  line-height 14px
+  line-height: 14px;
 `;
 
 

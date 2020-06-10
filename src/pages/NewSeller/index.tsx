@@ -81,18 +81,8 @@ const DivContainer =  styled.div<any>`
     .ant-steps-item::before, .ant-steps-item::after {
       display: none;
     }
-       
-    //   .ant-steps-item: nth-child(${ props => props.current }) {
-      //     display: block;display
-      //     cursor: pointer;cursor
-      //     pointer-events: none;pointer-events
-      //     .ant-steps-item-container {
-        //       padding-bottom: unset;padding-bottom
-      //     }
-    //   }
-  // }
-} 
-`;
+  } 
+}`;
 
 const stepStyle = {
   boxShadow: "0px -1px 0 0 #e8e8e8 inset"

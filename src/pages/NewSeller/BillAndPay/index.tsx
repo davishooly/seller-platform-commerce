@@ -5,13 +5,13 @@ import { Center, Input } from 'components';
 import {validateNameFields} from "utils/validators";
 
 const StyledBillAndPay = styled.div`
-  padding: 3rem;
-  .hide {
+padding: 3rem;
+.hide {
+  display: none;
+  input {
     display: none;
-    input {
-      display: none;
-    }
   }
+}
 `;
 
 const BillAndPay = ({customer, changeCustomerDetails, setInputError, error}: any) => {

@@ -13,7 +13,7 @@ const  LoginContainer = styled.div`
     width: 361px;
     border-bottom: 1px solid rgba(28,44,56,0.3);
     color: #000000;
-    font-family: "Roboto";
+    
     font-size: 14px;
     outline: none;
   }
@@ -30,7 +30,6 @@ const  LoginContainer = styled.div`
     
     span {
       color: #FFFFFF;
-      font-family: "Roboto";
       font-size: 20px;
       font-weight: bold;
     }
@@ -48,18 +47,7 @@ const  LoginContainer = styled.div`
       font-size: 16px !important;
     }
   } 
-  .bottom__section {
-    display: flex;
-    justify-content: center;
-    min-height: 5vh;
-    font-family: "Roboto Regular";
-    span { font-size: 16px; }
-    span: last-of-type{
-      cursor: pointer;
-      padding-left: 6px;
-      text-decoration: underline;
-    }
-  }
+
   .create {
     display: flex;
     align-items: center;
@@ -67,10 +55,20 @@ const  LoginContainer = styled.div`
     min-height: 10vh;
     width: 98%;
     span {
-      font-family: "Roboto";
       font-size: 16px !important;
       line-height: 24px;
       color: #1C2C38;
+    }
+  }
+  .bottom__section {
+    display: flex;
+    justify-content: center;
+    min-height: 5vh;
+    span { font-size: 16px; }
+    span:last-of-type{
+      cursor: pointer;
+      padding-left: 6px;
+      text-decoration: underline;
     }
   }
   .error {

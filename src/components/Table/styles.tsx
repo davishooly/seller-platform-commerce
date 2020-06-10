@@ -27,7 +27,7 @@ const TableSection = styled.section<ThemesType>`
   } 
   .ant-select-selection-selected-value {
     color: #909399;
-    font-family: "PingFang SC";
+    font-family: PingFang SC, sans-serif;
   } 
   .ant-select-selection--single {
     height: 37px;
@@ -71,7 +71,7 @@ const TableSection = styled.section<ThemesType>`
       letter-spacing: 0.39px;
       line-height: 16px;
       font-size: 14px;
-      font-family: Roboto;
+      font-family: Roboto, sans-serif;
     }
   
     span:first-of-type  {
@@ -165,7 +165,7 @@ const Button =  styled.button<any>`
       color: #F56C6C;
       cursor: pointer;
    `}
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     outline: none;
     line-height: 16px;
     padding-right: 16px;

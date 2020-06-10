@@ -4,7 +4,7 @@ import { Overlay } from "./index";
 import {Icon} from "antd";
 
 const ModalComponent = styled.div`
-  div: first-of-type {
+  div:first-of-type {
     i { padding: 20px;
       text-align: end;
     }
