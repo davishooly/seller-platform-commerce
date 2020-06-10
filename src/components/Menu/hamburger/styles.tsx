@@ -5,7 +5,7 @@ const HamburgerContainer = styled.div<any>`
    flex-direction: column;
    
    ${props => props.isMenuOpen && css<any>`
-     position: absolute;
+     position: fixed;
      width: 100%;
      top: 0;
      left: 0;

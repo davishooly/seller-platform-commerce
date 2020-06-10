@@ -1,0 +1,35 @@
+{
+  "extends": "stylelint-config-recommended",
+  "processors": [["stylelint-processor-styled-components", {
+    "moduleName": "styled-components",
+    "importName": "default",
+    "strict": false,
+    "ignoreFiles":["**/*.ts"],
+    "rules": {
+      "indentation": [
+        2,
+        {
+          "except": ["value"],
+          "severity": "warning"
+        }
+      ],
+      "color-no-invalid-hex": true,
+      "block-no-empty": null,
+      "max-empty-lines": 2,
+      "comment-empty-line-before": [
+        "always",
+        {
+          "ignore": ["stylelint-commands", "after-comment"]
+        }
+      ]
+    },
+    "parserPlugins": [
+      "tsx",
+      ["decorators", { "decoratorsBeforeExport": true }],
+      "classProperties",
+      "exportExtensions",
+      "functionBind",
+      "functionSent"
+    ]
+  }]]
+}
