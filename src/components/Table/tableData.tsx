@@ -50,10 +50,10 @@ export const columns = [
         key: 'status',
         render:
             (text: any) => <span style={{
-                color: text === 'Live' ? themes.greenBright :
-                    text === 'In Review' ? '#E6A441' : themes.lightRedBackground
+        color: text === 'Live' ? themes.greenBright :
+        text === 'In Review' ? '#E6A441' : themes.lightRedBackground
 
-            }
+      }
             }
             >
     {text}

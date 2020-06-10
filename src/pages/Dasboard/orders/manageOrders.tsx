@@ -14,8 +14,8 @@ import Loader from "components/Loader";
 
 
 const OrderContainer  = Styled.div`
-     display: flex;
-     justify-content: space-between;
+      display: flex;
+      justify-content: space-between;
 `;
 
 const { Search } = Input;

@@ -1,32 +1,32 @@
 import styled, { css } from "styled-components";
 
 const HamburgerContainer = styled.div<any>`
-   display: flex;
-   flex-direction: column;
+  display: flex;
+  flex-direction: column;
    
-   ${props => props.isMenuOpen && css<any>`
-     position: fixed;
-     width: 100%;
-     top: 0;
-     left: 0;
-     bottom: 0;
-     z-index: 2;
-     background: #00AD9F;
-   ` }
+  ${props => props.isMenuOpen && css<any>`
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  background: #00AD9F;
+  ` }
    
-   svg path {
-     fill: #006DBF;
-   }    
-   svg:not(:root) {
-     width: 48px;
-   }
+  svg path {
+    fill: #006DBF;
+  }    
+  svg:not(:root) {
+    width: 48px;
+  }
    
-   .top__section {
+  .top__section {
     height: 80px;
     display: flex;
     align-items: center;
     
-   .toggle__container {
+    .toggle__container {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -37,36 +37,36 @@ const HamburgerContainer = styled.div<any>`
       width: 98%;
       margin: 0 auto;
       
-    .brand__section {
-       display: flex;
-       width: 78%;
-       align-items: center;
-       justify-content: space-between;
+      .brand__section {
+        display: flex;
+        width: 78%;
+        align-items: center;
+        justify-content: space-between;
        
-     span {
-       font-weight: 900;
-        font-size: 20px;
-    }
+        span {
+          font-weight: 900;
+          font-size: 20px;
+        }
       
-   }
+      }
    
-    .anticon {
-      font-size: 30px;
+      .anticon {
+        font-size: 30px;
+      }
     }
-   }
   }
-   .menu__items--section {
-     width: 90%;
-     margin: 0 auto;
-     color: #fff;
-     font-weight: 700;
-     font-size: 1.5625em;
+  .menu__items--section {
+    width: 90%;
+    margin: 0 auto;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.5625em;
      
-     div {
-       height: 50%;
-     }
+    div {
+      height: 50%;
+    }
      
-   }
+  }
    
 `;
 

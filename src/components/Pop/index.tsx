@@ -11,7 +11,7 @@ const PopContainer =  Styled.div<any>`
   border-radius: 4px;
   
   ${props => props.logout && css `
-     top: 78%;
+  top: 78%;
   `}
   .ant-popover-arrow {
     left: 50%;

@@ -69,8 +69,8 @@ const Center = styled.div`
 
 
 const DivContainer =  styled.div<any>`
- @media only screen and ${device.mobileS} and (max-device-width: 480px) {
-   .ant-steps-horizontal.ant-steps-label-horizontal {
+@media only screen and ${device.mobileS} and (max-device-width: 480px) {
+  .ant-steps-horizontal.ant-steps-label-horizontal {
     display: flex;
     flex-direction: column;
     
@@ -82,20 +82,20 @@ const DivContainer =  styled.div<any>`
       display: none;
     }
        
-  //   .ant-steps-item: nth-child(${ props => props.current }) {
-  //     display: block;
-  //     cursor: pointer;
-  //     pointer-events: none;
-  //     .ant-steps-item-container {
-  //       padding-bottom: unset;
-  //     }
-  //   }
+    //   .ant-steps-item: nth-child(${ props => props.current }) {
+      //     display: block;display
+      //     cursor: pointer;cursor
+      //     pointer-events: none;pointer-events
+      //     .ant-steps-item-container {
+        //       padding-bottom: unset;padding-bottom
+      //     }
+    //   }
   // }
- } 
+} 
 `;
 
 const stepStyle = {
-    boxShadow: "0px -1px 0 0 #e8e8e8 inset"
+  boxShadow: "0px -1px 0 0 #e8e8e8 inset"
 };
 
 interface IProp {

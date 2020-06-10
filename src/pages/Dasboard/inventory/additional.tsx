@@ -137,7 +137,7 @@ const Additional: React.FC = ({ form, onNext, callback, setSize }: any) => {
                     mode="tags"
                     placeholder="Example color, size"
                     onChange={handleSizeChange}
-                    style={{ width: '100%' , height: "40px"}}
+                    style={{ width: '100%', height: "40px"}}
                 >
                     {children}
                 </Select>

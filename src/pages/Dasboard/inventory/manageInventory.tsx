@@ -15,9 +15,9 @@ import Loader from "components/Loader";
 
 
 export const CardSection = styled.section`
- display: flex;
- justify-content: space-between;
- width: 97.09%;
+display: flex;
+justify-content: space-between;
+width: 97.09%;
 `;
 
 const filter = { minPrice: "", maxPrice: "", category: '', keywords: ''};

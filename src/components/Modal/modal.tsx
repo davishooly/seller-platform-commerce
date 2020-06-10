@@ -4,25 +4,25 @@ import { Overlay } from "./index";
 import {Icon} from "antd";
 
 const ModalComponent = styled.div`
-   div: first-of-type {
+  div: first-of-type {
     i { padding: 20px;
       text-align: end;
-     }
-   }
-   width: 431px;
-   z-index: 999;
-   visibility: visible;
-   left: 50%;
-   top: 50%;
-   transform: translate(-50%, -50%);
-   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
-   position: fixed;
-   background-color: #FFFFFF;
-   border-radius: 4px;
+    }
+  }
+  width: 431px;
+  z-index: 999;
+  visibility: visible;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
+  position: fixed;
+  background-color: #FFFFFF;
+  border-radius: 4px;
    
-   span {
+  span {
     font-weight: normal !important;
-   }
+  }
 `;
 
 const Modal = ({isOpen, children, close, styles}: any) => {
@@ -31,8 +31,8 @@ const Modal = ({isOpen, children, close, styles}: any) => {
             <Overlay>
                 <ModalComponent style={{...styles}}>
                     <div style={{
-                        textAlign: "end"
-                    }}
+            textAlign: "end"
+          }}
                     >
                         <Icon type="close" onClick={() => close(!isOpen)}/>
                     </div>

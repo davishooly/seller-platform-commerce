@@ -7,24 +7,24 @@ const HeaderContainer = styled.div<ThemesType>`
     min-height: 65px;
     box-shadow: 0 1px 6px rgba(57,73,76,.35);
     svg path {
-     fill: #006DBF;
-   }    
+      fill: #006DBF;
+    }    
     .container {
-     position: relative;
-     margin-left: auto;
-     width: 90%;
-     margin-right: auto;
-     padding-right: 15px;
-     padding-left: 15px;
+      position: relative;
+      margin-left: auto;
+      width: 90%;
+      margin-right: auto;
+      padding-right: 15px;
+      padding-left: 15px;
     }
-   .navbar-header {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 65px;
-    height: 55px;
-    flex-basis: 100%;
+    .navbar-header {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 65px;
+      height: 55px;
+      flex-basis: 100%;
     }
     .navigation {
       cursor: pointer;
@@ -42,91 +42,91 @@ const HeaderContainer = styled.div<ThemesType>`
       }
       
       span:last-of-type {
-       padding: 8px;
-       border: solid 1px ${props => props.buttonBackground};
+        padding: 8px;
+        border: solid 1px ${props => props.buttonBackground};
       }
     }
 `;
 
 const RegisterContainer = styled.div`
- margin: 60px auto 60px auto;
- width: 70%;
- display: flex;
- flex-direction: column;
- @media only screen and ${device.mobileS} and (max-device-width: 768px) {
-    width: unset;
-  } 
+margin: 60px auto 60px auto;
+width: 70%;
+display: flex;
+flex-direction: column;
+@media only screen and ${device.mobileS} and (max-device-width: 768px) {
+  width: unset;
+} 
   
- .modal__container {
+.modal__container {
   display: flex;
   justify-content: center;
   span {
-     font-size: 18px;
+    font-size: 18px;
   }
- }
- .title {
-    margin-top: 20px;
-  }
+}
+.title {
+  margin-top: 20px;
+}
   
-  .ant-form  {
-    width: 70%;
+.ant-form  {
+  width: 70%;
     
-    @media only screen and ${device.mobileS} and (max-device-width: 600px) {
-       width: 100%;
-    } 
+  @media only screen and ${device.mobileS} and (max-device-width: 600px) {
+    width: 100%;
+  } 
     
-    @media only screen and ${device.tablet} and (max-device-width: 1024px) {
-       width: 100%;
-    } 
+  @media only screen and ${device.tablet} and (max-device-width: 1024px) {
+    width: 100%;
+  } 
     
-    .ant-btn-primary, .ant-input{
-     height: 50px;
-    }
+  .ant-btn-primary, .ant-input{
+    height: 50px;
+  }
       
   .login-form {
-      max-width: 300px;
-   }
+    max-width: 300px;
+  }
   .login-form-forgot {
     float: right;
-   }
-   .ant-col-rtl .login-form-forgot {
-     float: left;
-   }
-   .login-form-button {
+  }
+  .ant-col-rtl .login-form-forgot {
+    float: left;
+  }
+  .login-form-button {
     width: 100%;
-   }
+  }
 
-   .remember__section { 
-     .ant-form-item-children {
-       display: flex;
-       justify-content: space-between;
+  .remember__section { 
+    .ant-form-item-children {
+      display: flex;
+      justify-content: space-between;
     } 
   }
-    .create {
-      text-align: center;
-      margin-top: 20px;
-    }
+  .create {
+    text-align: center;
+    margin-top: 20px;
+  }
 }
 
 `;
 
 const Container = styled.div`
- height: 60vh;
- width: 50%;
+  height: 60vh;
+  width: 50%;
  
-   @media only screen and ${device.mobileS} and (max-width: 768px) {
+  @media only screen and ${device.mobileS} and (max-width: 768px) {
     width: unset;
     height: 70vh;
   }
   
   @media only screen and ${device.tablet} and (max-device-width: 1024px) {
-       width: 100%;
-       height: unset;
-    }
+    width: 100%;
+    height: unset;
+  }
     
   display: flex;
- justify-content: center;
- align-items: center;
+  justify-content: center;
+  align-items: center;
 `;
 
 
@@ -138,26 +138,26 @@ const ResetPasswordContainer = styled.section`
     min-height: calc(50vh - 72px);
     
     .title {
-    height: 100px;
+      height: 100px;
       h1 {
-         font-size: 24px;
+        font-size: 24px;
       }
       h3 {
-         font-weight: 300;
+        font-weight: 300;
       }
     }
     
     .ant-form  {
       width: 24%;
-    .ant-input{
-     height: 50px;
-    }
-    .login-form-button {
-       width: 30%;
-       height: 50px;
-       margin-right: 20px;
-    }
-`;
+      .ant-input{
+        height: 50px;
+      }
+      .login-form-button {
+        width: 30%;
+        height: 50px;
+        margin-right: 20px;
+      }
+    }`;
 
 
 

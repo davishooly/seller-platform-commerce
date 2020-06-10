@@ -8,12 +8,12 @@ import { sellersActivateCreate } from "../../api/src/apis";
 
 
 const ActivationContainer = styled.div`
-     display: grid;
-     place-items: center;
-     height: 600px;
-    span {
-      text-align: center;
-    }
+  display: grid;
+  place-items: center;
+  height: 600px;
+  span {
+    text-align: center;
+  }
 `;
 
 

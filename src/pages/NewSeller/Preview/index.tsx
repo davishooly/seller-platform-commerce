@@ -9,53 +9,53 @@ import { device } from "mediaScreen/mediaQueries";
 export const Container = styled.div`
   margin-bottom : 40px;
   .section {
-     display: flex;
-     flex-direction:column;
-     width: 100%;
+    display: flex;
+    flex-direction:column;
+    width: 100%;
      
-  .section__title {
-     display: flex;
-     width: 100%;
-     justify-content: space-between;
-     font-size: 24px;
-     margin-bottom: 20px;
+    .section__title {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      font-size: 24px;
+      margin-bottom: 20px;
      
-     span {
-       font-weight: 300;
-     }
+      span {
+        font-weight: 300;
+      }
      
-     .anticon {
+      .anticon {
         color: #1890ff;
         font-size: 16px;
         cursor: pointer;
-     }
-   }
+      }
+    }
      
-   .section__content {
-     display: flex;
-     flex-direction:column;
-     width: 100%;
-    .content {
-       display: grid;
-       grid-template-columns: 2fr 2fr;
-       justify-items: start;
-       width: 100%;
-       padding: 16px 0 16px 0;
-       font-size: 18px;
-       span:first-of-type { 
+    .section__content {
+      display: flex;
+      flex-direction:column;
+      width: 100%;
+      .content {
+        display: grid;
+        grid-template-columns: 2fr 2fr;
+        justify-items: start;
+        width: 100%;
+        padding: 16px 0 16px 0;
+        font-size: 18px;
+        span:first-of-type { 
           font-weight: 500;
           color: rgba(0, 0, 0, 0.85);
           font-size: 14px;
-     }
-      span { 
-         @media only screen and ${device.mobileS} and (max-device-width: 768px) {
-          text-align: start;
-        } 
+        }
+        span { 
+          @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+            text-align: start;
+          } 
+        }
       }
     }
-   }
    
-`;
+  }`;
 
 interface Section {
     section: string,

@@ -10,24 +10,24 @@ import {Hamburger} from "../Menu/hamburger";
 
 
 const Content = styled.main`
-    grid-area: content;
+  grid-area: content;
 `;
 const StyledLayout = styled.div`
-    display: grid;
-    min-height: 100vh;
+  display: grid;
+  min-height: 100vh;
 
-    grid-template-areas:
-    "header"
-    "content"
-    "footer";
+  grid-template-areas:
+  "header"
+  "content"
+  "footer";
     
-   @media only screen and ${device.mobileS} and (max-device-width: 768px) {
-     header {
-       display: none;
-     }
+  @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+    header {
+      display: none;
+    }
   } 
 
-    grid-template-rows: auto 2fr auto;
+  grid-template-rows: auto 2fr auto;
 
 `;
 

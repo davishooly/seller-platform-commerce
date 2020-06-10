@@ -35,21 +35,21 @@ function beforeUpload(file: Blob) {
 
 
 const Container = styled.div`
-   .ant-upload-list-item-error {
-      border-color: unset;
-      color: unset;
-   }
-   .ant-upload-list-item-undefined {
-      border-color: red;
-      color: red;
-   }
+  .ant-upload-list-item-error {
+    border-color: unset;
+    color: unset;
+  }
+  .ant-upload-list-item-undefined {
+    border-color: red;
+    color: red;
+  }
 `;
 
 
 export const Action = styled.div`
-    button {
-        margin-right: 2rem;
-    }
+  button {
+    margin-right: 2rem;
+  }
 `;
 
 const Image = ({ callback, score, setScore, files, setFiles }: any) => {

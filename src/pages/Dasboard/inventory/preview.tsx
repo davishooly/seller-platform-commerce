@@ -96,7 +96,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product , files, submit, su
                                     })
                                     :
                                     < div style={{ visibility: files.length ? 'hidden' : "visible",}} className="empty__images">
-                                        <Icon type="file-jpg" style={{ width: '10em', height:"10em" , color: '#08c' }} theme="outlined" />
+                                        <Icon type="file-jpg" style={{ width: '10em', height:"10em", color: '#08c' }} theme="outlined" />
                                         <span onClick={() => callback("4")}> Add images </span>
                                     </div>
                             }

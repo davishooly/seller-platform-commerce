@@ -27,21 +27,21 @@ const StyledAgreement = styled.div<Props>`
   text-align: center;
   
     
-   @media only screen and ${device.mobileS} and (max-device-width: 768px) {
-     width: 100%;
-     padding: 1rem;
-     justify-items: center;
+  @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+    width: 100%;
+    padding: 1rem;
+    justify-items: center;
      
-     h1 {
+    h1 {
       margin-bottom: unset !important;
       font-size: 30px !important;
-     }
+    }
      
-     h1, h4 {
-       text-align: start;
-       width: 90%;
-       margin: 1rem;
-     }
+    h1, h4 {
+      text-align: start;
+      width: 90%;
+      margin: 1rem;
+    }
   } 
 
   .ant-checkbox {
@@ -69,9 +69,9 @@ const StyledAgreement = styled.div<Props>`
     margin: 1rem;
     
     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
-       margin: unset;
-        height: 63px;
-        width: 63px;
+      margin: unset;
+      height: 63px;
+      width: 63px;
     } 
   }
 
@@ -79,10 +79,10 @@ const StyledAgreement = styled.div<Props>`
     display: flex;
     width: 100%;
     justify-content: space-between;
-     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
-       width: 90%;
+    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+      width: 90%;
     } 
-     h3 {
+    h3 {
       margin-top: 20px;
     }
   }

@@ -25,9 +25,9 @@ const Span  =  Styled.span`
 `;
 
 const Div = Styled.div`
- .filterSection:first-of-type  {
-   width: 38%;
- }`;
+  .filterSection:first-of-type  {
+    width: 38%;
+  }`;
 
 const OeExpress = () => {
   const [selectProduct, setSelectedProduct] = useState<any>([]);

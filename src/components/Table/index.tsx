@@ -49,11 +49,11 @@ const renderSearchInputs = (
                         className="site-input-split"
 
                         style={{
-                            width: 30,
-                            borderLeft: 0,
-                            borderRight: 0,
-                            pointerEvents: 'none',
-                        }}
+              width: 30,
+              borderLeft: 0,
+              borderRight: 0,
+              pointerEvents: 'none',
+            }}
                         placeholder="~"
                         disabled
                     />
@@ -63,9 +63,9 @@ const renderSearchInputs = (
                         onChange={handleChange}
                         type="number"
                         style={{
-                            width: 100,
-                            textAlign: 'center',
-                        }}
+              width: 100,
+              textAlign: 'center',
+            }}
                         value={filterValue?.maxPrice}
                         placeholder="Maximum"
                     />

@@ -12,12 +12,12 @@ const StyledInfo = styled.div`
   place-content: center;
   padding: 3rem;
 
-    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+  @media only screen and ${device.mobileS} and (max-device-width: 768px) {
    
-     .ant-col-8, .ant-col-16, .ant-col-12 {
-       width: 100% !important;
-     }
-    } 
+    .ant-col-8, .ant-col-16, .ant-col-12 {
+      width: 100% !important;
+    }
+  } 
 
   .verify {
     background-color: #203341;

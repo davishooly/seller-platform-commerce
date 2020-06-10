@@ -8,10 +8,10 @@ const Span = styled.span`
 `;
 
 const Div = styled.div`
-   display: flex;
-   justify-content: space-between;
-   color: white;
-   align-items: center;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    align-items: center;
 `;
 
 const RenderCard: React.FC<any> = ({style, children}) => {

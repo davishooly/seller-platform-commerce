@@ -9,52 +9,52 @@ import { device } from 'mediaScreen/mediaQueries';
 
 
 const StyledLanding = styled.div<ThemesType>`
-    display: flex;
-    height: 82vh;
-    justify-content: center;
-    align-items: center;
-    background-image: url(${Image});
-    background-color: ${props => props.greyBackground};
-    background-repeat:  no-repeat;
-    background-size: cover;
-    position: relative;
-    &:before {
-        content: '';
-        position: absolute;
-        top: 0%;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background: ${props => props.radialGradient};
-        opacity: 1;
+  display: flex;
+  height: 82vh;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${Image});
+  background-color: ${props => props.greyBackground};
+  background-repeat:  no-repeat;
+  background-size: cover;
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: ${props => props.radialGradient};
+    opacity: 1;
   }
-    .landing {
-        display: grid;
-        place-items: center;
-        height: 35vh;
-        z-index: 1;
-         @media only screen and ${device.mobileS} and (max-device-width: 768px) {
-          text-align: center;
-        } 
-    }
-    span {
+  .landing {
+    display: grid;
+    place-items: center;
+    height: 35vh;
+    z-index: 1;
+    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+      text-align: center;
+    } 
+  }
+  span {
     color: ${props => props.textColor};
-    }
-    .title {
-     font-size: 28px;
-    }
-    span: nth-child(2){
+  }
+  .title {
+    font-size: 28px;
+  }
+  span: nth-child(2){
     font-size: 20px;
-    }
-    span: nth-child(3){
+  }
+  span: nth-child(3){
     font-size: 16px;
-    }
+  }
 `;
 
 const ButtonContainer = styled.div`
- display: flex;
- width: 300px;
- justify-content: space-evenly;
+display: flex;
+width: 300px;
+justify-content: space-evenly;
 `;
 
 const Landing = () => {

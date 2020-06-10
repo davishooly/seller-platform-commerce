@@ -36,7 +36,7 @@ export const columns = [
     render:
       (        text: {} | null | undefined) => <span style={{
           color: text === 'Replenish' ? '#F56C6C' :
-              text === 'Check' ? '#E6A441' : '#67C23A'
+          text === 'Check' ? '#E6A441' : '#67C23A'
         }
         }
         >

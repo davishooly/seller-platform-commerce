@@ -4,60 +4,60 @@ import { Input as InputAnt , Checkbox } from "antd"
 import { device } from "mediaScreen/mediaQueries";
 
 const StyledInput = styled.div`
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 20px;
    
-    span {
-        padding-bottom: 1rem;
-        color: #009D98;
-        font-size: 14px;
-    }
+  span {
+    padding-bottom: 1rem;
+    color: #009D98;
+    font-size: 14px;
+  }
 
-    input {
-        height: 40px;
+  input {
+    height: 40px;
        	
-        border: 1px solid #DCDFE6;	
-        border-radius: 4px;	background-color: #FFFFFF;
-        padding: 1rem;
-    }
+    border: 1px solid #DCDFE6;	
+    border-radius: 4px;	background-color: #FFFFFF;
+    padding: 1rem;
+  }
 
-    h2 {
-        max-width: 400px;
-    }
+  h2 {
+    max-width: 400px;
+  }
 `;
 
 const StyleRadio = styled.div`
-    display: flex;
-    text-align: left;
+  display: flex;
+  text-align: left;
     
-    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
-     text-align: center;
+  @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+    text-align: center;
      
-     .text { width: 100% !important;}
-    } 
+    .text { width: 100% !important;}
+  } 
 
-    flex-direction: column;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+  flex-direction: column;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
-    .text {
-        display: flex;
-        padding: 0;
-        margin: 0;
+  .text {
+    display: flex;
+    padding: 0;
+    margin: 0;
 
-        width: 350px;
-        font-size: 16px;
-        letter-spacing: 0.5px;
-        line-height: 19px;
+    width: 350px;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    line-height: 19px;
 
-        justify-content: space-between;
-        p {
-            padding-left: 20px;
-        }
-        
+    justify-content: space-between;
+    p {
+      padding-left: 20px;
     }
+        
+  }
 `
 
 const Input = (props: any) => (<StyledInput>
@@ -79,24 +79,24 @@ export const TermAndCons = (props: any) => (<StyleRadio>
 
 
 const StyledInline = styled.div`
-    /* margin-top: 5px; */
-    /* margin-bottom: 1rem; */
-    .label {
-        display: flex;
-        align-items: baseline;
+  /* margin-top: 5px; */
+  /* margin-bottom: 1rem; */
+  .label {
+    display: flex;
+    align-items: baseline;
 
-        span {
-            margin-left: 5px;
+    span {
+      margin-left: 5px;
             
-        }
-        span:after {
-            content:")";
-        }
-
-        span:before {
-            content: "(";
-        }
     }
+    span:after {
+      content:")";
+    }
+
+    span:before {
+      content: "(";
+    }
+  }
 `;
 
 export const InlineInput = (props: any) => (
