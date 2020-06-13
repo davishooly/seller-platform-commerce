@@ -14,7 +14,7 @@ const Div = styled.div`
     align-items: center;
 `;
 
-const RenderCard: React.FC<any> = ({ style, children }) => {
+const RenderCard: React.FC<any> = ({ style, children }: any) => {
     return (
         <Card
             bordered={true}
@@ -30,7 +30,7 @@ const RenderCard: React.FC<any> = ({ style, children }) => {
     );
 };
 
-const renderCardContent = (content: any, index: any, width: any): JSX.Element => (
+const renderCardContent = (content: any, index: string, width: number): JSX.Element => (
     <RenderCard style={{ color: content.backgroundColor, width }} key={index}>
         <Span> {content.title} </Span>
         <Div>

@@ -112,7 +112,7 @@ const Header = () => {
                                     <Button {...themes} name="sign in" onClick={openPopConfirm}>
                                         <Link to="/login"> Sign in</Link>
                                     </Button>
-                                    <span> Don't have an account? </span>
+                                    <span> {"Don't have an account?"}</span>
                                     <SignUpSpan {...themes} id="sign up" onClick={openPopConfirm}>
                                         <Link to="/new"> Sign up</Link>
                                     </SignUpSpan>
@@ -127,7 +127,7 @@ const Header = () => {
                 <ul>
                     <li> All Categories</li>
                     <li> Top Seller</li>
-                    <li> Today's Deals</li>
+                    <li> {"Today's Deals"}</li>
                     <li> OE Fashion</li>
                     <li> OE Market</li>
                     <li> Customer Service</li>
@@ -171,9 +171,6 @@ export const DashboardHeader = () => {
             <div className="header">
                 <img src={Logo} alt="logo" style={{ filter: 'invert(0)', paddingBottom: 20 }} />
                 <ul>
-                    <li>
-                        <div style={{ marginBottom: 16, marginRight: 30 }}></div>
-                    </li>
                     <div className="pop__container">
                         <li className="account" onClick={openPopConfirm}>
                             <Icon type="user" /> {username}{' '}

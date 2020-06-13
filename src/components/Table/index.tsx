@@ -11,7 +11,9 @@ import { ProductPreview } from './productPreview';
 const { Option } = Select;
 const options = ['category', 'price', 'keywords'];
 
-const renderSearchInputs = (searchType: string, setFilterValue: Function, filterValue: any) => {
+type setFilterValue = (value: any) => void;
+
+const renderSearchInputs = (searchType: string, setFilterValue: setFilterValue, filterValue: any) => {
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setFilterValue({ ...filterValue, [name]: value });

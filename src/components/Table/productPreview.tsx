@@ -9,7 +9,9 @@ const styles = {
     height: '600px',
 };
 
-export const ProductPreview = (isOpen: boolean, setModalOpen: Function) => {
+type setModalOpen = () => void;
+
+export const ProductPreview = (isOpen: boolean, setModalOpen: setModalOpen) => {
     return (
         <>
             <ModalComponent styles={styles} isOpen={isOpen} close={setModalOpen}>

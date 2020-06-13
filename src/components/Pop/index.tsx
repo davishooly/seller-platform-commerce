@@ -33,13 +33,12 @@ const PopContainer = Styled.div<any>`
   }
 `;
 
-const Index = ({ isOpen, children, setOpenPop, logout }: any) => {
+const Index = ({ isOpen, children, setOpenPop }: any) => {
     const ref = useRef(null);
 
     const updatePopView = (e: any) => {
         // @ts-ignore
         if (ref.current !== null && !ref.current.contains(e.target)) {
-            // @ts-ignore
             setOpenPop(!isOpen);
         }
     };

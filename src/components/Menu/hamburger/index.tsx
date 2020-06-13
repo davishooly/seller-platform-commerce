@@ -43,7 +43,7 @@ export const Hamburger = (menuItems: Array<Menu>) => {
     const renderMenuItems = () => (
         <>
             {menuItems.map(({ path, name }: Menu) => (
-                <div onClick={() => handleMenuNavigation(path)}>
+                <div key={name} onClick={() => handleMenuNavigation(path)}>
                     <span>{name}</span>
                 </div>
             ))}
