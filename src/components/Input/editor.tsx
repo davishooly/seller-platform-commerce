@@ -4,9 +4,7 @@ import { Editor } from 'react-draft-wysiwyg';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-
-
-class RichEditor extends Component <any> {
+class RichEditor extends Component<any> {
     state = {
         editorState: EditorState.createEmpty(),
     };
@@ -16,7 +14,7 @@ class RichEditor extends Component <any> {
             editorState,
         });
 
-        this.props.onChange(editorState, this.props.editorType )
+        this.props.onChange(editorState, this.props.editorType);
     };
 
     render() {
@@ -35,5 +33,4 @@ class RichEditor extends Component <any> {
     }
 }
 
-
-export default RichEditor
+export default RichEditor;

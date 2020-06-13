@@ -1,8 +1,7 @@
-import React, {Component} from "react";
-import {Action, AnyAction, Dispatch} from "redux";
-import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
-
+import React, { Component } from 'react';
+import { Action, AnyAction, Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 interface StateProps {
     isLoggedIn: boolean;
@@ -16,16 +15,14 @@ interface ConnectedReduxProps<A extends Action = AnyAction> {
 }
 
 // TODO: Fix out how to re-type this as React.ComponentType<P> properly
-export default <P extends {}>(
-    ChildComponent: React.ComponentType<P>
-): React.ComponentType => {
+export default <P extends {}>(ChildComponent: React.ComponentType<P>): React.ComponentType => {
     class AuthenticatedComponent extends Component<P & StateProps> {
         render() {
-            const {isLoggedIn}: any = this.props;
+            const { isLoggedIn }: any = this.props;
             if (isLoggedIn) {
                 return <ChildComponent {...(this.props as P)} />;
             } else {
-                return <Redirect from="/dashboard" exact to='/login'/>
+                return <Redirect from="/dashboard" exact to="/login" />;
             }
         }
     }
@@ -33,7 +30,7 @@ export default <P extends {}>(
     const mapStateToProps = (state: any): StateProps => {
         return {
             isLoggedIn: !!state.auth.accessToken,
-            refreshToken: state.auth.refreshToken
+            refreshToken: state.auth.refreshToken,
         };
     };
 

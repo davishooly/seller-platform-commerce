@@ -1,0 +1,3 @@
+src/registerServiceWorker.js
+.eslintrc.js
+src/**/__tests__/**

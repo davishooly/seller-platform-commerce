@@ -87,6 +87,4 @@ const Div = Styled.div`
    align-items: center;
 `;
 
-
-
 export { AnalyticsSection, Span, Div, DivCard };

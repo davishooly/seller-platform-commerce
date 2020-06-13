@@ -1,32 +1,32 @@
-import React, { Suspense, lazy } from "react";
-import { Route, Switch } from 'react-router-dom'
-import requireAuthentication from "../RequireAuthentication";
-import { DashboardLayout } from "../../components/Layout";
-import {HomeRoutes, AuthRoutes, AccountActivationRoutes, ResetPasswordRoute} from "./routes";
-import Loader from "../../components/Loader";
+import React, { Suspense, lazy } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import requireAuthentication from '../RequireAuthentication';
+import { DashboardLayout } from '../../components/Layout';
+import { HomeRoutes, AuthRoutes, AccountActivationRoutes, ResetPasswordRoute } from './routes';
+import Loader from '../../components/Loader';
 
 /**
  * code splitting -> faster page load time
  *  Add dynamic import on route level components to improve performance
  */
 
-const DashboardRoutes = lazy(() =>import("./routes"));
-const MainLayout  =  lazy(() => import("../../components/Layout"));
-
+const DashboardRoutes = lazy(() => import('./routes'));
+const MainLayout = lazy(() => import('../../components/Layout'));
 
 const AuthedRoutes: React.FunctionComponent<any> = () => {
-    return <>
-        <DashboardLayout>
-            <DashboardRoutes/>
-        </DashboardLayout>
-    </>;
+    return (
+        <>
+            <DashboardLayout>
+                <DashboardRoutes />
+            </DashboardLayout>
+        </>
+    );
 };
 
 // TODO add code spliting
 class Routing extends React.Component<any, {}> {
-
     state = {
-        isLoaded: false
+        isLoaded: false,
     };
 
     private PreAuthedRoutes = requireAuthentication(AuthedRoutes);
@@ -34,24 +34,24 @@ class Routing extends React.Component<any, {}> {
     render() {
         const Routes = this.PreAuthedRoutes;
         return (
-            <Suspense fallback={<Loader/>}>
+            <Suspense fallback={<Loader />}>
                 <Switch>
-                    <Route exact path='/login'>
-                        <AuthRoutes/>
+                    <Route exact path="/login">
+                        <AuthRoutes />
                     </Route>
-                    <Route path={"/checkpoint"}>
-                        <ResetPasswordRoute/>
+                    <Route path={'/checkpoint'}>
+                        <ResetPasswordRoute />
                     </Route>
-                    <Route exact path={"/activate/:userId/:token"}>
-                        <AccountActivationRoutes/>
+                    <Route exact path={'/activate/:userId/:token'}>
+                        <AccountActivationRoutes />
                     </Route>
                     <Route path="/dashboard">
-                        <Routes/>
+                        <Routes />
                     </Route>
 
                     <Route path="/">
                         <MainLayout>
-                            <HomeRoutes/>
+                            <HomeRoutes />
                         </MainLayout>
                     </Route>
                 </Switch>

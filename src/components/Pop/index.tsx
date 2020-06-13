@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import Styled,  { css } from 'styled-components';
+import Styled, { css } from 'styled-components';
 
-const PopContainer =  Styled.div<any>`
+const PopContainer = Styled.div<any>`
   height: 200px;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
   z-index: 999;
@@ -9,9 +9,11 @@ const PopContainer =  Styled.div<any>`
   right: 10%;
   background-color: #FFFFFF;
   border-radius: 4px;
-  ${props => props.logout && css `
-  top: 78%;
-  `}
+  ${(props) =>
+      props.logout &&
+      css`
+          top: 78%;
+      `}
   .ant-popover-arrow {
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
@@ -31,7 +33,7 @@ const PopContainer =  Styled.div<any>`
   }
 `;
 
-const Index = ({isOpen, children, setOpenPop, logout }: any ) => {
+const Index = ({ isOpen, children, setOpenPop, logout }: any) => {
     const ref = useRef(null);
 
     const updatePopView = (e: any) => {
@@ -43,18 +45,19 @@ const Index = ({isOpen, children, setOpenPop, logout }: any ) => {
     };
 
     useEffect(() => {
-        document.addEventListener("click",updatePopView);
-        return () => document.removeEventListener("click", updatePopView)
+        document.addEventListener('click', updatePopView);
+        return () => document.removeEventListener('click', updatePopView);
     }, [updatePopView]);
     return (
-        <>{
-            isOpen ? (
+        <>
+            {isOpen ? (
                 <PopContainer logout ref={ref}>
-                    <div className="ant-popover-arrow"/>
+                    <div className="ant-popover-arrow" />
                     {children}
                 </PopContainer>
-            ) : ''
-        }
+            ) : (
+                ''
+            )}
         </>
     );
 };

@@ -1,6 +1,5 @@
-import Modal from "./modal";
+import Modal from './modal';
 // import ModalContent from "modalContent";
-import Overlay from "./overlay";
+import Overlay from './overlay';
 
-
-export { Modal , Overlay};
+export { Modal, Overlay };
