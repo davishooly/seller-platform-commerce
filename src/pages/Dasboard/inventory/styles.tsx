@@ -1,7 +1,7 @@
 import styles, { css } from 'styled-components';
-import {ThemesType} from "../../../providers/themes/ThemeTypes";
+import { ThemesType } from '../../../providers/themes/ThemeTypes';
 
-const CategoriesContainer =  styles.div`
+const CategoriesContainer = styles.div`
     display: flex;
     width: 1200px;
     overflow: scroll;
@@ -36,10 +36,12 @@ const CategoriesContainer =  styles.div`
 `;
 
 const ButtonContainer = styles.div<any>`
-    ${(props: any) => props.list && css `
-      display: flex !important;
-      justify-content: center
-   `}
+    ${(props: any) =>
+        props.list &&
+        css`
+            display: flex !important;
+            justify-content: center;
+        `}
     display: none;
 `;
 
@@ -124,7 +126,7 @@ const ImageContainer = styles.div`
   }
 `;
 
-const PreviewProductDetailsContainer =  styles.div`
+const PreviewProductDetailsContainer = styles.div`
     display: flex;
     width: 100%;
     padding: 20px 0 20px 0;
@@ -148,7 +150,6 @@ const PreviewProductDetailsContainer =  styles.div`
     }
 `;
 
-
 const Button = styles.button<ThemesType>`
   background: #E6F1FC;
   border: none;
@@ -158,10 +159,9 @@ const Button = styles.button<ThemesType>`
   border-radius: 3px;
   font-family: "Proxima Nova Regular", sans-serif;
   font-size: 12px;
-  color: ${props => props.footerBackground};
+  color: ${(props) => props.footerBackground};
   line-height: 14px
 `;
-
 
 const Container = styles.div`
   margin-bottom : 20px;
@@ -200,10 +200,10 @@ const UploadContainer = styles.div`
 export {
     CategoriesContainer,
     ButtonContainer,
-    TabsContainer ,
+    TabsContainer,
     ImageContainer,
     PreviewProductDetailsContainer,
     Container,
     Button,
-    UploadContainer
+    UploadContainer,
 };

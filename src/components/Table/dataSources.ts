@@ -7,7 +7,7 @@ export default [
         sale: 49000,
         stock: 200,
         status: 'Live',
-        listing:'',
+        listing: '',
     },
     {
         key: '2',

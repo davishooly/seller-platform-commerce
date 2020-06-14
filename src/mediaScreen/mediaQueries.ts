@@ -1,4 +1,4 @@
-import { size } from "./devices";
+import { size } from './devices';
 
 export const device = {
     mobileS: `(min-device-width: ${size.mobileS})`,
@@ -8,5 +8,5 @@ export const device = {
     laptop: `(min-device-width: ${size.laptop})`,
     laptopL: `(min-width: ${size.laptopL})`,
     desktop: `(min-width: ${size.desktop})`,
-    desktopL: `(min-width: ${size.desktop})`
+    desktopL: `(min-width: ${size.desktop})`,
 };

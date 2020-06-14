@@ -1,6 +1,4 @@
-import React from "react";
-
-export const columns =  [
+export const columns = [
     {
         title: 'Requested',
         dataIndex: 'requested',
@@ -28,4 +26,5 @@ export const columns =  [
         dataIndex: 'status',
         key: 'status',
         // render: text => renderPopup(text)
-    },];
+    },
+];

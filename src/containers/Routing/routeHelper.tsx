@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import { useLocation } from "react-use";
+import { useEffect } from 'react';
+import { useLocation } from 'react-use';
 
 /**
  * support for scroll restoration
@@ -7,12 +7,10 @@ import { useLocation } from "react-use";
  *  this helps us to achieve scroll to top on every page navigation
  */
 
-
 export const ScrollToTop = () => {
-
     const { pathname } = useLocation();
 
-    useEffect(()=> {
+    useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
 

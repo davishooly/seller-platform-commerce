@@ -1,45 +1,42 @@
-
-import styled,  { css } from "styled-components"
+import styled from 'styled-components';
 
 const Box = styled.div`
-  box-sizing: border-box;
-  border: 1px solid #E2E7F2;
-  border-radius: 3px;
-  background-color: #FFFFFF;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
-  padding: 20px;
-  max-width: 97.5%;
-  .ant-breadcrumb {
-    font-size: 16px;
-    height: 6vh;
-  }
-  
-  .ant-col-16 {
-    width: 80%;
-  }
-  
-  .ant-progress-circle {
-    background: #FFFFFF;
-  }
-  
-  .ant-col-8 {
-    padding-left: 8px;
-    width: 20%;
-    padding-right: 8px;
-    z-index: 999;
-    position: sticky;
-    top: 60px;
-  }
-  
-  .ant-progress-text > div {
-    display: flex;
-    flex-direction: column;
-    font-size: 18px;
-    min-height: 6vh;
-    justify-content: space-between;
-  }
-  `;
+    box-sizing: border-box;
+    border: 1px solid #e2e7f2;
+    border-radius: 3px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 97.5%;
+    .ant-breadcrumb {
+        font-size: 16px;
+        height: 6vh;
+    }
 
+    .ant-col-16 {
+        width: 80%;
+    }
 
-export default Box
+    .ant-progress-circle {
+        background: #ffffff;
+    }
 
+    .ant-col-8 {
+        padding-left: 8px;
+        width: 20%;
+        padding-right: 8px;
+        z-index: 999;
+        position: sticky;
+        top: 60px;
+    }
+
+    .ant-progress-text > div {
+        display: flex;
+        flex-direction: column;
+        font-size: 18px;
+        min-height: 6vh;
+        justify-content: space-between;
+    }
+`;
+
+export default Box;

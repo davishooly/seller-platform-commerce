@@ -1,47 +1,43 @@
-import React, {lazy} from 'react';
-import {Route, Redirect, Switch} from 'react-router-dom'
+import React, { lazy } from 'react';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import Home from 'pages/Home/index';
 import NewSeller from 'pages/NewSeller';
 import Settings from 'pages/Dasboard/settings';
 import Dashboard from 'pages/Dasboard';
 import Inventory from 'pages/Dasboard/inventory';
-import PayoutTaxes from "pages/Dasboard/payoutTaxes/index";
-import Orders from "pages/Dasboard/orders";
-import Register from "../../pages/Auth";
-import ActivationPage from "../../pages/ActivateAccount";
-import {connect } from "react-redux";
-import {connectRequest} from "redux-query-react";
-import {compose} from "redux";
-import { sellerFromToken } from "../../api/src/apis";
-import {getProductsCategories} from "../../state/product";
+import PayoutTaxes from 'pages/Dasboard/payoutTaxes/index';
+import Orders from 'pages/Dasboard/orders';
+import Register from '../../pages/Auth';
+import ActivationPage from '../../pages/ActivateAccount';
+import { connect } from 'react-redux';
+import { connectRequest } from 'redux-query-react';
+import { compose } from 'redux';
+import { sellerFromToken } from '../../api/src/apis';
+import { getProductsCategories } from '../../state/product';
 import Edit from 'pages/Dasboard/inventory/Edit';
-import ResetPassword from "../../pages/Auth/resetPassword";
-import useBeforeUnload from "use-before-unload/lib";
+import ResetPassword from '../../pages/Auth/resetPassword';
+import useBeforeUnload from 'use-before-unload/lib';
 
-const ErrorPage = lazy(() => import("../../pages/Error/error"));
-
-
+const ErrorPage = lazy(() => import('../../pages/Error/error'));
 
 export const errorPageRoute = () => (
     <>
-        <Route path={"/"}>
-            <ErrorPage/>
+        <Route path={'/'}>
+            <ErrorPage />
         </Route>
     </>
 );
-
-
 
 export const HomeRoutes = () => {
     return (
         <Switch>
             <Route path="/" exact>
-                <Home/>
+                <Home />
             </Route>
-            <Route path="/new" exact >
-                <NewSeller/>
+            <Route path="/new" exact>
+                <NewSeller />
             </Route>
-            { errorPageRoute() }
+            {errorPageRoute()}
         </Switch>
     );
 };
@@ -49,32 +45,29 @@ export const HomeRoutes = () => {
 export const AuthRoutes = () => (
     <Switch>
         <Route path="/login" exact>
-            <Register/>
+            <Register />
         </Route>
-        { errorPageRoute() }
+        {errorPageRoute()}
     </Switch>
-
 );
 
 export const ResetPasswordRoute = () => (
     <Switch>
         <Route path="/checkpoint/request-password-reset" exact>
-            <ResetPassword/>
+            <ResetPassword />
         </Route>
-        { errorPageRoute() }
+        {errorPageRoute()}
     </Switch>
 );
 
 export const AccountActivationRoutes = () => (
     <Switch>
-        <Route path={"/activate/:userId/:token"} render={(props: any) => <ActivationPage {...props} />}/>
+        <Route path={'/activate/:userId/:token'} render={(props: any) => <ActivationPage {...props} />} />
     </Switch>
 );
 
-
-const DashboardRoutesL = (props: any) => {
-
-    useBeforeUnload(evt => {
+const DashboardRoutesL = () => {
+    useBeforeUnload(() => {
         /* Do some checks here if you like */
         return true; // Suppress reload
     });
@@ -82,25 +75,25 @@ const DashboardRoutesL = (props: any) => {
     return (
         <Switch>
             <Route path="/dashboard/settings">
-                <Settings/>
+                <Settings />
             </Route>
-            <Redirect exact from="/dashboard/inventory" to='/dashboard/inventory/manage'/>
-            <Route  path="/dashboard/inventory/edit/:id">
-                <Edit/>
+            <Redirect exact from="/dashboard/inventory" to="/dashboard/inventory/manage" />
+            <Route path="/dashboard/inventory/edit/:id">
+                <Edit />
             </Route>
-            <Route  path="/dashboard/inventory">
-                <Inventory/>
+            <Route path="/dashboard/inventory">
+                <Inventory />
             </Route>
             <Route exact path="/dashboard/payout">
-                <PayoutTaxes/>
+                <PayoutTaxes />
             </Route>
             <Route path="/dashboard/orders">
-                <Orders/>
+                <Orders />
             </Route>
             <Route exact path="/dashboard">
-                <Dashboard/>
+                <Dashboard />
             </Route>
-            { errorPageRoute() }
+            {errorPageRoute()}
         </Switch>
     );
 };
@@ -108,34 +101,28 @@ const DashboardRoutesL = (props: any) => {
 const mapStateToProps = (state: any) => ({
     seller: state.entities.seller,
     rootCategories: state.entities.rootCategories,
-    auth: state.auth
+    auth: state.auth,
 });
 
 const mapPropsToConfig = (props: any): any => {
     const actions = [
-        sellerFromToken(
-            {
-                transform: (responseBody: any) => {
-                    return {
-                        seller: responseBody,
-                    }
-                },
-                update: {
-                    seller: (prev: any, next: any) => next
-                }
-            }
-        ),
+        sellerFromToken({
+            transform: (responseBody: any) => {
+                return {
+                    seller: responseBody,
+                };
+            },
+            update: {
+                seller: (prev: any, next: any) => next,
+            },
+        }),
         getProductsCategories(props.rootCategories),
     ];
     return actions;
 };
 
-export default compose(
-    connect(mapStateToProps),
-    connectRequest(mapPropsToConfig)
-)(DashboardRoutesL);
+export default compose(connect(mapStateToProps), connectRequest(mapPropsToConfig))(DashboardRoutesL);
 
 export const ROUTES = {
-    inventory: "/dashboard/inventory"
+    inventory: '/dashboard/inventory',
 };
-

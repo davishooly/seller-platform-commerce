@@ -1,41 +1,32 @@
 import * as React from 'react';
-import {
-    StoreEnhancer,
-    applyMiddleware,
-    createStore,
-    combineReducers,
-    compose
-} from "redux";
-import {Provider} from 'react-redux';
-import {persistStore, persistReducer} from 'redux-persist'
-import {PersistGate} from 'redux-persist/integration/react'
+import { StoreEnhancer, applyMiddleware, createStore, combineReducers, compose } from 'redux';
+import { Provider } from 'react-redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import storage from 'redux-persist/lib/storage'
-import {BrowserRouter} from "react-router-dom";
-import superagentInterface from "redux-query-interface-superagent";
-import {Provider as ReduxQueryProvider} from 'redux-query-react';
-import {queryMiddleware, entitiesReducer, queriesReducer, requestAsync} from 'redux-query';
-import {reducer as auth} from "state/auth"
-import {authHeader} from 'state/auth_header';
-import {getTokenRefreshed} from "../state/refreshToken";
-import { ScrollToTop } from "containers/Routing/routeHelper";
-
-
+import storage from 'redux-persist/lib/storage';
+import { BrowserRouter } from 'react-router-dom';
+import superagentInterface from 'redux-query-interface-superagent';
+import { Provider as ReduxQueryProvider } from 'redux-query-react';
+import { queryMiddleware, entitiesReducer, queriesReducer, requestAsync } from 'redux-query';
+import { reducer as auth } from 'state/auth';
+import { authHeader } from 'state/auth_header';
+import { getTokenRefreshed } from '../state/refreshToken';
+import { ScrollToTop } from 'containers/Routing/routeHelper';
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ["auth"],
-    blacklist: ['queries']
+    whitelist: ['auth'],
+    blacklist: ['queries'],
 };
 
 const persistEntitiesConfig = {
     key: 'entities',
     storage,
-    whitelist: ["rootCategories",  "sellerProducts", 'seller'],
-    blacklist: ['currentSellerProduct']
+    whitelist: ['rootCategories', 'sellerProducts', 'seller'],
+    blacklist: ['currentSellerProduct'],
 };
-
 
 // Reducers
 const rootReducer = combineReducers({
@@ -44,17 +35,14 @@ const rootReducer = combineReducers({
     queries: queriesReducer,
 });
 
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Initial state - keep it simple, just to prevent basic null selection errs
 export const initialState: any = {
     auth: {},
     queries: {},
-    entities: {}
+    entities: {},
 };
-
 
 // Middleware / redux query setup
 const getQueries = (state: any) => state.queries;
@@ -64,39 +52,28 @@ const getEntities = (state: any) => state.entities;
 // if they are present - prevents "undefined" middlewares from being applied
 // See this issue comment by Dan Abramov:
 // https://github.com/facebook/create-react-app/issues/1114#issuecomment-263650957
-const middleware = [
-    authHeader,
-    queryMiddleware(superagentInterface, getQueries, getEntities),
-];
-const enhancers: StoreEnhancer<{ dispatch: {} }, {}>[] = [
-    applyMiddleware(...middleware)
-];
+const middleware = [authHeader, queryMiddleware(superagentInterface, getQueries, getEntities)];
+const enhancers: StoreEnhancer<{ dispatch: any }, any>[] = [applyMiddleware(...middleware)];
 if (window && (window as any).__REDUX_DEVTOOLS_EXTENSION__) {
     enhancers.push((window as any).__REDUX_DEVTOOLS_EXTENSION__());
 }
-export const store = createStore(
-    persistedReducer,
-    initialState as any,
-    compose(...enhancers)
-);
+export const store = createStore(persistedReducer, initialState as any, compose(...enhancers));
 
 store.subscribe(() => {
-
-    const { auth:  { timeout, refreshToken } } = store.getState();
-    if(timeout){
-        store.dispatch(requestAsync(getTokenRefreshed(refreshToken, store.dispatch)))
+    const {
+        auth: { timeout, refreshToken },
+    } = store.getState();
+    if (timeout) {
+        store.dispatch(requestAsync(getTokenRefreshed(refreshToken, store.dispatch)));
     }
-
 });
 
-export const persistor = persistStore(store)
-
+export const persistor = persistStore(store);
 
 const StateManagement = (props: any) => {
     return (
-
         <BrowserRouter>
-            <ScrollToTop/>
+            <ScrollToTop />
             <Provider store={store}>
                 <ReduxQueryProvider queriesSelector={getQueries}>
                     <PersistGate loading={null} persistor={persistor}>

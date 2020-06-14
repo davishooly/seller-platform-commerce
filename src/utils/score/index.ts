@@ -1,7 +1,7 @@
-export const calculateScore = ( value: string, type: string ) => {
+export const calculateScore = (value: string, type: string) => {
     let score = 0;
-    if(type === "description"){
-     score  = ( value.split(' ')).length
+    if (type === 'description') {
+        score = value.split(' ').length;
     }
-    return score >= 20
-  };
+    return score >= 20;
+};

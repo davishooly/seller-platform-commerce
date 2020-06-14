@@ -1,27 +1,26 @@
-import React  from 'react';
-import { Link, useHistory } from "react-router-dom";
-import {Button, Form, Checkbox, Input, Divider} from 'antd';
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { Button, Form, Checkbox, Input, Divider } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import notification from '../../utils/toast'
-import {loginSeller} from "../../state/auth/authQuery";
-import { useDispatch  } from 'react-redux'
+import notification from '../../utils/toast';
+import { loginSeller } from '../../state/auth/authQuery';
+import { useDispatch } from 'react-redux';
 import { useMutation } from 'redux-query-react';
-import { setStoreTokens } from "../../state/auth";
+import { setStoreTokens } from '../../state/auth';
 
-const Login = ( { form }: any) => {
+const Login = ({ form }: any) => {
     const { getFieldDecorator } = form;
     const dispatch = useDispatch();
 
     const history = useHistory();
 
-    const [{isFinished, isPending}, loginMutation] = useMutation((user: any) =>
+    const [{ isPending }, loginMutation] = useMutation((user: any) =>
         loginSeller({
-            ...user
-        })
+            ...user,
+        }),
     );
 
-
-    const onFinish = (e:any) => {
+    const onFinish = (e: any) => {
         e.preventDefault();
         form.validateFields((err: any, values: any) => {
             if (!err) {
@@ -31,31 +30,33 @@ const Login = ( { form }: any) => {
     };
 
     const logInUser = (values: any) => {
-        loginMutation({ ...values }).then(redirect).catch((error: any) => {
-        })
+        loginMutation({ ...values }).then(redirect);
     };
 
     const redirect = (response: any) => {
-        const {status, text, body: { expires_in , access_token, refresh_token }} = response;
-        const { error , error_description } = JSON.parse(text);
+        const { status, text, body } = response;
+        const { error, error_description } = JSON.parse(text);
 
-        const now  =  new Date()
+        const now = new Date();
 
-        if (status === 200 && !error ) {
+        if (status === 200 && !error) {
+            const { expires_in, access_token, refresh_token } = body;
             notification.success({
-                message: "Success",
-                description: "Welcome back to OE Seller Center"
+                message: 'Success',
+                description: 'Welcome back to OE Seller Center',
             });
-            dispatch(setStoreTokens({
-                accessToken:  access_token,
-                refreshToken: refresh_token,
-                expiresIn: now.getTime() + expires_in
-            }))
-            history.push("/dashboard")
+            dispatch(
+                setStoreTokens({
+                    accessToken: access_token,
+                    refreshToken: refresh_token,
+                    expiresIn: now.getTime() + expires_in,
+                }),
+            );
+            history.push('/dashboard');
         } else {
             notification.error({
-                message: "Error",
-                description: error_description
+                message: 'Error',
+                description: error_description,
             });
         }
     };
@@ -64,36 +65,31 @@ const Login = ( { form }: any) => {
         <Form onSubmit={onFinish}>
             <div className="modal__container title">
                 <h1> Welcome back! </h1>
-             </div>
-            <Divider/>
+            </div>
+            <Divider />
             <Form.Item>
-                {getFieldDecorator("email", {
-                    rules: [{ required: true, message:  'Please input your email!' }]
-                })(
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="email" />
-                )}
-
+                {getFieldDecorator('email', {
+                    rules: [{ required: true, message: 'Please input your email!' }],
+                })(<Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="email" />)}
             </Form.Item>
             <Form.Item>
-                {getFieldDecorator("password", {
-                    rules: [{ required: true, message:   'Please input your Password!' }]
+                {getFieldDecorator('password', {
+                    rules: [{ required: true, message: 'Please input your Password!' }],
                 })(
                     <Input.Password
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         placeholder="Password"
-                    />
+                    />,
                 )}
-
             </Form.Item>
             <Form.Item className="remember__section">
                 <Form.Item>
-
                     <Checkbox>Remember me</Checkbox>
                 </Form.Item>
                 <span className="login-form-forgot">
-                    <Link to={"/checkpoint/request-password-reset"} >  Forgot password </Link>
-               </span>
+                    <Link to={'/checkpoint/request-password-reset'}> Forgot password </Link>
+                </span>
             </Form.Item>
 
             <Form.Item>
@@ -101,14 +97,13 @@ const Login = ( { form }: any) => {
                     Log in
                 </Button>
                 <div className="create">
-                    <span> Don’t have an account?  </span>
+                    <span> Don’t have an account? </span>
                     <span id="sign up">
-                <Link to={"/new"}> Create it </Link>
-            </span>
+                        <Link to={'/new'}> Create it </Link>
+                    </span>
                 </div>
             </Form.Item>
         </Form>
-
     );
 };
 
