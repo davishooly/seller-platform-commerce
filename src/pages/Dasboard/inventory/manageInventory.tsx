@@ -121,14 +121,16 @@ const ManageInventory = () => {
                     const { values, pk } = variable;
 
                     values.forEach((value: any) => {
-                        const { sale_price, sku, available_units, minimum_price } = value;
+                        const { salePrice, sku, value: type, availableUnits, minimumPrice } = value;
                         productList.push({
                             key: pk,
                             date: moment(createdOn).format('Do MMMM YYYY'),
-                            price: Number(sale_price),
-                            stock: available_units,
+                            variant: type,
+                            price: Number(salePrice),
+                            stock: availableUnits,
+                            sku: sku,
                             status: !product.deleted ? 'Live' : 'Unlisted',
-                            sale: Number(minimum_price),
+                            sale: Number(minimumPrice),
                             productName: name,
                             product: renderProductContent({
                                 variations: variationVariables.length,

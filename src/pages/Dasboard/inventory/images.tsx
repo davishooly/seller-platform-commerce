@@ -67,7 +67,7 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
         if (state.fileList.length >= 0) {
             handleScore();
         }
-    });
+    }, [state.fileList]);
 
     const handleCancel = () => setState({ previewVisible: false });
 

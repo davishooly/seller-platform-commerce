@@ -68,7 +68,7 @@ const Description = ({ onNext, callback, setScore, score }: any) => {
                 });
             }
         }
-    }, [productDescription, score, changeDescription, setScore]);
+    }, [productDescription.description, productDescription.package]);
 
     const submitProducts = () => {
         onNext({

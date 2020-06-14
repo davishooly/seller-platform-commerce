@@ -52,6 +52,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                     } = result;
                     createProductVariant(id).then((result: any) => {
                         const { status } = result;
+                        console.log({ result });
                         if (status === 201) {
                             notification.success({
                                 message: 'Success',
@@ -68,7 +69,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                 }
             });
         },
-        [submit, addMedia, files, history, createProductVariant],
+        [submit],
     );
 
     return (

@@ -27,6 +27,12 @@ export const columns = [
         key: 'date',
     },
     {
+        title: 'Variant',
+        dataIndex: 'variant',
+        key: 'variant',
+        render: (text: any) => renderPopup(text, 'price'),
+    },
+    {
         title: 'Price',
         dataIndex: 'price',
         key: 'price',
@@ -42,6 +48,12 @@ export const columns = [
         title: 'Stock',
         dataIndex: 'stock',
         key: 'stock',
+        render: (text: any) => renderPopup(text, 'Stock'),
+    },
+    {
+        title: 'Sku',
+        dataIndex: 'sku',
+        key: 'sku',
         render: (text: any) => renderPopup(text, 'Stock'),
     },
     {

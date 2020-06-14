@@ -20,7 +20,7 @@ const Pricing = ({ onNext, form, callback, variations }: Props) => {
 
     useEffect(() => {
         validateFields();
-    });
+    }, []);
 
     const labelError = (name: string) => isFieldTouched(name) && getFieldError(name);
 

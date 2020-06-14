@@ -38,7 +38,7 @@ const Login = ({ form }: any) => {
             status,
             text,
             body: { expires_in, access_token, refresh_token },
-        } = response;
+        } = response && response;
         const { error, error_description } = JSON.parse(text);
 
         const now = new Date();

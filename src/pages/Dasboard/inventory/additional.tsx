@@ -35,7 +35,7 @@ const Additional: React.FC = ({ form, onNext, callback, setSize }: any) => {
 
     useEffect(() => {
         validateFields();
-    });
+    }, []);
 
     // field validations
     const barcodeError = isFieldTouched('barcode') && getFieldError('barcode');
