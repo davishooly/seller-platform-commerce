@@ -70,7 +70,9 @@ const sections = [
     { section: 'Payment Information', path: 3 },
 ];
 
-const previewSections = ({ section, path, details }: Section, setCurrent: Function) => (
+type setCurrent = (path: number) => void;
+
+const previewSections = ({ section, path, details }: Section, setCurrent: setCurrent) => (
     <>
         <Divider />
         <div className="section">
@@ -92,7 +94,7 @@ const previewSections = ({ section, path, details }: Section, setCurrent: Functi
     </>
 );
 
-const PreviewSellerInfo: React.FC<any> = ({ customer, onClick }) => {
+const PreviewSellerInfo: React.FC<any> = ({ customer, onClick }: any) => {
     const infoSections = {
         terms: {
             'Business Name': customer.businessName,

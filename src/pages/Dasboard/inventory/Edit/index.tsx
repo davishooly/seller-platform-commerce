@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 
 const { Sider, Content } = Layout;
 
-const Edit: React.FC<any> = ({ form }) => {
+const Edit: React.FC<any> = ({ form }: any) => {
     const { getFieldsError } = form;
     const [page, setPage] = useState('1');
 
@@ -23,8 +23,6 @@ const Edit: React.FC<any> = ({ form }) => {
     useRequest(getSellerProduct(id));
 
     const sellerProduct = useSelector((state: any) => state.entities.currentSellerProduct);
-
-    const [productDetails, setDetails] = useState(sellerProduct);
 
     const [{ isPending }, updateProduct] = useMutation((product) => updateSellerProduct(product));
 

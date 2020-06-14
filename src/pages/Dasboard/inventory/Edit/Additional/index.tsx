@@ -8,7 +8,7 @@ interface IProps {
     sellerProduct: SellerProduct;
 }
 
-const Additional: React.FC<IProps> = ({ form, sellerProduct }) => {
+const Additional: React.FC<IProps> = ({ form, sellerProduct }: IProps) => {
     const { getFieldDecorator } = form;
 
     return (

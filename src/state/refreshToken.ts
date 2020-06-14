@@ -15,7 +15,7 @@ export const getTokenRefreshed = (refreshToken: string, dispatch: any) => {
             }),
             update: {
                 token: (prev: any, next: any) => {
-                    const { accessToken, refreshToken, expiresIn } = next;
+                    const { accessToken, refreshToken } = next;
                     const now = new Date();
                     dispatch(
                         setStoreTokens({

@@ -4,7 +4,14 @@ import { Action } from './images';
 import { TabsContainer } from './styles';
 import { hasErrors } from 'utils/validators';
 
-const Pricing = ({ onNext, form, callback, variations }: any) => {
+type Props = {
+    onNext(value: any): void;
+    variations: Array<string>;
+    form: any;
+    callback(value: string): void;
+};
+
+const Pricing = ({ onNext, form, callback, variations }: Props) => {
     const [variants, setVariants] = useState(['variant']);
 
     const [deletedVariants, setDeletedVariants] = useState<any>([]);
@@ -13,7 +20,7 @@ const Pricing = ({ onNext, form, callback, variations }: any) => {
 
     useEffect(() => {
         validateFields();
-    }, []);
+    });
 
     const labelError = (name: string) => isFieldTouched(name) && getFieldError(name);
 
@@ -73,6 +80,7 @@ const Pricing = ({ onNext, form, callback, variations }: any) => {
     const renderFormContent = (index: number) => (
         <TabsContainer key={index.toString()} id={`variant${index}`}>
             <Col className="price__tabs">
+                {/* eslint-disable-next-line react/prop-types */}
                 {variations.length ? renderVariationFields(index) : ''}
 
                 <Form.Item validateStatus={labelError(`sku${index}`) ? 'error' : ''} help={labelError('sku') || ''}>

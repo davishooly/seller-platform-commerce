@@ -34,7 +34,7 @@ const props = {
 
 const Images: React.FC<IProps> = ({ form, sellerProduct }: any) => {
     const data = sellerProduct?.product?.media;
-    const { getFieldDecorator, getFieldError, validateFields, isFieldTouched, getFieldsError } = form;
+    const { getFieldDecorator } = form;
 
     return (
         <div>
@@ -77,7 +77,7 @@ const Images: React.FC<IProps> = ({ form, sellerProduct }: any) => {
 
                         <div>
                             <Button> Set as Primary image </Button>
-                            <Form onSubmit={() => {}}>
+                            <Form onSubmit={() => console.log('submit')}>
                                 <Form.Item>
                                     {getFieldDecorator('Ordering', {
                                         initialValue: item.ordering,

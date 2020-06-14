@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Input from 'components/Input';
 import { Col, Row } from 'antd';
@@ -36,31 +36,31 @@ const Info = ({ customer, changeCustomerDetails, setInputError, error }: any) =>
         if (town !== '') {
             validateNameFields(town, 'town', setInputError, error, 'town');
         }
-    }, [town]);
+    }, [town, setInputError, error]);
 
     useEffect(() => {
         if (county !== '') {
             validateNameFields(county, 'county', setInputError, error, 'county');
         }
-    }, [county]);
+    }, [county, setInputError, error]);
 
     useEffect(() => {
         if (displayName !== '') {
             validateNameFields(displayName, 'displayName', setInputError, error, 'display name');
         }
-    }, [displayName]);
+    }, [displayName, setInputError, error]);
 
     useEffect(() => {
         if (businessNameLocation !== '') {
             validateNameFields(businessNameLocation, 'businessNameLocation', setInputError, error, 'business location');
         }
-    }, [businessNameLocation]);
+    }, [businessNameLocation, setInputError, error]);
 
     useEffect(() => {
         if (phone !== '') {
             setInputError({ ...error, phone: '' });
         }
-    }, [phone]);
+    }, [phone, setInputError, error]);
 
     return (
         <StyledInfo>

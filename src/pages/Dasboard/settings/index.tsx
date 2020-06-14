@@ -16,9 +16,9 @@ const StyledSettings = styled.div``;
 
 const Settings = () => {
     const seller = useSelector((state: any) => state.entities.seller);
-    const [{}] = useRequest(readSeller(seller?.id));
+    useRequest(readSeller(seller?.id));
 
-    useBeforeUnload((evt) => {
+    useBeforeUnload(() => {
         /* Do some checks here if you like */
         return true; // Suppress reload
     });

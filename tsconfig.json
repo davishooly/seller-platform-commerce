@@ -21,6 +21,9 @@
     "noEmit": true,
     "jsx": "react"
   },
+  "exclude": [
+    "src/api/**/*.ts"
+  ],
   "include": [
     "src"
   ]

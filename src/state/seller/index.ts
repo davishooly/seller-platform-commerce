@@ -1,36 +1,31 @@
 import { sellersCreate, sellersProductsList, sellersRead, sellersUpdate } from 'api/src/apis';
 
 const createSeller = (customerDetails: any) => {
-    return sellersCreate(
-        {
-            data: {
-                owner: {
-                    password: customerDetails.password,
-                    email: customerDetails.email,
-                    firstName: customerDetails.firstname,
-                    lastName: customerDetails.lastname,
-                    username: customerDetails.username,
-                },
-                bank: {
-                    name: customerDetails.bankName,
-                    accNumber: customerDetails.bankAccountNumber,
-                    location: customerDetails.bankLocation,
-                },
-                address: {
-                    street: customerDetails.businessNameLocation,
-                    city: customerDetails.town,
-                    name: customerDetails.businessNameLocation,
-                },
-                logo: '',
-                businessName: customerDetails.businessName,
-                phoneNumber: customerDetails.phone,
-                name: customerDetails.displayName,
+    return sellersCreate({
+        data: {
+            owner: {
+                password: customerDetails.password,
+                email: customerDetails.email,
+                firstName: customerDetails.firstname,
+                lastName: customerDetails.lastname,
+                username: customerDetails.username,
             },
+            bank: {
+                name: customerDetails.bankName,
+                accNumber: customerDetails.bankAccountNumber,
+                location: customerDetails.bankLocation,
+            },
+            address: {
+                street: customerDetails.businessNameLocation,
+                city: customerDetails.town,
+                name: customerDetails.businessNameLocation,
+            },
+            logo: '',
+            businessName: customerDetails.businessName,
+            phoneNumber: customerDetails.phone,
+            name: customerDetails.displayName,
         },
-        {
-            update: () => {},
-        },
-    );
+    });
 };
 
 const updateSeller = (id: any, customerDetails: any) => {
@@ -57,7 +52,7 @@ const updateSeller = (id: any, customerDetails: any) => {
         name: customerDetails.displayName,
     };
 
-    const config = sellersUpdate(
+    return sellersUpdate(
         {
             id,
             data: {
@@ -66,17 +61,16 @@ const updateSeller = (id: any, customerDetails: any) => {
         },
         {
             update: {
-                sellerInfo: (prev: any, next: any) => {
+                sellerInfo: (prev: any) => {
                     return { ...prev, ...data };
                 },
             },
         },
     );
-    return config;
 };
 
 const getSellerProducts = (param: any) => {
-    const config = sellersProductsList(
+    return sellersProductsList(
         {
             ...param,
         },
@@ -89,12 +83,10 @@ const getSellerProducts = (param: any) => {
             },
         },
     );
-
-    return config;
 };
 
 const readSeller = (id: any) => {
-    const config = sellersRead(
+    return sellersRead(
         {
             id,
         },
@@ -107,7 +99,6 @@ const readSeller = (id: any) => {
             },
         },
     );
-    return config;
 };
 
 export { createSeller, getSellerProducts, readSeller, updateSeller };

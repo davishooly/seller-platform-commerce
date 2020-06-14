@@ -21,7 +21,7 @@ const BillAndPay = ({ customer, changeCustomerDetails, setInputError, error }: a
         if (bankLocation !== '') {
             validateNameFields(bankLocation, 'bankLocation', setInputError, error, 'bank Location');
         }
-    }, [bankLocation]);
+    }, [bankLocation, setInputError, error]);
 
     useEffect(() => {
         if (bankAccountHoldersName !== '') {
@@ -33,7 +33,7 @@ const BillAndPay = ({ customer, changeCustomerDetails, setInputError, error }: a
                 'bank account holder',
             );
         }
-    }, [bankAccountHoldersName]);
+    }, [bankAccountHoldersName, setInputError, error]);
 
     useEffect(() => {
         if (bankAccountNumber !== '') {
@@ -41,18 +41,18 @@ const BillAndPay = ({ customer, changeCustomerDetails, setInputError, error }: a
                 ? setInputError({ ...error, bankAccountNumber: '' })
                 : setInputError({ ...error, bankAccountNumber: 'Please input a valid bank account number' });
         }
-    }, [bankAccountNumber]);
+    }, [bankAccountNumber, setInputError, error]);
     useEffect(() => {
         if (confirmBankAccount !== '') {
             setInputError({ ...error, confirmBankAccount: '' });
         }
-    }, [confirmBankAccount]);
+    }, [confirmBankAccount, setInputError, error]);
 
     useEffect(() => {
         if (bankName !== '') {
             validateNameFields(bankName, 'bankName', setInputError, error, ' bank name');
         }
-    }, [bankName]);
+    }, [bankName, setInputError, error]);
 
     return (
         <Center>

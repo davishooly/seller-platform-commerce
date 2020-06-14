@@ -91,7 +91,7 @@ interface IProp {
     dispatch: any;
 }
 
-const NewSeller: React.FC<IProp> = (props) => {
+const NewSeller: React.FC<IProp> = () => {
     const [current, setCurrent] = useState(0);
     const [customerDetails, setCustomerDetails] = useState(customer);
     const [isChecked, setIsChecked] = useState(false);
@@ -181,7 +181,7 @@ const NewSeller: React.FC<IProp> = (props) => {
     const submitDetails = () => {
         sellerCreate()
             .then(redirect)
-            .catch((error: any) => {
+            .catch(() => {
                 notification.error({
                     message: 'Error',
                     description: 'An Error occurred',
@@ -207,7 +207,7 @@ const NewSeller: React.FC<IProp> = (props) => {
         }
     };
 
-    useBeforeUnload((evt) => {
+    useBeforeUnload(() => {
         // preventing the auto reload for cocky novice users
         /* Do some checks here if you like */
         return true; // Suppress reload
@@ -284,6 +284,6 @@ const NewSeller: React.FC<IProp> = (props) => {
     );
 };
 
-const mapStateToProps = (state: any) => ({});
+const mapStateToProps = () => ({});
 
 export default compose<any>(connect(mapStateToProps))(NewSeller);

@@ -14,7 +14,7 @@ const Login = ({ form }: any) => {
 
     const history = useHistory();
 
-    const [{ isFinished, isPending }, loginMutation] = useMutation((user: any) =>
+    const [{ isPending }, loginMutation] = useMutation((user: any) =>
         loginSeller({
             ...user,
         }),
@@ -30,9 +30,7 @@ const Login = ({ form }: any) => {
     };
 
     const logInUser = (values: any) => {
-        loginMutation({ ...values })
-            .then(redirect)
-            .catch((error: any) => {});
+        loginMutation({ ...values }).then(redirect);
     };
 
     const redirect = (response: any) => {

@@ -56,18 +56,18 @@ const Image = ({ callback, score, setScore, files, setFiles }: any) => {
         loading: false,
     });
 
-    useEffect(() => {
-        if (state.fileList.length >= 0) {
-            handleScore();
-        }
-    }, [state.fileList]);
-
     const handleScore = () => {
         setScore({
             ...score,
             images: state.fileList.length >= 3 ? 10 : state.fileList.length * 4,
         });
     };
+
+    useEffect(() => {
+        if (state.fileList.length >= 0) {
+            handleScore();
+        }
+    });
 
     const handleCancel = () => setState({ previewVisible: false });
 

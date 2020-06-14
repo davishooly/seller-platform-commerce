@@ -47,7 +47,7 @@ const Dashboard: React.FC<any> = () => {
         };
     });
 
-    useBeforeUnload((evt) => {
+    useBeforeUnload(() => {
         /* Do some checks here if you like */
         return true; // Suppress reload
     });

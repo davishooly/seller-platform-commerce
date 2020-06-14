@@ -1,8 +1,6 @@
 import React from 'react';
 import ModalComponent from '../Modal/modal';
 import { Container, ImageContainer, PreviewProductDetailsContainer } from '../../pages/Dasboard/inventory/styles';
-import { Editor } from 'react-draft-wysiwyg';
-import { convertFromRaw, EditorState } from 'draft-js';
 
 const styles = {
     width: '850px',

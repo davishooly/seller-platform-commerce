@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Landing from 'components/Landing';
 
 const Home: React.FC<any> = () => {

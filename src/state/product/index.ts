@@ -1,13 +1,13 @@
 import {
     productsCategoriesRoot,
+    sellersProductsDelete,
     sellersProductsVariablesRead,
     sellersProductsVariablesRemoveVariable,
-    sellersProductsDelete,
 } from 'api/src/apis';
 
 const getProductsCategories = (categories: any) => {
     if (!categories) {
-        const config = productsCategoriesRoot(
+        return productsCategoriesRoot(
             {
                 offset: 1,
                 limit: 3,
@@ -19,7 +19,6 @@ const getProductsCategories = (categories: any) => {
                 },
             },
         );
-        return config;
     }
     return;
 };
@@ -35,13 +34,12 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
                     sellerProducts: body,
                 }),
                 update: {
-                    sellerProducts: (prev: any, next: any) => {
+                    sellerProducts: (prev: any) => {
                         const { results, count } = prev;
-                        const newState = {
+                        return {
                             count: count - 1,
                             results: results.filter((product: any) => product.id !== productId),
                         };
-                        return newState;
                     },
                 },
             },
@@ -64,7 +62,7 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
                 sellerProducts: body,
             }),
             update: {
-                sellerProducts: (prev: any, next: any) => {
+                sellerProducts: (prev: any) => {
                     const { results, count } = prev;
                     return {
                         count: count,
@@ -99,7 +97,7 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
 };
 
 const getSellerProduct = (id: any) => {
-    const QueryConfig = sellersProductsVariablesRead(
+    return sellersProductsVariablesRead(
         {
             id,
         },
@@ -113,8 +111,6 @@ const getSellerProduct = (id: any) => {
             force: true,
         },
     );
-
-    return QueryConfig;
 };
 
 export { getProductsCategories, deleteProductVariant, getSellerProduct };

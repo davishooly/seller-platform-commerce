@@ -27,7 +27,7 @@ const ResetPassword = ({ form }: any) => {
             <ResetPasswordContainer>
                 <Form onSubmit={onFinish}>
                     <div className="title">
-                        <h1> First, let's find your account </h1>
+                        <h1> {"First, let's find your account"} </h1>
                         <h3> Please enter your email or phone </h3>
                     </div>
                     <Form.Item>

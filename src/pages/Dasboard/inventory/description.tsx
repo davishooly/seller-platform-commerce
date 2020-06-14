@@ -7,7 +7,7 @@ import { calculateScore } from 'utils/score';
 
 const descriptionSet = new Set();
 
-const Description = ({ onNext, callback, setScore, score, submit }: any) => {
+const Description = ({ onNext, callback, setScore, score }: any) => {
     const { Panel } = Collapse;
     const [productDescription, setDescription] = useState<any>({
         description: '',
@@ -68,7 +68,7 @@ const Description = ({ onNext, callback, setScore, score, submit }: any) => {
                 });
             }
         }
-    }, [productDescription.description, productDescription.package]);
+    }, [productDescription, score, changeDescription, setScore]);
 
     const submitProducts = () => {
         onNext({

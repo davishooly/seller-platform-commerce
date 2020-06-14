@@ -45,7 +45,7 @@ const FinalDetails = ({ onClick, loading, submit, customer, setCurrent }: any) =
             <Result
                 title={previewTitle()}
                 extra={[
-                    <PreviewSellerInfo customer={customer} onClick={setCurrent} />,
+                    <PreviewSellerInfo customer={customer} onClick={setCurrent} key={'preview'} />,
                     <Button loading={loading} onClick={submit} type="primary" key="console">
                         Create Seller
                     </Button>,

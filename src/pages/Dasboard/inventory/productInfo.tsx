@@ -15,7 +15,7 @@ const ProductInfo = ({ form, onNext, onPrevClick, callback }: any) => {
 
     useEffect(() => {
         validateFields();
-    }, []);
+    });
 
     const nameError = isFieldTouched('name') && getFieldError('name');
     const brandError = isFieldTouched('brand') && getFieldError('brand');

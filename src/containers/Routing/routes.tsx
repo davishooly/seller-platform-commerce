@@ -66,8 +66,8 @@ export const AccountActivationRoutes = () => (
     </Switch>
 );
 
-const DashboardRoutesL = (props: any) => {
-    useBeforeUnload((evt) => {
+const DashboardRoutesL = () => {
+    useBeforeUnload(() => {
         /* Do some checks here if you like */
         return true; // Suppress reload
     });

@@ -53,7 +53,7 @@ const getEntities = (state: any) => state.entities;
 // See this issue comment by Dan Abramov:
 // https://github.com/facebook/create-react-app/issues/1114#issuecomment-263650957
 const middleware = [authHeader, queryMiddleware(superagentInterface, getQueries, getEntities)];
-const enhancers: StoreEnhancer<{ dispatch: {} }, {}>[] = [applyMiddleware(...middleware)];
+const enhancers: StoreEnhancer<{ dispatch: any }, any>[] = [applyMiddleware(...middleware)];
 if (window && (window as any).__REDUX_DEVTOOLS_EXTENSION__) {
     enhancers.push((window as any).__REDUX_DEVTOOLS_EXTENSION__());
 }

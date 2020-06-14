@@ -23,8 +23,12 @@ const AuthedRoutes: React.FunctionComponent<any> = () => {
     );
 };
 
+type state = {
+    isLoaded: boolean;
+};
+
 // TODO add code spliting
-class Routing extends React.Component<any, {}> {
+class Routing extends React.Component<any, state> {
     state = {
         isLoaded: false,
     };

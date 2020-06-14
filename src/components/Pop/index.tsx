@@ -46,7 +46,8 @@ const Index = ({ isOpen, children, setOpenPop }: any) => {
     useEffect(() => {
         document.addEventListener('click', updatePopView);
         return () => document.removeEventListener('click', updatePopView);
-    }, [updatePopView]);
+    });
+
     return (
         <>
             {isOpen ? (

@@ -11,7 +11,7 @@ interface IProps {
     sellerProduct: SellerProduct;
 }
 
-const BasicInfo: React.FC<any> = ({ form, sellerProduct }) => {
+const BasicInfo: React.FC<any> = ({ form, sellerProduct }: any) => {
     const { getFieldDecorator } = form;
 
     return (

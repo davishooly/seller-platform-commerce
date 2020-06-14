@@ -7,7 +7,7 @@ import ProductInfo from './productInfo';
 import Image from './images';
 import Description from './description';
 import Pricing from './pricing';
-import { CategoriesContainer, ButtonContainer, Button, UploadContainer } from './styles';
+import { CategoriesContainer, ButtonContainer, UploadContainer } from './styles';
 import Buttons from 'components/Button';
 import { Center } from 'components';
 import { useSelector } from 'react-redux';
@@ -114,7 +114,7 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
 
                 <p>
                     Note: If you do not see your products category listed below, it may either require approval or be
-                    restricted. <a>Click here </a> to learn more.
+                    restricted. <a href="">Click here </a> to learn more.
                 </p>
 
                 <Breadcrumb separator=">">
@@ -128,7 +128,9 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
                         {renderCategories(rootCategories.results, 'main', undefined)}
                     </div>
                     {stateSubCategories.map((subCategory: any, index: number) => (
-                        <div className="categories__options">{renderCategories(subCategory, 'category', index)}</div>
+                        <div key={index.toString()} className="categories__options">
+                            {renderCategories(subCategory, 'category', index)}
+                        </div>
                     ))}
                 </CategoriesContainer>
                 <ButtonContainer list={list}>
@@ -197,7 +199,7 @@ const ProductDetails = () => {
 
     const [variations, setVariations] = useState<Array<string>>([]);
 
-    useBeforeUnload((evt) => {
+    useBeforeUnload(() => {
         /* Do some checks here if you like */
         return true; // Suppress reload
     });

@@ -15,6 +15,7 @@ interface ConnectedReduxProps<A extends Action = AnyAction> {
 }
 
 // TODO: Fix out how to re-type this as React.ComponentType<P> properly
+// eslint-disable-next-line @typescript-eslint/ban-types
 export default <P extends {}>(ChildComponent: React.ComponentType<P>): React.ComponentType => {
     class AuthenticatedComponent extends Component<P & StateProps> {
         render() {

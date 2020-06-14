@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Divider, Icon, Form, Typography, Radio } from 'antd';
+import React, { useEffect } from 'react';
+import { Divider, Typography } from 'antd';
 import styled, { css } from 'styled-components';
 import Input, { TermAndCons } from 'components/Input';
 import Bank from 'icons/bank-24px.svg';
@@ -91,13 +91,13 @@ const Agreement = ({ businessName, changeName, error, setInputError, isChecked, 
         if (businessName !== '') {
             validateNameFields(businessName, 'businessName', setInputError, error, 'name');
         }
-    }, [businessName]);
+    }, [businessName, error, setInputError]);
 
     useEffect(() => {
         if (isChecked) {
             setInputError({ ...error, agreeTerms: '' });
         }
-    }, [isChecked]);
+    }, [isChecked, error, setInputError]);
 
     return (
         <StyledAgreement error={error.agreeTerms}>

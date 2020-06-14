@@ -37,7 +37,7 @@ const ActivationPage: React.FC = (props: any) => {
 
     useEffect(() => {
         createInvitation();
-    }, [userId]);
+    }, [userId, createInvitation]);
 
     const antIcon = <Icon type="loading" style={{ fontSize: 100 }} spin={isPending} />;
 

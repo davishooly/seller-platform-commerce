@@ -27,7 +27,7 @@ export const AuthHeader = ({ reset, themes }: any) => (
     </HeaderContainer>
 );
 
-const Register = (props: any) => {
+const Register = () => {
     const { themes } = useContext(ThemeContext);
 
     return (

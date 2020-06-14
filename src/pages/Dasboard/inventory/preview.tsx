@@ -6,10 +6,10 @@ import { Editor } from 'react-draft-wysiwyg';
 import { convertFromRaw, EditorState } from 'draft-js';
 import { ImageContainer, PreviewProductDetailsContainer, Container } from './styles';
 import { useMutation } from 'redux-query-react';
-import { createProductVariation, productAddMedia } from '../../../state/product/createProduct';
+import { createProductVariation, productAddMedia } from 'state/product/createProduct';
 import { useSelector } from 'react-redux';
 
-const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, submitting }) => {
+const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, submitting }: any) => {
     const history = useHistory();
 
     const sellerProducts = useSelector((state: any) => state.entities?.sellerProducts);
@@ -35,6 +35,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
 
     const variant: any = formatVariant();
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const [{ isPending }, createProductVariant] = useMutation((id) => {
         return createProductVariation({ id, currentProduct: product, products: sellerProducts });
@@ -59,9 +60,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                             history.push('/dashboard/inventory/manage');
                             files.forEach((file: any) => {
                                 getBase64(file).then((url) => {
-                                    addMedia(id, url, file.name)
-                                        .then(() => {})
-                                        .catch(() => {});
+                                    addMedia(id, url, file.name).then();
                                 });
                             });
                         }
@@ -69,7 +68,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                 }
             });
         },
-        [submit],
+        [submit, addMedia, files, history, createProductVariant],
     );
 
     return (
@@ -88,7 +87,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                                 formattedFiles.map((file, index) => {
                                     const filePath = URL.createObjectURL(file);
                                     return (
-                                        <div className="image__pad image__pad--small">
+                                        <div key={index.toString()} className="image__pad image__pad--small">
                                             <div
                                                 key={index.toString()}
                                                 className="item__image images"

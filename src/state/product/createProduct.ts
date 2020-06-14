@@ -1,4 +1,4 @@
-import { productsAddMedia, sellersProductsVariablesCreate, sellersProductsCreate } from 'api/src';
+import { productsAddMedia, sellersProductsCreate, sellersProductsVariablesCreate } from 'api/src';
 
 import { options } from '../../pages/Dasboard/inventory/additional';
 
@@ -21,11 +21,10 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
             update: {
                 sellerProducts: (prev: any, next: any) => {
                     const { results, count } = prev;
-                    const newState = {
+                    return {
                         count: count + 1,
                         results: [...results, next],
                     };
-                    return newState;
                 },
             },
         },
@@ -74,7 +73,7 @@ export const createProductVariation = ({ id, products, currentProduct }: any) =>
         },
         {
             update: {
-                sellerProducts: (prev: any, next: any) => {
+                sellerProducts: () => {
                     return {
                         count: products.count,
                         results: [...products.results, newProduct],

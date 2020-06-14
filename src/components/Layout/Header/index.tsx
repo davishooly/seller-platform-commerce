@@ -65,7 +65,7 @@ const useCustomUserCheck = () => {
         if (sellerInfo && sellerInfo.seller) {
             setIsLoggedIn(sellerInfo.seller.name);
         }
-    });
+    }, [sellerInfo, setIsLoggedIn]);
 
     return {
         username,
