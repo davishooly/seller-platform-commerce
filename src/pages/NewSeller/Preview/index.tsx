@@ -50,7 +50,6 @@ export const Container = styled.div`
                 span:first-of-type {
                     font-weight: 500;
                     color: rgba(0, 0, 0, 0.85);
-                    font-size: 14px;
                 }
             }
         }

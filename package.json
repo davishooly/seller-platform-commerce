@@ -45,6 +45,7 @@
     "lint": "eslint '*/**/*.{ts,tsx}' --fix",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "postinstall": "npm run generate",
     "eject": "react-scripts eject",
     "generate": "rm -rf ./src/api && java -jar ./src/vendor/openapi-generator/openapi-generator-cli.jar generate -i https://omaarmarketplace.herokuapp.com/swagger -g typescript-redux-query -o ./src/api"
   },
@@ -53,14 +54,13 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix",
-      "stylelint --fix"
-    ]
+      "eslint --fix"
+    ],
+    "./src/**/*.tsx": [ "stylelint --fix" ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "browserslist": {

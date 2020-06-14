@@ -91,13 +91,13 @@ const Agreement = ({ businessName, changeName, error, setInputError, isChecked, 
         if (businessName !== '') {
             validateNameFields(businessName, 'businessName', setInputError, error, 'name');
         }
-    }, [businessName, error, setInputError]);
+    }, [businessName]);
 
     useEffect(() => {
         if (isChecked) {
             setInputError({ ...error, agreeTerms: '' });
         }
-    }, [isChecked, error, setInputError]);
+    }, [isChecked]);
 
     return (
         <StyledAgreement error={error.agreeTerms}>

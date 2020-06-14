@@ -36,31 +36,31 @@ const Info = ({ customer, changeCustomerDetails, setInputError, error }: any) =>
         if (town !== '') {
             validateNameFields(town, 'town', setInputError, error, 'town');
         }
-    }, [town, setInputError, error]);
+    }, [town]);
 
     useEffect(() => {
         if (county !== '') {
             validateNameFields(county, 'county', setInputError, error, 'county');
         }
-    }, [county, setInputError, error]);
+    }, [county]);
 
     useEffect(() => {
         if (displayName !== '') {
             validateNameFields(displayName, 'displayName', setInputError, error, 'display name');
         }
-    }, [displayName, setInputError, error]);
+    }, [displayName]);
 
     useEffect(() => {
         if (businessNameLocation !== '') {
             validateNameFields(businessNameLocation, 'businessNameLocation', setInputError, error, 'business location');
         }
-    }, [businessNameLocation, setInputError, error]);
+    }, [businessNameLocation]);
 
     useEffect(() => {
         if (phone !== '') {
             setInputError({ ...error, phone: '' });
         }
-    }, [phone, setInputError, error]);
+    }, [phone]);
 
     return (
         <StyledInfo>

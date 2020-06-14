@@ -36,7 +36,7 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
         if (username !== '') {
             validateNameFields(username, 'username', setInputError, error, 'username');
         }
-    }, [username, setInputError, error]);
+    }, [username]);
 
     useEffect(() => {
         if (email !== '') {
@@ -46,25 +46,25 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
                 setInputError({ ...error, email: '' });
             }
         }
-    }, [email, setInputError, error]);
+    }, [email]);
 
     useEffect(() => {
         if (firstname !== '') {
             validateNameFields(firstname, 'firstname', setInputError, error, 'firstname');
         }
-    }, [firstname, setInputError, error]);
+    }, [firstname]);
 
     useEffect(() => {
         if (lastname !== '') {
             validateNameFields(lastname, 'lastname', setInputError, error, 'display name');
         }
-    }, [lastname, setInputError, error]);
+    }, [lastname]);
 
     useEffect(() => {
         if (password !== '') {
             validateNameFields(password, 'password', setInputError, error, 'password');
         }
-    }, [password, setInputError, error]);
+    }, [password]);
 
     useEffect(() => {
         if (confirmPassword !== password) {
@@ -72,7 +72,7 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
         } else {
             setInputError({ ...error, confirmPassword: '' });
         }
-    }, [confirmPassword, password, setInputError, error]);
+    }, [confirmPassword]);
 
     return (
         <StyledInfo>

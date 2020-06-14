@@ -181,7 +181,7 @@ const Button = styled.button<any>`
             color: #f56c6c;
             cursor: pointer;
         `}
-    font-family: Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
     outline: none;
     line-height: 16px;
     padding-right: 16px;
