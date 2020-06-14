@@ -27,7 +27,7 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
     if (variations < 2) {
         const config = sellersProductsDelete(
             {
-                id: productId,
+                id: 56,
             },
             {
                 transform: (body: any) => ({
