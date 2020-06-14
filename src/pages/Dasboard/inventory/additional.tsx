@@ -41,6 +41,7 @@ const Additional: React.FC = ({ form, onNext, callback, setSize }: any) => {
     const barcodeError = isFieldTouched('barcode') && getFieldError('barcode');
     const gtinError = isFieldTouched('gtin') && getFieldError('gtin');
     const netWeightError = isFieldTouched('net_weight') && getFieldError('net_weight');
+    const baseError = isFieldTouched('basePrice') && getFieldError('basePrice');
     const variantError = isFieldTouched('variation types') && getFieldError('variation types');
 
     const handleSubmit = (e: any) => {
@@ -83,7 +84,8 @@ const Additional: React.FC = ({ form, onNext, callback, setSize }: any) => {
                     rules: [{ required: true, message: 'Please input weight!' }],
                 })(<InlineInput label="Weight" tip="kg" type="number" placeholder="Example: 20kg" />)}
             </Form.Item>
-            <Form.Item validateStatus={netWeightError ? 'error' : ''} help={netWeightError || ''}>
+
+            <Form.Item validateStatus={baseError ? 'error' : ''} help={baseError || ''}>
                 {getFieldDecorator('basePrice', {
                     rules: [{ required: true, message: 'Please input base prose !' }],
                 })(<InlineInput label="Base price" type="number" placeholder="base price" />)}

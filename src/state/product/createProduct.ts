@@ -42,21 +42,14 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
 export const createProductVariation = ({ id, products, currentProduct }: any) => {
     const { variants } = currentProduct;
 
-    const { variation, salePrice, minimumPrice, availableUnits } = variants[0];
+    const { variation } = variants[0];
 
     const newProduct = {
-        ...currentProduct,
         product: {
             ...currentProduct,
             variationVariables: [
                 {
-                    values: [
-                        {
-                            sale_price: salePrice,
-                            minimum_price: minimumPrice,
-                            available_units: availableUnits,
-                        },
-                    ],
+                    values: variants,
                     variant: variation,
                 },
             ],
@@ -75,7 +68,7 @@ export const createProductVariation = ({ id, products, currentProduct }: any) =>
             update: {
                 sellerProducts: () => {
                     return {
-                        count: products.count,
+                        count: products.count + 1,
                         results: [...products.results, newProduct],
                     };
                 },

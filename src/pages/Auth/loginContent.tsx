@@ -34,16 +34,13 @@ const Login = ({ form }: any) => {
     };
 
     const redirect = (response: any) => {
-        const {
-            status,
-            text,
-            body: { expires_in, access_token, refresh_token },
-        } = response && response;
+        const { status, text, body } = response;
         const { error, error_description } = JSON.parse(text);
 
         const now = new Date();
 
         if (status === 200 && !error) {
+            const { expires_in, access_token, refresh_token } = body;
             notification.success({
                 message: 'Success',
                 description: 'Welcome back to OE Seller Center',
