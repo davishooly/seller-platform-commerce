@@ -6,6 +6,9 @@ import { ReactComponent as Logo } from 'icons/omaar-logo.svg';
 
 import { HeaderContainer, Container, RegisterContainer } from './styles';
 import ThemeContext from '../../providers/themes/ThemeContext';
+import { useWindowSize } from 'react-use';
+import { Hamburger } from '../../components/Menu/hamburger';
+import { menuItems } from '../../components/Layout';
 
 export const AuthHeader = ({ reset, themes }: any) => (
     <HeaderContainer {...themes}>
@@ -29,10 +32,11 @@ export const AuthHeader = ({ reset, themes }: any) => (
 
 const Register = () => {
     const { themes } = useContext(ThemeContext);
+    const { width } = useWindowSize();
 
     return (
         <>
-            <AuthHeader themes={themes} />
+            {width > 768 ? <AuthHeader themes={themes} /> : <Hamburger menuItems={menuItems} />}
             <RegisterContainer>
                 <div className="modal__container">
                     <Container>

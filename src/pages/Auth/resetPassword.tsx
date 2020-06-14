@@ -5,11 +5,15 @@ import { UserOutlined } from '@ant-design/icons';
 import { ResetPasswordContainer } from './styles';
 import { AuthHeader } from './index';
 import ThemeContext from '../../providers/themes/ThemeContext';
+import { useWindowSize } from 'react-use';
+import { Hamburger } from '../../components/Menu/hamburger';
+import { menuItems } from '../../components/Layout';
 
 const ResetPassword = ({ form }: any) => {
     const { getFieldDecorator } = form;
 
     const { themes } = useContext(ThemeContext);
+    const { width } = useWindowSize();
 
     const onFinish = (e: any) => {
         e.preventDefault();
@@ -22,7 +26,7 @@ const ResetPassword = ({ form }: any) => {
 
     return (
         <>
-            <AuthHeader reset themes={themes} />
+            {width > 768 ? <AuthHeader reset themes={themes} /> : <Hamburger menuItems={menuItems} />}
 
             <ResetPasswordContainer>
                 <Form onSubmit={onFinish}>

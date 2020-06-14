@@ -12,7 +12,7 @@ const HamburgerContainer = styled.div<any>`
             top: 0;
             left: 0;
             bottom: 0;
-            z-index: 2;
+            z-index: 99;
             background: #00ad9f;
         `}
 

@@ -28,7 +28,7 @@ const StyledLayout = styled.div`
     grid-template-rows: auto 2fr auto;
 `;
 
-const menuItems = [
+export const menuItems = [
     { path: '/', name: 'Home' },
     { path: '/login', name: 'Login' },
     { path: '/new', name: 'New seller' },
