@@ -38,7 +38,7 @@ const MainLayout = ({ children }: any) => {
     const { width } = useWindowSize();
     return (
         <StyledLayout>
-            {width > 768 ? <Header /> : Hamburger(menuItems)}
+            {width > 768 ? <Header /> : <Hamburger menuItems={menuItems} />}
             <Content>{children}</Content>
             <Footer />
         </StyledLayout>

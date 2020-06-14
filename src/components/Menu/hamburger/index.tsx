@@ -12,9 +12,8 @@ interface Menu {
     name: string;
 }
 
-export const Hamburger = (menuItems: Array<Menu>) => {
+export const Hamburger = ({ menuItems }: any) => {
     const [isMenuOpen, toggleMenu] = useState(false);
-
     const { themes } = useContext(ThemeContext);
 
     const history = useHistory();
