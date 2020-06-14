@@ -148,10 +148,16 @@ const ResetPasswordContainer = styled.section`
 
     .ant-form {
         width: 24%;
+        @media only screen and ${device.mobileS} and (max-width: 768px) {
+            width: unset;
+        }
         .ant-input {
             height: 50px;
         }
         .login-form-button {
+            @media only screen and ${device.mobileS} and (max-width: 768px) {
+                width: unset;
+            }
             width: 30%;
             height: 50px;
             margin-right: 20px;

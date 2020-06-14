@@ -7,6 +7,7 @@ import { loginSeller } from '../../state/auth/authQuery';
 import { useDispatch } from 'react-redux';
 import { useMutation } from 'redux-query-react';
 import { setStoreTokens } from '../../state/auth';
+import { handlePaste } from '../NewSeller/Info/owner';
 
 const Login = ({ form }: any) => {
     const { getFieldDecorator } = form;
@@ -79,6 +80,7 @@ const Login = ({ form }: any) => {
                     <Input.Password
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
+                        onPaste={handlePaste}
                         placeholder="Password"
                     />,
                 )}

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { device } from '../../../mediaScreen/mediaQueries';
 
 const HamburgerContainer = styled.div<any>`
     display: flex;
@@ -43,11 +44,14 @@ const HamburgerContainer = styled.div<any>`
                 display: flex;
                 width: 78%;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: space-evenly;
 
                 span {
                     font-weight: 900;
                     font-size: 20px;
+                    @media only screen and (max-width: 320px) {
+                        font-size: 16px;
+                    }
                 }
             }
 

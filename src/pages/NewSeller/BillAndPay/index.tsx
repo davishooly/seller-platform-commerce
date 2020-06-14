@@ -4,6 +4,8 @@ import { Center, Input } from 'components';
 
 import { validateNameFields } from 'utils/validators';
 
+import { handlePaste } from '../Info/owner';
+
 const StyledBillAndPay = styled.div`
     padding: 3rem;
     .hide {
@@ -96,6 +98,7 @@ const BillAndPay = ({ customer, changeCustomerDetails, setInputError, error }: a
                     label="Bank Account Number "
                     style={{ borderColor: error.bankAccountNumber ? 'red' : '' }}
                     value={bankAccountNumber}
+                    onPaste={handlePaste}
                     allowClear
                     name="bankAccountNumber"
                     onChange={changeCustomerDetails}
@@ -104,6 +107,7 @@ const BillAndPay = ({ customer, changeCustomerDetails, setInputError, error }: a
                 <Input
                     label="Confirm Bank Account Number"
                     allowClear
+                    onPaste={handlePaste}
                     style={{ borderColor: error.confirmBankAccount ? 'red' : '' }}
                     value={confirmBankAccount}
                     name="confirmBankAccount"

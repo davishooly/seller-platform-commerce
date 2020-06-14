@@ -55,7 +55,7 @@ export const Hamburger = ({ menuItems }: any) => {
                 <div className="toggle__container">
                     <div className="brand__section">
                         <Logo />
-                        <span> Omar Marketplace</span>
+                        <span> Ommar Marketplace</span>
                     </div>
                     {isMenuOpen ? (
                         <CloseOutlined onClick={toggleMenus} />

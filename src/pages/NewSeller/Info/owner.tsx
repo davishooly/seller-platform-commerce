@@ -29,6 +29,12 @@ const StyledInfo = styled.div`
     }
 `;
 
+// prevent paste events
+export const handlePaste = (e: any) => {
+    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
+};
+
 const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
     const { username, email, firstname, lastname, password, confirmPassword } = owner;
 
@@ -134,6 +140,7 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
                     name="password"
                     allowClear
                     tip="Enter  password"
+                    onPaste={handlePaste}
                     onChange={changeCustomerDetails}
                     value={password}
                     type="password"
@@ -146,6 +153,7 @@ const Owner = ({ owner, changeCustomerDetails, setInputError, error }: any) => {
                     name="confirmPassword"
                     type="password"
                     tip="confirm password"
+                    onPaste={handlePaste}
                     allowClear
                     onChange={changeCustomerDetails}
                     value={confirmPassword}
