@@ -40,7 +40,7 @@ const Users = ({ form }: any) => {
     };
 
     return (
-        <>
+        <div className="setting__container">
             <h2> Personal Information </h2>
             <Divider />
             <Row gutter={16}>
@@ -86,7 +86,7 @@ const Users = ({ form }: any) => {
                     </Form>
                 </Col>
             </Row>
-        </>
+        </div>
     );
 };
 export default Form.create<any>({ name: 'edit' })(Users);

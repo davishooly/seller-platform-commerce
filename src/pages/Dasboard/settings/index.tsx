@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
-import styled from 'styled-components';
 import Menu from '../menu';
 import Container from 'components/Common/Container';
 import ShopInfo from './shopinfo';
@@ -11,8 +10,7 @@ import useBeforeUnload from 'use-before-unload/lib';
 import { useSelector } from 'react-redux';
 import { useMutation, useRequest } from 'redux-query-react';
 import { readSeller, updateSeller } from '../../../state/seller';
-
-const StyledSettings = styled.div``;
+import { StyledSettings } from './styles';
 
 const Settings = () => {
     const seller = useSelector((state: any) => state.entities.seller);
@@ -25,7 +23,7 @@ const Settings = () => {
 
     return (
         <StyledSettings>
-            <Menu>
+            <Menu className="menu">
                 <li>
                     {' '}
                     <NavLink to="/dashboard/settings" activeClassName="active" exact>

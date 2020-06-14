@@ -40,7 +40,7 @@ const Payment = ({ form }: any) => {
     };
 
     return (
-        <>
+        <div className="setting__container">
             <h2> Payment Information </h2>
             <Divider />
             <Row gutter={16}>
@@ -73,7 +73,7 @@ const Payment = ({ form }: any) => {
                     </Form>
                 </Col>
             </Row>
-        </>
+        </div>
     );
 };
 export default Form.create<any>({ name: 'edit' })(Payment);

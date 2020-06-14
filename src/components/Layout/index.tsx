@@ -34,6 +34,14 @@ export const menuItems = [
     { path: '/new', name: 'New seller' },
 ];
 
+export const dashboardMenus = [
+    { path: '/dashboard', name: 'Dashboard' },
+    { path: '/dashboard/inventory', name: 'Inventory' },
+    { path: '/dashboard/order', name: 'Orders' },
+    { path: '/dashboard/payout', name: 'Payout' },
+    { path: '/dashboard/settings', name: 'Settings' },
+];
+
 const MainLayout = ({ children }: any) => {
     const { width } = useWindowSize();
     return (
@@ -46,9 +54,10 @@ const MainLayout = ({ children }: any) => {
 };
 
 export const DashboardLayout = ({ children }: any) => {
+    const { width } = useWindowSize();
     return (
         <StyledLayout>
-            <DashboardHeader />
+            {width > 768 ? <DashboardHeader /> : <Hamburger menuItems={dashboardMenus} />}
             <Content>{children}</Content>
         </StyledLayout>
     );
