@@ -40,7 +40,7 @@ const ShopInfo = ({ form }: any) => {
     };
 
     return (
-        <>
+        <div className="setting__container">
             <h2> Shop Info </h2>
             <Divider />
             <Row gutter={16}>
@@ -91,7 +91,7 @@ const ShopInfo = ({ form }: any) => {
                     </Form>
                 </Col>
             </Row>
-        </>
+        </div>
     );
 };
 

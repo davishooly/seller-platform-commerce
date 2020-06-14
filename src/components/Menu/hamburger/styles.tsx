@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { device } from '../../../mediaScreen/mediaQueries';
 
 const HamburgerContainer = styled.div<any>`
     display: flex;
