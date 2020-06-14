@@ -53,9 +53,9 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix"
-    ],
-    "*.--fix": "stylelint --fix"
+      "eslint --fix",
+      "stylelint --fix"
+    ]
   },
   "husky": {
     "hooks": {
