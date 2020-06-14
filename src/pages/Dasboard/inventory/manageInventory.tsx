@@ -12,17 +12,28 @@ import { Avatar, Checkbox, Icon, notification, Switch, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 import { deleteProductVariant } from '../../../state/product';
 import Loader from 'components/Loader';
+import { useWindowSize } from 'react-use';
+import { device } from '../../../mediaScreen/mediaQueries';
 
 export const CardSection = styled.section`
     display: flex;
     justify-content: space-between;
     width: 97.09%;
+
+    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+        flex-direction: column;
+        .ant-card {
+            margin-bottom: 20px;
+        }
+    }
 `;
 
 const filter = { minPrice: '', maxPrice: '', category: '', keywords: '' };
 
 const ManageInventory = () => {
     const [filterValue, setFilterValue] = useState(filter);
+
+    const { width } = useWindowSize();
 
     const [isOpen, setModalOpen] = useState(false);
 
@@ -152,21 +163,26 @@ const ManageInventory = () => {
             <CardSection>
                 {details.map((detail: any, i: { toString: () => any }) => renderCardContent(detail, i.toString(), 340))}
             </CardSection>
-            <TableSection
-                {...{
-                    productList,
-                    productFetchPending,
-                    deletePending,
-                    setFilterValue,
-                    filterValue,
-                    refresh,
-                    isOpen,
-                    setModalOpen,
-                    count: sellerProducts && sellerProducts.count,
-                    selectedProduct,
-                    confirm,
-                }}
-            />
+
+            {width > 768 ? (
+                <TableSection
+                    {...{
+                        productList,
+                        productFetchPending,
+                        deletePending,
+                        setFilterValue,
+                        filterValue,
+                        refresh,
+                        isOpen,
+                        setModalOpen,
+                        count: sellerProducts && sellerProducts.count,
+                        selectedProduct,
+                        confirm,
+                    }}
+                />
+            ) : (
+                ''
+            )}
         </div>
     );
 };

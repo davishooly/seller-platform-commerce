@@ -37,7 +37,7 @@ export const menuItems = [
 export const dashboardMenus = [
     { path: '/dashboard', name: 'Dashboard' },
     { path: '/dashboard/inventory', name: 'Inventory' },
-    { path: '/dashboard/order', name: 'Orders' },
+    { path: '/dashboard/orders', name: 'Orders' },
     { path: '/dashboard/payout', name: 'Payout' },
     { path: '/dashboard/settings', name: 'Settings' },
 ];
