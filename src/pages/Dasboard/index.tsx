@@ -186,7 +186,11 @@ const Dashboard: React.FC<any> = () => {
                                 Refresh
                             </div>
                         </div>
-                        <Table loading={isPending} columns={columns} dataSource={bestSellerProducts.results} />
+                        <Table
+                            loading={isPending}
+                            columns={columns}
+                            dataSource={bestSellerProducts && bestSellerProducts.results}
+                        />
                     </TableSection>
                 </Container>
             )}
