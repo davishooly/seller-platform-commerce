@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { columns } from './dashboardFixtures/tableColumns';
 import dataSources from './dashboardFixtures/dataSources';
 import Container from '../../components/Common/Container';
-import { useRequest } from 'redux-query-react';
+import { useRequests } from 'redux-query-react';
 
 import { ProductContainer, TableSection } from '../../components/Table/styles';
 import { CardSection } from './inventory/manageInventory';
@@ -16,13 +16,18 @@ import Loader from 'components/Loader';
 import { AnalyticsSection, Span, Div, DivCard } from './styles';
 import { BarChart } from 'components/Charts';
 import ThemeContext from '../../providers/themes/ThemeContext';
-import { bestSellingProducts } from '../../state/dashboard';
+import { bestSellingProducts, getPendingOrders } from '../../state/dashboard';
 import useBeforeUnload from 'use-before-unload/lib';
+import { QueryConfig } from 'redux-query';
+
+// handle dashboard api calls
+const request: Array<QueryConfig> = [getPendingOrders(), bestSellingProducts()];
 
 const Dashboard: React.FC<any> = () => {
-    const [{ isFinished, isPending, status }, refresh] = useRequest(bestSellingProducts());
+    const [{ isFinished, isPending, status }, refresh] = useRequests(request);
 
     const bestSellerProducts = useSelector((state: any) => state.entities?.bestSellerProducts);
+    const pendingOrders = useSelector((state: any) => state.entities?.pendingOrders);
 
     const { themes } = useContext(ThemeContext);
     const sellerInfo = useSelector((state: any) => state.entities);

@@ -18,15 +18,6 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
             transform: (body: any) => ({
                 sellerProducts: body,
             }),
-            update: {
-                sellerProducts: (prev: any, next: any) => {
-                    const { results, count } = prev;
-                    return {
-                        count: count + 1,
-                        results: [...results, next],
-                    };
-                },
-            },
         },
     );
 
@@ -44,18 +35,6 @@ export const createProductVariation = ({ id, products, currentProduct }: any) =>
 
     const { variation } = variants[0];
 
-    const newProduct = {
-        product: {
-            ...currentProduct,
-            variationVariables: [
-                {
-                    values: variants,
-                    variant: variation,
-                },
-            ],
-        },
-    };
-
     return sellersProductsVariablesCreate(
         {
             id,
@@ -65,11 +44,29 @@ export const createProductVariation = ({ id, products, currentProduct }: any) =>
             },
         },
         {
+            transform: (body: any) => ({
+                sellerProducts: body,
+            }),
             update: {
-                sellerProducts: () => {
+                sellerProducts: (prev: any, next: any) => {
+                    const { product, values } = next;
+                    const createdProduct = {
+                        id: product.pk,
+                        product: {
+                            ...currentProduct,
+                            id: product.pk,
+                            variationVariables: [
+                                {
+                                    values: values,
+                                    variant: variation,
+                                },
+                            ],
+                        },
+                    };
+
                     return {
                         count: products.count + 1,
-                        results: [...products.results, newProduct],
+                        results: [...products.results, createdProduct],
                     };
                 },
             },

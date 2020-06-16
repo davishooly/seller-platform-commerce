@@ -129,10 +129,10 @@ const ManageInventory = () => {
                 const { id, createdOn, name, variationVariables } = product;
 
                 variationVariables.forEach((variable: any) => {
-                    const { values, pk } = variable;
+                    const { values } = variable;
 
                     values.forEach((value: any) => {
-                        const { salePrice, sku, value: type, availableUnits, minimumPrice } = value;
+                        const { salePrice, sku, value: type, availableUnits, minimumPrice, id: pk } = value;
                         productList.push({
                             key: pk,
                             date: moment(createdOn).format('Do MMMM YYYY'),

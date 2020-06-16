@@ -36,7 +36,7 @@ const Login = ({ form }: any) => {
 
     const redirect = (response: any) => {
         const { status, text, body } = response;
-        const { error, error_description } = JSON.parse(text);
+        const { error, error_description } = text && JSON.parse(text);
 
         const now = new Date();
 

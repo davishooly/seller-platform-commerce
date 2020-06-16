@@ -1,4 +1,4 @@
-import { productsBestSeller } from 'api/src';
+import { productsBestSeller, sellersProductsPendingOrders } from 'api/src';
 
 const bestSellingProducts = () => {
     const config = productsBestSeller(
@@ -19,4 +19,20 @@ const bestSellingProducts = () => {
     return config;
 };
 
-export { bestSellingProducts };
+const getPendingOrders = () => {
+    const config = sellersProductsPendingOrders(
+        {},
+        {
+            transform: (body: any) => ({
+                pendingOrders: body,
+            }),
+            update: {
+                pendingOrders: (prev: any, next: any) => next,
+            },
+        },
+    );
+
+    return config;
+};
+
+export { bestSellingProducts, getPendingOrders };
