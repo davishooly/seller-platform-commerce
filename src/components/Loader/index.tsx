@@ -5,7 +5,8 @@ import { Spin } from 'antd';
 const Div = styled.div`
     position: absolute;
     top: 50%;
-    left: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
 `;
 
 const Loader = () => {

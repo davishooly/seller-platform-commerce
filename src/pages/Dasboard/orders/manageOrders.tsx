@@ -11,10 +11,11 @@ import { useRequest } from 'redux-query-react';
 import { getSellerProductsOrders } from '../../../state/orders';
 import { useSelector } from 'react-redux';
 import Loader from 'components/Loader';
+import { useWindowSize } from 'react-use';
 
 const OrderContainer = Styled.div`
-      display: flex;
-      justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 `;
 
 const { Search } = Input;
@@ -24,6 +25,8 @@ const options = ['category', 'price'];
 const ManageOrders = () => {
     const [selectedOrders, SelectOrders] = useState<any>([]);
     const { themes } = useContext(ThemeContext);
+
+    const { width } = useWindowSize();
 
     const [{ isFinished, isPending, status }, refresh] = useRequest(getSellerProductsOrders());
 
@@ -67,40 +70,44 @@ const ManageOrders = () => {
         <>
             <CardSection>{details.map((detail, i) => renderCardContent(detail, i.toString(), 340))}</CardSection>
 
-            <TableSection {...themes}>
-                <div className="head">
-                    <span> Orders </span>
-                </div>
-                <DivContainer order>
-                    <div className="filterSection filter__order">
-                        <ButtonContainer order>
-                            <Button primary={orders > 0 ? 'primary' : ''} className="verticalLine">
-                                Export
-                            </Button>
-                            <Button primary={orders > 0 ? 'primary' : ''}>Fulfill</Button>
-                        </ButtonContainer>
-                        <div className="reload" onClick={refresh}>
-                            <Icon type="reload" />
-                            Refresh
+            {width > 768 ? (
+                <TableSection {...themes}>
+                    <div className="head">
+                        <span> Orders </span>
+                    </div>
+                    <DivContainer order>
+                        <div className="filterSection filter__order">
+                            <ButtonContainer order>
+                                <Button primary={orders > 0 ? 'primary' : ''} className="verticalLine">
+                                    Export
+                                </Button>
+                                <Button primary={orders > 0 ? 'primary' : ''}>Fulfill</Button>
+                            </ButtonContainer>
+                            <div className="reload" onClick={refresh}>
+                                <Icon type="reload" />
+                                Refresh
+                            </div>
                         </div>
-                    </div>
-                    <div className="filterSection filter">
-                        <Select defaultValue="Filter Orders" style={{ width: 140 }}>
-                            {options.map((value) => (
-                                <Option key={value} value={`${value}`}>
-                                    {value}
-                                </Option>
-                            ))}
-                        </Select>
-                        <Search
-                            placeholder="Search orders"
-                            onSearch={(value) => console.log(value)}
-                            style={{ width: 200 }}
-                        />
-                    </div>
-                </DivContainer>
-                <Table loading={isPending} columns={columns} dataSource={data} />
-            </TableSection>
+                        <div className="filterSection filter">
+                            <Select defaultValue="Filter Orders" style={{ width: 140 }}>
+                                {options.map((value) => (
+                                    <Option key={value} value={`${value}`}>
+                                        {value}
+                                    </Option>
+                                ))}
+                            </Select>
+                            <Search
+                                placeholder="Search orders"
+                                onSearch={(value) => console.log(value)}
+                                style={{ width: 200 }}
+                            />
+                        </div>
+                    </DivContainer>
+                    <Table loading={isPending} columns={columns} dataSource={data} />
+                </TableSection>
+            ) : (
+                ''
+            )}
         </>
     );
 };

@@ -5,6 +5,9 @@ const StyledSettings = styled.div`
     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
         .menu {
             padding: 20px;
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
         }
         .menu + div {
             padding: 20px;

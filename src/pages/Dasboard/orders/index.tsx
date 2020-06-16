@@ -5,11 +5,12 @@ import Container from 'components/Common/Container';
 import ManageOrders from './manageOrders';
 import ReturnPage from './Returns';
 import { errorPageRoute } from '../../../containers/Routing/routes';
+import { CustomMenu } from '../inventory';
 
 const Orders = () => {
     return (
-        <>
-            <Menu>
+        <CustomMenu>
+            <Menu className="menu">
                 <li>
                     {' '}
                     <NavLink to="/dashboard/orders" activeClassName="active" exact>
@@ -34,7 +35,7 @@ const Orders = () => {
                     {errorPageRoute()}
                 </Switch>
             </Container>
-        </>
+        </CustomMenu>
     );
 };
 

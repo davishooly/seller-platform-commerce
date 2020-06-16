@@ -12,10 +12,13 @@ export const CustomMenu = styled.div`
     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
         .menu {
             padding: 20px;
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
         }
         .menu + div {
             padding: 20px;
-            width: 90%;
+            width: 100%;
             margin: 0 auto;
         }
     }

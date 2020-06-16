@@ -24,6 +24,7 @@ export const CardSection = styled.section`
         flex-direction: column;
         .ant-card {
             margin-bottom: 20px;
+            width: 100% !important;
         }
     }
 `;
