@@ -19,12 +19,15 @@ import ThemeContext from '../../providers/themes/ThemeContext';
 import { bestSellingProducts, getPendingOrders } from '../../state/dashboard';
 import useBeforeUnload from 'use-before-unload/lib';
 import { QueryConfig } from 'redux-query';
+import { useWindowSize } from 'react-use';
 
 // handle dashboard api calls
 const request: Array<QueryConfig> = [getPendingOrders(), bestSellingProducts()];
 
 const Dashboard: React.FC<any> = () => {
     const [{ isFinished, isPending, status }, refresh] = useRequests(request);
+
+    const { width } = useWindowSize();
 
     const bestSellerProducts = useSelector((state: any) => state.entities?.bestSellerProducts);
     const pendingOrders = useSelector((state: any) => state.entities?.pendingOrders);
@@ -183,20 +186,25 @@ const Dashboard: React.FC<any> = () => {
                             </RenderCard>
                         ))}
                     </CardSection>
-                    <TableSection {...themes}>
-                        <div className="head">
-                            <span> Best Selling Products </span>
-                            <div className="reload" onClick={refresh}>
-                                <Icon type="reload" />
-                                Refresh
+
+                    {width > 768 ? (
+                        <TableSection {...themes}>
+                            <div className="head">
+                                <span> Best Selling Products </span>
+                                <div className="reload" onClick={refresh}>
+                                    <Icon type="reload" />
+                                    Refresh
+                                </div>
                             </div>
-                        </div>
-                        <Table
-                            loading={isPending}
-                            columns={columns}
-                            dataSource={bestSellerProducts && bestSellerProducts.results}
-                        />
-                    </TableSection>
+                            <Table
+                                loading={isPending}
+                                columns={columns}
+                                dataSource={bestSellerProducts && bestSellerProducts.results}
+                            />
+                        </TableSection>
+                    ) : (
+                        ''
+                    )}
                 </Container>
             )}
         </>

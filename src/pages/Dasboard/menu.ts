@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../mediaScreen/mediaQueries';
 
 const Menu = styled.ul`
     width: 100%;
@@ -12,12 +13,19 @@ const Menu = styled.ul`
     align-items: center;
     padding: 20px 100px;
 
+    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+        padding: 20px;
+    }
+
     a {
         color: #131a1e;
     }
 
     li {
         padding-right: 30px;
+        @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+            padding: unset;
+        }
         font-size: 16px;
         line-height: 26px;
         padding-left: 0;

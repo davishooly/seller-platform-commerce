@@ -1,10 +1,19 @@
 import Styled from 'styled-components';
+import { device } from '../../mediaScreen/mediaQueries';
 
 const AnalyticsSection = Styled.section`
     display: flex;
     width: 97.09%;
     justify-content: space-between;
     margin-bottom: 20px;
+    
+    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+        flex-direction: column;
+        .ant-card {
+            margin-bottom: 20px;
+            width: 100% !important;
+        }
+       }
     
     .summary { 
        height: 16vh;
@@ -38,9 +47,12 @@ const AnalyticsSection = Styled.section`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 479px;
-      
-      &__summary {
+       height: 479px;
+          @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+                height: auto;
+
+          }
+       &__summary {
        margin-top: 14px;
        border-top: 1px solid #FFFFFF;
        border-bottom: 1px solid #FFFFFF;
