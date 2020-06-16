@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from 'icons/omaar-logo.svg';
 
 import { HamburgerContainer } from './styles';
 import ThemeContext from 'providers/themes/ThemeContext';
+import { useLogout } from '../../Layout/Header';
 
 interface Menu {
     path: string;
@@ -15,6 +16,8 @@ interface Menu {
 export const Hamburger = ({ menuItems }: any) => {
     const [isMenuOpen, toggleMenu] = useState(false);
     const { themes } = useContext(ThemeContext);
+
+    const { logout } = useLogout();
 
     const history = useHistory();
 
@@ -35,6 +38,9 @@ export const Hamburger = ({ menuItems }: any) => {
     const handleMenuNavigation = (path: string) => {
         toggleMenu(false);
         document.body.style.overflow = 'unset';
+        if (path === '/login') {
+            logout();
+        }
         history.push(path);
     };
 

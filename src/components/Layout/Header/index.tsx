@@ -149,21 +149,31 @@ const Header = () => {
     );
 };
 
+export const useLogout = ({ setOpenPop, isOpen }: any = {}) => {
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        if (isOpen && setOpenPop) {
+            setOpenPop(!isOpen);
+        }
+        localStorage.clear();
+        dispatch(removeTokens());
+        window.location.reload();
+    };
+    return {
+        logout,
+    };
+};
+
 export const DashboardHeader = () => {
     const { username } = useCustomUserCheck();
-    const dispatch = useDispatch();
     const { themes } = useContext(ThemeContext);
     const { isOpen, setOpenPop } = useCustomModalChange();
 
+    const { logout } = useLogout({ setOpenPop, isOpen });
+
     const openPopConfirm = () => {
         setOpenPop(!isOpen);
-    };
-
-    const handleLogout = () => {
-        localStorage.clear();
-        dispatch(removeTokens());
-        setOpenPop(!isOpen);
-        window.location.reload();
     };
 
     return (
@@ -197,7 +207,7 @@ export const DashboardHeader = () => {
                                                 Profile{' '}
                                             </NavLink>
                                         </span>
-                                        <Button {...themes} name="log out" onClick={handleLogout}>
+                                        <Button {...themes} name="log out" onClick={logout}>
                                             {' '}
                                             Logout{' '}
                                         </Button>

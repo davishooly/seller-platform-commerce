@@ -40,6 +40,7 @@ export const dashboardMenus = [
     { path: '/dashboard/orders', name: 'Orders' },
     { path: '/dashboard/payout', name: 'Payout' },
     { path: '/dashboard/settings', name: 'Settings' },
+    { path: '/login', name: 'Logout' },
 ];
 
 const MainLayout = ({ children }: any) => {
