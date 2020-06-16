@@ -12,6 +12,7 @@ const HamburgerContainer = styled.div<any>`
             top: 0;
             left: 0;
             bottom: 0;
+            padding-top: 20px;
             z-index: 99;
             background: #00ad9f;
         `}
@@ -19,6 +20,7 @@ const HamburgerContainer = styled.div<any>`
     svg path {
         fill: #006dbf;
     }
+
     svg:not(:root) {
         width: 48px;
     }
@@ -36,6 +38,12 @@ const HamburgerContainer = styled.div<any>`
             padding: 20px;
             border-radius: 4px;
             background: #f7f8f8;
+
+            ${(props) =>
+                props.isMenuOpen &&
+                css<any>`
+                    background: unset;
+                `};
             width: 98%;
             margin: 0 auto;
 
@@ -44,6 +52,14 @@ const HamburgerContainer = styled.div<any>`
                 width: 78%;
                 align-items: center;
                 justify-content: space-evenly;
+
+                ${(props) =>
+                    props.isMenuOpen &&
+                    css<any>`
+                        background: #f7f8f8;
+                        border-radius: 40px;
+                        padding: 8px;
+                    `};
 
                 span {
                     font-weight: 900;
@@ -56,19 +72,28 @@ const HamburgerContainer = styled.div<any>`
 
             .anticon {
                 font-size: 30px;
+                ${(props) =>
+                    props.isMenuOpen &&
+                    css<any>`
+                        svg path {
+                            fill: #f7f8f8;
+                        }
+                        background: unset;
+                    `};
             }
         }
     }
     .menu__items--section {
-        width: 90%;
+        width: 86%;
         margin: 0 auto;
         color: #fff;
         font-weight: 700;
+        height: 70%;
+        flex-direction: column;
+        justify-content: space-between;
+        display: flex;
+        padding-top: 20px;
         font-size: 1.5625em;
-
-        div {
-            height: 50%;
-        }
     }
 `;
 
