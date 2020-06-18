@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { renderCardContent } from 'components/Card';
 import TableSection from 'components/Table';
+import TableMobile from 'components/Table/tableMobile';
 import styled from 'styled-components';
 import details from 'components/Card/cardContent';
 import { useMutation, useRequest } from 'redux-query-react';
@@ -182,7 +183,7 @@ const ManageInventory = () => {
                     }}
                 />
             ) : (
-                ''
+                <TableMobile {...{productList}} />
             )}
         </div>
     );

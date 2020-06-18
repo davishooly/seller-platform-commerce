@@ -214,4 +214,61 @@ const ButtonContainer = styled.div<any>`
     }
 `;
 
-export { DivContainer, TableSection, ListingContainer, ProductContainer, Button, ButtonContainer };
+const TableMobileSection = styled.div<any>`
+    .head {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 20px;
+        .anticon {
+            margin-right: 4px;
+            color: ${(props) => props.blueText} !important;
+        }
+
+        .reload {
+            width: 6% !important;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .reload:hover {
+            transform: scale(1.1);
+        }
+
+        .anticon:hover {
+            color: #40a9ff !important;
+        }
+
+        a {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        span {
+            font-weight: bold;
+            color: ${(props) => props.blueText};
+            letter-spacing: 0.39px;
+            line-height: 16px;
+            font-size: 14px;
+            font-family: Roboto, sans-serif;
+        }
+
+        span:first-of-type {
+            height: 21px;
+            color: #203341;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            line-height: 21px;
+        }
+    }
+    .details {
+        display: flex;
+        justify-content: space-between;
+
+        
+    }
+`
+
+export { DivContainer, TableSection, ListingContainer, ProductContainer, Button, ButtonContainer, TableMobileSection };
