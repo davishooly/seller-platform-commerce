@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { Table } from 'antd';
 import Styled from 'styled-components';
+import { useWindowSize } from 'react-use';
 
 import { TableSection } from 'components/Table/styles';
+import TableMobile from 'components/Table/tableMobile';
 import { columns } from './fixtures/tableColumns';
 import ThemeContext from '../../../providers/themes/ThemeContext';
 import { ThemesType } from '../../../providers/themes/ThemeTypes';
@@ -59,6 +61,7 @@ const Button = Styled.button<ThemesType>`
 
 const Payout = () => {
     const { themes } = useContext(ThemeContext);
+    const { width } = useWindowSize();
 
     return (
         <Container>
@@ -77,13 +80,18 @@ const Payout = () => {
                     <Span {...themes}> KES 2,029,078.55 </Span>
                 </div>
             </PayoutContainer>
-            <TableSection {...themes}>
-                <div className="head">
-                    <span> Payout History </span>
-                    <Button {...themes}> Download CSV </Button>
-                </div>
-                <Table columns={columns} dataSource={[]} />
-            </TableSection>
+            {width > 768 ? (
+                <TableSection {...themes}>
+                    <div className="head">
+                        <span> Payout History </span>
+                        <Button {...themes}> Download CSV </Button>
+                    </div>
+                    <Table columns={columns} dataSource={[]} />
+                </TableSection>
+
+            ) : (
+                <TableMobile {...{ productList: [], title: 'Payout History', columns }} />
+            )}
         </Container>
     );
 };

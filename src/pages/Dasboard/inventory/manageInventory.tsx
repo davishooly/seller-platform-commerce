@@ -16,6 +16,8 @@ import Loader from 'components/Loader';
 import { useWindowSize } from 'react-use';
 import { device } from '../../../mediaScreen/mediaQueries';
 
+import { columns } from '../../../components/Table/tableData';
+
 export const CardSection = styled.section`
     display: flex;
     justify-content: space-between;
@@ -31,6 +33,9 @@ export const CardSection = styled.section`
 `;
 
 const filter = { minPrice: '', maxPrice: '', category: '', keywords: '' };
+
+columns.shift();
+columns.pop();
 
 const ManageInventory = () => {
     const [filterValue, setFilterValue] = useState(filter);
@@ -183,7 +188,7 @@ const ManageInventory = () => {
                     }}
                 />
             ) : (
-                <TableMobile {...{productList}} />
+                <TableMobile {...{ productList, title: 'Product Catalog', columns }} />
             )}
         </div>
     );

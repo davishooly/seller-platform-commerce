@@ -266,8 +266,10 @@ const TableMobileSection = styled.div<any>`
     .details {
         display: flex;
         justify-content: space-between;
-
         
+        h4 {
+            font-weight: bold;
+        } 
     }
 `
 

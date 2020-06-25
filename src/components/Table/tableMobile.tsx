@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Collapse, Card } from 'antd';
-import { PlusCircleOutlined } from '@ant-design/icons/lib';
-import { columns } from './tableData';
-import { Link, NavLink } from 'react-router-dom';
+import { Collapse, Card, Empty } from 'antd';
+// import { PlusCircleOutlined } from '@ant-design/icons/lib';
+// import { Link, NavLink } from 'react-router-dom';
 
 import ThemeContext from '../../providers/themes/ThemeContext';
 import {TableMobileSection} from './styles';
@@ -12,7 +11,7 @@ import {TableMobileSection} from './styles';
 const { Panel } = Collapse;
 
 
-const TableMobile = ({productList}: any) => {
+const TableMobile = ({productList, title, columns}: any ) => {
     const [searchValue, setSearchValue] = useState('');
     const { themes } = useContext(ThemeContext);
 
@@ -35,31 +34,34 @@ const TableMobile = ({productList}: any) => {
         <TableMobileSection {...themes}>
             <Card>
                 <div className="head">
-                    <span> Product Catalog </span>
-                    <NavLink to="/dashboard/inventory/new" activeClassName="active" exact>
+                    <span> {title} </span>
+                    {/* <NavLink to="/dashboard/inventory/new" activeClassName="active" exact>
                         <PlusCircleOutlined />
-                    </NavLink>
+                    </NavLink> */}
                 </div>
-                <Collapse expandIconPosition="right">
-                    {
-                        searchProducts.map((product: any) => {
-                            const cols = [... columns];
-                            cols.shift();
-                            cols.pop();
-                            return (
-                                <Panel header={product.productName} key={product.key} extra={product.listing}>
-                                    {cols.map(({title, dataIndex, key}: any)=>(
-                                        <div key={dataIndex} className="details">
-                                            <h4>{title}:</h4>
-                                            <p>{product[key]}</p>
-                                        </div>
-                                    ))}
-                                </Panel>
-                            )
-                        })
-                    } 
-                    
-                </Collapse>
+                {
+                    productList.length ? (
+                        <Collapse expandIconPosition="right">
+                            {
+                                searchProducts.map((product: any) => {
+                                    return (
+                                        <Panel header={product.productName} key={product.key}>
+                                            {columns.map(({title, dataIndex, key}: any)=>(
+                                                <div key={dataIndex} className="details">
+                                                    <h4>{title}:</h4>
+                                                    <p>{product[key]}</p>
+                                                </div>
+                                            ))}
+                                        </Panel>
+                                    )
+                                })
+                            } 
+                            
+                        </Collapse>
+                    ) : (
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                    )
+                }
             </Card>
         </TableMobileSection>
     )
