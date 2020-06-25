@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { renderCardContent } from 'components/Card';
 import TableSection from 'components/Table';
+import TableMobile from 'components/Table/tableMobile';
 import styled from 'styled-components';
 import details from 'components/Card/cardContent';
 import { useMutation, useRequest } from 'redux-query-react';
@@ -14,6 +15,8 @@ import { deleteProductVariant } from '../../../state/product';
 import Loader from 'components/Loader';
 import { useWindowSize } from 'react-use';
 import { device } from '../../../mediaScreen/mediaQueries';
+
+import { columns } from '../../../components/Table/tableData';
 
 export const CardSection = styled.section`
     display: flex;
@@ -30,6 +33,9 @@ export const CardSection = styled.section`
 `;
 
 const filter = { minPrice: '', maxPrice: '', category: '', keywords: '' };
+
+columns.shift();
+columns.pop();
 
 const ManageInventory = () => {
     const [filterValue, setFilterValue] = useState(filter);
@@ -182,7 +188,7 @@ const ManageInventory = () => {
                     }}
                 />
             ) : (
-                ''
+                <TableMobile {...{ productList, title: 'Product Catalog', columns }} />
             )}
         </div>
     );

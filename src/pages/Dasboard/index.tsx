@@ -9,6 +9,7 @@ import Container from '../../components/Common/Container';
 import { useRequests } from 'redux-query-react';
 
 import { ProductContainer, TableSection } from '../../components/Table/styles';
+import TableMobile from 'components/Table/tableMobile';
 import { CardSection } from './inventory/manageInventory';
 import { details, orderSummary, fullFilledSummary } from './dashboardFixtures/details';
 import { RenderCard } from 'components/Card';
@@ -203,7 +204,9 @@ const Dashboard: React.FC<any> = () => {
                             />
                         </TableSection>
                     ) : (
-                        ''
+                        <TableMobile
+                            {...{ productList: bestSellerProducts.results, title: 'Best Selling Products', columns }}
+                        />
                     )}
                 </Container>
             )}

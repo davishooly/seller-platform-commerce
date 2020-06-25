@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import TableMobile from 'components/Table/tableMobile';
 import { TableSection } from '../../../../components/Table/styles';
 import { Icon, Table } from 'antd';
 import { columns } from './tableColumn';
@@ -29,7 +30,7 @@ export default () => {
                     <Table loading={isPending} columns={columns} dataSource={[]} />
                 </TableSection>
             ) : (
-                ''
+                <TableMobile {...{ productList: [], title: 'Order Returns', columns }} />
             )}
         </>
     );

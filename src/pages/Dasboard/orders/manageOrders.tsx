@@ -5,6 +5,7 @@ import { renderCardContent } from 'components/Card/index';
 import Styled from 'styled-components';
 import details from './fixtures/details';
 import { columns } from './fixtures/tableColumns';
+import TableMobile from 'components/Table/tableMobile';
 import { Button, ButtonContainer, DivContainer, TableSection } from 'components/Table/styles';
 import ThemeContext from '../../../providers/themes/ThemeContext';
 import { useRequest } from 'redux-query-react';
@@ -106,7 +107,7 @@ const ManageOrders = () => {
                     <Table loading={isPending} columns={columns} dataSource={data} />
                 </TableSection>
             ) : (
-                ''
+                <TableMobile {...{ productList: [], title: 'Orders', columns }} />
             )}
         </>
     );

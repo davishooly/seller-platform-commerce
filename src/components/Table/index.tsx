@@ -13,7 +13,7 @@ const options = ['category', 'price', 'keywords'];
 
 type setFilterValue = (value: any) => void;
 
-const renderSearchInputs = (searchType: string, setFilterValue: setFilterValue, filterValue: any) => {
+export const renderSearchInputs = (searchType: string, setFilterValue: setFilterValue, filterValue: any) => {
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setFilterValue({ ...filterValue, [name]: value });

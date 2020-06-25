@@ -10,8 +10,10 @@ import {
 import { Avatar, Checkbox, Icon, Select, Switch, Table } from 'antd';
 import Styled from 'styled-components';
 import Search from 'components/Search';
+import { useWindowSize } from 'react-use';
 
 import { columns } from './expressFixture/tableData';
+import TableMobile from 'components/Table/tableMobile';
 import dataSources from './expressFixture/dataSources';
 import ThemeContext from '../../../providers/themes/ThemeContext';
 
@@ -32,6 +34,8 @@ const Div = Styled.div`
 const OeExpress = () => {
     const [selectProduct, setSelectedProduct] = useState<any>([]);
     const { themes } = useContext(ThemeContext);
+
+    const { width } = useWindowSize();
 
     const products = selectProduct.length;
 
@@ -86,39 +90,48 @@ const OeExpress = () => {
         <Div>
             <Span> Manage products fulfilled by OE </Span>
             <TableSection {...themes}>
-                <div className="head">
-                    <span> Product Catalog </span>
-                </div>
-                <DivContainer>
-                    <div className="filterSection">
-                        <ButtonContainer express>
-                            <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">
-                                Export
-                            </Button>
-                            <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">
-                                Add Stock
-                            </Button>
-                            <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">
-                                Request from Warehouse
-                            </Button>
-                        </ButtonContainer>
-                        <div className="reload">
-                            <Icon type="reload" />
-                            Refresh
+                {width > 768 ? (
+                    <>
+                        <div className="head">
+                            <span> Product Catalog </span>
                         </div>
-                    </div>
-                    <div className="filterSection">
-                        <Select defaultValue="Filter products" style={{ width: 140 }}>
-                            {options.map((value) => (
-                                <Option key={value} value={`${value}`}>
-                                    {value}
-                                </Option>
-                            ))}
-                        </Select>
-                        <Search handleSearch={handleSearch} searchValue={''} />
-                    </div>
-                </DivContainer>
-                <Table dataSource={[]} columns={columns} />
+                        <DivContainer>
+                            <div className="filterSection">
+                                <ButtonContainer express>
+                                    <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">
+                                        Export
+                                    </Button>
+                                    <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">
+                                        Add Stock
+                                    </Button>
+                                    <Button primary={products > 0 ? 'primary' : ''} className="verticalLine">
+                                        Request from Warehouse
+                                    </Button>
+                                </ButtonContainer>
+                                <div className="reload">
+                                    <Icon type="reload" />
+                                    Refresh
+                                </div>
+                            </div>
+                            <div className="filterSection">
+                                <Select defaultValue="Filter products" style={{ width: 140 }}>
+                                    {options.map((value) => (
+                                        <Option key={value} value={`${value}`}>
+                                            {value}
+                                        </Option>
+                                    ))}
+                                </Select>
+                                <Search handleSearch={handleSearch} searchValue={''} />
+                            </div>
+                        </DivContainer>
+                        <Table dataSource={[]} columns={columns} />
+                    </>
+                ) : (
+                    <TableMobile
+                        {...{ productList: [], title: 'Product Catalog', columns }}
+                    />
+                )
+                }
             </TableSection>
         </Div>
     );
