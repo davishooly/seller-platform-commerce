@@ -179,6 +179,8 @@ const NewSeller: React.FC<IProp> = () => {
     };
 
     const submitDetails = () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         sellerCreate()
             .then(redirect)
             .catch(() => {

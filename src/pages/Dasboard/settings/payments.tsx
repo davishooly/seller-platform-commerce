@@ -26,6 +26,8 @@ const Payment = ({ form }: any) => {
                     ...seller.address,
                     ...seller.owner,
                 };
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 updateSellerDetails(updatedInfo).then((result: any) => {
                     const { status } = result;
                     if (status === 200) {

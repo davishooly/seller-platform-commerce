@@ -18,7 +18,6 @@ const createSeller = (customerDetails: any) => {
             address: {
                 street: customerDetails.businessNameLocation,
                 city: customerDetails.town,
-                name: customerDetails.businessNameLocation,
             },
             logo: '',
             businessName: customerDetails.businessName,

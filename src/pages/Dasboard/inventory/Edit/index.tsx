@@ -39,8 +39,8 @@ const Edit: React.FC<any> = ({ form }: any) => {
                     value: [{ ...sellerProduct.values[0], ...values, id: sellerProduct.pk }],
                 };
 
-                console.log({ newProduct });
-
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 updateProduct(newProduct).then((result: any) => {
                     if (result.status === 200) {
                         notification.success({

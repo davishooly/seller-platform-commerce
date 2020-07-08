@@ -60,6 +60,8 @@ const ManageInventory = () => {
 
     const handleDeleteProduct = useCallback(
         (optimistic) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             deleteProducts(optimistic).then((response: any) => {
                 if (response.status === 204) {
                     notification.success({

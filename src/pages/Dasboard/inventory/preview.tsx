@@ -50,6 +50,8 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                     const {
                         body: { id },
                     } = result;
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
                     createProductVariant(id).then((result: any) => {
                         const { status } = result;
                         console.log({ result });
@@ -61,6 +63,8 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                             history.push('/dashboard/inventory/manage');
                             files.forEach((file: any) => {
                                 getBase64(file).then((url) => {
+                                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                    // @ts-ignore
                                     addMedia(id, url, file.name).then();
                                 });
                             });
