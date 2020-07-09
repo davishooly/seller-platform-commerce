@@ -190,7 +190,18 @@ const ManageInventory = () => {
                     }}
                 />
             ) : (
-                <TableMobile {...{ productList, title: 'Product Catalog', columns }} />
+                <TableMobile
+                    {...{
+                        productList,
+                        title: 'Product Catalog',
+                        columns,
+                        addProductIcon: true,
+                        hasSearch: true,
+                        hasFilter: true,
+                        filterValue,
+                        setFilterValue
+                    }}
+                />
             )}
         </div>
     );

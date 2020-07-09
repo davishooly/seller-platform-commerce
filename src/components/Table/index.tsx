@@ -2,14 +2,13 @@ import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Icon, Popconfirm, Select, Table, Input } from 'antd';
 import { Button, ButtonContainer, DivContainer, TableSection } from './styles';
-import { columns } from './tableData';
+import { columns, options } from './tableData';
 import Search from '../../components/Search';
 import ThemeContext from '../../providers/themes/ThemeContext';
 import { PlusCircleOutlined } from '@ant-design/icons/lib';
 import { ProductPreview } from './productPreview';
 
 const { Option } = Select;
-const options = ['category', 'price', 'keywords'];
 
 type setFilterValue = (value: any) => void;
 

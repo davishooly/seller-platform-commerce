@@ -271,6 +271,19 @@ const TableMobileSection = styled.div<any>`
             font-weight: bold;
         } 
     }
+    .filterSection > div,
+    .filterSection > div > span,
+    .filterSection > .ant-input,
+    .filterSection > .ant-input-group.ant-input-group-compact{
+        width: 100% !important;
+        margin-bottom: 1em;
+    }
+    .filterSection > div > span{
+        width: 100% !important;
+    }
+    .filterSection > .ant-input-group > input[type=number]{
+        width: 45% !important;
+    } 
 `
 
 export { DivContainer, TableSection, ListingContainer, ProductContainer, Button, ButtonContainer, TableMobileSection };
