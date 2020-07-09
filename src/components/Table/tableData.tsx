@@ -15,6 +15,8 @@ const renderPopup = (text: any, title: string) => (
     </Popconfirm>
 );
 
+export const options = ['category', 'price', 'keywords'];
+
 export const columns = [
     {
         title: 'Product',
