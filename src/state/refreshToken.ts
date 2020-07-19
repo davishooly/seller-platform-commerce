@@ -15,13 +15,13 @@ export const getTokenRefreshed = (refreshToken: string, dispatch: any) => {
             }),
             update: {
                 token: (prev: any, next: any) => {
-                    const { accessToken, refreshToken } = next;
+                    const { accessToken, refreshToken, expiresIn } = next;
                     const now = new Date();
                     dispatch(
                         setStoreTokens({
                             accessToken: accessToken,
                             refreshToken: refreshToken,
-                            expiresIn: now.getTime() + 360000,
+                            expiresIn: now.getTime() + expiresIn,
                             timeout: false,
                         }),
                     );

@@ -11,7 +11,7 @@ export const authHeader: Middleware = (api: MiddlewareAPI<Dispatch<AnyAction>>) 
             const expiry = api.getState().auth.smiles;
             const now = new Date();
             const range = now.getTime() - expiry;
-            if (range > 0) {
+            if (range > -1000) {
                 api.dispatch({
                     type: 'AUTH-REFRESH',
                 });
