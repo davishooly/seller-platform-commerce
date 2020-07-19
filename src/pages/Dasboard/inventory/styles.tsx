@@ -219,6 +219,14 @@ const AddProductContainer = styles.div`
       height: 10vh !important;
     }
   }
+  
+  @media only screen and (max-width: 360px) {
+ 
+    .ant-breadcrumb {
+      height: 16vh !important;
+    }
+  
+  }
 `;
 
 export {

@@ -15,6 +15,11 @@ const Menu = styled.ul`
 
     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
         padding: 20px 0 !important;
+        .welcome {
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
     }
 
     a {
@@ -25,6 +30,11 @@ const Menu = styled.ul`
         padding-right: 30px;
         @media only screen and ${device.mobileS} and (max-device-width: 768px) {
             padding: unset;
+            font-size: 14px;
+        }
+
+        @media only screen and (max-device-width: 320px) {
+            font-size: 12px;
         }
         font-size: 16px;
         line-height: 26px;

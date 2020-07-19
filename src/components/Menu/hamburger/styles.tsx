@@ -44,12 +44,12 @@ const HamburgerContainer = styled.div<any>`
                 css<any>`
                     background: unset;
                 `}
-            width: 98%;
+            width: 100%;
             margin: 0 auto;
 
             .brand__section {
                 display: flex;
-                width: 78%;
+                width: 100%;
                 align-items: center;
                 justify-content: space-evenly;
 

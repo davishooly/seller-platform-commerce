@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ThemesType } from '../../providers/themes/ThemeTypes';
+import { device } from '../../mediaScreen/mediaQueries';
 
 const TableSection = styled.section<ThemesType>`
     width: 97.09%;
@@ -10,6 +11,10 @@ const TableSection = styled.section<ThemesType>`
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
     margin-top: 20px;
     padding: 20px;
+
+    @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+        width: 100%;
+    }
 
     th {
         background-color: #00acdc !important;
