@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 import { deleteProductVariant } from 'state/product';
 import Loader from 'components/Loader';
 import { useWindowSize } from 'react-use';
-import { columns } from 'components/Table/tableData';
+import { columns, mobileColumn } from 'components/Table/tableData';
 import { device } from 'mediaScreen/mediaQueries';
 
 export const CardSection = styled.section`
@@ -33,9 +33,6 @@ export const CardSection = styled.section`
 `;
 
 const filter = { minPrice: '', maxPrice: '', category: '', keywords: '' };
-
-columns.shift();
-columns.pop();
 
 const ManageInventory = () => {
     const [filterValue, setFilterValue] = useState(filter);
@@ -82,7 +79,6 @@ const ManageInventory = () => {
             </>
         );
     }
-
     const productList: Array<any> = [];
 
     const confirm = (e: any) => {
@@ -194,7 +190,7 @@ const ManageInventory = () => {
                     {...{
                         productList,
                         title: 'Product Catalog',
-                        columns,
+                        columns: mobileColumn,
                         addProductIcon: true,
                         hasSearch: true,
                         hasFilter: true,

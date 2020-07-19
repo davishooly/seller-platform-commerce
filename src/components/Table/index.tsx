@@ -40,11 +40,11 @@ export const renderSearchInputs = (searchType: string, setFilterValue: setFilter
                 <Input
                     className="site-input-split"
                     style={{
-                        width: 30,
-                        borderLeft: 0,
-                        borderRight: 0,
-                        pointerEvents: 'none',
-                    }}
+            width: 30,
+            borderLeft: 0,
+            borderRight: 0,
+            pointerEvents: 'none',
+          }}
                     placeholder="~"
                     disabled
                 />
@@ -54,9 +54,9 @@ export const renderSearchInputs = (searchType: string, setFilterValue: setFilter
                     onChange={handleChange}
                     type="number"
                     style={{
-                        width: 100,
-                        textAlign: 'center',
-                    }}
+            width: 100,
+            textAlign: 'center',
+          }}
                     value={filterValue?.maxPrice}
                     placeholder="Maximum"
                 />
@@ -183,4 +183,7 @@ const RenderTable = ({
         </div>
     );
 };
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export default RenderTable;
