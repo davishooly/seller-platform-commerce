@@ -7,9 +7,13 @@ const CategoriesContainer = styles.div`
     overflow: scroll;
     margin:0;
     padding:0;
+    @media only screen and (max-width: 768px) { 
+      width: 100%;
+    }
     .categories__options {
       display: flex;
       flex-shrink: 0;
+      text-align: start;
       width: 271px;
       overflow: scroll;
       flex-direction: column;
@@ -195,11 +199,32 @@ const UploadContainer = styles.div`
     display: flex;
     width: 97%;
     justify-content: space-between;
+    
+    @media only screen and (max-width: 768px) { 
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+`;
+
+const AddProductContainer = styles.div`
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+      
+    .details {
+      text-align: center;
+    }
+    
+    .ant-breadcrumb {
+      height: 10vh !important;
+    }
+  }
 `;
 
 export {
     CategoriesContainer,
     ButtonContainer,
+    AddProductContainer,
     TabsContainer,
     ImageContainer,
     PreviewProductDetailsContainer,

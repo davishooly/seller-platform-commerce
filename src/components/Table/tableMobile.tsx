@@ -22,14 +22,13 @@ const TableMobile = ({
     addProductIcon = false,
     hasSearch = false,
     hasFilter = false,
-    filterValue = "",
+    filterValue = '',
     setFilterValue: setFilterValue,
 }: any) => {
     const { themes } = useContext(ThemeContext);
 
     const [searchValue, setSearchValue] = useState('');
     const [searchType, setSearchType] = useState('');
-
 
     const handleSelect = (value: string) => {
         setSearchType(value);
@@ -65,27 +64,30 @@ const TableMobile = ({
                             <PlusCircleOutlined />
                         </NavLink>
                     )}
-
                 </div>
                 <div className="filterSection">
-                    {hasFilter &&
-                        <Select className="filter" defaultValue="Filter products" onChange={handleSelect} style={{ width: 140 }}>
+                    {hasFilter && (
+                        <Select
+                            className="filter"
+                            defaultValue="Filter products"
+                            onChange={handleSelect}
+                            style={{ width: 140 }}
+                        >
                             {options.map((value) => (
                                 <Option key={value} value={`${value}`}>
                                     {value}
                                 </Option>
                             ))}
                         </Select>
-                    }
+                    )}
 
                     {/* render search entry fields  */}
-                    {hasSearch && 
+                    {hasSearch &&
                         (searchType.length ? (
                             renderSearchInputs(searchType, setFilterValue, filterValue)
                         ) : (
                             <Search handleSearch={handleSearch} searchValue={searchValue} />
-                        ))
-                    }
+                        ))}
                 </div>
                 {productList.length ? (
                     <Collapse expandIconPosition="right">

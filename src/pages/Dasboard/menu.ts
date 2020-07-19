@@ -14,7 +14,7 @@ const Menu = styled.ul`
     padding: 20px 100px;
 
     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
-        padding: 20px;
+        padding: 20px 0 !important;
     }
 
     a {

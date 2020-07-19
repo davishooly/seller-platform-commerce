@@ -15,8 +15,8 @@ import Loader from 'components/Loader';
 import { useWindowSize } from 'react-use';
 
 const OrderContainer = Styled.div`
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const { Search } = Input;

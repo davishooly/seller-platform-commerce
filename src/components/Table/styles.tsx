@@ -266,24 +266,24 @@ const TableMobileSection = styled.div<any>`
     .details {
         display: flex;
         justify-content: space-between;
-        
+
         h4 {
             font-weight: bold;
-        } 
+        }
     }
     .filterSection > div,
     .filterSection > div > span,
     .filterSection > .ant-input,
-    .filterSection > .ant-input-group.ant-input-group-compact{
+    .filterSection > .ant-input-group.ant-input-group-compact {
         width: 100% !important;
         margin-bottom: 1em;
     }
-    .filterSection > div > span{
+    .filterSection > div > span {
         width: 100% !important;
     }
-    .filterSection > .ant-input-group > input[type=number]{
+    .filterSection > .ant-input-group > input[type='number'] {
         width: 45% !important;
-    } 
-`
+    }
+`;
 
 export { DivContainer, TableSection, ListingContainer, ProductContainer, Button, ButtonContainer, TableMobileSection };

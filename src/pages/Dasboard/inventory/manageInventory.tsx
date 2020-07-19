@@ -199,7 +199,7 @@ const ManageInventory = () => {
                         hasSearch: true,
                         hasFilter: true,
                         filterValue,
-                        setFilterValue
+                        setFilterValue,
                     }}
                 />
             )}

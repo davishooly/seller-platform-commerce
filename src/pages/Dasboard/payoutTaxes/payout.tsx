@@ -11,42 +11,42 @@ import { ThemesType } from '../../../providers/themes/ThemeTypes';
 import Container from '../../../components/Common/Container';
 
 const PayoutContainer = Styled.div`
-    display: flex;
-    width: 97.09%;
-    height: 111px;
-    flex-direction: column;
-    background: #7073AF;
-    padding: 10px;
-    justify-content: space-around;
-    .container__title {
-      color:#FFFFFF;
-      font-size: 18px;
-      line-height: 21px;
-      letter-spacing: .5px;
-    }
+  display: flex;
+  width: 97.09%;
+  height: 111px;
+  flex-direction: column;
+  background: #7073AF;
+  padding: 10px;
+  justify-content: space-around;
+  .container__title {
+    color:#FFFFFF;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: .5px;
+  }
 
-    .summary__container{
-      display: flex;
-      justify-content: space-between;
-    }
+  .summary__container{
+    display: flex;
+    justify-content: space-between;
+  }
 
 `;
 
 const Span = Styled.span<ThemesType>`
-    color: ${(props) => props.textColor};
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: .44px;
+  color: ${(props) => props.textColor};
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: .44px;
 `;
 
 const Div = Styled.div`
-    span:last-of-type {
-      border-left: 1px solid rgba(255,255,255,0.5);
-      padding: 10px;
-    }
-    span:first-of-type {
-      padding-right: 10px
-    }
+  span:last-of-type {
+    border-left: 1px solid rgba(255,255,255,0.5);
+    padding: 10px;
+  }
+  span:first-of-type {
+    padding-right: 10px
+  }
 `;
 
 const Button = Styled.button<ThemesType>`
@@ -88,7 +88,6 @@ const Payout = () => {
                     </div>
                     <Table columns={columns} dataSource={[]} />
                 </TableSection>
-
             ) : (
                 <TableMobile {...{ productList: [], title: 'Payout History', columns }} />
             )}
