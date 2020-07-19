@@ -6,17 +6,16 @@ import styled from 'styled-components';
 import details from 'components/Card/cardContent';
 import { useMutation, useRequest } from 'redux-query-react';
 import { useSelector } from 'react-redux';
-import { getSellerProducts } from '../../../state/seller';
+import { getSellerProducts } from 'state/seller';
 import moment from 'moment';
-import { ListingContainer, ProductContainer } from '../../../components/Table/styles';
+import { ListingContainer, ProductContainer } from 'components/Table/styles';
 import { Avatar, Checkbox, Icon, notification, Switch, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
-import { deleteProductVariant } from '../../../state/product';
+import { deleteProductVariant } from 'state/product';
 import Loader from 'components/Loader';
 import { useWindowSize } from 'react-use';
-import { device } from '../../../mediaScreen/mediaQueries';
-
-import { columns } from '../../../components/Table/tableData';
+import { columns } from 'components/Table/tableData';
+import { device } from 'mediaScreen/mediaQueries';
 
 export const CardSection = styled.section`
     display: flex;
@@ -24,6 +23,7 @@ export const CardSection = styled.section`
     width: 97.09%;
 
     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+        width: 100%;
         flex-direction: column;
         .ant-card {
             margin-bottom: 20px;
@@ -199,7 +199,7 @@ const ManageInventory = () => {
                         hasSearch: true,
                         hasFilter: true,
                         filterValue,
-                        setFilterValue
+                        setFilterValue,
                     }}
                 />
             )}

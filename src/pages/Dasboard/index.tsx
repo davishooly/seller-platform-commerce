@@ -64,7 +64,9 @@ const Dashboard: React.FC<any> = () => {
     return (
         <>
             <Menu>
-                <li>Hey {sellerInfo.seller ? sellerInfo.seller.name : ''}!.Its great to see you again.</li>
+                <li className="welcome">
+                    Hey {sellerInfo.seller ? sellerInfo.seller.name : ''}!.Its great to see you again.
+                </li>
             </Menu>
             {!isFinished && status !== 200 && !bestSellerProducts ? (
                 <Loader />

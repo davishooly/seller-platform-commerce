@@ -7,7 +7,7 @@ import ProductInfo from './productInfo';
 import Image from './images';
 import Description from './description';
 import Pricing from './pricing';
-import { CategoriesContainer, ButtonContainer, UploadContainer } from './styles';
+import { CategoriesContainer, ButtonContainer, UploadContainer, AddProductContainer } from './styles';
 import Buttons from 'components/Button';
 import { Center } from 'components';
 import { useSelector } from 'react-redux';
@@ -99,7 +99,7 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
     }
 
     return (
-        <>
+        <AddProductContainer>
             <UploadContainer>
                 <h1>Create a new product</h1>
                 <a href={`${process.env.PUBLIC_URL}/ProductCreationTemplate.xlsx`} download="product_template">
@@ -107,12 +107,14 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
                 </a>
             </UploadContainer>
 
-            <p>To start creating a detail page, first select a primary category for your product.</p>
+            <p className="details">
+                To start creating a detail page, first select a primary category for your product.
+            </p>
 
             <Box>
                 <h2>Browse for your product’s category</h2>
 
-                <p>
+                <p className="details">
                     Note: If you do not see your products category listed below, it may either require approval or be
                     restricted. <a href="">Click here </a> to learn more.
                 </p>
@@ -140,7 +142,7 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
                     </Buttons>
                 </ButtonContainer>
             </Box>
-        </>
+        </AddProductContainer>
     );
 };
 
@@ -219,9 +221,9 @@ const ProductDetails = () => {
                     onNext={setProductDetailsPage}
                 />
             ) : (
-                <>
+                <AddProductContainer>
                     <h1>Add new product information</h1>
-                    <p>
+                    <p className="details">
                         Complete all the details about your product to improve it’s visibility to buyers across the
                         platform.
                     </p>
@@ -315,7 +317,7 @@ const ProductDetails = () => {
                             </Col>
                         </Row>
                     </Box>
-                </>
+                </AddProductContainer>
             )}
         </>
     );

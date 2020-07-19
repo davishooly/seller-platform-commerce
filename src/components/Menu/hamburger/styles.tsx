@@ -43,13 +43,13 @@ const HamburgerContainer = styled.div<any>`
                 props.isMenuOpen &&
                 css<any>`
                     background: unset;
-                `};
-            width: 98%;
+                `}
+            width: 100%;
             margin: 0 auto;
 
             .brand__section {
                 display: flex;
-                width: 78%;
+                width: 100%;
                 align-items: center;
                 justify-content: space-evenly;
 
@@ -59,7 +59,7 @@ const HamburgerContainer = styled.div<any>`
                         background: #f7f8f8;
                         border-radius: 40px;
                         padding: 8px;
-                    `};
+                    `}
 
                 span {
                     font-weight: 900;
@@ -79,7 +79,7 @@ const HamburgerContainer = styled.div<any>`
                             fill: #f7f8f8;
                         }
                         background: unset;
-                    `};
+                    `}
             }
         }
     }

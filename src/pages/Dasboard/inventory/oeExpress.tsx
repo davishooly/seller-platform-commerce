@@ -24,6 +24,8 @@ const Span = Styled.span`
   color: #203341;
   font-size: 28px;
   line-height: 28px;
+  display: block;
+  text-align: center;
 `;
 
 const Div = Styled.div`
@@ -127,11 +129,8 @@ const OeExpress = () => {
                         <Table dataSource={[]} columns={columns} />
                     </>
                 ) : (
-                    <TableMobile
-                        {...{ productList: [], title: 'Product Catalog', columns }}
-                    />
-                )
-                }
+                    <TableMobile {...{ productList: [], title: 'Product Catalog', columns }} />
+                )}
             </TableSection>
         </Div>
     );

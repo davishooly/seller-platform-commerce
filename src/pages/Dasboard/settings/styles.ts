@@ -4,7 +4,7 @@ import { device } from '../../../mediaScreen/mediaQueries';
 const StyledSettings = styled.div`
     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
         .menu {
-            padding: 20px;
+            padding: 20px 0;
             display: flex;
             width: 100%;
             justify-content: space-around;

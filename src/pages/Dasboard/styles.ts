@@ -8,6 +8,7 @@ const AnalyticsSection = Styled.section`
     margin-bottom: 20px;
     
     @media only screen and ${device.mobileS} and (max-device-width: 768px) {
+        width: 100%;
         flex-direction: column;
         .ant-card {
             margin-bottom: 20px;
