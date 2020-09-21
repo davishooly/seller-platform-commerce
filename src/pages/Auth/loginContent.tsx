@@ -43,7 +43,7 @@ const Login = ({ form }: any) => {
         const now = new Date();
 
         if (status === 200 && !error) {
-            const { expires_in, access_token, refresh_token } = body;
+            const { expires_in = '', access_token = '', refresh_token = '' } = body;
             notification.success({
                 message: 'Success',
                 description: 'Welcome back to OE Seller Center',
