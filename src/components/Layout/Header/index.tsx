@@ -189,19 +189,19 @@ export const DashboardHeader = () => {
                             <PopConfirm logout isOpen={isOpen} setOpenPop={setOpenPop}>
                                 <PopContainer logout>
                                     <div className="pop__content">
-                                        <span>
+                                        <span onClick={openPopConfirm}>
                                             <NavLink to="/dashboard/orders" activeClassName="active">
                                                 {' '}
                                                 Orders{' '}
                                             </NavLink>
                                         </span>
-                                        <span>
+                                        <span onClick={openPopConfirm}>
                                             <NavLink to="/dashboard/payout" activeClassName="active">
                                                 {' '}
                                                 Payouts{' '}
                                             </NavLink>
                                         </span>
-                                        <span>
+                                        <span onClick={openPopConfirm}>
                                             <NavLink to="/dashboard/settings" activeClassName="active">
                                                 {' '}
                                                 Profile{' '}
