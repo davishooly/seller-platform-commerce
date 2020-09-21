@@ -5,7 +5,6 @@ export const getTokenRefreshed = (refreshToken: string, dispatch: any) => {
     return authRefreshCreate(
         {
             data: {
-                grantType: 'refresh_token',
                 refreshToken: refreshToken,
             },
         },

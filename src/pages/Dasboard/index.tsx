@@ -23,7 +23,9 @@ import { QueryConfig } from 'redux-query';
 import { useWindowSize } from 'react-use';
 
 // handle dashboard api calls
-const request: Array<QueryConfig> = [getPendingOrders(), bestSellingProducts()];
+const request: Array<QueryConfig> = [bestSellingProducts()];
+
+//TODO Pending orders
 
 const Dashboard: React.FC<any> = () => {
     const [{ isFinished, isPending, status }, refresh] = useRequests(request);

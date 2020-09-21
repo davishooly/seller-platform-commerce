@@ -1,7 +1,7 @@
-import { productsBestSeller, sellersProductsPendingOrders } from 'api/src';
+import { sellersProductsBestSellers, sellersProductsPendingOrders } from 'api/src';
 
 const bestSellingProducts = () => {
-    const config = productsBestSeller(
+    const config = sellersProductsBestSellers(
         {
             offset: 1,
             limit: 10,

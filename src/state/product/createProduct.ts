@@ -1,15 +1,14 @@
-import { productsAddMedia, sellersProductsCreate, sellersProductsVariablesCreate } from 'api/src';
+import { productsAddMedia, sellersProductsCreateCreate, sellersProductsVariablesCreate } from 'api/src';
 
 import { options } from '../../pages/Dasboard/inventory/additional';
 
 export const createProductSeller = (product: any, sellerId: number, categoryId: number, optimistic: any) => {
-    const config = sellersProductsCreate(
+    const config = sellersProductsCreateCreate(
         {
             data: {
                 product: {
                     ...product,
                 },
-                seller: sellerId,
                 basePrice: product.basePrice,
                 primaryCategory: categoryId,
             },
