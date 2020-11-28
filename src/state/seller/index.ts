@@ -1,7 +1,7 @@
-import { sellersCreate, sellersProductsList, sellersRead, sellersUpdate } from 'api/src/apis';
+import { createSellerAccount, sellersProductsList, sellersRead, sellersUpdate } from 'api/src/apis';
 
 const createSeller = (customerDetails: any) => {
-    return sellersCreate({
+    return createSellerAccount({
         data: {
             owner: {
                 password: customerDetails.password,

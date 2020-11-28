@@ -1,9 +1,9 @@
-import { productsAddMedia, sellersProductsCreateCreate, sellersProductsVariablesCreate } from 'api/src';
+import { productsAddMedia, createSellerProduct, createVariationVariable } from 'api/src';
 
 import { options } from '../../pages/Dasboard/inventory/additional';
 
 export const createProductSeller = (product: any, sellerId: number, categoryId: number, optimistic: any) => {
-    const config = sellersProductsCreateCreate(
+    const config = createSellerProduct(
         {
             data: {
                 product: {
@@ -34,7 +34,7 @@ export const createProductVariation = ({ id, products, currentProduct }: any) =>
 
     const { variation } = variants[0];
 
-    return sellersProductsVariablesCreate(
+    return createVariationVariable(
         {
             id,
             data: {

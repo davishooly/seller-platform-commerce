@@ -17,6 +17,8 @@ import { createProductSeller } from '../../../state/product/createProduct';
 import { useMutation } from 'redux-query-react';
 import { Product } from '../../../api/src/models';
 import Loader from '../../../components/Loader';
+import { getProductsCategories } from 'state/product';
+import { useRequest } from 'redux-query-react';
 
 const { TabPane } = Tabs;
 
@@ -26,7 +28,7 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
     const [list, setList] = useState(false);
     const [indices, setIndices] = useState<any>([]);
 
-    const handleSetSubCategory = (currentSubCategories: any, newSubCategories: any, category: any, index: number) => {
+    const handleSetSubCategory = (currentSubCategories = [], newSubCategories = [], category: any, index: number) => {
         // keeping track of click indices in the state
         if (index !== undefined) {
             setIndices([...indices, index]);
@@ -81,8 +83,8 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
         return isSelected[0];
     };
 
-    const renderCategories = (categories: any, type: string, index: any) => {
-        return categories.map(({ name, id, subcategories }: any, i: number) => (
+    const renderCategories = (categories = [], type: string, index: any) => {
+        return categories.map(({ name, id, subcategories = [] }: any, i: number) => (
             <span
                 key={i.toString()}
                 className={setSelected(name, type) ? 'selected' : ''}

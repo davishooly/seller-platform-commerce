@@ -1,7 +1,7 @@
-import { sellersProductsOrders, sellersProductsReturns } from 'api/src';
+import { sellersOrders, sellersReturnsFromSales } from 'api/src';
 
 const getSellerProductsOrders = () => {
-    const config = sellersProductsOrders(
+    const config = sellersOrders(
         {
             limit: 10,
             offset: 1,
@@ -20,7 +20,7 @@ const getSellerProductsOrders = () => {
 };
 
 const getOrderReturns = () => {
-    const config = sellersProductsReturns(
+    const config = sellersReturnsFromSales(
         {
             limit: 10,
             offset: 1,

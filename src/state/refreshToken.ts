@@ -1,8 +1,8 @@
-import { authRefreshCreate } from '../api/src/apis';
+import { refreshAuthToken } from '../api/src/apis';
 import { setStoreTokens } from './auth';
 
 export const getTokenRefreshed = (refreshToken: string, dispatch: any) => {
-    return authRefreshCreate(
+    return refreshAuthToken(
         {
             data: {
                 refreshToken: refreshToken,

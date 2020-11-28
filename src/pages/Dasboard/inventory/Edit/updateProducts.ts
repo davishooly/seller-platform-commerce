@@ -1,7 +1,7 @@
-import { sellersProductsVariablesUpdateVariable } from 'api/src/apis';
+import { updateProductVariation } from 'api/src/apis';
 
 const updateSellerProduct = ({ id, product, value }: any) => {
-    const config = sellersProductsVariablesUpdateVariable(
+    const config = updateProductVariation(
         {
             id,
             data: {

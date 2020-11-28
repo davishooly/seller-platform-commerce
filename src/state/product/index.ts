@@ -1,31 +1,20 @@
-import {
-    productsCategoriesRoot,
-    sellersProductsDelete,
-    sellersProductsVariablesRead,
-    sellersProductsVariablesRemoveVariable,
-} from 'api/src/apis';
+import { getRootCategories, deleteSellerProduct, viewProductVariation, deleteProductVariations } from 'api/src/apis';
 
-const getProductsCategories = (categories: any) => {
-    if (!categories) {
-        return productsCategoriesRoot(
-            {
-                offset: 1,
-                limit: 3,
+const getProductsCategories = () => {
+    return getRootCategories(
+        {},
+        {
+            transform: (body: any) => ({ rootCategories: body }),
+            update: {
+                rootCategories: (prev: any, next: any) => next,
             },
-            {
-                transform: (body: any) => ({ rootCategories: body }),
-                update: {
-                    rootCategories: (prev: any, next: any) => next,
-                },
-            },
-        );
-    }
-    return;
+        },
+    );
 };
 
 const deleteProductVariant = ({ variations, productId, variantId }: any, optimistic: any) => {
     if (variations < 2) {
-        const config = sellersProductsDelete(
+        const config = deleteSellerProduct(
             {
                 id: productId,
             },
@@ -53,7 +42,7 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
         return config;
     }
 
-    const config = sellersProductsVariablesRemoveVariable(
+    const config = deleteProductVariations(
         {
             id: variantId,
         },
@@ -97,7 +86,7 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
 };
 
 const getSellerProduct = (id: any) => {
-    return sellersProductsVariablesRead(
+    return viewProductVariation(
         {
             id,
         },

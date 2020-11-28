@@ -1,7 +1,7 @@
-import { sellersProductsBestSellers, sellersProductsPendingOrders } from 'api/src';
+import { sellersBestSellers, sellersPendingOrders } from 'api/src';
 
 const bestSellingProducts = () => {
-    const config = sellersProductsBestSellers(
+    const config = sellersBestSellers(
         {
             offset: 1,
             limit: 10,
@@ -20,7 +20,7 @@ const bestSellingProducts = () => {
 };
 
 const getPendingOrders = () => {
-    const config = sellersProductsPendingOrders(
+    const config = sellersPendingOrders(
         {},
         {
             transform: (body: any) => ({

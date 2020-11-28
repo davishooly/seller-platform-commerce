@@ -1,4 +1,4 @@
-import { authTokensCreate } from 'api/src/apis';
+import { userLogin } from 'api/src/apis';
 
 export interface Login {
     email: string;
@@ -6,7 +6,7 @@ export interface Login {
 }
 
 export const loginSeller = (userCredentials: Login) => {
-    const config = authTokensCreate({
+    const config = userLogin({
         data: {
             email: userCredentials.email,
             password: userCredentials.password,

@@ -4,7 +4,7 @@ import { Spin, Icon, notification } from 'antd';
 import styled from 'styled-components';
 import { useMutation } from 'redux-query-react';
 
-import { sellersActivateCreate } from '../../api/src/apis';
+import { activateSellerAccount } from '../../api/src/apis';
 
 const ActivationContainer = styled.div`
     display: grid;
@@ -16,7 +16,7 @@ const ActivationContainer = styled.div`
 `;
 
 const sendInvitation = (userId: string, token: string) => {
-    return sellersActivateCreate({
+    return activateSellerAccount({
         data: {
             uid: userId,
             token: token,

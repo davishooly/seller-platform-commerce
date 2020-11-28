@@ -12,7 +12,7 @@ import ActivationPage from '../../pages/ActivateAccount';
 import { connect } from 'react-redux';
 import { connectRequest } from 'redux-query-react';
 import { compose } from 'redux';
-import { sellerFromToken } from '../../api/src/apis';
+import { getSellerFromToken } from '../../api/src/apis';
 import { getProductsCategories } from '../../state/product';
 import Edit from 'pages/Dasboard/inventory/Edit';
 import ResetPassword from '../../pages/Auth/resetPassword';
@@ -106,7 +106,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapPropsToConfig = (props: any): any => {
     const actions = [
-        sellerFromToken({
+        getSellerFromToken({
             transform: (responseBody: any) => {
                 return {
                     seller: responseBody,
@@ -116,7 +116,7 @@ const mapPropsToConfig = (props: any): any => {
                 seller: (prev: any, next: any) => next,
             },
         }),
-        getProductsCategories(props.rootCategories),
+        getProductsCategories(),
     ];
     return actions;
 };

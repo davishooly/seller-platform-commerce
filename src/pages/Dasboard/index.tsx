@@ -23,7 +23,7 @@ import { QueryConfig } from 'redux-query';
 import { useWindowSize } from 'react-use';
 
 // handle dashboard api calls
-const request: Array<QueryConfig> = [bestSellingProducts()];
+const request: Array<QueryConfig> = [getPendingOrders()];
 
 //TODO Pending orders
 
