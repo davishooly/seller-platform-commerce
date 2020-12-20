@@ -11,9 +11,7 @@ import { useSelector } from 'react-redux';
 
 const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, submitting }: any) => {
     const history = useHistory();
-
     const sellerProducts = useSelector((state: any) => state.entities?.sellerProducts);
-
     const formattedFiles = [...files].splice(1, files.length - 1);
 
     const [{}, addMedia] = useMutation((id, file, path) => productAddMedia(id, file, path));
@@ -54,7 +52,6 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                     // @ts-ignore
                     createProductVariant(id).then((result: any) => {
                         const { status } = result;
-                        console.log({ result });
                         if (status === 201) {
                             notification.success({
                                 message: 'Success',
@@ -85,7 +82,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                             <div
                                 className="item__image"
                                 style={{ backgroundImage: `url(${files.length && URL.createObjectURL(files[0])})` }}
-                            ></div>
+                            />
                         </div>
                         <div className="images__container">
                             {formattedFiles.length ? (
@@ -97,7 +94,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                                                 key={index.toString()}
                                                 className="item__image images"
                                                 style={{ backgroundImage: `url(${filePath})` }}
-                                            ></div>
+                                            />
                                         </div>
                                     );
                                 })

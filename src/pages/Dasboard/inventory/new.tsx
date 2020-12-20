@@ -53,8 +53,8 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
         }
     };
 
-    const setCategory = ({ category, subcategories, type, id, index }: any) => {
-        selectCategory({ ...selectedCategories, [`${type}`]: { category, id } });
+    const setCategory = ({ category, subcategories, type, pk, index }: any) => {
+        selectCategory({ ...selectedCategories, [`${type}`]: { category, id: pk } });
         if (subcategories.length > 0) {
             handleSetSubCategory(stateSubCategories, subcategories, category, index);
             setList(false);
@@ -84,11 +84,11 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
     };
 
     const renderCategories = (categories = [], type: string, index: any) => {
-        return categories.map(({ name, id, subcategories = [] }: any, i: number) => (
+        return categories.map(({ name, pk, subcategories = [] }: any, i: number) => (
             <span
                 key={i.toString()}
                 className={setSelected(name, type) ? 'selected' : ''}
-                onClick={() => setCategory({ category: name, subcategories, type, id, index })}
+                onClick={() => setCategory({ category: name, subcategories, type, pk, index })}
             >
                 {name}
                 {subcategories.length > 0 ? '> ' : ''}
@@ -210,6 +210,7 @@ const ProductDetails = () => {
 
     // create root product product
     const [{ isPending }, createProductForSeller] = useMutation((optimistic) => {
+        console.log({ categories });
         const id = categories.category.id === undefined ? categories.main.id : categories.category.id;
         return createProductSeller(product, sellerId, id, optimistic);
     });
