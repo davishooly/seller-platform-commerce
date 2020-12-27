@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 import { deleteProductVariant } from 'state/product';
 import Loader from 'components/Loader';
 import { useWindowSize } from 'react-use';
-import { columns, mobileColumn } from 'components/Table/tableData';
+import { mobileColumn } from 'components/Table/tableData';
 import { device } from 'mediaScreen/mediaQueries';
 
 export const CardSection = styled.section`
@@ -131,32 +131,31 @@ const ManageInventory = () => {
     sellerProducts &&
         sellerProducts.results.forEach(({ product }: any) => {
             if (product) {
-                const { id, createdOn, name, variationVariables } = product;
+                const { id: ProductId, createdOn, name, variationVariables } = product;
 
                 variationVariables.forEach((variable: any) => {
                     const { values } = variable;
-
                     values.forEach((value: any) => {
-                        const { salePrice, sku, value: type, availableUnits, minimumPrice, id: pk } = value;
+                        const { salePrice, sku, value: type, availableUnits, provisionalPrice, id } = value;
                         productList.push({
-                            key: pk,
+                            key: id,
                             date: moment(createdOn).format('Do MMMM YYYY'),
                             variant: type,
                             price: Number(salePrice),
                             stock: availableUnits,
                             sku: sku,
                             status: !product.deleted ? 'Live' : 'Unlisted',
-                            sale: Number(minimumPrice),
+                            sale: Number(provisionalPrice || ''),
                             productName: name,
                             product: renderProductContent({
                                 variations: variationVariables.length,
-                                productId: id,
+                                productId: ProductId,
                                 name,
-                                variantId: pk,
+                                variantId: id,
                             }),
                             listing: !product.deleted
-                                ? renderListingContent(false, pk)
-                                : renderListingContent(true, pk),
+                                ? renderListingContent(false, id)
+                                : renderListingContent(true, id),
                         });
                     });
                 });
