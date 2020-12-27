@@ -7,9 +7,6 @@ const bestSellingProducts = () => {
             limit: 10,
         },
         {
-            transform: (body: any) => ({
-                bestSellerProducts: body,
-            }),
             update: {
                 bestSellerProducts: (prev: any, next: any) => next,
             },
@@ -23,9 +20,6 @@ const getPendingOrders = () => {
     const config = sellersPendingOrders(
         {},
         {
-            transform: (body: any) => ({
-                pendingOrders: body,
-            }),
             update: {
                 pendingOrders: (prev: any, next: any) => next,
             },
