@@ -49,9 +49,7 @@ const OeExpress = () => {
             : setSelectedProduct(products.filter((product: any) => product.key !== value.key));
     };
 
-    const handleSearch = (value: string) => {
-        console.log({ value });
-    };
+    const handleSearch = () => ({});
 
     const renderOderContent = (data: any) => (
         <ProductContainer>

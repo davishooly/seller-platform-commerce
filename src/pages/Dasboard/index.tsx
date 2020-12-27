@@ -23,7 +23,7 @@ import { QueryConfig } from 'redux-query';
 import { useWindowSize } from 'react-use';
 
 // handle dashboard api calls
-const request: Array<QueryConfig> = [bestSellingProducts()];
+const request: Array<QueryConfig> = [bestSellingProducts(), getPendingOrders()];
 
 //TODO Pending orders
 
@@ -162,10 +162,10 @@ const Dashboard: React.FC<any> = () => {
                             <RenderCard
                                 key={i.toString()}
                                 style={{
-                                    color: detail.backgroundColor,
-                                    width: 282,
-                                    height: 'auto',
-                                }}
+                  color: detail.backgroundColor,
+                  width: 282,
+                  height: 'auto',
+                }}
                             >
                                 <Span> {detail.title} </Span>
                                 {detail.percentage ? (

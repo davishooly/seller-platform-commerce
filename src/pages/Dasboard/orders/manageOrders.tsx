@@ -97,11 +97,7 @@ const ManageOrders = () => {
                                     </Option>
                                 ))}
                             </Select>
-                            <Search
-                                placeholder="Search orders"
-                                onSearch={(value) => console.log(value)}
-                                style={{ width: 200 }}
-                            />
+                            <Search placeholder="Search orders" onSearch={() => ({})} style={{ width: 200 }} />
                         </div>
                     </DivContainer>
                     <Table loading={isPending} columns={columns} dataSource={data} />
