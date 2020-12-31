@@ -6,14 +6,14 @@ FROM timbru31/java-node
 #set working directory
 WORKDIR /app
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+COPY node_modules /app/node_modules/
 
-COPY . .
+COPY build /app/build/
+COPY server.js /app/server.js
 
-#install and cache all dependencies
-COPY package.json /app/package.json
-RUN npm i --unsafe-perm
+ENV PORT 3000
+
+EXPOSE $PORT
 
 #start app
-CMD ["npm", "start"]
+CMD ["node" , "server.js"]
