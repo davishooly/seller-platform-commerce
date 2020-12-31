@@ -38,7 +38,8 @@
     "styled-components": "^5.0.0",
     "typescript": "~3.7.2",
     "use-before-unload": "^1.0.1",
-    "express": "latest"
+    "express": "latest",
+    "path": "^0.12.7"
   },
   "scripts": {
     "start": "react-scripts start",
