@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const proxy = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const headers = {
     'Cache-Control': 'no-cache',
@@ -26,6 +26,6 @@ module.exports = function (app) {
             '/auth',
             '/sellers/products/orders/',
         ],
-        proxy(apiProxy),
+        createProxyMiddleware(apiProxy),
     );
 };
