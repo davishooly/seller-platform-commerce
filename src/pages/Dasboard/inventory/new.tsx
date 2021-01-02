@@ -17,8 +17,10 @@ import { createProductSeller } from '../../../state/product/createProduct';
 import { useMutation } from 'redux-query-react';
 import { Product } from '../../../api/src/models';
 import Loader from '../../../components/Loader';
-import { getProductsCategories } from 'state/product';
+import { getProductsSubCategory } from 'state/product';
 import { useRequest } from 'redux-query-react';
+import { useDispatch } from 'react-redux';
+import { requestAsync } from 'redux-query';
 
 const { TabPane } = Tabs;
 
@@ -27,6 +29,7 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
     const [stateSubCategories, setSubCategories] = useState<any>([]);
     const [list, setList] = useState(false);
     const [indices, setIndices] = useState<any>([]);
+    const dispatch = useDispatch();
 
     const handleSetSubCategory = (currentSubCategories = [], newSubCategories = [], category: any, index: number) => {
         // keeping track of click indices in the state
@@ -53,7 +56,12 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
         }
     };
 
-    const setCategory = ({ category, subcategories, type, pk, index }: any) => {
+    const fetchSubCategories = async (id: number) => {
+        await dispatch(requestAsync(getProductsSubCategory(id)));
+    };
+
+    const setCategory = async ({ category, subcategories, type, pk, index }: any) => {
+        await fetchSubCategories(pk);
         selectCategory({ ...selectedCategories, [`${type}`]: { category, id: pk } });
         if (subcategories.length > 0) {
             handleSetSubCategory(stateSubCategories, subcategories, category, index);
@@ -90,8 +98,7 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
                 className={setSelected(name, type) ? 'selected' : ''}
                 onClick={() => setCategory({ category: name, subcategories, type, pk, index })}
             >
-                {name}
-                {subcategories.length > 0 ? '> ' : ''}
+                {name + ' >'}
             </span>
         ));
     };

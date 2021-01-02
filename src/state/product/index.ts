@@ -1,4 +1,10 @@
-import { getRootCategories, deleteSellerProduct, viewProductVariation, deleteProductVariations } from 'api/src/apis';
+import {
+    getRootCategories,
+    deleteSellerProduct,
+    getCategorySubCategories,
+    viewProductVariation,
+    deleteProductVariations,
+} from 'api/src/apis';
 
 const getProductsCategories = () => {
     return getRootCategories(
@@ -10,6 +16,22 @@ const getProductsCategories = () => {
             },
         },
     );
+};
+
+const getProductsSubCategory = (id: number) => {
+    const config = getCategorySubCategories(
+        {
+            id,
+        },
+        {
+            transform: (body: any) => ({ productSubCategory: body }),
+            update: {
+                productSubCategory: (prev: any, next: any) => next,
+            },
+        },
+    );
+
+    return config;
 };
 
 const deleteProductVariant = ({ variations, productId, variantId }: any, optimistic: any) => {
@@ -102,4 +124,4 @@ const getSellerProduct = (id: any) => {
     );
 };
 
-export { getProductsCategories, deleteProductVariant, getSellerProduct };
+export { getProductsCategories, deleteProductVariant, getSellerProduct, getProductsSubCategory };

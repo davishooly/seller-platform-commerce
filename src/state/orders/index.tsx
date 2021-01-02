@@ -1,12 +1,13 @@
-import { sellersOrders, sellersReturnsFromSales } from 'api/src';
+import { sellersProductsSellerOrdersList, sellersReturnsFromSales } from 'api/src';
 
 const getSellerProductsOrders = () => {
-    const config = sellersOrders(
+    const config = sellersProductsSellerOrdersList(
         {
             limit: 10,
             offset: 1,
         },
         {
+            transform: (body: any) => ({ sellerOrders: body }),
             update: {
                 sellerOrders: (prev: any, next: any) => next,
             },
