@@ -34,7 +34,7 @@ const getProductsSubCategory = (id: number) => {
     return config;
 };
 
-const deleteProductVariant = ({ variations, productId, variantId }: any, optimistic: any) => {
+const deleteProductVariant = ({ variations, productId, valueId }: any, optimistic: any) => {
     if (variations < 2) {
         const config = deleteSellerProduct({
             id: productId,
@@ -49,7 +49,7 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
     }
 
     const config = deleteVariationValue({
-        id: variantId,
+        id: valueId,
     });
     if (optimistic) {
         config.optimisticUpdate = {

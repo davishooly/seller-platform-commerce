@@ -137,11 +137,11 @@ const ManageInventory = () => {
                 const { createdOn, name, variationVariables } = product;
 
                 variationVariables.forEach((variable: any) => {
-                    const { values } = variable;
+                    const { values, id: variantId } = variable;
                     values.forEach((value: any) => {
-                        const { salePrice, sku, value: type, availableUnits, id } = value;
+                        const { salePrice, sku, value: type, availableUnits, id: valueId } = value;
                         productList.push({
-                            key: id,
+                            key: valueId,
                             date: moment(createdOn).format('Do MMMM YYYY'),
                             variant: type,
                             price: Number(basePrice || ''),
@@ -154,11 +154,12 @@ const ManageInventory = () => {
                                 variations: values.length || 0,
                                 productId: ProductId,
                                 name,
-                                variantId: id,
+                                variantId: valueId,
+                                variationId: variantId,
                             }),
                             listing: !product.deleted
-                                ? renderListingContent(false, id)
-                                : renderListingContent(true, id),
+                                ? renderListingContent(false, variantId)
+                                : renderListingContent(true, variantId),
                         });
                     });
                 });
