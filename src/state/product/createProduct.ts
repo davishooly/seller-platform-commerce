@@ -43,12 +43,12 @@ export const createProductVariation = ({ id, currentProduct }: any) => {
     });
 };
 
-export const productAddMedia = (productId: any, file: any, path: any) => {
+export const productAddMedia = ({ id, file, path }: any) => {
     return productsAddMedia(
         {
-            id: productId,
+            id,
             data: {
-                file: file,
+                externalUrl: file,
                 path,
                 kind: 2,
             },
