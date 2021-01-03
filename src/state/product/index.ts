@@ -36,25 +36,9 @@ const getProductsSubCategory = (id: number) => {
 
 const deleteProductVariant = ({ variations, productId, variantId }: any, optimistic: any) => {
     if (variations < 2) {
-        const config = deleteSellerProduct(
-            {
-                id: productId,
-            },
-            {
-                transform: (body: any) => ({
-                    sellerProducts: body,
-                }),
-                update: {
-                    sellerProducts: (prev: any) => {
-                        const { results, count } = prev;
-                        return {
-                            count: count - 1,
-                            results: results.filter((product: any) => product.id !== productId),
-                        };
-                    },
-                },
-            },
-        );
+        const config = deleteSellerProduct({
+            id: productId,
+        });
         if (optimistic) {
             config.optimisticUpdate = {
                 sellerProducts: (body: any) => body,
@@ -64,42 +48,9 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
         return config;
     }
 
-    const config = deleteVariationValue(
-        {
-            id: variantId,
-        },
-        {
-            transform: (body: any) => ({
-                sellerProducts: body,
-            }),
-            update: {
-                sellerProducts: (prev: any) => {
-                    const { results, count } = prev;
-                    return {
-                        count: count,
-                        results: results.map((product: any) => {
-                            let filteredValues = [];
-                            if (product.id === productId) {
-                                const values = product.product.variationVariables?.values || [];
-                                filteredValues = values.filter((variation: any) => variation.pk !== variantId);
-                            }
-
-                            return {
-                                ...product,
-                                product: {
-                                    ...product.product,
-                                    variationVariables: {
-                                        ...product.product.variationVariables,
-                                        values: filteredValues,
-                                    },
-                                },
-                            };
-                        }),
-                    };
-                },
-            },
-        },
-    );
+    const config = deleteVariationValue({
+        id: variantId,
+    });
     if (optimistic) {
         config.optimisticUpdate = {
             sellerProducts: (body: any) => body,

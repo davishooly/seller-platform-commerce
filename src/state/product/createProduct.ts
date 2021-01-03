@@ -51,6 +51,7 @@ export const createProductVariation = ({ id, products, currentProduct }: any) =>
                     const { product, values } = next;
                     const createdProduct = {
                         id: product.pk,
+                        salePrice: product.salePrice,
                         product: {
                             ...currentProduct,
                             id: product.pk,

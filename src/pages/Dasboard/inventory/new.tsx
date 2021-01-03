@@ -61,7 +61,6 @@ const CategoriesSelect: React.FC<any> = ({ selectedCategories, selectCategory, o
     };
 
     const setCategory = async ({ category, subcategories, type, pk, index }: any) => {
-        await fetchSubCategories(pk);
         selectCategory({ ...selectedCategories, [`${type}`]: { category, id: pk } });
         if (subcategories.length > 0) {
             handleSetSubCategory(stateSubCategories, subcategories, category, index);

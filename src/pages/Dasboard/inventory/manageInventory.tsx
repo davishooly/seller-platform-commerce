@@ -61,6 +61,7 @@ const ManageInventory = () => {
             // @ts-ignore
             deleteProducts(optimistic).then((response: any) => {
                 if (response.status === 204) {
+                    refresh().then(() => ({}));
                     notification.success({
                         message: 'Success',
                         description: 'Your Product has been deleted successfully',
@@ -129,23 +130,23 @@ const ManageInventory = () => {
     );
 
     sellerProducts &&
-        sellerProducts.results.forEach(({ product, id: ProductId }: any) => {
+        sellerProducts.results.forEach(({ product, id: ProductId, basePrice }: any) => {
             if (product) {
                 const { createdOn, name, variationVariables } = product;
 
                 variationVariables.forEach((variable: any) => {
                     const { values } = variable;
                     values.forEach((value: any) => {
-                        const { salePrice, sku, value: type, availableUnits, provisionalPrice, id } = value;
+                        const { salePrice, sku, value: type, availableUnits, id } = value;
                         productList.push({
                             key: id,
                             date: moment(createdOn).format('Do MMMM YYYY'),
                             variant: type,
-                            price: Number(salePrice),
+                            price: Number(basePrice || ''),
                             stock: availableUnits,
                             sku: sku,
                             status: !product.deleted ? 'Live' : 'Unlisted',
-                            sale: Number(provisionalPrice || ''),
+                            sale: Number(salePrice || ''),
                             productName: name,
                             product: renderProductContent({
                                 variations: values.length || 0,

@@ -24,9 +24,6 @@ const getOrderReturns = () => {
             offset: 1,
         },
         {
-            transform: (body: any) => ({
-                orderReturns: body,
-            }),
             update: {
                 orderReturns: (prev: any, next: any) => next,
             },
