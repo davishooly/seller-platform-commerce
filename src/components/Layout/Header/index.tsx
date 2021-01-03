@@ -8,6 +8,7 @@ import Logo from 'icons/omaar-logo.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeTokens } from '../../../state/auth';
 import ThemeContext from '../../../providers/themes/ThemeContext';
+import { useHistory } from 'react-router-dom';
 
 const NavLink = (props: any) => (
     <Link
@@ -151,6 +152,7 @@ const Header = () => {
 
 export const useLogout = ({ setOpenPop, isOpen }: any = {}) => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const logout = () => {
         if (isOpen && setOpenPop) {
@@ -158,7 +160,7 @@ export const useLogout = ({ setOpenPop, isOpen }: any = {}) => {
         }
         localStorage.clear();
         dispatch(removeTokens());
-        window.location.reload();
+        history.push('/login');
     };
     return {
         logout,
