@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import { renderCardContent } from 'components/Card';
 import TableSection from 'components/Table';
 import TableMobile from 'components/Table/tableMobile';
@@ -48,6 +48,8 @@ const ManageInventory = () => {
             ...filterValue,
         }),
     );
+
+    useMemo(() => refresh(), []).then();
 
     const [selectedProduct, setSelectedProduct]: any = useState([]);
 
