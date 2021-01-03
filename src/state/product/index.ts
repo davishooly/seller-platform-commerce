@@ -3,7 +3,6 @@ import {
     deleteSellerProduct,
     getCategorySubCategories,
     viewProductVariation,
-    deleteProductVariations,
     deleteVariationValue,
 } from 'api/src/apis';
 
@@ -35,9 +34,7 @@ const getProductsSubCategory = (id: number) => {
     return config;
 };
 
-const deleteProductVariant = ({ variations, variationVariables, productId, variantId }: any, optimistic: any) => {
-    console.log({ variations });
-
+const deleteProductVariant = ({ variations, productId, variantId }: any, optimistic: any) => {
     if (variations < 2) {
         const config = deleteSellerProduct(
             {
