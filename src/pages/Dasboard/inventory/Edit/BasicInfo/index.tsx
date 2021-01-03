@@ -1,10 +1,8 @@
 import React from 'react';
-import { Form, Select } from 'antd';
+import { Form } from 'antd';
 import RichEditor from 'components/Input/editor';
 import { InlineInput, Inline } from 'components/Input';
 import { SellerProduct } from 'api/src';
-
-const { Option } = Select;
 
 interface IProps {
     form: any;
@@ -29,14 +27,6 @@ const BasicInfo: React.FC<any> = ({ form, sellerProduct }: any) => {
                     rules: [{ required: true, message: 'Please input sku!' }],
                 })(<InlineInput tip="stock keeping unit" label="SKU" placeholder="SKU" />)}
             </Form.Item>
-
-            <Form.Item hasFeedback>
-                {getFieldDecorator('minimumPrice', {
-                    initialValue: sellerProduct?.values[0]?.minimumPrice,
-                    rules: [{ required: true, message: 'Please input price!' }],
-                })(<InlineInput label="Price" placeholder="price" type="number" prefix="$" />)}
-            </Form.Item>
-
             <Form.Item hasFeedback>
                 {getFieldDecorator('salePrice', {
                     initialValue: sellerProduct?.values[0]?.salePrice,
@@ -50,28 +40,6 @@ const BasicInfo: React.FC<any> = ({ form, sellerProduct }: any) => {
                     rules: [{ required: true, message: 'Please input price!' }],
                 })(<InlineInput label="stock" placeholder="stock" type="number" />)}
             </Form.Item>
-
-            {/*  <Form.Item>*/}
-            {/*  {getFieldDecorator("visibility", {*/}
-            {/*    initialValue: sellerProduct,*/}
-            {/*    rules: [{ required: true, message: "Please input Visibility!" }]*/}
-            {/*  })(*/}
-            {/*    <Inline label="Visibility" placeholder="Visibility">*/}
-            {/*      <Select*/}
-            {/*        showSearch*/}
-            {/*        // style={{ }}*/}
-            {/*        placeholder="Select  Visibility"*/}
-            {/*        optionFilterProp="children"*/}
-            {/*      >*/}
-            {/*        <Option value={1}>not visible</Option>*/}
-            {/*        <Option value={2}>Searchable</Option>*/}
-            {/*        <Option value={3}>Listed</Option>*/}
-            {/*        <Option value={4}>Always Visible</Option>*/}
-            {/*      </Select>*/}
-            {/*    </Inline>*/}
-            {/*  )}*/}
-            {/*</Form.Item>*/}
-
             <Form.Item>
                 <Inline label="Description" placeholder="">
                     <RichEditor placeholder="This is a text editor.  Add and edit as you wish." editorType="package" />
