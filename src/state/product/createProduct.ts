@@ -29,48 +29,18 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
     return config;
 };
 
-export const createProductVariation = ({ id, products, currentProduct }: any) => {
+export const createProductVariation = ({ id, currentProduct }: any) => {
     const { variants } = currentProduct;
 
     const { variation } = variants[0];
 
-    return createVariationVariable(
-        {
-            id,
-            data: {
-                values: variants,
-                variable: options.filter(({ value }): any => value === variation)[0].index,
-            },
+    return createVariationVariable({
+        id,
+        data: {
+            values: variants,
+            variable: options.filter(({ value }): any => value === variation)[0].index || 0,
         },
-        {
-            transform: (body: any) => ({
-                sellerProducts: body,
-            }),
-            update: {
-                sellerProducts: (prev: any, next: any) => {
-                    const { product, values } = next;
-                    const createdProduct = {
-                        id: product.pk,
-                        product: {
-                            ...currentProduct,
-                            id: product.pk,
-                            variationVariables: [
-                                {
-                                    values: values,
-                                    variant: variation,
-                                },
-                            ],
-                        },
-                    };
-
-                    return {
-                        count: products.count + 1,
-                        results: [...products.results, createdProduct],
-                    };
-                },
-            },
-        },
-    );
+    });
 };
 
 export const productAddMedia = (productId: any, file: any, path: any) => {

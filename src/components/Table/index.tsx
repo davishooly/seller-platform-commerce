@@ -133,7 +133,7 @@ const RenderTable = ({
                             <Link
                                 className={products !== 1 ? 'disable-link' : ''}
                                 to={`/dashboard/inventory/edit/${
-                                    selectedProduct.length && selectedProduct[0].variantId
+                                    selectedProduct.length && selectedProduct[0].variationId
                                 }`}
                             >
                                 <Button primary={products === 1 ? 'primary' : ''} className="verticalLine">

@@ -37,6 +37,8 @@ const Pricing = ({ onNext, form, callback, variations }: Props) => {
                     sku: data[`sku${i}`],
                     value: data[`${variations[0]}${i}`],
                     barcode: '',
+                    b2bQuantity: 0,
+                    provisionalPrice: data[`salesPrice${i}`],
                     trackInventory: true,
                     taxable: true,
                     weight: 20,

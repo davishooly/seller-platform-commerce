@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import { renderCardContent } from 'components/Card';
 import TableSection from 'components/Table';
 import TableMobile from 'components/Table/tableMobile';
@@ -49,6 +49,8 @@ const ManageInventory = () => {
         }),
     );
 
+    useMemo(() => refresh(), []).then();
+
     const [selectedProduct, setSelectedProduct]: any = useState([]);
 
     const [{ isPending: deletePending }, deleteProducts] = useMutation((optimistic) =>
@@ -61,6 +63,7 @@ const ManageInventory = () => {
             // @ts-ignore
             deleteProducts(optimistic).then((response: any) => {
                 if (response.status === 204) {
+                    refresh().then(() => ({}));
                     notification.success({
                         message: 'Success',
                         description: 'Your Product has been deleted successfully',
@@ -129,33 +132,34 @@ const ManageInventory = () => {
     );
 
     sellerProducts &&
-        sellerProducts.results.forEach(({ product }: any) => {
+        sellerProducts.results.forEach(({ product, id: ProductId, basePrice }: any) => {
             if (product) {
-                const { id: ProductId, createdOn, name, variationVariables } = product;
+                const { createdOn, name, variationVariables } = product;
 
                 variationVariables.forEach((variable: any) => {
-                    const { values } = variable;
+                    const { values, id: variantId } = variable;
                     values.forEach((value: any) => {
-                        const { salePrice, sku, value: type, availableUnits, provisionalPrice, id } = value;
+                        const { salePrice, sku, value: type, availableUnits, id: valueId } = value;
                         productList.push({
-                            key: id,
+                            key: valueId,
                             date: moment(createdOn).format('Do MMMM YYYY'),
                             variant: type,
-                            price: Number(salePrice),
+                            price: Number(basePrice || ''),
                             stock: availableUnits,
                             sku: sku,
                             status: !product.deleted ? 'Live' : 'Unlisted',
-                            sale: Number(provisionalPrice || ''),
+                            sale: Number(salePrice || ''),
                             productName: name,
                             product: renderProductContent({
-                                variations: variationVariables.length,
+                                variations: values.length || 0,
                                 productId: ProductId,
                                 name,
-                                variantId: id,
+                                variantId: valueId,
+                                variationId: variantId,
                             }),
                             listing: !product.deleted
-                                ? renderListingContent(false, id)
-                                : renderListingContent(true, id),
+                                ? renderListingContent(false, variantId)
+                                : renderListingContent(true, variantId),
                         });
                     });
                 });

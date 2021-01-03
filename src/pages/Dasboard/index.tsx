@@ -162,10 +162,10 @@ const Dashboard: React.FC<any> = () => {
                             <RenderCard
                                 key={i.toString()}
                                 style={{
-                  color: detail.backgroundColor,
-                  width: 282,
-                  height: 'auto',
-                }}
+                                    color: detail.backgroundColor,
+                                    width: 282,
+                                    height: 'auto',
+                                }}
                             >
                                 <Span> {detail.title} </Span>
                                 {detail.percentage ? (
@@ -209,7 +209,11 @@ const Dashboard: React.FC<any> = () => {
                         </TableSection>
                     ) : (
                         <TableMobile
-                            {...{ productList: bestSellerProducts.results, title: 'Best Selling Products', columns }}
+                            {...{
+                                productList: bestSellerProducts?.results || [],
+                                title: 'Best Selling Products',
+                                columns,
+                            }}
                         />
                     )}
                 </Container>

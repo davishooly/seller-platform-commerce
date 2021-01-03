@@ -1,4 +1,10 @@
-import { getRootCategories, deleteSellerProduct, viewProductVariation, deleteProductVariations } from 'api/src/apis';
+import {
+    getRootCategories,
+    deleteSellerProduct,
+    getCategorySubCategories,
+    viewProductVariation,
+    deleteVariationValue,
+} from 'api/src/apis';
 
 const getProductsCategories = () => {
     return getRootCategories(
@@ -12,27 +18,27 @@ const getProductsCategories = () => {
     );
 };
 
-const deleteProductVariant = ({ variations, productId, variantId }: any, optimistic: any) => {
+const getProductsSubCategory = (id: number) => {
+    const config = getCategorySubCategories(
+        {
+            id,
+        },
+        {
+            transform: (body: any) => ({ productSubCategory: body }),
+            update: {
+                productSubCategory: (prev: any, next: any) => next,
+            },
+        },
+    );
+
+    return config;
+};
+
+const deleteProductVariant = ({ variations, productId, valueId }: any, optimistic: any) => {
     if (variations < 2) {
-        const config = deleteSellerProduct(
-            {
-                id: productId,
-            },
-            {
-                transform: (body: any) => ({
-                    sellerProducts: body,
-                }),
-                update: {
-                    sellerProducts: (prev: any) => {
-                        const { results, count } = prev;
-                        return {
-                            count: count - 1,
-                            results: results.filter((product: any) => product.id !== productId),
-                        };
-                    },
-                },
-            },
-        );
+        const config = deleteSellerProduct({
+            id: productId,
+        });
         if (optimistic) {
             config.optimisticUpdate = {
                 sellerProducts: (body: any) => body,
@@ -42,40 +48,9 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
         return config;
     }
 
-    const config = deleteProductVariations(
-        {
-            id: variantId,
-        },
-        {
-            transform: (body: any) => ({
-                sellerProducts: body,
-            }),
-            update: {
-                sellerProducts: (prev: any) => {
-                    const { results, count } = prev;
-                    return {
-                        count: count,
-                        results: results.map((product: any) => {
-                            let filteredVariables = [];
-                            if (product.id === productId) {
-                                filteredVariables = product.product.variationVariables.filter(
-                                    (variation: any) => variation.pk !== variantId,
-                                );
-                            }
-
-                            return {
-                                ...product,
-                                product: {
-                                    ...product.product,
-                                    variationVariables: filteredVariables,
-                                },
-                            };
-                        }),
-                    };
-                },
-            },
-        },
-    );
+    const config = deleteVariationValue({
+        id: valueId,
+    });
     if (optimistic) {
         config.optimisticUpdate = {
             sellerProducts: (body: any) => body,
@@ -102,4 +77,4 @@ const getSellerProduct = (id: any) => {
     );
 };
 
-export { getProductsCategories, deleteProductVariant, getSellerProduct };
+export { getProductsCategories, deleteProductVariant, getSellerProduct, getProductsSubCategory };
