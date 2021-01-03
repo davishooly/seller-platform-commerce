@@ -7,7 +7,6 @@ const getSellerProductsOrders = () => {
             offset: 1,
         },
         {
-            transform: (body: any) => ({ sellerOrders: body }),
             update: {
                 sellerOrders: (prev: any, next: any) => next,
             },

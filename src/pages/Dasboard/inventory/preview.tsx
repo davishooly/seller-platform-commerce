@@ -14,7 +14,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
     const sellerProducts = useSelector((state: any) => state.entities?.sellerProducts);
     const formattedFiles = [...files].splice(1, files.length - 1);
 
-    const [{}, addMedia] = useMutation((id, file, path) => productAddMedia(id, file, path));
+    const [{}, addMedia] = useMutation((id, file, path) => productAddMedia({ id, file, path }));
 
     const formatVariant = () => {
         let variant;
@@ -46,7 +46,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                 const { status } = result;
                 if (status === 201) {
                     const {
-                        body: { id },
+                        body: { id, product: { id: productId = '' } = {} },
                     } = result;
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
@@ -62,7 +62,7 @@ const PreviewComponent: React.FC<any> = ({ callback, product, files, submit, sub
                                 getBase64(file).then((url) => {
                                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                                     // @ts-ignore
-                                    addMedia(id, url, file.name).then();
+                                    addMedia(productId, url, file.name).then();
                                 });
                             });
                         }
