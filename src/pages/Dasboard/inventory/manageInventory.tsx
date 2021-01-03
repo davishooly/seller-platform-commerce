@@ -129,9 +129,9 @@ const ManageInventory = () => {
     );
 
     sellerProducts &&
-        sellerProducts.results.forEach(({ product }: any) => {
+        sellerProducts.results.forEach(({ product, id: ProductId }: any) => {
             if (product) {
-                const { id: ProductId, createdOn, name, variationVariables } = product;
+                const { createdOn, name, variationVariables } = product;
 
                 variationVariables.forEach((variable: any) => {
                     const { values } = variable;
@@ -148,7 +148,7 @@ const ManageInventory = () => {
                             sale: Number(provisionalPrice || ''),
                             productName: name,
                             product: renderProductContent({
-                                variations: variationVariables.length,
+                                variations: values.length || 0,
                                 productId: ProductId,
                                 name,
                                 variantId: id,

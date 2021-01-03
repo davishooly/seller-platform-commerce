@@ -4,6 +4,7 @@ import {
     getCategorySubCategories,
     viewProductVariation,
     deleteProductVariations,
+    deleteVariationValue,
 } from 'api/src/apis';
 
 const getProductsCategories = () => {
@@ -34,7 +35,9 @@ const getProductsSubCategory = (id: number) => {
     return config;
 };
 
-const deleteProductVariant = ({ variations, productId, variantId }: any, optimistic: any) => {
+const deleteProductVariant = ({ variations, variationVariables, productId, variantId }: any, optimistic: any) => {
+    console.log({ variations });
+
     if (variations < 2) {
         const config = deleteSellerProduct(
             {
@@ -64,7 +67,7 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
         return config;
     }
 
-    const config = deleteProductVariations(
+    const config = deleteVariationValue(
         {
             id: variantId,
         },
@@ -78,18 +81,20 @@ const deleteProductVariant = ({ variations, productId, variantId }: any, optimis
                     return {
                         count: count,
                         results: results.map((product: any) => {
-                            let filteredVariables = [];
+                            let filteredValues = [];
                             if (product.id === productId) {
-                                filteredVariables = product.product.variationVariables.filter(
-                                    (variation: any) => variation.pk !== variantId,
-                                );
+                                const values = product.product.variationVariables?.values || [];
+                                filteredValues = values.filter((variation: any) => variation.pk !== variantId);
                             }
 
                             return {
                                 ...product,
                                 product: {
                                     ...product.product,
-                                    variationVariables: filteredVariables,
+                                    variationVariables: {
+                                        ...product.product.variationVariables,
+                                        values: filteredValues,
+                                    },
                                 },
                             };
                         }),

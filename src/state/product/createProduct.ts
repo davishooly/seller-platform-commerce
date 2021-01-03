@@ -32,6 +32,8 @@ export const createProductSeller = (product: any, sellerId: number, categoryId: 
 export const createProductVariation = ({ id, products, currentProduct }: any) => {
     const { variants } = currentProduct;
 
+    console.log({ currentProduct });
+
     const { variation } = variants[0];
 
     return createVariationVariable(
@@ -39,7 +41,7 @@ export const createProductVariation = ({ id, products, currentProduct }: any) =>
             id,
             data: {
                 values: variants,
-                variable: options.filter(({ value }): any => value === variation)[0].index,
+                variable: options.filter(({ value }): any => value === variation)[0].index || 0,
             },
         },
         {
