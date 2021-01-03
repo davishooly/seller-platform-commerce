@@ -154,7 +154,7 @@ const ManageInventory = () => {
                                 variations: values.length || 0,
                                 productId: ProductId,
                                 name,
-                                variantId: valueId,
+                                valueId: valueId,
                                 variationId: variantId,
                             }),
                             listing: !product.deleted
